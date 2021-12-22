@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title_region}}</title>
+</head>
+<body>
+<section>
+  <h2>{{title_region}}:</h2>
+
+  <ul>
+    {% for i_region in region_list %}
+    <li>{{ i_region }}</li>
+      {% endfor %}
+  </ul>
+
+       {% for i_ok in complete_post %}
+    <p>{{ i_ok }}</p>
+      {% endfor %}
+
+
+
+</section>
+</body>
+</html>

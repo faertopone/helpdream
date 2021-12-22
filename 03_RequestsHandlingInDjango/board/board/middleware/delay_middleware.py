@@ -41,7 +41,7 @@ class DelayIPMiddleware:
 
         # сколько раз с 1 IP выполнили запрос
         number_counts = 5
-        # Время за которое счиитаь запросы
+        # Время за которое счиитаь запросы sec
         time_number = 10
 
         self.end_time = time.time()
@@ -53,6 +53,7 @@ class DelayIPMiddleware:
         #Прошедшее время
         range_time = abs(result_end.tm_sec - result_start.tm_sec)
         print(range_time, ' - Прошедшее время')
+
         allow_ips = ["127.0.0.1"]
         ip = request.META.get('REMOTE_ADDR')
         if ip in allow_ips:
