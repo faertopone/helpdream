@@ -50,6 +50,7 @@ class DelayIPMiddleware:
         print(result_end.tm_sec, ' - сумма времени при вызове')
         print(result_start.tm_sec, ' - время начальное')
         print(time.time(), ' - время тайм при запросы')
+
         #Прошедшее время
         range_time = abs(result_end.tm_sec - result_start.tm_sec)
         print(range_time, ' - Прошедшее время')
