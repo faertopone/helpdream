@@ -8,8 +8,9 @@
 
 <h2> Контакты:</h2>
 <ul>
-    {% for name_i, content_i in contacts_list.items %}
-  <li>{{name_i}}: {{content_i}}</li>
+    {% for k, y in contacts_list.items %}
+        <li>{{k}}: {{y}}</li>
+    {% endfor %}
 </ul>
 
 </body>

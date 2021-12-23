@@ -16,6 +16,12 @@
     {% endfor %}
 </ul>
 
+ <form method="post" >{% csrf_token %}
+     <input name="text" type="text" placeholder="Какой то текст">
+     <button type="submit" >Найти</button>
+     <p>{{succes_post}}</p>
+ </form>
+
 
 </body>
 </html>

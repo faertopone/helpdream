@@ -2,33 +2,56 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView
 
+count_get = 0
+
 def index(request, *args, **kwargs):
     category_list = dict()
     category_list = {'О компании': '/about',
-                     'Контакты': '/сontacts'
+                     'Контакты': '/сontacts',
+                     'Регионы': '/regions',
+                     'Список услуг': 'advertisements'
                      }
+    methods = request.META.get('REQUEST_METHOD')
+    print(methods)
+    succes_post = '-----'
+    if methods == 'POST':
+        succes_post = 'Метод пост прошел'
 
-    return render(request, 'advertisements/index.html', {'category_list': category_list})
+    return render(request, 'advertisements/index.html', {'category_list': category_list,
+                                                        'succes_post': succes_post
+                                                         })
 
 
 class About(TemplateView):
     template_name = 'advertisements/about.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context['name_company'] = 'Бесплатные объявления'
         context['description_company'] = ['Бесплатные объявления в вашем городе!', 'Лучшие девченки']
+
         return context
 
 
-class Contacts (TemplateView):
+class Advertisements(TemplateView):
+    template_name = 'advertisements/advertisements.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['advertisements_list'] = ['Курсы', 'Подробнее об методе ПОСТ', 'Не придумал название', 'И последний пнукт']
+
+        global count_get
+        count_get += 1
+        context['count'] = str(count_get)
+
+        return context
+
+
+class Contacts(TemplateView):
     template_name = 'advertisements/сontacts.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['contacts_list'] = {
-            'адрес': 'Лалаленд',
-            'телефон': '880090060000',
-            'эл. почта': 'хххххххх@бабки.ру'
-        }
+        context['contacts_list'] = {'адрес': 'Шлюшандра 123', 'телефон': '9999999999', 'эл. почта': '1хбетсобакару'}
+
         return context
 
 
