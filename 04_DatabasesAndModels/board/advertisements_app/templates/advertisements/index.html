@@ -8,20 +8,29 @@
     <title>Главное окно</title>
 </head>
 <body>
+    {% if index %}
 
 <ul>
-    <h2>Категории:</h2>
-    {% for name_category, links in category_list.items %}
-    <li><a href={{links}}>{{name_category}}</a></li>
-    {% endfor %}
+
+    {% for items_list in index %}
+    <li>
+        {{ items_list.title }}  Цена: {{ items_list.price }} руб.
+
+    <p>
+        Дата создания: {{ items_list.created_at }}
+    </p>
+      <p>
+        Количество просмотров: {{ items_list.views_count }}
+    </p>
+    </li>
+
+    {% endfor%}
+
 </ul>
 
- <form method="post" >{% csrf_token %}
-     <input name="text" type="text" placeholder="Какой то текст">
-     <button type="submit" >Найти</button>
-     <p>{{succes_post}}</p>
- </form>
-
+{% else %}
+    <p> Обьявлений нет.</p>
+{% endif%}
 
 </body>
 </html>

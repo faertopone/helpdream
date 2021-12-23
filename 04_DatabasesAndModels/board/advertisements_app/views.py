@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from . import models
-
+from advertisements_app.models import Advertisement
 
 
 def advertisement_index(request, *args, **kwargs):
-    pass
+    index = Advertisement.objects.all()
+    return render(request, 'advertisements/index.html', {
+        'index': index
+    })
