@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.views import generic
+from django.views.generic.list import ListView
+from .models import *
+from .import models
 from .models import Advertisement
 
 
@@ -13,8 +14,8 @@ def advertisement_index(request, *args, **kwargs):
 
 
 
-class AdvertisementListView(generic.ListView):
+class AdvertisementListView(ListView):
     model = Advertisement
-    template_name = 'advertisement_list.html'
-    context_object_name = 'advertisement_list'
+    template_name = 'advertisements_list.html'
+    context_object_name = 'advertisements_list'
     queryset = Advertisement.objects.all()[:5]
