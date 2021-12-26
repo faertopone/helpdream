@@ -13,6 +13,17 @@
 
     {% if index %}
 
+    <ul>
+         <h2>Все авторы:</h2>
+        {% if allAuthors %}
+        {% for authors_itmes in allAuthors %}
+        <li> {{authors_itmes.name}} </li>
+         {% endfor %}
+        {% else %}
+         <h3>Авторов нет</h3>
+        {% endif %}
+    </ul>
+
 <ul>
 
 

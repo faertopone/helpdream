@@ -3,13 +3,15 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import *
 from .import models
-from .models import Advertisement
+from .models import Advertisement, Author
 
 
 def advertisement_index(request, *args, **kwargs):
     index = Advertisement.objects.all()
+    allAuthor = Author.objects.all()
     return render(request, 'advertisements/index.html', {
-        'index': index
+        'index': index,
+        'allAuthor': allAuthor,
     })
 
 

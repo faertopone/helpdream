@@ -31,6 +31,7 @@ class Advertisement(models.Model):
     def getPriceUS(self):
         return (round((self.price / 67.7), 2))
 
+
     class Meta:
         db_table = 'advertisements'
         ordering = ['title']
@@ -49,7 +50,6 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
-
 
     class Meta:
         db_table = 'authors'
