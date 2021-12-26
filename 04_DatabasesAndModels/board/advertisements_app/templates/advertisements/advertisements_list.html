@@ -7,22 +7,23 @@
 <body>
 <h1> Бесплатные обьявления</h1>
 
-{%  if advertisement_list %}
+{%  if advertisements_list %}
 
-<ul>
 
+
+<table style="border: 1px solid black; font-size: 16px; color: gray;">
+   <tr ><th >Заголовок</th><th>Цена</th> <th>Наименование рубрики</th></tr>
     {% for advertisement in advertisements_list %}
-   <li>
-     <a href="/advertisements/{{ advertisement.id }}"> {{ advertisement.title }} </a>
-   </li>
-
+   <tr style="border-bottom: 1px solid black"><td style="border-right: 1px solid black"><a href="/advertisements/{{ advertisement.id }}"> {{ advertisement.title }} </a></td><td>{{ advertisement.price }} </td> <td> {{advertisement.categoty_name}} </td></tr>
     {% endfor %}
+  </table>
+
   {% else %}
-   <p> Обяьвлений нет.</p>
+   <p> Обьяьвлений нет.</p>
 
   {% endif %}
 
-</ul>
+
 
 
 </body>

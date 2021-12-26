@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from .models import *
 from .import models
 from .models import Advertisement
@@ -19,3 +20,9 @@ class AdvertisementListView(ListView):
     template_name = 'advertisements/advertisements_list.html'
     context_object_name = 'advertisements_list'
     queryset = Advertisement.objects.all()[:5]
+
+
+class AdvertisementDetailView(DetailView):
+    model = Advertisement
+    template_name = 'advertisements/advertisements_detail.html'
+    context_object_name = 'detail_items'

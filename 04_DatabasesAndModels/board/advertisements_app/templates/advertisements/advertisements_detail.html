@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ detail_items.title }}</title>
+</head>
+<body>
+
+<ul>
+
+        <li><h1>{{ detail_items.title }} </h1></li>
+
+        <li>Цена: {{ detail_items.price }} руб. , {{ detail_items.getPriceUS }} $ </li>
+       <li>Описание:{{detail_items.description}}</li>
+       <li>Рубрика: {{detail_items.categoty_name}}</li>
+       <li>Автор: {{detail_items.author_content.name}}</li>
+      <li>Контакты: {{detail_items.author_content.mail}} , Телефон: {{detail_items.author_content.phone}}</li>
+       <li>Количество просмотров: {{detail_items.views_count}}</li>
+
+
+    <p> дата создания обьявления: {{ detail_items.modifiedСreatedTime }}</p>
+
+
+</ul>
+
+
+</body>
+</html>
