@@ -133,3 +133,4 @@ dmypy.json
 # Jetbrains Intellij IDEA
 .idea/
 /03_RequestsHandlingInDjango/board/history_log/
+/04_DatabasesAndModels/board/advertisements_app/migrations/
