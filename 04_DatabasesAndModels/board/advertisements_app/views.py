@@ -15,8 +15,6 @@ def advertisement_index(request, *args, **kwargs):
     })
 
 
-
-
 class AdvertisementListView(ListView):
     model = Advertisement
     template_name = 'advertisements/advertisements_list.html'
