@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все новости</title>
+</head>
+<body>
+
+<h2> <a href="profiles/registr"> Регистрация</a> </h2>
+<form method="post" action="/">
+    {% csrf_token %}
+<p><label for="id_username">Введите имя:</label> <input type="text" name="username" required id="id_username"></p>
+<p><label for="id_password">Введите Пароль:</label> <input type="text" name="password" required id="id_password"></p>
+    <button type="submit">Войти</button>
+</form>
+
+   <a href="/created_news/"> Создать новость </a>
+    {% if news %}
+        {% for items_news in news %}
+    <h1> Новость: {{ items_news.titleNews }}</h1>
+        <p> Описание: {{ items_news.description }}</p>
+        <p>Дата создания новости: {{ items_news.created_news }}</p>
+        <p>Дата обновления новости: {{ items_news.updated_news }}</p>
+        {% endfor %}
+    {% else %}
+    <h1>Новостей нет</h1>
+    {% endif %}
+
+
+
+
+
+
+
+</body>
+</html>
