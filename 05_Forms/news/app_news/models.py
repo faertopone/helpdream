@@ -20,7 +20,7 @@ class User(models.Model):
         ordering = ['created_at']
 
 
-class News(models.Model):
+class MyNews(models.Model):
 
     def __str__(self):
         return self.titleNews
@@ -35,7 +35,7 @@ class News(models.Model):
         db_table = 'News'
 
 
-class Comments(models.Model):
+class MyComments(models.Model):
 
     def __str__(self):
         return self.name
@@ -43,7 +43,7 @@ class Comments(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя', db_index=True)
     description = models.TextField(default='', verbose_name='описание', db_index=True)
 
-    news = models.ForeignKey('News', default=None, null=True, on_delete=models.CASCADE,
+    news = models.ForeignKey('MyNews', default=None, null=True, on_delete=models.CASCADE,
                                        related_name='News', verbose_name='новость')
 
     class Meta:

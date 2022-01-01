@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from .forms import UserForm, LogginForm, NewsForm
-from .models import User, News
+from .models import User, MyNews
 from datetime import datetime
 from django.http import HttpResponseRedirect
 
