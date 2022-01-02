@@ -5,6 +5,11 @@
     <title>Редактировать новость</title>
 </head>
 <body>
+ <form method="post" action="/created_news/{{ profile_id }}/edit/">
+    {% csrf_token %}
+    {{ news_form.as_p }}
 
+    <button type="submit" >Редактировать</button>
+ </form>
 </body>
 </html>

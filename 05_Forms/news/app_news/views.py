@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 from django.views import View
 from .forms import UserForm, LogginForm
@@ -69,20 +70,20 @@ class Created_news(View):
         print('Не прошло валидность формы')
         return render(request, 'news_htmls/created_news.html', context={'my_news': my_news})
 
+class EditNews(View):
+
+    def get(self, request, profile_id):
+        news = MyNews.objects.get(id=profile_id)
+        news_form = MyNewsForm(instance=news)
+        return render(request, 'news_htmls/edit_news.html',
+                      context={'user_form': news_form, 'profile_id': profile_id})
+
+    def post(self, request, profile_id):
+        news = MyNews.objects.get(id=profile_id)
+        news_form = MyNewsForm(request.POST, instance=news)
+        if news_form.is_valid():
+            news.save()
+        return render(request, 'users_htmls/edit_profil.html', context={'user_form': news_form, 'profile_id': profile_id})
 
 
 
-
-
-
-    # def get(self, request):
-    #     news = NewsForm()
-    #     return render(request, 'news_htmls/created_news.html', context={'news': news})
-    #
-    # def post(self, request, profile_id):
-    #     news = News.objects.get(id=profile_id)
-    #     news_form = UserForm(request.POST, instance=news)
-    #     if news_form.is_valid():
-    #         news.save()
-    #     return render(request, 'news_htmls/edit_news.html',
-    #                   context={'news_form': news_form, 'profile_id': profile_id})

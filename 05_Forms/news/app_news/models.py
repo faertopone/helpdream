@@ -36,6 +36,7 @@ class MyNews(models.Model):
         db_table = 'News'
 
 
+
 class MyComments(models.Model):
 
     def __str__(self):

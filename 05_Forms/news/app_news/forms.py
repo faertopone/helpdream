@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, MyNews
 
 
 
@@ -17,15 +17,21 @@ class UserForm(forms.ModelForm):
         fields = '__all__'
 
 
-class MyNewsForm(forms.Form):
+class MyNewsForm(forms.ModelForm):
     titlenews = forms.CharField()
     description = forms.CharField()
     is_active_news = forms.BooleanField(required=False)
 
+    class Meta:
+        model = MyNews
+        fields = ['titlenews', 'description', 'is_active_news']
 
 
 
-class CommentsForm(forms.Form):
+
+
+
+class CommentsForm(forms.ModelForm):
     name = forms.CharField()
     description = forms.CharField()
 
