@@ -17,10 +17,12 @@
    <a href="/created_news/"> Создать новость </a>
     {% if news %}
         {% for items_news in news %}
-    <h1> Новость: {{ items_news.titleNews }}</h1>
+            {% if items_news.is_active_news %}
+    <h1> Новость: {{ items_news.titlenews }}</h1>
         <p> Описание: {{ items_news.description }}</p>
         <p>Дата создания новости: {{ items_news.created_news }}</p>
         <p>Дата обновления новости: {{ items_news.updated_news }}</p>
+            {% endif %}
         {% endfor %}
     {% else %}
     <h1>Новостей нет</h1>

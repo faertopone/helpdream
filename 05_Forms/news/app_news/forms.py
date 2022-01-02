@@ -16,12 +16,16 @@ class UserForm(forms.ModelForm):
         model = User
         fields = '__all__'
 
-class NewsForm(forms.ModelForm):
-    titleNews = forms.CharField()
+
+class MyNewsForm(forms.Form):
+    titlenews = forms.CharField()
     description = forms.CharField()
+    is_active_news = forms.BooleanField(required=False)
 
 
-class CommentsForm(forms.ModelForm):
+
+
+class CommentsForm(forms.Form):
     name = forms.CharField()
     description = forms.CharField()
 

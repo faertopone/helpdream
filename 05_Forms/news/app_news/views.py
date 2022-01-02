@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from .forms import UserForm, LogginForm, NewsForm
+from .forms import UserForm, LogginForm
+from .forms import MyNewsForm
 from .models import User, MyNews
 from datetime import datetime
 from django.http import HttpResponseRedirect
@@ -24,8 +25,9 @@ class UserFormView(View):
 
 
 class Index(View):
+
     def get(self, request):
-        news = News.objects.all()
+        news = MyNews.objects.all()
         return render(request, 'news_htmls/index.html', {'news': news})
 
     def post(self, request):
@@ -53,17 +55,19 @@ class UserEditFormView(View):
 class Created_news(View):
 
     def get(self, request):
-        news = NewsForm()
-        return render(request, 'news_htmls/created_news.html', context={'news': news})
+        my_news = MyNewsForm()
+        return render(request, 'news_htmls/created_news.html', context={'my_news': my_news})
 
     def post(self, request):
-        news_form = NewsForm(request.POST)
-
+        news_form = MyNewsForm(request.POST)
+        my_news = MyNewsForm()
         if news_form.is_valid():
-            User.objects.create(**news_form.cleaned_data)
+            MyNews.objects.create(**news_form.cleaned_data)
+            print('Новость должна записаться в БД')
+            print(news_form.is_valid(), 'news_form.is_valid()')
             return HttpResponseRedirect('/')
         print('Не прошло валидность формы')
-        return render(request, 'news_htmls/created_news.html', {})
+        return render(request, 'news_htmls/created_news.html', context={'my_news': my_news})
 
 
 

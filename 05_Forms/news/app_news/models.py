@@ -23,13 +23,14 @@ class User(models.Model):
 class MyNews(models.Model):
 
     def __str__(self):
-        return self.titleNews
+        return self.titlenews
 
-    titleNews = models.CharField(max_length=200, verbose_name='Заголовок новости', db_index=True)
+    titlenews = models.CharField(max_length=200, verbose_name='Заголовок новости', db_index=True)
     description = models.TextField(default='', verbose_name='описание', db_index=True)
     created_news = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
     updated_news = models.DateTimeField(auto_now=True, verbose_name='Дата обновления', db_index=True)
-    is_active_news = models.BooleanField(verbose_name='Активность новости', db_index=True)
+    is_active_news = models.BooleanField(verbose_name='Активность новости', db_index=True, default=False)
+
 
     class Meta:
         db_table = 'News'
