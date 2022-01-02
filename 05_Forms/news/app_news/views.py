@@ -27,18 +27,42 @@ class UserFormView(View):
 
 
 
-class Index(ListView):
+class NewsListView(ListView):
 
     model = MyNews
     template_name = 'news_htmls/news_list.html'
     context_object_name = 'items_news'
     queryset = MyNews.objects.all()
 
-    def post(self, request):
-        loggin = LogginForm()
-        if loggin.is_valid():
-            return HttpResponseRedirect('/')
-        return render(request, 'news_htmls/news_list.html', {})
+# class NewsDetailView(DetailView):
+#
+#     model = MyNews
+#     template_name = 'news_htmls/news_detail.html'
+#     context_object_name = 'detail_items'
+
+class NewsDetailView(View):
+
+
+    def get(self, request, pk):
+        news = MyNews.objects.get(id=pk)
+        coments = MyComments.objects.all()
+        coments_list = []
+
+        #тут я взял все коментарии,и у кого Ид совпало с ид новости записываю в массив
+        for i in coments:
+            if i.id_news_current == pk:
+                coments_list.append(i)
+
+        print(coments_list)
+        return render(request, 'news_htmls/news_detail.html',
+                      context={'news': news, 'pk': pk, 'coments': coments_list})
+
+
+
+
+
+
+
 
 
 class UserEditFormView(View):
@@ -53,6 +77,7 @@ class UserEditFormView(View):
         user_form = UserForm(request.POST, instance=user)
         if user_form.is_valid():
             user.save()
+            return HttpResponseRedirect('/')
         return render(request, 'users_htmls/edit_profil.html', context={'user_form': user_form, 'profile_id': profile_id})
 
 
@@ -86,15 +111,36 @@ class EditNews(View):
         news_form = MyNewsForm(request.POST, instance=news)
         if news_form.is_valid():
             news.save()
+            return HttpResponseRedirect('/')
         return render(request, 'news_htmls/edit_news.html', context={'news_form': news_form, 'profile_id': profile_id})
 
 
-class NewsDetailView(DetailView):
-    news = MyNews
-    template_name = 'news_htmls/news_detail.html'
-    context_object_name = 'detail_items'
+
+class CreadetComment(View):
+
+    def get(self, request, pk):
+        my_comment = CommentsForm()
+        news = MyNews.objects.get(id=pk)
+
+        return render(request, 'news_htmls/created_comment.html', context={'my_comment': my_comment, 'news': news})
+
+    def post(self, request, pk):
+        comment_form = CommentsForm(request.POST)
+        my_comment = CommentsForm()
+        news = MyNews.objects.get(id=pk)
 
 
+        if comment_form.is_valid():
+            temp = MyComments.objects.create(**comment_form.cleaned_data)
+            #Тут мы присвоим ключ по названию новости к этому коментарию)
+            temp.id_news_current = news.id
+            temp.comment = news
+            temp.save()
+
+
+            return HttpResponseRedirect('/')
+        print('Не прошло валидность формы')
+        return render(request, 'news_htmls/created_comment.html', context={'my_comment': my_comment})
 
 
 

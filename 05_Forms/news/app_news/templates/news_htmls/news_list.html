@@ -5,24 +5,34 @@
     <title>Все новости</title>
 </head>
 <body>
-
-<h2> <a href="profiles/registr"> Регистрация</a> </h2>
-<form method="post" action="/">
-    {% csrf_token %}
-<p><label for="id_username">Введите имя:</label> <input type="text" name="username" required id="id_username"></p>
-<p><label for="id_password">Введите Пароль:</label> <input type="text" name="password" required id="id_password"></p>
-    <button type="submit">Войти</button>
-</form>
+{##}
+{#<h2> <a href="profiles/registr"> Регистрация</a> </h2>#}
+{#<form method="post" action="/">#}
+{#    {% csrf_token %}#}
+{#<p><label for="id_username">Введите имя:</label> <input type="text" name="username" required id="id_username"></p>#}
+{#<p><label for="id_password">Введите Пароль:</label> <input type="text" name="password" required id="id_password"></p>#}
+{#    <button type="submit">Войти</button>#}
+{#</form>#}
 
    <a href="/created_news/"> Создать новость </a>
     {% if items_news %}
         {% for i in items_news %}
             {% if i.is_active_news %}
-    <h1> <a href='news_{{ i.id}}/'> Новость: {{ i.titlenews }} </a></h1>
+    <h1> <a href='news/{{ i.id}}'> Новость: {{ i.titlenews }} </a></h1>
       <a href="created_news/{{ i.id }}/edit/">Редактировать новость</a>
+
             {% endif %}
         {% endfor %}
+        <h2> Устаревшие новости(не активные):</h2>
+        {% for i_old in items_news %}
+            {% if not i_old.is_active_news %}
+                <h1> <a href='news/{{ i.id}}'> Устаревшие новости(не активные): {{ i_old.titlenews }} </a></h1>
+      <a href="created_news/{{ i_old.id }}/edit/">Редактировать новость</a>
+                {% endif %}
+        {% endfor %}
     {% else %}
+
+
     <h1>Новостей нет</h1>
     {% endif %}
 

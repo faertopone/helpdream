@@ -34,6 +34,8 @@ class MyNews(models.Model):
 
 
 
+
+
     class Meta:
         db_table = 'News'
         ordering = ['-updated_news']  # - перед парамером значит revers
@@ -48,8 +50,10 @@ class MyComments(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя', db_index=True)
     description = models.TextField(default='', verbose_name='описание', db_index=True)
     created_comments = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
+
     comment = models.ForeignKey('MyNews', default=None, null=True, on_delete=models.CASCADE,
-                                related_name='comment', verbose_name='новость')
+                                related_name='comment', verbose_name='Название новости')
+    id_news_current = models.IntegerField(default=0)
 
 
 

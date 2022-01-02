@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, MyNews
+from .models import User, MyNews, MyComments
 
 
 
@@ -26,8 +26,10 @@ class MyNewsForm(forms.ModelForm):
 
 
 class CommentsForm(forms.ModelForm):
-    name = forms.CharField()
-    description = forms.CharField()
+
+    class Meta:
+        model = MyComments
+        fields = ['name', 'description']
 
 
 class LogginForm(forms.Form):

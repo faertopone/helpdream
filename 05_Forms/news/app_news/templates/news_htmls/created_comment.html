@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать коментарий</title>
+</head>
+
+
+<h2> Название новости: {{ news.titlenews }}</h2>
+
+<form method="post" action="/created_comments/{{ news.id }}/">
+      {% csrf_token %}
+    {{ my_comment.as_p }}
+
+{#   <p>Ваше имя: {{ my_comment.name }}</p>#}
+{#    <p>Коментарий: {{ my_comment.description }}</p>#}
+    <button type="submit">Написать!</button>
+
+</form>
+
+</body>
+</html>
