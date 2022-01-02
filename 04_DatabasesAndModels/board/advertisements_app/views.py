@@ -9,7 +9,7 @@ from .models import Advertisement, Author
 def advertisement_index(request, *args, **kwargs):
     index = Advertisement.objects.all()
     allAuthor = Author.objects.all()
-    return render(request, 'advertisements/index.html', {
+    return render(request, 'advertisements/news_list.html', {
         'index': index,
         'allAuthor': allAuthor,
     })

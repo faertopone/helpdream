@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1> Новость: {{ detail_items.titlenews }}</h1>
+<p> Описание: {{ detail_items.description }}</p>
+<p>Дата создания новости: {{ detail_items.created_news }}</p>
+<p>Дата обновления новости: {{ detail_items.updated_news }}</p>
+
+ {% if detail_items.comment %}
+    <p>{{ detail_items.comment.name }}</p>
+{% else %}
+ <p> Коментариев нет</p>
+{% endif %}
+
+
+
+</body>
+</html>

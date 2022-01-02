@@ -15,13 +15,11 @@
 </form>
 
    <a href="/created_news/"> Создать новость </a>
-    {% if news %}
-        {% for items_news in news %}
-            {% if items_news.is_active_news %}
-    <h1> Новость: {{ items_news.titlenews }}</h1>
-        <p> Описание: {{ items_news.description }}</p>
-        <p>Дата создания новости: {{ items_news.created_news }}</p>
-        <p>Дата обновления новости: {{ items_news.updated_news }}</p>
+    {% if items_news %}
+        {% for i in items_news %}
+            {% if i.is_active_news %}
+    <h1> <a href='news_{{ i.id}}/'> Новость: {{ i.titlenews }} </a></h1>
+      <a href="created_news/{{ i.id }}/edit/">Редактировать новость</a>
             {% endif %}
         {% endfor %}
     {% else %}

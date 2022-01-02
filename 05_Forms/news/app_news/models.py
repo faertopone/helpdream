@@ -32,8 +32,11 @@ class MyNews(models.Model):
     is_active_news = models.BooleanField(verbose_name='Активность новости', db_index=True, default=False)
 
 
+
+
     class Meta:
         db_table = 'News'
+        ordering = ['-updated_news']  # - перед парамером значит revers
 
 
 
@@ -44,10 +47,12 @@ class MyComments(models.Model):
 
     name = models.CharField(max_length=200, verbose_name='Имя', db_index=True)
     description = models.TextField(default='', verbose_name='описание', db_index=True)
+    created_comments = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
+    comment = models.ForeignKey('MyNews', default=None, null=True, on_delete=models.CASCADE,
+                                related_name='comment', verbose_name='новость')
 
-    news = models.ForeignKey('MyNews', default=None, null=True, on_delete=models.CASCADE,
-                                       related_name='News', verbose_name='новость')
+
 
     class Meta:
         db_table = 'Comments'
-        ordering = ['news']
+        ordering = ['created_comments']

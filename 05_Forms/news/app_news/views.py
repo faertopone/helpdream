@@ -1,9 +1,11 @@
 import requests
 from django.shortcuts import render
 from django.views import View
-from .forms import UserForm, LogginForm
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from .forms import UserForm, LogginForm, CommentsForm
 from .forms import MyNewsForm
-from .models import User, MyNews
+from .models import User, MyNews, MyComments
 from datetime import datetime
 from django.http import HttpResponseRedirect
 
@@ -25,17 +27,18 @@ class UserFormView(View):
 
 
 
-class Index(View):
+class Index(ListView):
 
-    def get(self, request):
-        news = MyNews.objects.all()
-        return render(request, 'news_htmls/index.html', {'news': news})
+    model = MyNews
+    template_name = 'news_htmls/news_list.html'
+    context_object_name = 'items_news'
+    queryset = MyNews.objects.all()
 
     def post(self, request):
         loggin = LogginForm()
         if loggin.is_valid():
             return HttpResponseRedirect('/')
-        return render(request, 'news_htmls/index.html', {})
+        return render(request, 'news_htmls/news_list.html', {})
 
 
 class UserEditFormView(View):
@@ -76,14 +79,25 @@ class EditNews(View):
         news = MyNews.objects.get(id=profile_id)
         news_form = MyNewsForm(instance=news)
         return render(request, 'news_htmls/edit_news.html',
-                      context={'user_form': news_form, 'profile_id': profile_id})
+                      context={'news_form': news_form, 'profile_id': profile_id})
 
     def post(self, request, profile_id):
         news = MyNews.objects.get(id=profile_id)
         news_form = MyNewsForm(request.POST, instance=news)
         if news_form.is_valid():
             news.save()
-        return render(request, 'users_htmls/edit_profil.html', context={'user_form': news_form, 'profile_id': profile_id})
+        return render(request, 'news_htmls/edit_news.html', context={'news_form': news_form, 'profile_id': profile_id})
+
+
+class NewsDetailView(DetailView):
+    news = MyNews
+    template_name = 'news_htmls/news_detail.html'
+    context_object_name = 'detail_items'
+
+
+
+
+
 
 
 

@@ -17,7 +17,7 @@ def index(request, *args, **kwargs):
     if methods == 'POST':
         succes_post = 'Метод пост прошел'
 
-    return render(request, 'advertisements/index.html', {'category_list': category_list,
+    return render(request, 'advertisements/news_list.html', {'category_list': category_list,
                                                         'succes_post': succes_post
                                                          })
 

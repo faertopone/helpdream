@@ -3,12 +3,6 @@ from .models import User, MyNews
 
 
 
-# class UserForm(forms.Form):
-#     username = forms.CharField()
-#     password = forms.CharField()
-#     first_name = forms.CharField()
-#     second_name = forms.CharField()
-#     email = forms.EmailField()
 
 class UserForm(forms.ModelForm):
 
@@ -24,7 +18,7 @@ class MyNewsForm(forms.ModelForm):
 
     class Meta:
         model = MyNews
-        fields = ['titlenews', 'description', 'is_active_news']
+        fields = '__all__'
 
 
 

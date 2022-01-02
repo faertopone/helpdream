@@ -6,7 +6,7 @@ def advertisement_list(request, *args, **kwargs):
     return render(request, 'advertisement/advertisements_list.html', {})
 
 def index(request, *args, **kwargs):
-    return render(request, 'advertisement/index.html', {})
+    return render(request, 'advertisement/news_list.html', {})
 
 def kurs_1(request, *args, **kwargs):
     return render(request, 'advertisement/kurs_1_list.html', {})
