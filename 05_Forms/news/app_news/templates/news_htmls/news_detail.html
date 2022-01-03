@@ -20,7 +20,7 @@
 <p> Описание: {{ news.description }}</p>
 <p>Дата создания новости: {{ news.created_news }}</p>
 <p>Дата обновления новости: {{ news.updated_news }}</p>
-<a href="/created_comments/{{ news.id }}">Написать коментарий</a>
+<a href="/created_comments/{{ pk }}">Написать коментарий</a>
 
 
 {% for com in coments %}

@@ -12,13 +12,11 @@ class UserForm(forms.ModelForm):
 
 
 class MyNewsForm(forms.ModelForm):
-    titlenews = forms.CharField()
-    description = forms.CharField()
-    is_active_news = forms.BooleanField(required=False)
 
     class Meta:
         model = MyNews
-        fields = '__all__'
+        fields = ['titlenews', 'description', 'is_active_news']
+        is_active_news = forms.BooleanField(required=False)
 
 
 
