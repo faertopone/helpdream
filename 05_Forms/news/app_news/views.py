@@ -23,7 +23,9 @@ class UserFormView(View):
             User.objects.create(**user_form.cleaned_data)
             return HttpResponseRedirect('/')
         print('Не прошло валидность формы')
-        return render(request, 'users_htmls/User_registration.html', {})
+        errors = user_form.errors
+
+        return render(request, 'users_htmls/User_registration.html', {'errors': errors, 'user_form': user_form})
 
 
 

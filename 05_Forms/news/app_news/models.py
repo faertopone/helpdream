@@ -15,6 +15,8 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
     is_active_user = models.BooleanField(verbose_name='актив', db_index=True)
 
+
+
     class Meta:
         db_table = 'Users'
         ordering = ['created_at']

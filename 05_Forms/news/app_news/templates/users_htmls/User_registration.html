@@ -5,18 +5,25 @@
     <title>Регистрация нового пользователя</title>
 </head>
 <body>
- <h2> Регистрация когда сам написал код HTML</h2>
+ <h2> Регистрация </h2>
 <form method="post" action="/profiles/registr/">
     {% csrf_token %}
-<p><label for="id_username">Username:</label> <input type="text" name="username" required id="id_username"></p>
-<p><label for="id_password">Password:</label> <input type="text" name="password" required id="id_password"></p>
-<p><label for="id_first_name">First name:</label> <input type="text" name="first_name"  required id="id_first_name"></p>
-<p><label for="id_second_name">Second name:</label> <input type="text" name="second_name"  required id="id_second_name"></p>
-<p><label for="id_email">Email:</label> <input type="email" name="email" required id="id_email"></p>
-{#<p><label for="id_birthday">Birthday:</label> <input type="date" name="birthday" required id="id_birthday"></p>#}
+    {{ user_form.as_p }}
+{#<p><label for="id_username">Username:</label> <input type="text" name="username" required id="id_username"></p>#}
+{#<p><label for="id_password">Password:</label> <input type="text" name="password" required id="id_password"></p>#}
+{#<p><label for="id_first_name">First name:</label> <input type="text" name="first_name"  required id="id_first_name"></p>#}
+{#<p><label for="id_second_name">Second name:</label> <input type="text" name="second_name"  required id="id_second_name"></p>#}
+{#<p><label for="id_email">Email:</label> <input type="email" name="email" required id="id_email"></p>#}
+
 
 
     <button type="submit" >Зарегистрироваться</button>
+{#    {% if errors %}#}
+{#        <p>Ошибки:</p>#}
+{#        {% for v_er in errors.value %}#}
+{#           <p> {{ v_er }}</p>#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
 </form>
 
 </body>
