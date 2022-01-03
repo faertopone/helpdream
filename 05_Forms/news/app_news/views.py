@@ -42,7 +42,6 @@ class NewsListView(ListView):
 
 class NewsDetailView(View):
 
-
     def get(self, request, pk):
         news = MyNews.objects.get(id=pk)
         coments = MyComments.objects.all()
@@ -56,13 +55,6 @@ class NewsDetailView(View):
         print(coments_list)
         return render(request, 'news_htmls/news_detail.html',
                       context={'news': news, 'pk': pk, 'coments': coments_list})
-
-
-
-
-
-
-
 
 
 class UserEditFormView(View):

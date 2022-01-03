@@ -26,7 +26,7 @@
         <h2> Устаревшие новости(не активные):</h2>
         {% for i_old in items_news %}
             {% if not i_old.is_active_news %}
-                <h1> <a href='news/{{ i.id}}'> Устаревшие новости(не активные): {{ i_old.titlenews }} </a></h1>
+                <h1> <a href='news/{{ i_old.id}}'> Устаревшие новости(не активные): {{ i_old.titlenews }} </a></h1>
       <a href="created_news/{{ i_old.id }}/edit/">Редактировать новость</a>
                 {% endif %}
         {% endfor %}
