@@ -25,16 +25,22 @@ class User(models.Model):
 class MyNews(models.Model):
 
     def __str__(self):
-        return self.titlenews
-
+        temp = str(self.created_news)
+        data = temp[:10]
+        time_x = temp[10:]
+        time = time_x[:6]
+        return f'{self.titlenews},   время: {time}, Дата: {data}'
+    # сначало действие- потом описание (оно и в админке будет отображаться)
+    STATUS_CHOISE = [
+        (True, 'Активно'),
+        (False, 'Не активно')
+    ]
     titlenews = models.CharField(max_length=200, verbose_name='Заголовок новости', db_index=True)
     description = models.TextField(default='', verbose_name='описание', db_index=True)
     created_news = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
     updated_news = models.DateTimeField(auto_now=True, verbose_name='Дата обновления', db_index=True)
-    is_active_news = models.BooleanField(verbose_name='Активность новости', db_index=True, default=False)
-
-
-
+    is_active_news = models.BooleanField(verbose_name='Активность новости', db_index=True, default=False, choices=STATUS_CHOISE)
+    # all_comment = models.ManyToManyField('MyComments',  verbose_name='Коментарии')
 
 
 
@@ -47,14 +53,26 @@ class MyNews(models.Model):
 class MyComments(models.Model):
 
     def __str__(self):
-        return self.name
+        return f'{self.name}, город ({self.city})'
+
+        # сначало действие- потом описание (оно и в админке будет отображаться)
+
+    STATUS_CHOISE = [
+        (True, 'Удалено администратором'),
+        (False, 'Комментарий норм')
+    ]
 
     name = models.CharField(max_length=200, verbose_name='Имя', db_index=True)
     description = models.TextField(default='', verbose_name='описание', db_index=True)
+    old_description = models.TextField(default='', verbose_name='Хранения комментария после удаления', db_index=True)
     created_comments = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
+    city = models.CharField(max_length=50, verbose_name='Город', db_index=True, default='Неизвестно')
+    nickname = models.CharField(max_length=50, verbose_name='Прозвище', db_index=True, default='Неизвестно')
 
     comment = models.ForeignKey('MyNews', default=None, null=True, on_delete=models.CASCADE,
                                 related_name='comment', verbose_name='Название новости')
+    status_comment = models.BooleanField(verbose_name='статус', db_index=True, default=False, choices=STATUS_CHOISE)
+
     id_news_current = models.IntegerField(default=0)
 
 

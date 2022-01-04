@@ -24,12 +24,19 @@
 
 
 {% for com in coments %}
-
+    {% if not com.status_comment %}
 <p>Имя коментатора: {{ com.name }}</p>
     <p>коментарий: {{ com.description }}</p>
     <p>Дата коментария: {{ com.created_comments }}</p>
+{#    <p> Этот коментарий к новости: {{ com.comment.titlenews }}</p>#}
     <p>---------------------------------</p>
+    {% else %}
+         <p>---------Имя: {{ com.name }}----------------</p>
+          <p>Этот комент был УДАЛЕН АДМИНОМ</p>
+        <p>------------------------------</p>
+    {% endif %}
 {% endfor %}
+
 
 
 
