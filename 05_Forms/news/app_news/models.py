@@ -75,7 +75,17 @@ class MyComments(models.Model):
 
     id_news_current = models.IntegerField(default=0)
 
+    #Это сделал для того что бы в админ панели выводилось краткое описание
+    def min_description(self):
+        text_str = self.description
+        text = list(text_str)
+        if len(text) > 15:
+            self.description = text_str[:15] + '...'
+        else:
+            self.description = text_str
+        return self.description
 
+    min_description.short_description = 'Краткое описание'
 
     class Meta:
         db_table = 'Comments'

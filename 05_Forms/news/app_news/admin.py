@@ -55,7 +55,7 @@ admin.site.register(MyNews, MyNewsAdmin)
 
 @admin.register(MyComments)
 class MyCommentsAdmin(admin.ModelAdmin):
-    list_display = ['name', 'status_comment', 'id', 'created_comments', 'city', 'nickname']
+    list_display = ['name', 'status_comment', 'min_description', 'min_description_admin', 'id', 'created_comments', 'city', 'nickname']
     # fields = ('name', 'description')
     list_filter = ['name']
     search_fields = ['name']
@@ -80,6 +80,20 @@ class MyCommentsAdmin(admin.ModelAdmin):
     # Если выбрали restore_comment - тогда status_comment  делаем False
     def restore_comment(self, request, queryset):
         queryset.update(status_comment=False)
+
+
+    #Или можно в дамни панели через obj
+    #Это сделал для того что бы в админ панели выводилось краткое описание
+    def min_description_admin(self, obj):
+        text_str = obj.description
+        text = list(text_str)
+        if len(text) > 15:
+            obj.description = text_str[:15] + '...'
+        else:
+            obj.description = text_str
+        return obj.description
+
+    min_description_admin.short_description = 'Краткое описание через админ панель'
 
     # Это название когда в админке выбираем Актион чойсе (с русским описанием
     delete_comment_admin.short_description = 'Удалить коммент админом'
