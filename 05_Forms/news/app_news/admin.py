@@ -77,9 +77,11 @@ class MyCommentsAdmin(admin.ModelAdmin):
     def delete_comment_admin(self, request, queryset):
         queryset.update(status_comment=True)
 
+
     # Если выбрали restore_comment - тогда status_comment  делаем False
     def restore_comment(self, request, queryset):
         queryset.update(status_comment=False)
+
 
 
     #Или можно в дамни панели через obj
@@ -89,8 +91,6 @@ class MyCommentsAdmin(admin.ModelAdmin):
         text = list(text_str)
         if len(text) > 15:
             obj.description = text_str[:15] + '...'
-        else:
-            obj.description = text_str
         return obj.description
 
     min_description_admin.short_description = 'Краткое описание через админ панель'
