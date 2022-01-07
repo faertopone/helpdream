@@ -91,7 +91,7 @@ class Created_news(View):
         my_news = MyNewsForm()
         if news_form.is_valid():
             MyNews.objects.create(**news_form.cleaned_data)
-            print('Новость должна записаться в БД')
+
             print(news_form.is_valid(), 'news_form.is_valid()')
             return HttpResponseRedirect('/')
         print('Не прошло валидность формы')
@@ -120,32 +120,31 @@ class CreadetComment(View):
     def get(self, request, pk):
         my_comment = CommentsForm()
         news = MyNews.objects.get(id=pk)
-
         return render(request, 'news_htmls/created_comment.html', context={'my_comment': my_comment, 'news': news})
 
     def post(self, request, pk):
         comment_form = CommentsForm(request.POST)
-        print(comment_form)
-        my_comment = CommentsForm()
+
         news = MyNews.objects.get(id=pk)
-        if request.user.is_authenticated:
-            comment_form.name = request.user.username
-            print(comment_form)
+
 
         if comment_form.is_valid():
             temp = MyComments.objects.create(**comment_form.cleaned_data)
             #Тут мы присвоим ключ по названию новости к этому коментарию)
-
+            if request.user.is_authenticated:
+                comment_form.name = request.user.username
+            else:
+                temp.name = temp.name + ' (Аноним)'
             temp.id_news_current = news.id
-            temp.user_comments = comment_form.name
             temp.comment = news
             temp.save()
-
-
             return HttpResponseRedirect('/')
+
         print('Не прошло валидность формы')
         errors = comment_form.errors
-        return render(request, 'news_htmls/created_comment.html', context={'my_comment': my_comment, 'errors': errors})
+        my_comment = CommentsForm()
+        news = MyNews.objects.get(id=pk)
+        return render(request, 'news_htmls/created_comment.html', context={'news': news, 'my_comment': my_comment, 'errors': errors})
 
 
 

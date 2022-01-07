@@ -10,18 +10,19 @@
 
 <form method="post" action="/created_comments/{{ news.id }}/">
       {% csrf_token %}
+       {{ errors }}
 
    <p>Ваше имя:
        {% if request.user.is_authenticated %}
-        <input type="text" name="name" maxlength="200" required id="id_name" disabled> {{ request.user.username }} (Вы авторизованы)
+        <input style="display: none" type="text" name="name" maxlength="200" required id="id_name" value="{{ request.user.username }}">  {{ request.user.username }} (Вы авторизованы)
        {%  else %}
         {{ my_comment.name }} (Аноним)
 
        {% endif %}
+
    <p>Напишите сообщение : </p>
     {{ my_comment.description }}
     <button type="submit">Написать!</button>
-    {{ errors }}
 
 </form>
 
