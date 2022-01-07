@@ -75,6 +75,9 @@ class MyComments(models.Model):
 
     id_news_current = models.IntegerField(default=0)
 
+    user_comments = models.ForeignKey('User', default=None, null=True, on_delete=models.CASCADE,
+                                related_name='auther_user', verbose_name='Авторизированный пользователь')
+
     #Это сделал для того что бы в админ панели выводилось краткое описание
     def min_description(self):
         text_str = self.description

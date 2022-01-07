@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 
 
 
+
 class UserForm(forms.ModelForm):
 
     #тут сделали првоерку поля с именем и выведем ошибку свою
@@ -26,6 +27,8 @@ class UserForm(forms.ModelForm):
         model = User
         fields = '__all__'
         is_active_user = forms.BooleanField(required=False)
+        password = forms.CharField(widget=forms.PasswordInput)
+
 
 
 class MyNewsForm(forms.ModelForm):
@@ -49,4 +52,4 @@ class CommentsForm(forms.ModelForm):
 
 class LogginForm(forms.Form):
     username = forms.CharField()
-    password = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

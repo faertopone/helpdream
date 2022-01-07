@@ -10,6 +10,10 @@ from datetime import datetime
 from django.http import HttpResponseRedirect
 
 
+from django.contrib.auth import authenticate, login
+from django.http.response import HttpResponse, HttpResponseRedirect
+
+
 class UserFormView(View):
 
     def get(self, request):
@@ -18,7 +22,6 @@ class UserFormView(View):
 
     def post(self, request):
         user_form = UserForm(request.POST)
-
         if user_form.is_valid():
             User.objects.create(**user_form.cleaned_data)
             return HttpResponseRedirect('/')
@@ -29,12 +32,14 @@ class UserFormView(View):
 
 
 
-class NewsListView(ListView):
+class NewsListView(View):
 
-    model = MyNews
-    template_name = 'news_htmls/news_list.html'
-    context_object_name = 'items_news'
-    queryset = MyNews.objects.all()
+    def get(self, request):
+
+        items_news = MyNews.objects.all()
+        return render(request, 'news_htmls/news_list.html', context={'items_news': items_news})
+
+
 
 # class NewsDetailView(DetailView):
 #
@@ -120,21 +125,27 @@ class CreadetComment(View):
 
     def post(self, request, pk):
         comment_form = CommentsForm(request.POST)
+        print(comment_form)
         my_comment = CommentsForm()
         news = MyNews.objects.get(id=pk)
-
+        if request.user.is_authenticated:
+            comment_form.name = request.user.username
+            print(comment_form)
 
         if comment_form.is_valid():
             temp = MyComments.objects.create(**comment_form.cleaned_data)
             #Тут мы присвоим ключ по названию новости к этому коментарию)
+
             temp.id_news_current = news.id
+            temp.user_comments = comment_form.name
             temp.comment = news
             temp.save()
 
 
             return HttpResponseRedirect('/')
         print('Не прошло валидность формы')
-        return render(request, 'news_htmls/created_comment.html', context={'my_comment': my_comment})
+        errors = comment_form.errors
+        return render(request, 'news_htmls/created_comment.html', context={'my_comment': my_comment, 'errors': errors})
 
 
 

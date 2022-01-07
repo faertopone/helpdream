@@ -25,7 +25,13 @@
 
 {% for com in coments %}
     {% if not com.status_comment %}
-<p>Имя коментатора: {{ com.name }}</p>
+<p>Имя коментатора:
+     {% if request.user.is_authenticated %}
+         {{ com.user_comments }}
+         {% else %}
+         {{ com.user_comments }} (Аноним)
+         {% endif %}
+    {{ com.name }}</p>
     <p>коментарий: {{ com.description }}</p>
     <p>Дата коментария: {{ com.created_comments }}</p>
 {#    <p> Этот коментарий к новости: {{ com.comment.titlenews }}</p>#}

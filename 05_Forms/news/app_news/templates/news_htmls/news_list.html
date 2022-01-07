@@ -5,13 +5,25 @@
     <title>Все новости</title>
 </head>
 <body>
+{% if request.user.is_authenticated %}
+    <h2> Добро пожаловать! {{ request.user.username }}</h2>
+    <p> Если что, то можно выйти СПОСОБ №1: <a href="users/logout/">ВЫЙТИ</a></p>
+    <p> Если что, то можно выйти СПОСОБ №2:<a href="users/another_logout">ВЫЙТИ</a></p>
+
+    {% else %}
+    <h2> <a href="users/login/" >LOGIN</a></h2>
+    <h2> <a href="users/another_login/" >Another LOGIN</a></h2>
+
+{% endif %}
+
 {##}
 <h2> <a href="profiles/registr"> Регистрация</a> </h2>
 <h2> <a href="admin/"> Админка</a> </h2>
-{#<form method="post" action="/">#}
+
+
+{#<form method="post" >#}
 {#    {% csrf_token %}#}
-{#<p><label for="id_username">Введите имя:</label> <input type="text" name="username" required id="id_username"></p>#}
-{#<p><label for="id_password">Введите Пароль:</label> <input type="text" name="password" required id="id_password"></p>#}
+{#    {{ user_form.as_p }}#}
 {#    <button type="submit">Войти</button>#}
 {#</form>#}
 
