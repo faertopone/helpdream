@@ -2,7 +2,9 @@ from django.db import models
 
 
 
-class User(models.Model):
+
+
+class My_User(models.Model):
 
     def __str__(self):
         return self.username
@@ -75,7 +77,7 @@ class MyComments(models.Model):
 
     id_news_current = models.IntegerField(default=0)
 
-    user_comments = models.ForeignKey('User', default=None, null=True, on_delete=models.CASCADE,
+    user_comments = models.ForeignKey('My_User', default=None, null=True, on_delete=models.CASCADE,
                                 related_name='auther_user', verbose_name='Авторизированный пользователь')
 
     #Это сделал для того что бы в админ панели выводилось краткое описание

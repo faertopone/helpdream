@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import User, MyNews, MyComments
+from .models import My_User, MyNews, MyComments
 
 
 # Register your models here.
 
 #---------------------------------------------------
-@admin.register(User)
+@admin.register(My_User)
 class UserAdmin(admin.ModelAdmin):
     pass
 

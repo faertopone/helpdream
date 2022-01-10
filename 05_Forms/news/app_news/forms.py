@@ -1,8 +1,17 @@
 from django import forms
-from .models import User, MyNews, MyComments
+from .models import My_User, MyNews, MyComments
 from django.core.exceptions import ValidationError
 
+from django.contrib.auth.models import User
 
+
+class StandartUser(forms.ModelForm):
+
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'password']
 
 
 
@@ -24,10 +33,10 @@ class UserForm(forms.ModelForm):
             raise ValidationError('Нельзя что бы пароль и имя были одинаковые!')
 
     class Meta:
-        model = User
+        model = My_User
         fields = '__all__'
         is_active_user = forms.BooleanField(required=False)
-        password = forms.CharField(widget=forms.PasswordInput)
+
 
 
 

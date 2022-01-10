@@ -4,11 +4,11 @@ from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .forms import UserForm, LogginForm, CommentsForm
-from .forms import MyNewsForm
-from .models import User, MyNews, MyComments
+from .forms import MyNewsForm, StandartUser
+from .models import My_User, MyNews, MyComments
 from datetime import datetime
 from django.http import HttpResponseRedirect
-
+from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login
 from django.http.response import HttpResponse, HttpResponseRedirect
@@ -17,13 +17,13 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 class UserFormView(View):
 
     def get(self, request):
-        user_form = UserForm()
+        user_form = StandartUser()
         return render(request, 'users_htmls/User_registration.html', context={'user_form': user_form})
 
     def post(self, request):
-        user_form = UserForm(request.POST)
+        user_form = StandartUser(request.POST)
         if user_form.is_valid():
-            User.objects.create(**user_form.cleaned_data)
+            User.objects.create_user('username', 'password')
             return HttpResponseRedirect('/')
         print('Не прошло валидность формы')
         errors = user_form.errors
@@ -67,12 +67,12 @@ class NewsDetailView(View):
 class UserEditFormView(View):
 
     def get(self, request, profile_id):
-        user = User.objects.get(id=profile_id)
+        user = My_User.objects.get(id=profile_id)
         user_form = UserForm(instance=user)
         return render(request, 'users_htmls/edit_profil.html', context={'user_form': user_form, 'profile_id': profile_id})
 
     def post(self, request, profile_id):
-        user = User.objects.get(id=profile_id)
+        user = My_User.objects.get(id=profile_id)
         user_form = UserForm(request.POST, instance=user)
         if user_form.is_valid():
             user.save()
