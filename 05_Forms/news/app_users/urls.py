@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import login_view, AnotherLoginView, logout_view,AnotherLogoutView
+from .views import login_view, AnotherLoginView, logout_view, AnotherLogoutView, login_view
 from django.urls import include
 
 
