@@ -4,14 +4,19 @@ from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
 
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext as _
+
+
+
 
 class StandartUser(forms.ModelForm):
 
-    password = forms.CharField(widget=forms.PasswordInput)
-
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'email', 'password']
+
+        # тут сделали првоерку поля с именем и выведем ошибку свою
 
 
 

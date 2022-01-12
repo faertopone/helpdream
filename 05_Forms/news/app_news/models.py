@@ -1,9 +1,6 @@
 from django.db import models
 
 
-
-
-
 class My_User(models.Model):
 
     def __str__(self):
