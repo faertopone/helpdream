@@ -73,3 +73,14 @@ class MyUser(AbstractBaseUser):
 
     class Meta:
         db_table = 'MyUser'
+
+
+class TestBD(models.Model):
+
+    def __str__(self):
+        return self.name
+
+    name = models.CharField(max_length=100, verbose_name='name')
+
+    class Meta:
+        db_table = 'TestBD'
