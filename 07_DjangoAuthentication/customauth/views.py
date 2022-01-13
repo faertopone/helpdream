@@ -1,20 +1,21 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login, logout
-from django.http.response import HttpResponse, HttpResponseRedirect
-from .admin import UserChangeForm
+from django.contrib.auth import authenticate, login
+from django.http.response import HttpResponseRedirect
+from .admin import UserCreationForm
 from django.contrib.auth.views import LogoutView
 from django.views import View
 from django.contrib.auth.models import User
+from .forms import AuthForm
 
 
 
 def login_view(request):
     if request.method == 'POST':  # для POST пытаемся аутенфицировать пользователя
-        auth_form = UserChangeForm(request.POST)
+        auth_form = AuthForm(request.POST)
         if auth_form.is_valid():
-            username = auth_form.cleaned_data['username']
+            email = auth_form.cleaned_data['email']
             password = auth_form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(email=email, password=password)
             if user:
                 if user.is_active:
                     login(request, user)
@@ -27,7 +28,7 @@ def login_view(request):
 
 
     else:  # для всех остальных запросов отображаем страничку логина
-        auth_form = UserChangeForm()
+        auth_form = AuthForm()
 
     context = {
             'form': auth_form
@@ -48,14 +49,21 @@ class Index(View):
 class RegistrationView(View):
 
     def get(self, request):
-        user_form = UserChangeForm()
+        user_form = UserCreationForm()
         return render(request, 'register.html', context={'user_form': user_form})
 
     def post(self, request):
-        user_form = UserChangeForm(request.POST)
+        user_form = UserCreationForm(request.POST)
         if user_form.is_valid():
-            user = User.objects.create_user(**user_form.cleaned_data)
+            email, date_of_birth, password = (
+                user_form.cleaned_data['email'],
+                user_form.cleaned_data['date_of_birth'],
+                user_form.cleaned_data['password'],
+
+            )
+            user = User.objects.create_user(email, date_of_birth, password)
             user.save()
+
             return HttpResponseRedirect('/')
         print('Не прошло валидность формы')
         errors = user_form.errors
