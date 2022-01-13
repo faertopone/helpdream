@@ -75,6 +75,8 @@ WSGI_APPLICATION = 'djauth.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+AUTH_USER_MODEL = 'customauth.MyUser'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -125,4 +127,3 @@ LOGIN_REDIRECT_URL = '/'
 
 SESSION_COOKIE_AGE = 30 * 24 * 60 * 60
 
-AUTH_USER_MODEL = 'customauth.MyUser'

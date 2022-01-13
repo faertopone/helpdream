@@ -81,6 +81,7 @@ class TestBD(models.Model):
         return self.name
 
     name = models.CharField(max_length=100, verbose_name='name')
+    description = models.TextField()
 
     class Meta:
         db_table = 'TestBD'
