@@ -12,9 +12,22 @@ from django.utils.translation import ugettext as _
 
 class StandartUser(forms.ModelForm):
 
+    username = forms.CharField(label='Введите Ваше имя')
+    email = forms.EmailField(label='Введите Ваш mail')
+    password1 = forms.CharField(label='Введите Пароль', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Повторите Пароль', widget=forms.PasswordInput)
+
+    def clean(self):
+        # Тут метод сразу првоерит это условие и если не будет совпадать будет ошибка) в форме erros _)
+        cleaned_data = super(StandartUser, self).clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+        if password1 != password2:
+            raise ValidationError('Повторите пароль еще раз(возможно вы опечатались)')
+
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'email']
 
         # тут сделали првоерку поля с именем и выведем ошибку свою
 

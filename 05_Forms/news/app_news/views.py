@@ -23,13 +23,15 @@ class UserFormView(View):
     def post(self, request):
         user_form = StandartUser(request.POST)
         if user_form.is_valid():
-            username, email, password = (
+            username, email, password1 = (
                 user_form.cleaned_data['username'],
                 user_form.cleaned_data['email'],
-                user_form.cleaned_data['password'],
+                user_form.cleaned_data['password1'],
             )
-            user = User.objects.create_user(username, email, password)
+            print(username, email, password1)
+            user = User.objects.create_user(username, email, password=password1)
             user.save()
+            return HttpResponseRedirect('/')
         print('Не прошло валидность формы')
         errors = user_form.errors
 
