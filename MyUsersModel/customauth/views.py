@@ -58,7 +58,7 @@ class RegistrationView(View):
             email, date_of_birth, password = (
                 user_form.cleaned_data['email'],
                 user_form.cleaned_data['date_of_birth'],
-                user_form.cleaned_data['password'],
+                user_form.cleaned_data['password2'],
 
             )
             user = User.objects.create_user(email, date_of_birth, password)

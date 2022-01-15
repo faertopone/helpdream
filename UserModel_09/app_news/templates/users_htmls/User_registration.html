@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация нового пользователя</title>
+</head>
+<body>
+ <h2> Регистрация </h2>
+<form method="post" >
+    {% csrf_token %}
+    {{ user_form.as_p }}
+
+    <button type="submit" >Зарегистрироваться</button>
+{#    {% if errors %}#}
+{#        <p>Ошибки:</p>#}
+{#        {% for v_er in errors.value %}#}
+{#           <p> {{ v_er }}</p>#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+</form>
+
+</body>
+</html>
