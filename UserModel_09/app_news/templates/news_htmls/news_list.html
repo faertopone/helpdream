@@ -9,7 +9,8 @@
     <h2> Добро пожаловать! {{ request.user.first_name }}</h2>
     <p> Если что, то можно выйти СПОСОБ №1: <a href="users/logout/">ВЫЙТИ</a></p>
     <p> Если что, то можно выйти СПОСОБ №2:<a href="users/another_logout">ВЫЙТИ</a></p>
-    <p>День рождения: {{ request.user.profile.new_date_of_birth }}</p>
+    <p>День рождения модефицированное: {{ request.user.profile.new_date_of_birth }}</p>
+     <p>День рождения: {{ request.user.profile.date_of_birth }}</p>
     <p>Ваш город: {{ request.user.profile.city }}</p>
 
     {% else %}
@@ -24,6 +25,7 @@
 <h2> <a href="{% url 'best_register' %}"> Регистрация через джанго где доработали поля </a> (В БД USER + дополнительные поля с нвоым БД</h2>
 
 <h2> <a href="admin/"> Админка</a> </h2>
+<h2><a href="{% url 'vacancy_list' %}">Ссылка на список вакансий</a> </h2>
 
 
 {#<form method="post" >#}

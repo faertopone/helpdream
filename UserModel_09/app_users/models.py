@@ -6,8 +6,8 @@ from django.db import models
 class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    city = models.CharField(max_length=40, blank=True)
-    date_of_birth = models.DateTimeField()
+    city = models.CharField(max_length=40, blank=True, verbose_name='Город', db_index=True)
+    date_of_birth = models.DateTimeField(verbose_name='дата рождения', db_index=True)
 
     #в Модели что бы вывести модернезирвоанные данные
     def new_date_of_birth(self):
