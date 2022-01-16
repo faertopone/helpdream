@@ -7,21 +7,21 @@
 
 {% if request.user.is_authenticated %}
     <h2> Добро пожаловать! {{ request.user.first_name }}</h2>
-    <p> Если что, то можно выйти СПОСОБ №1: <a href="users/logout/">ВЫЙТИ</a></p>
+{#    <p> Если что, то можно выйти СПОСОБ №1: <a href="users/logout/">ВЫЙТИ</a></p>#}
     <p> Если что, то можно выйти СПОСОБ №2:<a href="users/another_logout">ВЫЙТИ</a></p>
-    <p>День рождения модефицированное: {{ request.user.profile.new_date_of_birth }}</p>
-     <p>День рождения: {{ request.user.profile.date_of_birth }}</p>
-    <p>Ваш город: {{ request.user.profile.city }}</p>
+{#    <p>День рождения модефицированное: {{ request.user.profile.new_date_of_birth }}</p>#}
+{#     <p>День рождения: {{ request.user.profile.date_of_birth }}</p>#}
+{#    <p>Ваш город: {{ request.user.profile.city }}</p>#}
 
     {% else %}
     <h2> <a href="users/login/" >LOGIN</a></h2>
-    <h2> <a href="users/another_login/" >Another LOGIN</a></h2>
+{#    <h2> <a href="users/another_login/" >Another LOGIN</a></h2>#}
 
 {% endif %}
 
 {##}
-<h2> <a href="profiles/registr"> Регистрация</a> (В ОТЕДЛЬНУ БД - не для регистрации) </h2>
-<h2> <a href="{% url 'register' %}"> Регистрация через джанго представление</a> (В БД USER стандартное )</h2>
+{#<h2> <a href="profiles/registr"> Регистрация</a> (В ОТЕДЛЬНУ БД - не для регистрации) </h2>#}
+{#<h2> <a href="{% url 'register' %}"> Регистрация через джанго представление</a> (В БД USER стандартное )</h2>#}
 <h2> <a href="{% url 'best_register' %}"> Регистрация через джанго где доработали поля </a> (В БД USER + дополнительные поля с нвоым БД</h2>
 
 <h2> <a href="admin/"> Админка</a> </h2>
