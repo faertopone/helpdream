@@ -34,5 +34,11 @@
     <p>Резюме нет.</p>
 {% endif %}
 
+<h2>Пользователь {{ current_user.first_name }}, смотрит это</h2>
+    <p>Вы из города {{ current_user.city }}</p>
+    <p>Ваш логин {{ current_user.username }}</p>
+    <p>Ваши ДР {{ current_user.date_of_birth }}</p>
+
+
 </body>
 </html>
