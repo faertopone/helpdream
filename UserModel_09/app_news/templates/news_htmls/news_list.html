@@ -6,7 +6,7 @@
 </head>
 
 {% if request.user.is_authenticated %}
-    <h2> Добро пожаловать! {{ request.user.first_name }}</h2>
+    <h2> Добро пожаловать! {{ request.user.username }}, {{ request.user.first_name }}</h2>
 {#    <p> Если что, то можно выйти СПОСОБ №1: <a href="users/logout/">ВЫЙТИ</a></p>#}
     <p> Если что, то можно выйти СПОСОБ №2:<a href="users/another_logout">ВЫЙТИ</a></p>
 {#    <p>День рождения модефицированное: {{ request.user.profile.new_date_of_birth }}</p>#}
