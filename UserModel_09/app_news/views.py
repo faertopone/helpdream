@@ -45,9 +45,12 @@ class UserFormView(View):
 class NewsListView(View):
 
     def get(self, request):
-
+        if request.user.has_perm('app_users.moderator_time'):
+            flagmoder = True
+        else:
+            flagmoder = False
         items_news = MyNews.objects.all()
-        return render(request, 'news_htmls/news_list.html', context={'items_news': items_news,})
+        return render(request, 'news_htmls/news_list.html', context={'items_news': items_news, 'flagmoder': flagmoder})
 
 
 
@@ -62,16 +65,60 @@ class NewsDetailView(View):
     def get(self, request, pk):
         news = MyNews.objects.get(id=pk)
         coments = MyComments.objects.all()
-        coments_list = []
+        coments_list_anonim = []
+        coments_list_auth = []
+        if request.user.has_perm('app_users.moderator_time'):
+            flagmoder = True
+        else:
+            flagmoder = False
+
 
         #тут я взял все коментарии,и у кого Ид совпало с ид новости записываю в массив
         for i in coments:
             if i.id_news_current == pk:
-                coments_list.append(i)
+                lfg_name = i.name.split()
+                if '(Аноним)' in lfg_name:
+                    coments_list_anonim.append(i)
+                else:
+                    coments_list_auth.append(i)
 
-        print(coments_list)
+
         return render(request, 'news_htmls/news_detail.html',
-                      context={'news': news, 'pk': pk, 'coments': coments_list})
+                      context={'news': news, 'pk': pk, 'coments_list_anonim': coments_list_anonim, 'coments_list_auth': coments_list_auth, 'flagmoder': flagmoder})
+
+
+    def post(self, request, pk):
+        pass
+
+
+
+class EditNews(View):
+
+    def get(self, request, profile_id):
+        if request.user.has_perm('app_users.moderator_time'):
+            flagmoder = True
+            display = 'display: none'
+        else:
+            flagmoder = False
+            display = 'display: block'
+        news = MyNews.objects.get(id=profile_id)
+        news_form = MyNewsForm(instance=news)
+
+        return render(request, 'news_htmls/edit_news.html',
+                      context={'news_form': news_form, 'profile_id': profile_id, 'flagmoder': flagmoder, 'news': news, 'display': display})
+
+    def post(self, request, profile_id):
+        if request.user.has_perm('app_users.moderator_time'):
+            flagmoder = True
+        else:
+            flagmoder = False
+        news = MyNews.objects.get(id=profile_id)
+        news_form = MyNewsForm(request.POST, instance=news)
+        if news_form.is_valid():
+            news.save()
+            return HttpResponseRedirect('/')
+        return render(request, 'news_htmls/edit_news.html',
+                      context={'news_form': news_form, 'profile_id': profile_id, 'flagmoder': flagmoder, 'news': news})
 
 
 class UserEditFormView(View):
@@ -94,39 +141,36 @@ class Created_news(View):
 
     def get(self, request):
         my_news = MyNewsForm()
-        return render(request, 'news_htmls/created_news.html', context={'my_news': my_news})
+        if request.user.has_perm('app_users.moderator_time'):
+            flagmoder = True
+        else:
+            flagmoder = False
+        return render(request, 'news_htmls/created_news.html', context={'my_news': my_news, 'flagmoder': flagmoder})
 
     def post(self, request):
+        if request.user.has_perm('app_users.moderator_time'):
+            flagmoder = True
+        else:
+            flagmoder = False
+
         news_form = MyNewsForm(request.POST)
         my_news = MyNewsForm()
         user_y = request.user
         user_x = User.objects.get(id=user_y.id)
+        print(news_form.errors)
         if news_form.is_valid():
             MyNews.objects.create(**news_form.cleaned_data)
             count_x = user_x.profile.count_news
             count_x = +1
             user_x.profile.count_news = count_x
-            user_x.save()
+            user_x.profile.save()
             print(news_form.is_valid(), 'news_form.is_valid()')
             return HttpResponseRedirect('/')
         print('Не прошло валидность формы')
-        return render(request, 'news_htmls/created_news.html', context={'my_news': my_news})
+        return render(request, 'news_htmls/created_news.html', context={'my_news': my_news, 'flagmoder': flagmoder})
 
-class EditNews(View):
 
-    def get(self, request, profile_id):
-        news = MyNews.objects.get(id=profile_id)
-        news_form = MyNewsForm(instance=news)
-        return render(request, 'news_htmls/edit_news.html',
-                      context={'news_form': news_form, 'profile_id': profile_id})
 
-    def post(self, request, profile_id):
-        news = MyNews.objects.get(id=profile_id)
-        news_form = MyNewsForm(request.POST, instance=news)
-        if news_form.is_valid():
-            news.save()
-            return HttpResponseRedirect('/')
-        return render(request, 'news_htmls/edit_news.html', context={'news_form': news_form, 'profile_id': profile_id})
 
 
 

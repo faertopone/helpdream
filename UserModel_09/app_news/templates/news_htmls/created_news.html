@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Создать новость</title>
@@ -9,12 +9,15 @@
 
 <form method="post" action="/created_news/">
     {% csrf_token %}
+{##}
+{#    {{ my_news.as_p }}#}
 
-    {{ my_news.as_p }}
+    <h3><label for="id_titlenews">Название новости:</label>  {{ my_news.titlenews }}</h3>
+    <p><label for="id_description">Описание:</label>{{ my_news.description }}</p>
+    {% if flagmoder %}
+     <p> Опубликовать: {{ my_news.is_active_news }}</p>
+      {% endif %}
 
-{#    <h3><label for="id_titlenews">Название новости:</label>  {{ my_news.titlenews }}</h3>#}
-{#    <p><label for="id_description">Описание:</label>{{ my_news.description }}</p>#}
-{#     <p> Флаг что нужно опубликовать: {{ my_news.is_active_news }}</p>#}
 
     <button type="submit">Опубликовать</button>
 </form>

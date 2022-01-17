@@ -60,10 +60,12 @@ class UserForm(forms.ModelForm):
 
 class MyNewsForm(forms.ModelForm):
 
+    is_active_news = forms.BooleanField(required=False)
+
     class Meta:
         model = MyNews
         fields = ['titlenews', 'description', 'is_active_news']
-        is_active_news = forms.BooleanField(required=False)
+
 
 
 

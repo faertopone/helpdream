@@ -2,16 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Добро пожаловать в свой личный кабинет {{ request.user.username }}</title>
+    <title>Добро пожаловать в свой личный кабинет {{ profile_user.username }}</title>
 </head>
 <body>
+<H1>Добро пожаловать в свой личный кабинет {{ profile_user.username }}</H1>
 <h2>Ваши данные</h2>
-<form method="post">
-     {{ form.as_p }}
-    <button type="submit"> Редактировать </button>
-</form>
+<p> Ваш логин: {{ profile_user.username }}</p>
+<p> Ваше имя: {{ profile_user.first_name }}</p>
+<p> Ваше Фамилия: {{ profile_user.last_name }}</p>
+<p> Ваш email: {{ profile_user.email }}</p>
+<p> Ваше телефон: {{ profile_user.profile.phone }}</p>
+<p> Ваше Город: {{ profile_user.profile.city }}</p>
+<p> Ваша дата рождения: {{ profile_user.profile.date_of_birth }}</p>
+<p>Количество опубликованных новостей: {{ profile_user.profile.count_news }}</p>
 
-
+<h2>Если хотите редактировать <a href="{% url 'profile_edit_view' %}" >РЕДАКТИРОВТАЬ ПРОФИЛЬ</a> </h2>
 
 
 

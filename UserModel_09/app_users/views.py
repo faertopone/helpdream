@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponse, HttpResponseRedirect
+from django.views import View
+
 from .forms import AuthForm, ExtendedREgisterForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
@@ -88,11 +90,28 @@ def best_register_view(request):
     return render(request, 'users/register.html', {'form': form} )
 
 
-def profile_data_view(request):
-    profile_user = request.user
-    form = ExtendedREgisterForm(instance=profile_user)
-    if request.method == 'POST':
+class profile_data_view(View):
+
+    def get(self, request):
+        profile_user = request.user
+        form = ExtendedREgisterForm(instance=profile_user)
+        return render(request, 'users/profile.html', {'profile_user': profile_user})
+
+
+
+class profile_edit_view(View):
+
+    def get(self, request):
+        profile_user = request.user
+        # form_list - тут выведем форму для текущего пользователя
+        form_list = ExtendedREgisterForm(instance=profile_user)
+        return render(request, 'users/profile_edit.html', {'form_list': form_list})
+
+    def post(self, request):
+        profile_user = request.user
+        #Это form - принимаем аднные после заполенния и првоерим валидность
         form = ExtendedREgisterForm(request.POST)
+
         if form.is_valid():
             user = form.save()
             date_of_birth = form.cleaned_data.get('date_of_birth')
@@ -109,6 +128,4 @@ def profile_data_view(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('/')
-
-    return render(request, 'users/profile.html', {'form': form})
 

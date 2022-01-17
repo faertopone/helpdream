@@ -27,6 +27,8 @@ class Profile(models.Model):
             ('veryfication', 'Верифицирован пользователя'),
             ('remove_veryfication', 'Убрать верификацию пользователя'),
             ('add_veryfication', 'Добавить верификацию пользователя'),
+            ('moderator_time', 'Проверять новость и давать право на публикацию')
+
         )
 
     def __str__(self):
