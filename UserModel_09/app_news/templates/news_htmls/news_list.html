@@ -7,11 +7,10 @@
 
 {% if request.user.is_authenticated %}
     <h2> Добро пожаловать! {{ request.user.username }}, {{ request.user.first_name }}</h2>
+    <p>Ваш телефон: {{ request.user.profile.phone }}</p>
 {#    <p> Если что, то можно выйти СПОСОБ №1: <a href="users/logout/">ВЫЙТИ</a></p>#}
     <p> Если что, то можно выйти СПОСОБ №2:<a href="users/another_logout">ВЫЙТИ</a></p>
-{#    <p>День рождения модефицированное: {{ request.user.profile.new_date_of_birth }}</p>#}
-{#     <p>День рождения: {{ request.user.profile.date_of_birth }}</p>#}
-{#    <p>Ваш город: {{ request.user.profile.city }}</p>#}
+    <a href="{% url 'profile_data_view' %}"> Ваш профиль</a> </p>
 
     {% else %}
     <h2> <a href="users/login/" >LOGIN</a></h2>
@@ -33,8 +32,11 @@
 {#    {{ user_form.as_p }}#}
 {#    <button type="submit">Войти</button>#}
 {#</form>#}
-
+    {% if request.user.profile.flag_veryfication %}
    <a href="/created_news/"> Создать новость </a>
+        {% else %}
+        <p> Вы не верифицированны для создания новости!</p>
+    {% endif %}
     {% if items_news %}
         {% for i in items_news %}
             {% if i.is_active_news %}

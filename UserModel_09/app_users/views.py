@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponse, HttpResponseRedirect
 from .forms import AuthForm, ExtendedREgisterForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import Profile
 
 
@@ -62,6 +62,9 @@ def register_view(request):
         form = UserCreationForm()
     return render(request, 'users/register.html', {'form': form} )
 
+
+
+
 def best_register_view(request):
     if request.method == 'POST':
         form = ExtendedREgisterForm(request.POST)
@@ -83,3 +86,29 @@ def best_register_view(request):
     else:
         form = ExtendedREgisterForm()
     return render(request, 'users/register.html', {'form': form} )
+
+
+def profile_data_view(request):
+    profile_user = request.user
+    form = ExtendedREgisterForm(instance=profile_user)
+    if request.method == 'POST':
+        form = ExtendedREgisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            date_of_birth = form.cleaned_data.get('date_of_birth')
+            city = form.cleaned_data.get('city')
+            phone = form.cleaned_data.get('phone')
+            Profile.objects.create(
+                user=user,
+                city=city,
+                date_of_birth=date_of_birth,
+                phone=phone,
+            )
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+
+    return render(request, 'users/profile.html', {'form': form})
+

@@ -14,6 +14,7 @@ from django.contrib.auth import authenticate, login
 from django.http.response import HttpResponse, HttpResponseRedirect
 
 
+
 class UserFormView(View):
 
     def get(self, request):
@@ -46,7 +47,7 @@ class NewsListView(View):
     def get(self, request):
 
         items_news = MyNews.objects.all()
-        return render(request, 'news_htmls/news_list.html', context={'items_news': items_news})
+        return render(request, 'news_htmls/news_list.html', context={'items_news': items_news,})
 
 
 
@@ -98,9 +99,14 @@ class Created_news(View):
     def post(self, request):
         news_form = MyNewsForm(request.POST)
         my_news = MyNewsForm()
+        user_y = request.user
+        user_x = User.objects.get(id=user_y.id)
         if news_form.is_valid():
             MyNews.objects.create(**news_form.cleaned_data)
-
+            count_x = user_x.profile.count_news
+            count_x = +1
+            user_x.profile.count_news = count_x
+            user_x.save()
             print(news_form.is_valid(), 'news_form.is_valid()')
             return HttpResponseRedirect('/')
         print('Не прошло валидность формы')

@@ -23,10 +23,10 @@ class ExtendedREgisterForm(UserCreationForm):
     date_of_birth = forms.DateTimeField(required=True, label='Дата рождения', help_text='Обезательно к заполнению!')
     # city = forms.ChoiceField(choices=['Москва', 'Питер'], required=False, label='Выберите город', help_text='Не обезательно')
     city = forms.ChoiceField(choices=STATUS_CHOISE, required=False, label='Выберите город', help_text='Не обезательно' )
-
+    phone = forms.IntegerField(required=False, label='Телефон', help_text='(Не обезательно)')
 
 
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'date_of_birth', 'city']
+        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'phone','date_of_birth', 'city']
 
