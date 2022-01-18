@@ -50,6 +50,7 @@
             {% if i.is_active_news %}
     <h1> <a href='news/{{ i.id}}'> Новость: {{ i.titlenews }} </a></h1>
                 <p>тэг: {{ i.teg }} </p>
+                <p>Дата создания новости: {{ i.created_news }}</p>
       <a href="created_news/{{ i.id }}/edit/">Редактировать новость</a>
 
             {% endif %}
