@@ -68,26 +68,35 @@ class NewsListView(View):
             teg = search.cleaned_data.get('teg')
             data_order = search.cleaned_data.get('data_order')
             #сортировка по возрастанию если True
-            if data_order == 'True':
-                items_news = MyNews.objects.order_by('created_news')
-            else:
-                items_news = MyNews.objects.order_by('-created_news')
 
-            filter_items_news = []
-            #Тут фильтрует по тэгу
             if not teg == 'all':
-                for i in items_news:
-                    if teg == i.teg:
-                        filter_items_news.append(i)
-                        #сортировку перевернем
-                        # filter_items_news.reverse()
+                if data_order == 'True':
+                    items_news = MyNews.objects.filter(teg=teg).order_by('created_news')
+                else:
+                    items_news = MyNews.objects.filter(teg=teg).order_by('-created_news')
             else:
-                #это выбрано all то создает сюда все обьекты
-                for i in items_news:
-                    filter_items_news.append(i)
+                if data_order == 'True':
+                    items_news = MyNews.objects.order_by('created_news')
+                else:
+                    items_news = MyNews.objects.order_by('-created_news')
+
+
+            # filter_items_news = []
+            # #Тут фильтрует по тэгу
+            # if not teg == 'all':
+            #     items_news.filter(teg)
+            #     # for i in items_news:
+            #     #     if teg == i.teg:
+            #     #         filter_items_news.append(i)
+            #             #сортировку перевернем
+            #             # filter_items_news.reverse()
+            # else:
+            #     #это выбрано all то создает сюда все обьекты
+            #     for i in items_news:
+            #         filter_items_news.append(i)
 
             return render(request, 'news_htmls/news_list.html',
-                      context={'items_news': filter_items_news, 'flagmoder': flagmoder, 'search': search})
+                      context={'items_news': items_news, 'flagmoder': flagmoder, 'search': search})
 
 
 # class NewsDetailView(DetailView):
