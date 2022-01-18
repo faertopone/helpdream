@@ -61,9 +61,9 @@ class NewsListView(View):
         else:
             flagmoder = False
 
+        #тут получил переменные с формы фильтра
         search = FilterForm(request.POST)
-        items_news = MyNews.objects.all()
-
+        #Проверим валидностьи получим значение
         if search.is_valid():
             teg = search.cleaned_data.get('teg')
             data_order = search.cleaned_data.get('data_order')
@@ -88,6 +88,7 @@ class NewsListView(View):
 
             return render(request, 'news_htmls/news_list.html',
                       context={'items_news': filter_items_news, 'flagmoder': flagmoder, 'search': search})
+
 
 # class NewsDetailView(DetailView):
 #
