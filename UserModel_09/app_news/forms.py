@@ -32,7 +32,7 @@ class StandartUser(forms.ModelForm):
         # тут сделали првоерку поля с именем и выведем ошибку свою
 
 
-
+#регистрация без аутификации помто в БД (ну прсото хранитсья  в БД и все)
 class UserForm(forms.ModelForm):
 
     #тут сделали првоерку поля с именем и выведем ошибку свою
@@ -60,11 +60,20 @@ class UserForm(forms.ModelForm):
 
 class MyNewsForm(forms.ModelForm):
 
+    TEG_CHOISE = [
+        ('не выбрано', 'не выбрано'),
+        ('работа', 'работа'),
+        ('машины', 'машины'),
+        ('спорт', 'спорт'),
+        ('игры', 'игры'),
+    ]
+
     is_active_news = forms.BooleanField(required=False)
+    teg = forms.ChoiceField(choices=TEG_CHOISE, required=False, label='Выберите ТЭГ', help_text='Не обезательно')
 
     class Meta:
         model = MyNews
-        fields = ['titlenews', 'description', 'is_active_news']
+        fields = ['titlenews', 'description', 'teg', 'is_active_news']
 
 
 

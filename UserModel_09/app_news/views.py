@@ -114,9 +114,11 @@ class EditNews(View):
             flagmoder = False
         news = MyNews.objects.get(id=profile_id)
         news_form = MyNewsForm(request.POST, instance=news)
+
         if news_form.is_valid():
             news.save()
             return HttpResponseRedirect('/')
+        print(news_form)
         return render(request, 'news_htmls/edit_news.html',
                       context={'news_form': news_form, 'profile_id': profile_id, 'flagmoder': flagmoder, 'news': news})
 

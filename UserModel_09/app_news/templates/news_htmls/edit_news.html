@@ -9,24 +9,28 @@
      {% if flagmoder %}
     <h2>Название новости: {{ news.titlenews }}</h2>
     <p>Описание: {{ news.description }}</p>
+{#         <p>тэг:  {{ news.teg }}</p>#}
     {%  else %}
 
 
- <form method="post" action="/created_news/{{ profile_id }}/edit/">
+ <form method="post">
     {% csrf_token %}
     <div style="{{ display }}">
     <h2>Название новости: {{ news_form.titlenews }}</h2>
      <p>Описание: {{ news_form.description }}</p>
+{#     <p><label for="id_teg"> Выберите тэг</label> {{ news_form.teg }}</p>#}
     </div>
     {% endif %}
+
         {% if flagmoder %}
-     <p>Поставьте галочку если новость проходит контроль: {{ news_form.is_active_news }}</p>
-              <button type="submit" >Опубликовать новость</button>
+            <p>Поставьте галочку если новость проходит контроль: {{ news_form.is_active_news }}</p>
+            <button type="submit" >Опубликовать новость</button>
             {% else %}
             <button type="submit" >Редактировать</button>
      {% endif %}
 
 
  </form>
+
 </body>
 </html>

@@ -34,6 +34,10 @@ class MyNews(models.Model):
         (True, 'Активно'),
         (False, 'Не активно')
     ]
+
+
+
+    teg = models.CharField(max_length=100, verbose_name='ТЭГ новости', db_index=True, default='не выбрано')
     titlenews = models.CharField(max_length=200, verbose_name='Заголовок новости', db_index=True)
     description = models.TextField(default='', verbose_name='описание', db_index=True)
     created_news = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)

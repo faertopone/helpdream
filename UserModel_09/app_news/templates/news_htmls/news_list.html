@@ -41,6 +41,7 @@
         {% for i in items_news %}
             {% if i.is_active_news %}
     <h1> <a href='news/{{ i.id}}'> Новость: {{ i.titlenews }} </a></h1>
+                <p>тэг: {{ i.teg }} </p>
       <a href="created_news/{{ i.id }}/edit/">Редактировать новость</a>
 
             {% endif %}
