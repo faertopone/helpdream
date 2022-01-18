@@ -76,9 +76,24 @@ class MyNewsForm(forms.ModelForm):
         fields = ['titlenews', 'description', 'teg', 'is_active_news']
 
 
+class FilterForm(forms.Form):
 
+    TEG_CHOISE = [
+        ('all', 'Все теги'),
+        ('не выбрано', 'не выбрано'),
+        ('работа', 'работа'),
+        ('машины', 'машины'),
+        ('спорт', 'спорт'),
+        ('игры', 'игры'),
+    ]
 
+    ORDER_CHOISE = [
+        ('False', 'По убыванию'),
+        ('True', 'По возрастанию')
+    ]
 
+    teg = forms.ChoiceField(choices=TEG_CHOISE, label='Выберите ТЭГ')
+    data_order = forms.ChoiceField(choices=ORDER_CHOISE, label='Сортировка по дате')
 
 
 class CommentsForm(forms.ModelForm):

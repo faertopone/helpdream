@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .forms import UserForm, LogginForm, CommentsForm
+from .forms import UserForm, LogginForm, CommentsForm, FilterForm
 from .forms import MyNewsForm, StandartUser
 from .models import My_User, MyNews, MyComments
 from datetime import datetime
@@ -49,10 +49,32 @@ class NewsListView(View):
             flagmoder = True
         else:
             flagmoder = False
+
+        search = FilterForm()
+
         items_news = MyNews.objects.all()
-        return render(request, 'news_htmls/news_list.html', context={'items_news': items_news, 'flagmoder': flagmoder})
+        return render(request, 'news_htmls/news_list.html', context={'items_news': items_news, 'flagmoder': flagmoder, 'search': search})
 
+    def post(self, request):
+        if request.user.has_perm('app_users.moderator_time'):
+            flagmoder = True
+        else:
+            flagmoder = False
 
+        search = FilterForm(request.POST)
+        items_news = MyNews.objects.all()
+
+        if search.is_valid():
+            teg = search.cleaned_data.get('teg')
+            data_order = search.cleaned_data.get('data_order')
+            #сортировка по возрастанию если True
+            if data_order == 'True':
+                items_news = MyNews.objects.order_by('created_news')
+            else:
+                items_news = MyNews.objects.order_by('-created_news')
+
+            return render(request, 'news_htmls/news_list.html',
+                      context={'items_news': items_news, 'flagmoder': flagmoder, 'search': search})
 
 # class NewsDetailView(DetailView):
 #

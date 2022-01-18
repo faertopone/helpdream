@@ -37,6 +37,14 @@
         {% else %}
         <p> Вы не верифицированны для создания новости!</p>
     {% endif %}
+<div style="border: 1px solid red; display: flex;">
+    <form method="post">
+        {% csrf_token %}
+        {{ search.as_p }}
+        <button type="submit">Фильтровать</button>
+    </form>
+</div>
+
     {% if items_news %}
         {% for i in items_news %}
             {% if i.is_active_news %}
