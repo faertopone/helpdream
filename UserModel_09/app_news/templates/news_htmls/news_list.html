@@ -44,7 +44,7 @@
         <button type="submit">Фильтровать</button>
     </form>
 </div>
-
+<h2><a href="{% url 'upload_file' %}"> Страничка с загрузкой файла</a> </h2>
     {% if items_news %}
         {% for i in items_news %}
             {% if i.is_active_news %}

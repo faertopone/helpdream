@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('app_news.urls')),
     path('users/', include('app_users.urls')),
     path('employment/', include('app_employment.urls')),
+    path('files/', include('app_media.urls')),
 ]
