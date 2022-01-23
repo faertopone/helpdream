@@ -68,9 +68,11 @@ class RegisterView(View):
         if reg_form.is_valid():
             user = reg_form.save()
             phone = reg_form.cleaned_data.get('phone')
+            avatar = reg_form.cleaned_data.get('avatar')
             Profile.objects.create(
                 user=user,
                 phone=phone,
+                avatar=avatar
 
             )
             username = reg_form.cleaned_data.get('username')
@@ -92,7 +94,10 @@ class ProfileInfo(View):
 
         #Я вот так сделал путь, но мне кажеться он должен как то подругому делаться?)))
         temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
-        avatar_link = temp + str(user_curent.profile.avatar)
+        if user_curent.username != 'admin':
+            avatar_link = temp + str(user_curent.profile.avatar)
+        else:
+            avatar_link = ''
         return render(request, 'Users/profile_user.html', {'user_curent': user_curent, 'avatar_link': avatar_link})
 
     def post(self, requset):
@@ -170,6 +175,7 @@ class CreatedBlog(View):
 
                 for i in links_img:
                     links_str_img += i + ' '
+
             Blog.objects.create(title=title, description=description, author=author, link_file_img=link, multi_link_file_img=str(links_str_img))
 
             return HttpResponseRedirect('/')
