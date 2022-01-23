@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование данных!</title>
+</head>
+<body>
+
+<h1>Редактирование данных!, {{ request.user.username }}.</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <p> Ваше имя сейчас({{ user_curent.first_name }}), новое имя: {{ reg_form.name }}</p>
+    <p> Ваша фамилия, сейчас ({{ user_curent.last_name }}), новая фамилия: {{ reg_form.last_name }}</p>
+    <button type="submit">Редактировать</button>
+</form>
+
+
+
+</body>
+</html>

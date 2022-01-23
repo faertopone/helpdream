@@ -1,0 +1,21 @@
+from django.contrib import admin
+from .models import Blog, Profile
+
+# Register your models here.
+
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ['title', 'min_description', 'creadet_at', 'id']
+    list_filter = ['title', 'creadet_at']
+    search_fields = ['title', 'creadet_at']
+    fields = ['author', 'title', 'description', 'file_img']
+
+
+admin.site.register(Blog, BlogAdmin)
+
+
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'phone']
+    list_filter = ['user', ]
+    search_fields = ['user', ]
+
+admin.site.register(Profile, ProfileAdmin)

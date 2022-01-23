@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль!</title>
+</head>
+<body>
+
+<h2>Добро пожаловать в свой профиль, {{ user_curent.first_name }}</h2>
+
+<ul>
+    <h3>Ваши данные:</h3>
+    <p> Ваша аватарка: </p>
+    <img src="{{ avatar_link }}" style="width: 100px; height: 100px" >
+    <li> Ваше логин: {{ user_curent.username }}</li>
+    <li> Ваше имя: {{ user_curent.first_name }}</li>
+    <li> Ваша фамилия: {{ user_curent.last_name }}</li>
+    <li> Ваш mail: {{ user_curent.email }}</li>
+    <li> Ваш телефон: {{ user_curent.profile.phone }}</li>
+    <li> Ваш пол: {{ user_curent.profile.gender }}</li>
+
+</ul>
+    <a href="{% url 'profile_user_edit' %}">Редактировать профиль</a>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать Блог</title>
+</head>
+<body>
+
+<h2>Тут Вы, {{ request.user.username }} можете создать новый блог</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Заголовок блога: {{ blog_form.title }}</p>
+    <p>Описание блога: {{ blog_form.description }}</p>
+    <p>Загрузить фото: {{ blog_form.img_field }}</p>
+    <p>Загрузить сразу много фото: {{ multi_form_img }}</p>
+    <button type="submit">Опубликовать.</button>
+</form>
+
+</body>
+</html>

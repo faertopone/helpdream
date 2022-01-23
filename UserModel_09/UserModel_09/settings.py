@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'app_users',
     'app_employment',
     'app_media',
+    'app_goods',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,3 +126,6 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 
 SESSION_COOKIE_AGE = 30 * 24 * 60 * 60
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'ALL_DATA_FILES')
+MEDIA_URL = '/ALL_DATA_FILES/'
