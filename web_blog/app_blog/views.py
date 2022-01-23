@@ -163,10 +163,11 @@ class CreatedBlog(View):
             links_img = []
 
             files_multi_img = request.FILES.getlist('multi_img')
+
             for f_img in files_multi_img:
                 links_img.append(temp + str(f_img))
-                instance = Blog(file_img=f_img)
-                instance.save()
+                Blog(file_img=f_img)
+
             for i in links_img:
                 links_str_img += i + ' '
 
