@@ -35,13 +35,11 @@ class MyUserRegister(UserCreationForm):
 class BlogForm(forms.ModelForm):
     author = forms.CharField(required=False)
     title = forms.CharField(max_length=50, label='Заголовок', help_text='Не более 50 символов')
-    img_field = forms.ImageField(required=False)
-    multi_img = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False,
-                                label='Несолько файлов сразу')
+    multi_img = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
 
     class Meta:
         model = Blog
-        fields = ['title', 'description', 'img_field']
+        fields = ['title', 'description', 'multi_img']
 
 class EditFormUser(forms.Form):
     name = forms.CharField(max_length=100, label='Ваше новое имя')
@@ -49,6 +47,4 @@ class EditFormUser(forms.Form):
 
 
 
-class MultiFormImg(forms.Form):
 
-    multi_img = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False, label='Несолько файлов сразу')

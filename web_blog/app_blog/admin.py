@@ -7,7 +7,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_display = ['title', 'min_description', 'creadet_at', 'id']
     list_filter = ['title', 'creadet_at']
     search_fields = ['title', 'creadet_at']
-    fields = ['author', 'title', 'description', 'file_img']
+    fields = ['author', 'title', 'description']
 
 
 admin.site.register(Blog, BlogAdmin)

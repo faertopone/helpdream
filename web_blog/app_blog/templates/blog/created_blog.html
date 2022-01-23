@@ -11,8 +11,7 @@
     {% csrf_token %}
     <p>Заголовок блога: {{ blog_form.title }}</p>
     <p>Описание блога: {{ blog_form.description }}</p>
-    <p>Загрузить фото: {{ blog_form.img_field }}</p>
-    <p>Загрузить сразу много фото: {{ multi_form_img }}</p>
+    <p>Загрузить сразу много фото: {{ blog_form.multi_img }}</p>
     <button type="submit">Опубликовать.</button>
 </form>
 

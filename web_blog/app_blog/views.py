@@ -12,7 +12,7 @@ from django.views import View
 from django.contrib.auth.models import User
 from django.views.generic import DetailView
 
-from .forms import AuthForm, MyUserRegister, EditFormUser, BlogForm,  MultiFormImg
+from .forms import AuthForm, MyUserRegister, EditFormUser, BlogForm
 from .models import Profile, Blog
 
 
@@ -142,45 +142,40 @@ class Blog_full_info(View):
 class CreatedBlog(View):
 
     def get(self, request):
-        cur_user = request.user
-        blog_form = BlogForm(instance=cur_user)
-        multi_form_img = MultiFormImg()
-        return render(request, 'blog/created_blog.html', {'blog_form': blog_form, 'multi_form_img': multi_form_img})
+        blog_form = BlogForm()
+
+        return render(request, 'blog/created_blog.html', {'blog_form': blog_form})
 
     def post(self, request):
-        blog_form = BlogForm(request.POST,  request.FILES)
-        multi_form_img = MultiFormImg(request.FILES)
+        blog_form = BlogForm(request.POST, request.FILES)
+
         dt = datetime.now()
         dt_now = dt.strftime("%d%m%y-%H-%M-%S")
         temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/img_blog/'
         if blog_form.is_valid():
             files_img = blog_form.cleaned_data.get('img_field')
-            link = temp + str(files_img)
+            blog_id = blog_form.cleaned_data.get('id')
             title = blog_form.cleaned_data.get('title')
             description = blog_form.cleaned_data.get('description')
             author = request.user.username
-            IMG = Blog(file_img=files_img)
-            IMG.save()
 
             links_str_img = ''
-            if multi_form_img.is_valid():
-                print('Мульитформа валидна')
-                links_str_img = ''
-                links_img = []
-                files_multi_img = request.FILES.getlist('multi_img')
-                for f_img in files_multi_img:
-                    links_img.append(temp + str(f_img))
-                    instance = Blog(file_img=f_img)
-                    instance.save()
+            links_img = []
 
-                for i in links_img:
-                    links_str_img += i + ' '
+            files_multi_img = request.FILES.getlist('multi_img')
+            for f_img in files_multi_img:
+                links_img.append(temp + str(f_img))
+                instance = Blog(file_img=f_img)
+                instance.save()
+            for i in links_img:
+                links_str_img += i + ' '
 
-            Blog.objects.create(title=title, description=description, author=author, link_file_img=link, multi_link_file_img=str(links_str_img))
+            Blog.objects.create(id=blog_id, title=title, description=description, author=author, multi_link_file_img=str(links_str_img))
+
 
             return HttpResponseRedirect('/')
 
 
 
-        return render(request, 'blog/created_blog.html', {'blog_form': blog_form, 'multi_form_img': multi_form_img})
+        return render(request, 'blog/created_blog.html', {'blog_form': blog_form})
 

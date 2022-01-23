@@ -35,7 +35,6 @@ class Blog(models.Model):
     description = models.TextField(blank=True, verbose_name='Описание новости', db_index=True)
     creadet_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
     file_img = models.ImageField(upload_to='img_blog/', verbose_name='Фото', db_index=True, default='')
-    link_file_img = models.CharField(max_length=300, verbose_name='Ссылка', db_index=True, default='')
     multi_link_file_img = models.TextField(verbose_name='Ссылка на фото', db_index=True, default='')
 
 
