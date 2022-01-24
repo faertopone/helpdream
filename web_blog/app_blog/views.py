@@ -178,10 +178,10 @@ class CreatedBlog(View):
                 links_str_img += i + ' '
             print(links_str_img)
 
-            Blog.objects.create(title=title, description=description, author=author, multi_link_file_img=str(links_str_img))
+            temp = Blog.objects.create(title=title, description=description, author=author, multi_link_file_img=str(links_str_img))
 
             for f_img in files_multi_img:
-                BlogPhoto(file_img=f_img).save()
+                BlogPhoto(file_img=f_img, blog=temp).save()
 
             return HttpResponseRedirect('/')
 

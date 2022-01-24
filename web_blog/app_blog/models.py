@@ -57,5 +57,8 @@ class Blog(models.Model):
 
 
 class BlogPhoto(models.Model):
-
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, default='')
     file_img = models.ImageField(upload_to='img_blog/', verbose_name='Фото', db_index=True, default='')
+
+    class Meta:
+        db_table = 'BlogPhoto'
