@@ -145,8 +145,15 @@ class Blog_full_info(View):
         blog_items = Blog.objects.get(id=blog_id)
         links = blog_items.multi_link_file_img
         links_img = links.split()
+        img_link = []
+        blog_photo = BlogPhoto.objects.all()
+        temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
+        for i in blog_photo:
+            if i.blog_id == blog_items.id:
+                img_link.append(temp + str(i.file_img))
+        print(img_link)
 
-        return render(request, 'blog/blog_full_info.html', {'blog_items': blog_items, 'blog_id': blog_id, 'links_img': links_img})
+        return render(request, 'blog/blog_full_info.html', {'blog_items': blog_items, 'blog_id': blog_id, 'links_img': links_img, 'img_link': img_link})
 
 
 
