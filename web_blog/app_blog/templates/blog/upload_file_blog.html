@@ -11,6 +11,12 @@
     {% csrf_token %}
     {{ file_csv_form.file_csv }}
     <button type="submit">Загрузить</button>
+    {% if error %}
+        <p> Неверный формат! загрузите файл .csv с таблицей форматом: </p>
+         <p>стоблец 1(описание): любой текст</p>
+        <p>стоблец 2(дата): 28/06/15 17:08:00</p>
+    <p> {{ error }}</p>
+    {% endif %}
 </form>
 </body>
 </html>

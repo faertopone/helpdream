@@ -191,20 +191,23 @@ class UploadAllBlog(View):
         user_y = request.user
         user_curent = User.objects.get(id=user_y.id)
         if file_form.is_valid():
-            blog_file = file_form.cleaned_data.get('file_csv').read()
-            blog_str = blog_file.decode('utf-8').split('\n')
-            csv_reader = reader(blog_str, delimiter=",", quotechar='"')
-            author = user_curent.username
-            title = 'Блог загружен через csv'
+            try:
+                blog_file = file_form.cleaned_data.get('file_csv').read()
+                blog_str = blog_file.decode('utf-8').split('\n')
+                csv_reader = reader(blog_str, delimiter=",", quotechar='"')
+                author = user_curent.username
+                title = 'Блог загружен через csv'
 
-            for row in csv_reader:
-                if len(row) != 0:
-                    row_z = row[1]
-                    data_time_str = datetime.strptime(row_z, "%d/%m/%y %H:%M:%S")
-                    temp = Blog.objects.create(author=author, description=row[0], title=title)
-                    print(data_time_str)
-                    temp.creadet_at = data_time_str
-                    temp.save()
+                for row in csv_reader:
+                    if len(row) != 0:
+                        row_z = row[1]
+                        data_time_str = datetime.strptime(row_z, "%d/%m/%y %H:%M:%S")
+                        temp = Blog.objects.create(author=author, description=row[0], title=title)
+                        temp.creadet_at = data_time_str
+                        temp.save()
+            except Exception as error:
+                file_csv_form = UploadFileCsv()
+                return render(request, 'blog/upload_file_blog.html', {'file_csv_form': file_csv_form, 'error': error})
             return HttpResponseRedirect('/')
 
         file_csv_form = UploadFileCsv()
