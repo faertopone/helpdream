@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, User
 from .models import Blog, Profile
 
 class AuthForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label='Ваш логин')
+    password = forms.CharField(widget=forms.PasswordInput, label='Ваш пароль')
 
 
 

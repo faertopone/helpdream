@@ -22,6 +22,7 @@ class Login_view(View):
     def post(self, request):
         auth_form = AuthForm(request.POST)
         if auth_form.is_valid():
+            print('Форма валдина')
             username = auth_form.cleaned_data['username']
             password = auth_form.cleaned_data['password']
             user = authenticate(username=username, password=password)
@@ -34,7 +35,8 @@ class Login_view(View):
 
             else:
                 auth_form.add_error('__all__', 'Ошибка! Проверьте правильность логина и пароля')
-
+        print('Форма не валдина')
+        print(auth_form)
         context = {
             'form': auth_form
         }
@@ -57,7 +59,12 @@ def logout_view(request):
 class MainIndex(View):
     def get(self, request):
         blog = Blog.objects.all().order_by('-creadet_at')
-        return render(request, 'blog/index.html', {'blog_list': blog})
+        admin_user = request.user.username
+        flag_admin = False
+        if admin_user == 'admin':
+            flag_admin = True
+
+        return render(request, 'blog/index.html', {'blog_list': blog, 'flag_admin': flag_admin})
 
     def post(self, request):
         pass
@@ -161,15 +168,14 @@ class CreatedBlog(View):
             links_str_img = ''
             links_img = []
             files_multi_img = request.FILES.getlist('multi_img')
+
             for f_img in files_multi_img:
                 links_img.append(temp + str(f_img))
                 Blog(file_img=f_img)
-                print('Сохарнение файла')
             for i in links_img:
                 links_str_img += i + ' '
 
             Blog.objects.create(id=blog_id, title=title, description=description, author=author, multi_link_file_img=str(links_str_img))
-
 
             return HttpResponseRedirect('/')
 

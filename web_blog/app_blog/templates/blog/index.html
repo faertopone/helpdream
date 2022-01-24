@@ -27,7 +27,11 @@
                             <ul class="header__login-menu">
                                 <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
                                 {% if request.user.is_authenticated %}
+                                    {% if flag_admin %}
+                                        <li class="header__login-list"><a href="admin/" class="links header__links">Профиль, ADMIN</a></li>
+                                        {% else %}
                                 <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
+                                        {% endif %}
                                     <li class="header__login-list"><a href="{% url 'created_blog' %}" class="links header__links"> Создать блог </a></li>
                                 <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
                                 {% else %}
@@ -49,6 +53,9 @@
 <section class="blog">
     <div class="blog__created">
         <h3 class="title__blog">Список всех блогов:</h3>
+         {% if not request.user.is_authenticated %}
+             <p class="title__blog_info">Что бы создать блог, Вам нужно авторизироваться!</p>
+        {% endif %}
     </div>
 
     {% if blog_list %}
