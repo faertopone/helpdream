@@ -2,46 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+
     <title>Блог</title>
 </head>
-<body style="margin: 0 auto; max-width: 1200px;">
-<p> <a href="admin/"> Админка (для удобства)</a> </p>
+<body>
 
-<h2 style="text-align: center"> Сайт блогов!</h2>
-{% if request.user.is_authenticated %}
-    <div style="display: flex; flex-direction: column; align-content: center; align-items: center">
-    <p>Добро пожаловать, {{ request.user.username }}</p>
-        <a href="{% url 'created_blog' %}">Создать блог.</a>
-        <a href="{% url 'profile_info' %}">Перейти в свой профиль!</a>
-    <a href="{% url 'logout' %}">Выйти из профиля</a>
+
+
+ <header> <h1 class="visually-hidden"> Блог </h1>
+        <div class="header">
+            <div class="header__nav">
+                <ul class="header__menu">
+                    <li class="header__list">
+                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+                    </li>
+
+                    <li class="header__list">
+                        <div class="header__login">
+                            <ul class="header__login-menu">
+                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
+                                    <li class="header__login-list"><a href="{% url 'created_blog' %}" class="links header__links"> Создать блог </a></li>
+                                <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
+                                {% else %}
+                                <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">Войти</a> </li>
+                                <li class="header__login-list"><a href="{% url 'register' %}" class="links header__links">Регистрация</a></li>
+                                {% endif %}
+                            </ul>
+                         </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="header__content">
+                <h2 class="header-title">Сайт для создания блогов</h2>
+            </div>
+        </div>
+   </header>
+
+<section class="blog">
+    <div class="blog__created">
+        <h3 class="title__blog">Список всех блогов:</h3>
     </div>
-    {% else %}
-    <div style="display: flex; flex-direction: column; align-content: center; align-items: center">
-    <div style="border: 1px solid gray; display: flex; flex-direction: column; align-content: center; width: max-content; padding: 10px" >
-    <span><a href="{% url 'register' %}">Регистрация</a></span>
-    <span><a href="{% url 'login' %}">Войти</a></span>
-    </div>
+
+    {% if blog_list %}
+
+
+    <ul class="blog__menu">
+     {% for item_blog in blog_list %}
+        <li class="blog__list">
+            <div class="blog__list-item">
+                <h3 class="blog__list-title">Блог номер № {{ item_blog.id }}</h3>
+                <span class="blog__author"> автор: {{ item_blog.author }}</span>
+                <h4 class="blog__name">Название: {{ item_blog.title }} </h4>
+                <p class="blog__description">Описание: {{ item_blog.min_description }}</p>
+                <p class="blog__datatime"> {{ item_blog.data_blog }}</p>
+                <a class="links blog__list-links" href="blog_info/{{ item_blog.id }}/"> Подробнее </a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="blog__created">
+    <h3 class="title__blog">Еще нету ни 1 созданного блока!</h3>
     </div>
 {% endif %}
-<div style="display: flex; flex-direction: column; align-content: center; align-items: center">
-<h2>Список блогов: </h2>
-<ul>
-    {% if blog_list %}
-    {% for item_blog in blog_list %}
-    <li style="border-top: 1px solid red; border-bottom: 1px solid red">
-        <h2>Блог номер № {{ item_blog.id }}, создатель {{ item_blog.author }} </h2>
-        <h> Название: {{ item_blog.title }}</h>
-        <p > Описание: {{ item_blog.min_description }}</p>
-        <p style="border-bottom: 1px solid gray; border-top: 1px solid gray" > {{ item_blog.data_blog }}</p>
-        
-        <p><a href="blog_info/{{ item_blog.id }}/"> Подробнее </a> </p>
-    </li>
-    {% endfor %}
-    {% else %}
-    <h3>Блогов нет</h3>
-    {% endif %}
 
-</ul>
-</div>
+</section>
+
+
+ <footer class="footer">
+    <div class="footer-conteiner">
+      <div class="footer__content">
+        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+
+      </div>
+    </div>
+ </footer>
+
 </body>
 </html>

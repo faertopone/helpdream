@@ -154,21 +154,17 @@ class CreatedBlog(View):
         dt_now = dt.strftime("%d%m%y-%H-%M-%S")
         temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/img_blog/'
         if blog_form.is_valid():
-            files_img = blog_form.cleaned_data.get('img_field')
             blog_id = blog_form.cleaned_data.get('id')
             title = blog_form.cleaned_data.get('title')
             description = blog_form.cleaned_data.get('description')
             author = request.user.username
-
             links_str_img = ''
             links_img = []
-
             files_multi_img = request.FILES.getlist('multi_img')
-
             for f_img in files_multi_img:
                 links_img.append(temp + str(f_img))
                 Blog(file_img=f_img)
-
+                print('Сохарнение файла')
             for i in links_img:
                 links_str_img += i + ' '
 

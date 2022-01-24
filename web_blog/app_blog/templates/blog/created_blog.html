@@ -2,20 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Создать Блог</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+    <link rel="stylesheet" href="{% static "css/style_created_blog.css" %}">
+
+    <title>Создать блог</title>
 </head>
 <body>
 
-<h2>Тут Вы, {{ request.user.username }} можете создать новый блог</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>Заголовок блога: {{ blog_form.title }}</p>
-    <p>Описание блога: {{ blog_form.description }}</p>
-    <p>Загрузить сразу много фото: {{ blog_form.multi_img }}</p>
-    <button type="submit">Опубликовать.</button>
-</form>
+ <header> <h1 class="visually-hidden"> Создать блог </h1>
+        <div class="header">
+            <div class="header__nav">
+                <ul class="header__menu">
+                    <li class="header__list">
+                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+                    </li>
 
-<a href="{% url 'upload_file_blog' %}">Если хтите загрузить блог через файл cvs. НАЖМИТЕ СЮДА!</a>
+                    <li class="header__list">
+                        <div class="header__login">
+                            <ul class="header__login-menu">
+                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
+                                    <li class="header__login-list"><a href="{% url 'created_blog' %}" class="links header__links"> Создать блог </a></li>
+                                <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
+                                {% else %}
+                                <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">Войти</a> </li>
+                                <li class="header__login-list"><a href="{% url 'register' %}" class="links header__links">Регистрация</a></li>
+                                {% endif %}
+                            </ul>
+                         </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+   </header>
+
+<section class="content">
+    <div class="blog">
+        <div class="blog__created">
+            <h2 class="blogcreated__title">Создать блог</h2>
+            <h3 class="title_author">Автор блога: {{ request.user.username }}</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p><input class="input_title" type="text" name="title" maxlength="50" required id="id_title" placeholder="Заголовок"></p>
+                <textarea class="input_description" type="text" name="description" required id="id_description" placeholder="Описание"></textarea>
+                <p class="blog__descriptions" > Загрузить фото:{{ blog_form.multi_img }}</p>
+                <button type="submit" class="button_load_file"><img src="{% static 'img/slice-mobile.png' %}" class="button_upload"> </button>
+            </form>
+
+        </div>
+        <div class="blog__img">
+            <img src="{% static 'img/pic1.png' %}" alt="" class="img_blog">
+        </div>
+    </div>
+</section>
+
+
+
+
+<a href="{% url 'upload_file_blog' %}">Если хотите загрузить блог через файл cvs. НАЖМИТЕ СЮДА!</a>
+
+
+ <footer class="footer">
+    <div class="footer-conteiner">
+      <div class="footer__content">
+        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+
+      </div>
+    </div>
+ </footer>
+
 
 </body>
 </html>
