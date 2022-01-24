@@ -2,27 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Профиль!</title>
+     {% load static %}
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+     <link rel="stylesheet" href="{% static "css/lk.css" %}">
+    <title>Профиль</title>
 </head>
 <body>
 
-<h2>Добро пожаловать в свой профиль, {{ user_curent.first_name }}</h2>
+<header> <h1 class="visually-hidden"> Личный кабинет </h1>
+        <div class="header">
+            <div class="header__nav">
+                <ul class="header__menu">
+                    <li class="header__list">
+                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+                    </li>
 
-<ul>
-    <h3>Ваши данные:</h3>
-    {% if avatar_link %}
-    <p> Ваша аватарка: </p>
-    <img src="{{ avatar_link }}" style="width: 100px; height: 100px" >
-    {% endif %}
-    <li> Ваше логин: {{ user_curent.username }}</li>
-    <li> Ваше имя: {{ user_curent.first_name }}</li>
-    <li> Ваша фамилия: {{ user_curent.last_name }}</li>
-    <li> Ваш mail: {{ user_curent.email }}</li>
-    <li> Ваш телефон: {{ user_curent.profile.phone }}</li>
-    <li> Ваш пол: {{ user_curent.profile.gender }}</li>
+                    <li class="header__list">
+                        <div class="header__login">
+                            <ul class="header__login-menu">
+                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
 
-</ul>
-    <a href="{% url 'profile_user_edit' %}">Редактировать профиль</a>
+                            </ul>
+                         </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+   </header>
+
+ <section class="content">
+ <h2 class="lk__title">Это Ваш личный кабинет, {{ user_curent.first_name }}</h2>
+       <div class="profile">
+    <div class="lk_content">
+        <p class="lk__description"> Ваше логин: {{ user_curent.username }}</p>
+        <p class="lk__description"> Ваше имя: {{ user_curent.first_name }} </p>
+        <p class="lk__description"> Ваша фамилия: {{ user_curent.last_name }} </p>
+        <p class="lk__description"> Ваш mail: {{ user_curent.email }} </p>
+        <p class="lk__description"> Ваш телефон: {{ user_curent.profile.phone }} </p>
+        <p class="lk__description"> Ваш пол: {{ user_curent.profile.gender }} </p>
+    </div>
+    <div class="lk_avatar">
+        {% if avatar_link %}
+        <img src="{{ avatar_link }}" alt="аватарка" class="img_avatar">
+        {% endif %}
+    </div>
+</div>
+    <div class="edit__btn">
+        <a href="{% url 'profile_user_edit' %}" class="link_edit" >Редактировать профиль</a>
+    </div>
+
+   </section>
+
+  <footer class="footer">
+    <div class="footer-conteiner">
+      <div class="footer__content">
+        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+
+      </div>
+    </div>
+</footer>
 
 </body>
 </html>

@@ -161,10 +161,17 @@ body {
 }
 
 
+.button_load_file{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
 
 section{
     margin: 0 auto;
     max-width: 1024px;
+    padding: 0 40px;
     
 }
 .blog__created{
@@ -301,4 +308,23 @@ section{
     align-items: center;
     justify-content: center;
     height: 140px;
+}
+
+
+.login_wrapper_upload {
+    margin-top: 50px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 500px;
+    flex-direction: column;
+    margin-left: 100px;
+}
+
+.button_load_file_csv{
+    margin-top: 25px;
+}
+
+.title_uplaod_file{
+    padding-top: 200px;
+    margin-bottom: 20px;
 }

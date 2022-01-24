@@ -120,12 +120,25 @@ class Profile_user_edit(View):
         reg_form = EditFormUser()
         user_y = request.user
         user_curent = User.objects.get(id=user_y.id)
-        return render(request, 'Users/profil_user_edit.html', {'reg_form': reg_form, 'user_curent': user_curent})
+        # Я вот так сделал путь, но мне кажеться он должен как то подругому делаться?)))
+        temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
+        if user_curent.username != 'admin':
+            avatar_link = temp + str(user_curent.profile.avatar)
+        else:
+            avatar_link = ''
+
+        return render(request, 'Users/profil_user_edit.html', {'reg_form': reg_form, 'user_curent': user_curent, 'avatar_link': avatar_link})
 
     def post(self, request):
         reg_form = EditFormUser(request.POST, request.FILES)
         user_y = request.user
         user_curent = User.objects.get(id=user_y.id)
+        # Я вот так сделал путь, но мне кажеться он должен как то подругому делаться?)))
+        temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
+        if user_curent.username != 'admin':
+            avatar_link = temp + str(user_curent.profile.avatar)
+        else:
+            avatar_link = ''
         if reg_form.is_valid():
             name = reg_form.cleaned_data.get('name')
             last_name = reg_form.cleaned_data.get('last_name')
@@ -136,7 +149,7 @@ class Profile_user_edit(View):
 
         reg_form = MyUserRegister(request.POST)
         print('Не прошло валидность')
-        return render(request, 'Users/profil_user_edit.html', {'reg_form': reg_form, 'errors': reg_form.errors})
+        return render(request, 'Users/profil_user_edit.html', {'reg_form': reg_form, 'errors': reg_form.errors, 'avatar_link': avatar_link})
 
 
 class Blog_full_info(View):

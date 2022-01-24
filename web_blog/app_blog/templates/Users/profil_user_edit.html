@@ -2,18 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Редактирование данных!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {% load static %}
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/lk.css" %}">
+
+    <title>Редактирование профиля</title>
 </head>
 <body>
 
-<h1>Редактирование данных!, {{ request.user.username }}.</h1>
+ <header> <h1 class="visually-hidden"> Логин </h1>
+        <div class="header">
+            <div class="header__nav">
+                <ul class="header__menu">
+                    <li class="header__list">
+                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+                    </li>
 
-<form method="post">
+                    <li class="header__list">
+                        <div class="header__login">
+                            <ul class="header__login-menu">
+                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
+
+                            </ul>
+                         </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+   </header>
+<body>
+
+ <section class="content content_profile_edit">
+ <h2 class="lk__title">Редактирование данных, <br> {{ user_curent.username }}</h2>
+       <div class="profile">
+    <div class="lk_content lk_edit_content">
+       <form method="post">
     {% csrf_token %}
-    <p> Ваше имя сейчас({{ user_curent.first_name }}), новое имя: {{ reg_form.name }}</p>
-    <p> Ваша фамилия, сейчас ({{ user_curent.last_name }}), новая фамилия: {{ reg_form.last_name }}</p>
-    <button type="submit">Редактировать</button>
-</form>
+    <p class="login">
+        <input type="text" name="name" maxlength="100" required id="id_name" placeholder="{{ request.user.first_name }}, введите новое" class="input input_name">
+    </p>
+        <p class="login">
+            <input type="text" name="last_name" maxlength="100" required id="id_last_name" placeholder="{{ request.user.last_name }}, введите новое" class="input input_name">
+        </p>
+     <div class="edit__btn">
+        <button type="submit"  class="link_edit" >Изменить данные</button>
+    </div>
+        </form>
+    </div>
+    <div class="lk_avatar">
+        {% if avatar_link %}
+        <img src="{{ avatar_link }}" alt="аватарка" class="img_avatar">
+        {% endif %}
+    </div>
+</div>
+ </section>
+
+     <footer class="footer">
+    <div class="footer-conteiner">
+      <div class="footer__content">
+        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+
+      </div>
+    </div>
+</footer>
+
+
+
+
 
 
 

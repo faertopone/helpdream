@@ -1,22 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Загрузить блог через файл</title>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {% load static %}
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+     <link rel="stylesheet" href="{% static "css/style_login.css" %}">
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+    <title>Загрузка файла</title>
 </head>
 <body>
-<h2>Загрузить блог через файл</h2>
+ <header> <h1 class="visually-hidden"> Загрузка файла csv </h1>
+        <div class="header">
+            <div class="header__nav">
+                <ul class="header__menu">
+                    <li class="header__list">
+                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+                    </li>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+                    <li class="header__list">
+                        <div class="header__login">
+                            <ul class="header__login-menu">
+                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
+
+                                <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
+                                {% else %}
+                                <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">Войти</a> </li>
+                                <li class="header__login-list"><a href="{% url 'register' %}" class="links header__links">Регистрация</a></li>
+                                {% endif %}
+                            </ul>
+                         </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+   </header>
+
+ <section>
+<div class="login_wrapper login_wrapper_upload">
+    <h2 class="header-title title_uplaod_file">Загрузить блог через файл</h2>
+    <form method="post" enctype="multipart/form-data" class="login_form">
+        {% csrf_token %}
+
     {{ file_csv_form.file_csv }}
-    <button type="submit">Загрузить</button>
-    {% if error %}
-        <p> Неверный формат! загрузите файл .csv с таблицей форматом: </p>
-         <p>стоблец 1(описание): любой текст</p>
-        <p>стоблец 2(дата): 28/06/15 17:08:00</p>
-    <p> {{ error }}</p>
-    {% endif %}
-</form>
+         <button type="submit" class="button_load_file button_load_file_csv"><img src="{% static 'img/slice-mobile.png' %}" class="button_upload"> </button>
+         </form>
+        {% if error %}
+            <div style="border: 2px solid red; margin-top: 15px; padding: 10px; border-radius: 10px">
+        <p class="login"> Неверный формат! загрузите файл .csv с таблицей форматом: </p>
+         <p class="login">столбец 1(описание): любой текст</p>
+        <p class="login">столбец 2(дата): 28/06/15 17:08:00</p>
+        <p class="login"> {{ error }}</p>
+        {% endif %}
+        </div>
+</div>
+</section>
+
+
+
+ <footer class="footer">
+    <div class="footer-conteiner">
+      <div class="footer__content">
+        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+
+      </div>
+    </div>
+ </footer>
+
+
+
 </body>
 </html>
