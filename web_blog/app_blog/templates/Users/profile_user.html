@@ -10,8 +10,10 @@
 
 <ul>
     <h3>Ваши данные:</h3>
+    {% if avatar_link %}
     <p> Ваша аватарка: </p>
     <img src="{{ avatar_link }}" style="width: 100px; height: 100px" >
+    {% endif %}
     <li> Ваше логин: {{ user_curent.username }}</li>
     <li> Ваше имя: {{ user_curent.first_name }}</li>
     <li> Ваша фамилия: {{ user_curent.last_name }}</li>

@@ -13,14 +13,16 @@
         <h3> Название: {{ blog_items.title }}</h3>
         <p > Описание: {{ blog_items.description }}</p>
         <p style="border-bottom: 1px solid gray; border-top: 1px solid gray" > {{ blog_items.data_blog }}</p>
-        <p>Фото: </p>
 
+
+        {% if links_img %}
         <h2>Список фоток:</h2>
     <ul>
         {% for i_img in links_img %}
             <li><img style="width: 200px; height: 200px" src="{{ i_img }}"></li>
         {% endfor %}
     </ul>
+{% endif %}
 
 
 

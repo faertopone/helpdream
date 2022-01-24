@@ -33,6 +33,7 @@
         <h> Название: {{ item_blog.title }}</h>
         <p > Описание: {{ item_blog.min_description }}</p>
         <p style="border-bottom: 1px solid gray; border-top: 1px solid gray" > {{ item_blog.data_blog }}</p>
+        
         <p><a href="blog_info/{{ item_blog.id }}/"> Подробнее </a> </p>
     </li>
     {% endfor %}

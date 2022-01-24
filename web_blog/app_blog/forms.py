@@ -37,6 +37,7 @@ class BlogForm(forms.ModelForm):
     title = forms.CharField(max_length=50, label='Заголовок', help_text='Не более 50 символов')
     multi_img = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
 
+
     class Meta:
         model = Blog
         fields = ['title', 'description', 'multi_img']
@@ -45,6 +46,9 @@ class EditFormUser(forms.Form):
     name = forms.CharField(max_length=100, label='Ваше новое имя')
     last_name = forms.CharField(max_length=100, label='Ваша новая фамилия')
 
+
+class UploadFileCsv(forms.Form):
+    file_csv = forms.FileField(required=False, label='Загрузить фаил cvs для блогов')
 
 
 
