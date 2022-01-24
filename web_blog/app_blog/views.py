@@ -1,6 +1,7 @@
 import os
 from _csv import reader
 from datetime import datetime
+from django.forms.utils import ErrorList
 
 import requests
 from django.contrib.auth import authenticate, login, logout
@@ -13,16 +14,17 @@ from django.views import View
 from django.contrib.auth.models import User
 from django.views.generic import DetailView
 
-from .forms import AuthForm, MyUserRegister, EditFormUser, BlogForm, UploadFileCsv
-from .models import Profile, Blog
+from .forms import AuthForm, MyUserRegister, EditFormUser, BlogForm, UploadFileCsv, BlogPhotoForm
+from .models import Profile, Blog, BlogPhoto
 
 
 class Login_view(View):
 
     def post(self, request):
         auth_form = AuthForm(request.POST)
+        my_errors = ''
         if auth_form.is_valid():
-            print('Форма валдина')
+
             username = auth_form.cleaned_data['username']
             password = auth_form.cleaned_data['password']
             user = authenticate(username=username, password=password)
@@ -34,17 +36,18 @@ class Login_view(View):
                     auth_form.add_error('__all__', 'Ошибка Учетная запись пользователя не активна')
 
             else:
+                my_errors = 'Ошибка!\n Проверьте правильность логина и пароля'
                 auth_form.add_error('__all__', 'Ошибка! Проверьте правильность логина и пароля')
-        print('Форма не валдина')
-        print(auth_form)
-        context = {
-            'form': auth_form
-        }
 
-        return render(request, 'users/login.html', context=context)
+        return render(request, 'users/login.html', {'form': auth_form, 'my_errors': my_errors})
+
+
+
+
 
     def get(self, request):
         auth_form = AuthForm()
+
         context = {
                 'form': auth_form
                 }
@@ -151,17 +154,16 @@ class CreatedBlog(View):
 
     def get(self, request):
         blog_form = BlogForm()
-
-        return render(request, 'blog/created_blog.html', {'blog_form': blog_form})
+        blog_photo_form = BlogPhotoForm()
+        return render(request, 'blog/created_blog.html', {'blog_form': blog_form, 'blog_photo_form': blog_photo_form})
 
     def post(self, request):
-        blog_form = BlogForm(request.POST, request.FILES)
-
+        blog_form = BlogForm(request.POST)
+        blog_photo_form = BlogPhotoForm(request.FILES)
         dt = datetime.now()
         dt_now = dt.strftime("%d%m%y-%H-%M-%S")
         temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/img_blog/'
-        if blog_form.is_valid():
-            blog_id = blog_form.cleaned_data.get('id')
+        if blog_form.is_valid() and blog_photo_form.is_valid():
             title = blog_form.cleaned_data.get('title')
             description = blog_form.cleaned_data.get('description')
             author = request.user.username
@@ -174,14 +176,12 @@ class CreatedBlog(View):
 
             for i in links_img:
                 links_str_img += i + ' '
+            print(links_str_img)
 
-            Blog.objects.create(id=blog_id, title=title, description=description, author=author, multi_link_file_img=str(links_str_img))
-
+            Blog.objects.create(title=title, description=description, author=author, multi_link_file_img=str(links_str_img))
 
             for f_img in files_multi_img:
-                Blog(file_img=f_img)
-
-
+                BlogPhoto(file_img=f_img).save()
 
             return HttpResponseRedirect('/')
 

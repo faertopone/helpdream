@@ -55,6 +55,7 @@ class Blog(models.Model):
         verbose_name = 'Блог'
         verbose_name_plural = 'Блоги'
 
+
 class BlogPhoto(models.Model):
-    blog = models.ForeignKey(Blog, related_name="blog", on_delete=models.CASCADE)
+
     file_img = models.ImageField(upload_to='img_blog/', verbose_name='Фото', db_index=True, default='')

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, User
-from .models import Blog, Profile
+from .models import Blog, Profile, BlogPhoto
+
 
 class AuthForm(forms.Form):
     username = forms.CharField(label='Ваш логин')
@@ -30,17 +31,20 @@ class MyUserRegister(UserCreationForm):
         fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'gender', 'phone', 'avatar']
 
 
+class BlogPhotoForm(forms.ModelForm):
+    multi_img = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
 
+    class Meta:
+        model = BlogPhoto
+        fields = ['multi_img']
 
 class BlogForm(forms.ModelForm):
     author = forms.CharField(required=False)
     title = forms.CharField(max_length=50, label='Заголовок', help_text='Не более 50 символов')
-    multi_img = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
-
 
     class Meta:
         model = Blog
-        fields = ['title', 'description', 'multi_img']
+        fields = ['title', 'description']
 
 class EditFormUser(forms.Form):
     name = forms.CharField(max_length=100, label='Ваше новое имя')
