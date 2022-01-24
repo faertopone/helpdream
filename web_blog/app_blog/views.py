@@ -196,7 +196,7 @@ class CreatedBlog(View):
 
             for i in links_img:
                 links_str_img += i + ' '
-            print(links_str_img)
+
 
             temp = Blog.objects.create(title=title, description=description, author=author, multi_link_file_img=str(links_str_img))
 
