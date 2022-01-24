@@ -2,37 +2,122 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Блог</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+     <link rel="stylesheet" href="{% static "css/swiper-bundle.css" %}">
+     <link rel="stylesheet" href="{% static "css/swiper-bundle.min.css" %}">
+     <link rel="stylesheet" href="{% static "css/swiper.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+    <title>Блог инфо</title>
 </head>
 <body>
 
 
-    <li style="border-top: 1px solid red; border-bottom: 1px solid red; list-style: none">
-        <h2>Блог номер № {{ blog_items.id }}</h2>
-        <h3>Автор: {{ blog_items.author }}</h3>
-        <h3> Название: {{ blog_items.title }}</h3>
-        <p > Описание: {{ blog_items.description }}</p>
-        <p style="border-bottom: 1px solid gray; border-top: 1px solid gray" > {{ blog_items.data_blog }}</p>
 
+ <header> <h1 class="visually-hidden"> Блог инфо </h1>
+        <div class="header">
+            <div class="header__nav">
+                <ul class="header__menu">
+                    <li class="header__list">
+                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+                    </li>
 
-        {% if links_img %}
-        <h2>Список фоток:</h2>
-    <ul>
-        {% for i_img in links_img %}
-            <li><img style="width: 200px; height: 200px" src="{{ i_img }}"></li>
-        {% endfor %}
+                    <li class="header__list">
+                        <div class="header__login">
+                            <ul class="header__login-menu">
+                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
+                                {% if request.user.is_authenticated %}
+                                    {% if flag_admin %}
+                                        <li class="header__login-list"><a href="admin/" class="links header__links">Профиль, ADMIN</a></li>
+                                        {% else %}
+                                <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
+                                        {% endif %}
+                                    <li class="header__login-list"><a href="{% url 'created_blog' %}" class="links header__links"> Создать блог </a></li>
+                                <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
+                                {% else %}
+                                <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">Войти</a> </li>
+                                <li class="header__login-list"><a href="{% url 'register' %}" class="links header__links">Регистрация</a></li>
+                                {% endif %}
+                            </ul>
+                         </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="header__content">
+                <h2 class="header-title">Сайт для создания блогов</h2>
+            </div>
+        </div>
+   </header>
+
+<section>
+    <ul class="blog__menu">
+<li class="blog__list">
+            <div class="blog__list-item">
+                <h3 class="blog__list-title">Блог номер № {{ blog_items.id }}</h3>
+                <span class="blog__author"> автор: {{ blog_items.author }}</span>
+                <h4 class="blog__name">Название: {{ blog_items.title }} </h4>
+                <p class="blog__description">Описание: {{ blog_items.description }}</p>
+                <p class="blog__datatime"> {{ blog_items.data_blog }}</p>
+
+            </div>
+        </li>
     </ul>
-{% endif %}
-<ul>
-<h2>Это второй способо!</h2>
-{% for i in img_link %}
-    <li><img style="width: 200px; height: 200px" src="{{ i }}"></li>
+</section>
 
-{% endfor %}
-</ul>
+{# #}
+<section>
+<h2 class="blog__list-title"> Галерея этого блога:</h2>
+<div class="section_swiper">
+
+     {% if links_img %}
+    <div class="swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+           {% for i in img_link %}
+        <div class="swiper-slide slide-section"> <img class="img_swiper" src="{{ i }}"></div>
+       {% endfor %}
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
 
 
+    </div>
+     {% endif %}
+</div>
+</section>>
 
+
+{#                    {% if links_img %}#}
+{#                    <h2>Список фоток:</h2>#}
+{#            #}
+{#            <h2>Это второй способо!</h2>#}
+{#                        <ul>#}
+{#            {% for i in img_link %}#}
+{#                <li><img style="width: 200px; height: 200px" src="{{ i }}"></li>#}
+{#            #}
+{#            {% endfor %}#}
+{#             {% endif %}#}
+{#            </ul>#}
+
+ <footer class="footer">
+    <div class="footer-conteiner">
+      <div class="footer__content">
+        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+
+      </div>
+    </div>
+ </footer>
+
+ <script src="{% static 'js/swiper-bundle.min.js.map' %}"></script>
+ <script src="{% static 'js/swiper-bundle.js.map' %}"></script>
+ <script src="{% static 'js/swiper-bundle.js' %}"></script>
+  <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
 
 
 </body>
