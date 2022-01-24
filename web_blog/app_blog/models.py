@@ -40,7 +40,7 @@ class Blog(models.Model):
 
     def min_description(self):
 
-        return self.description[:100]
+        return self.description[:100] + '...'
 
     def data_blog(self):
         temp = str(self.creadet_at)

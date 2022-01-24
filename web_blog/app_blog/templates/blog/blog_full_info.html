@@ -70,10 +70,11 @@
 
 {# #}
 <section>
+{% if links_img %}
 <h2 class="blog__list-title"> Галерея этого блога:</h2>
 <div class="section_swiper">
 
-     {% if links_img %}
+
     <div class="swiper">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
@@ -87,6 +88,8 @@
 
 
     </div>
+    {% else %}
+    <h2 class="blog__list-title" style="margin-bottom: 300px"> Фоток нет!</h2>
      {% endif %}
 </div>
 </section>>

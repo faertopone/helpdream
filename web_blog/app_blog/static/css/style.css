@@ -378,3 +378,8 @@ section{
     height: 100%;
     border-radius: 15px;
 }
+
+.login_wrapper_register{
+    flex-direction: column;
+    margin-left: 0;
+}

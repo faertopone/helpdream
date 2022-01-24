@@ -2,17 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {% load static %}
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+     <link rel="stylesheet" href="{% static "css/style_login.css" %}">
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+
     <title>Регистрация</title>
 </head>
 <body>
 
-<h2>Регистрация нового пользователя</h2>
+ <header> <h1 class="visually-hidden"> Регистрация </h1>
+        <div class="header">
+            <div class="header__nav">
+                <ul class="header__menu">
+                    <li class="header__list">
+                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+                    </li>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
-</form>
+                    <li class="header__list">
+                        <div class="header__login">
+                            <ul class="header__login-menu">
+                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
 
+                            </ul>
+                         </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+   </header>
+<section>
+<div class="login_wrapper login_wrapper_register">
+  <h3 class="title__blog"> Регистрация нового пользователя</h3>
+    <form method="post" enctype="multipart/form-data" class="login_form">
+        {% csrf_token %}
+        <p class="login">
+             <label class="label" > Ваш логин:</label>
+            <input type="text" name="username" autofocus required id="id_username" placeholder="Логин" class="input input_username">
+        </p>
+        <p class="password">
+            <label class="label"> Ваш пароль:</label>
+            <input type="password" name="password1" required id="id_password1" placeholder="Пароль" class="input input_password">
+        </p>
+        <p class="password">
+            <label class="label"> Повторите пароль:</label>
+            <input type="password" name="password2" required id="id_password2" placeholder="Еще раз пароль" class="input input_password">
+        </p>
+        <p class="login">
+             <label class="label" > Ваше имя:</label>
+            <input type="text" name="first_name" maxlength="30" id="id_first_name" placeholder="Имя (необезательно)" class="input ">
+        </p>
+
+         <p class="login">
+             <label class="label" > Ваша фамилия:</label>
+            <input type="text" name="last_name" maxlength="30"  id="id_last_name" placeholder="Фамилия (необезательно)" class="input ">
+        </p>
+
+         <p class="login">
+             <label class="label" > Ваша mail:</label>
+            <input type="email" name="email"   id="id_email" placeholder="mail (необезательно)" class="input ">
+        </p>
+
+           <p class="login">
+             <label class="label" > Выберите пол:</label>
+            <select name="gender" id="id_gender">
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
+            </select>
+        </p>
+
+         <p class="login">
+             <label class="label" > Ваша телефон:</label>
+            <input type="number" name="phone"   id="id_phone" placeholder="Телефон (необезательно)" class="input ">
+        </p>
+
+         <p class="login">
+             <label class="label" > Аватарка:</label>
+             {{ form.avatar }}
+        </p>
+
+        <button type="submit" class="Btn Btn_login" >Войти</button>
+        <p class="label_errors" > {{ my_errors }}</p>
+    </form>
+</div>
+</section>
+
+
+
+
+
+ <footer class="footer">
+    <div class="footer-conteiner">
+      <div class="footer__content">
+        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
+
+      </div>
+    </div>
+ </footer>
 </body>
 </html>
