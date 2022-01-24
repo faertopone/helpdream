@@ -96,6 +96,7 @@ a {
 }
 
 body {
+    position: relative;
     margin: 0 auto;
     font-family: 'Open-Sans', sans-serif;
     -webkit-box-sizing: border-box;
@@ -283,6 +284,8 @@ section{
 }
 
 .footer{
+    position: absolute;
+    bottom: 0;
     width: 100%;
     padding-top: 0;
     padding-bottom: 0;

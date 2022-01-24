@@ -201,6 +201,8 @@ section{
 
 
 .footer{
+    position: absolute;
+    bottom: 0;
     width: 100%;
     padding-top: 0;
     padding-bottom: 0;
@@ -254,11 +256,17 @@ section{
     padding: 5px;
 }
 
-.blog__descriptions{
+.blog__uplaod_file{
     margin: 0;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 18px;
     font-style: normal;
     font-weight: 800;
+}
 
+.link_csv{
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }

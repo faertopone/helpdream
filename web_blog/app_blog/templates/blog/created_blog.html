@@ -26,7 +26,7 @@
                                 <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
                                 {% if request.user.is_authenticated %}
                                 <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
-                                    <li class="header__login-list"><a href="{% url 'created_blog' %}" class="links header__links"> Создать блог </a></li>
+
                                 <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
                                 {% else %}
                                 <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">Войти</a> </li>
@@ -51,7 +51,8 @@
                 {% csrf_token %}
                 <p><input class="input_title" type="text" name="title" maxlength="50" required id="id_title" placeholder="Заголовок"></p>
                 <textarea class="input_description" type="text" name="description" required id="id_description" placeholder="Описание"></textarea>
-                <p class="blog__descriptions" > Загрузить фото:{{ blog_form.multi_img }}</p>
+                <div class="blog__uplaod_file" > Загрузить фото: </div>
+                <p>{{ blog_form.multi_img }} </p>
                 <button type="submit" class="button_load_file"><img src="{% static 'img/slice-mobile.png' %}" class="button_upload"> </button>
             </form>
 
@@ -60,12 +61,14 @@
             <img src="{% static 'img/pic1.png' %}" alt="" class="img_blog">
         </div>
     </div>
+    <span class="link_csv"> <a  href="{% url 'upload_file_blog' %}">Если хотите загрузить блог через файл cvs. НАЖМИТЕ СЮДА!</a> </span>
+
 </section>
 
 
 
 
-<a href="{% url 'upload_file_blog' %}">Если хотите загрузить блог через файл cvs. НАЖМИТЕ СЮДА!</a>
+
 
 
  <footer class="footer">

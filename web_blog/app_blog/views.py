@@ -171,11 +171,17 @@ class CreatedBlog(View):
 
             for f_img in files_multi_img:
                 links_img.append(temp + str(f_img))
-                Blog(file_img=f_img)
+
             for i in links_img:
                 links_str_img += i + ' '
 
             Blog.objects.create(id=blog_id, title=title, description=description, author=author, multi_link_file_img=str(links_str_img))
+
+
+            for f_img in files_multi_img:
+                Blog(file_img=f_img)
+
+
 
             return HttpResponseRedirect('/')
 

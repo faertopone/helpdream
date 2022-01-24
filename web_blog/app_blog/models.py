@@ -34,7 +34,6 @@ class Blog(models.Model):
     title = models.CharField(max_length=60, verbose_name='Название новости', db_index=True)
     description = models.TextField(blank=True, verbose_name='Описание новости', db_index=True)
     creadet_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
-    file_img = models.ImageField(upload_to='img_blog/', verbose_name='Фото', db_index=True, default='')
     multi_link_file_img = models.TextField(verbose_name='Ссылка на фото', db_index=True, default='')
 
 
@@ -55,3 +54,7 @@ class Blog(models.Model):
         db_table = 'Blog'
         verbose_name = 'Блог'
         verbose_name_plural = 'Блоги'
+
+class BlogPhoto(models.Model):
+    blog = models.ForeignKey(Blog, related_name="blog", on_delete=models.CASCADE)
+    file_img = models.ImageField(upload_to='img_blog/', verbose_name='Фото', db_index=True, default='')
