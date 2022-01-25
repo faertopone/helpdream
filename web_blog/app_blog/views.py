@@ -106,7 +106,7 @@ class ProfileInfo(View):
 
         #Я вот так сделал путь, но мне кажеться он должен как то подругому делаться?)))
         temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
-        if user_curent.username != 'admin' and user_curent.profile.avatar:
+        if user_curent.username != 'admin' and (user_curent.profile.avatar != ''):
             avatar_link = temp + str(user_curent.profile.avatar)
         else:
             avatar_link = ''
