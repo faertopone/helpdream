@@ -257,11 +257,18 @@ class RestorePassword(View):
     def post(self, request):
         restore_form = RestorePasswordForm(request.POST)
         if restore_form.is_valid():
+            new_password = User.objects.make_random_password()
+            user_email = restore_form.cleaned_data['email']
+            current_user = User.objects.filter(email=user_email).first()
+            if current_user:
+                current_user.set_password(new_password)
+                current_user.save()
+
             send_mail(
                 subject='Восстановление пароля',
                 message='Тут текст с сообщением',
                 from_email='admin@mail.ru',
-                recipient_list=['any@mail.ru']
+                recipient_list=[restore_form.cleaned_data['email']]
             )
             return HttpResponseRedirect('/succes')
 

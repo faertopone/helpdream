@@ -7,7 +7,7 @@ from django.urls import reverse
 
 USER_EMAIL = 'test@company.com'
 USER_NAME = 'TEST'
-OLD_PASSORD = 'testpassord'
+OLD_PASSWORD = 'testpassord'
 
 
 class RestorePasswordTest(TestCase):
@@ -28,9 +28,20 @@ class RestorePasswordTest(TestCase):
 
 
     def test_post_restore_password(self):
-        # user = User.objects.create(username=USER_NAME, email=USER_EMAIL)
+        user = User.objects.create(username=USER_NAME, email=USER_EMAIL)
         response = self.client.post(reverse('restore_password'), {'email': USER_EMAIL})
         self.assertEqual(response.status_code, 200)
         from django.core.mail import outbox
         self.assertEqual(len(outbox), 1)
-        # self.assertIn(USER_EMAIL, outbox[0].to)
+        self.assertIn(USER_EMAIL, outbox[0].to)
+
+
+    def test_if_password_was_changed(self):
+        user = User.objects.create(username=USER_NAME, email=USER_EMAIL)
+        user.set_password(OLD_PASSWORD)
+        user.save()
+        old_password_hash = user.password
+        response = self.client.post(reverse('restore_password'), {'email': USER_EMAIL})
+        self.assertEqual(response.status_code, 200)
+        user.refresh_from_db()
+        self.assertEqual(old_password_hash, user.password)
