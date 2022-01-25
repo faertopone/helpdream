@@ -151,7 +151,7 @@ class Profile_user_edit(View):
             return HttpResponseRedirect('/profile_info/')
 
         reg_form = MyUserRegister(request.POST)
-        print('Не прошло валидность')
+
         return render(request, 'Users/profil_user_edit.html', {'reg_form': reg_form, 'errors': reg_form.errors, 'avatar_link': avatar_link})
 
 
