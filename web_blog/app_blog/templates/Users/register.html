@@ -66,8 +66,10 @@
 
          <p class="login">
              <label class="label" > Ваша mail:</label>
-            <input type="email" name="email"   id="id_email" placeholder="email (необезательно)" class="input" data-validate-field="email">
+            <input type="email" name="email"  id="id_email" placeholder="email (необезательно)" class="input" data-validate-field="email">
         </p>
+
+
 
            <p class="login">
              <label class="label" > Выберите пол:</label>
@@ -78,9 +80,13 @@
         </p>
 
          <p class="login">
+
              <label class="label" > Ваша телефон:</label>
-            <input type="tel" name="phone"   id="id_phone" placeholder="Телефон (необезательно)" class="input" data-validate-field="tel">
+
+{#           это если лень писать в js     data-inputmask="'mask': '+7(999)-999-99-99'"#}
+            <input type="tel" name="phone"    id="id_phone" placeholder="Телефон (необезательно)" class="input">
         </p>
+        {{ form.phone.errors }}
 
          <p class="login">
              <label class="label" > Аватарка:</label>

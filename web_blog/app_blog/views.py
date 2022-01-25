@@ -93,6 +93,7 @@ class RegisterView(View):
             return HttpResponseRedirect('/')
 
 
+        reg_form.add_error('username', 'Выберите другой логин')
 
         return render(request, 'Users/register.html', {'form': reg_form})
 
@@ -168,6 +169,7 @@ class Blog_full_info(View):
             if i.blog_id == blog_items.id:
                 img_link.append(temp + str(i.file_img))
 
+        print(img_link)
 
         return render(request, 'blog/blog_full_info.html', {'blog_items': blog_items, 'blog_id': blog_id, 'links_img': links_img, 'img_link': img_link})
 

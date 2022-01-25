@@ -14,7 +14,7 @@ class Profile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.IntegerField(default='', verbose_name='Телефон', db_index=True)
+    phone = models.CharField(max_length=20, verbose_name='Телефон', db_index=True)
     gender = models.CharField(max_length=100, choices=STATUS_CHOISE, verbose_name='Ваш пол', db_index=True, default='Мужской')
     avatar = models.ImageField(upload_to='avatars/', verbose_name='Выберите фаил', db_index=True, default='')
     def __str__(self):
