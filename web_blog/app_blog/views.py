@@ -109,7 +109,7 @@ class ProfileInfo(View):
         if user_curent.username != 'admin' and (user_curent.profile.avatar != ''):
             avatar_link = temp + str(user_curent.profile.avatar)
         else:
-            avatar_link = ''
+            avatar_link = False
         return render(request, 'Users/profile_user.html', {'user_curent': user_curent, 'avatar_link': avatar_link})
 
     def post(self, requset):
