@@ -15,6 +15,14 @@
     border-radius: 30px;
 }
 
+.register_form{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2px solid rgb(163, 0, 122);
+    border-radius: 30px;
+}
+
 .label{
     font-size: 16px;
     font-weight: 800;
@@ -22,13 +30,19 @@
     margin-bottom: 3px;
 }
 
-.label_errors{
+.errorlist{
+    padding: 0;
+    margin: 0;
+    list-style: none;
 
+}
+
+.errorlist li{
+    color: red;
     font-size: 14px;
     font-weight: 400;
+    font-style: normal;
     margin-bottom: 3px;
-    max-width: 200px;
-
 }
 
 

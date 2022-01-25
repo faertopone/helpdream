@@ -16,7 +16,7 @@ class MyUserRegister(UserCreationForm):
         ('Женский', 'Женский')
     ]
 
-    username = forms.CharField(max_length=50, label='Логин', help_text='Не более 50 символов')
+    username = forms.CharField(max_length=50, error_messages={'required': 'Please enter your name'} )
     first_name = forms.CharField(max_length=30, required=False, label='Имя', help_text='(Не обезательно)')
     last_name = forms.CharField(max_length=30, required=False, label='Фамилия', help_text='(Не обезательно)')
     email = forms.EmailField(required=False, label='Ваш mail', help_text='(не обезательно)')

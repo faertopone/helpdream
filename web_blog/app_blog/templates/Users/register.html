@@ -38,13 +38,15 @@
 <section>
 <div class="login_wrapper login_wrapper_register">
   <h3 class="title__blog"> Регистрация нового пользователя</h3>
-    <form method="post" enctype="multipart/form-data" class="login_form">
+    <form method="post" enctype="multipart/form-data" class="register_form">
         {% csrf_token %}
         <p class="login">
-             <label class="label" > Ваш логин:</label>
-            <input type="text" name="username" autofocus required id="id_username" placeholder="Логин" class="input input_username">
+             {{ form.username.errors }}
+             <label class="label" for="id_username"> Ваш логин:</label>
+            <input type="text" name="username" required id="id_username" placeholder="Логин" class="input input_username">
         </p>
         <p class="password">
+
             <label class="label"> Ваш пароль:</label>
             <input type="password" name="password1" required id="id_password1" placeholder="Пароль" class="input input_password">
         </p>
@@ -64,7 +66,7 @@
 
          <p class="login">
              <label class="label" > Ваша mail:</label>
-            <input type="email" name="email"   id="id_email" placeholder="mail (необезательно)" class="input ">
+            <input type="email" name="email"   id="id_email" placeholder="email (необезательно)" class="input" data-validate-field="email">
         </p>
 
            <p class="login">
@@ -77,7 +79,7 @@
 
          <p class="login">
              <label class="label" > Ваша телефон:</label>
-            <input type="tel" name="phone"   id="id_phone" placeholder="Телефон (необезательно)" class="input ">
+            <input type="tel" name="phone"   id="id_phone" placeholder="Телефон (необезательно)" class="input" data-validate-field="tel">
         </p>
 
          <p class="login">
@@ -86,7 +88,7 @@
         </p>
 
         <button type="submit" class="Btn Btn_login" >Зарегистрироваться</button>
-        <p class="label_errors" > {{ my_errors }}</p>
+
     </form>
 </div>
 </section>
@@ -104,7 +106,7 @@
     </div>
  </footer>
 
-
+  <script src="{% static 'js/just-validate.min.js' %}"></script>
   <script src="{% static 'js/inputmask.min.js' %}"></script>
   <script src="{% static 'js/index.js' %}"></script>
 </body>

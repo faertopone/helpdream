@@ -2,7 +2,7 @@ import os
 from _csv import reader
 from datetime import datetime
 from django.forms.utils import ErrorList
-
+from django.contrib import messages
 import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
@@ -91,6 +91,9 @@ class RegisterView(View):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return HttpResponseRedirect('/')
+
+
+
         return render(request, 'Users/register.html', {'form': reg_form})
 
     def get(self, request):
@@ -105,7 +108,7 @@ class ProfileInfo(View):
 
         #Я вот так сделал путь, но мне кажеться он должен как то подругому делаться?)))
         temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
-        if user_curent.username != 'admin':
+        if user_curent.username != 'admin' and user_curent.profile.avatar:
             avatar_link = temp + str(user_curent.profile.avatar)
         else:
             avatar_link = ''
