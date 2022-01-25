@@ -49,8 +49,11 @@
             <h3 class="title_author">Автор блога: {{ request.user.username }}</h3>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <p><input class="input_title" type="text" name="title" maxlength="50" required id="id_title" placeholder="Заголовок"></p>
-                <textarea class="input_description" type="text" name="description" required id="id_description" placeholder="Описание"></textarea>
+                <p>{{ blog_form.title }}</p>
+                <p>{{ blog_form.description }}</p>
+{#                <p><input class="input_title" type="text" name="title" maxlength="50" required id="id_title" placeholder="Заголовок"></p>#}
+{#                <textarea class="input_description" name="description" required id="id_description" placeholder="Описание"></textarea>#}
+
                 <div class="blog__uplaod_file" > Загрузить фото: </div>
                 <p>{{ blog_photo_form.multi_img }} </p>
                 <button type="submit" class="button_load_file"><img src="{% static 'img/slice-mobile.png' %}" class="button_upload"> </button>

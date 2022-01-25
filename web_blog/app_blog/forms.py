@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, User
+from django.forms import TextInput, Textarea
+
 from .models import Blog, Profile, BlogPhoto
 from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 
@@ -62,12 +64,23 @@ class BlogPhotoForm(forms.ModelForm):
 
 class BlogForm(forms.ModelForm):
     author = forms.CharField(required=False)
-    title = forms.CharField(max_length=50, label='Заголовок', help_text='Не более 50 символов')
-
 
     class Meta:
         model = Blog
         fields = ['title', 'description']
+
+        #Вот так можно добавлять в нашу форму все что нужно и классы и все такое
+        widgets = {
+            'description': Textarea(attrs={
+                'placeholder': "Описание",
+                'class': 'input_description'
+            }),
+            'title': TextInput(attrs={
+                'placeholder': "Заголовок",
+                'class': 'input_title',
+            })
+
+        }
 
 class EditFormUser(forms.Form):
     name = forms.CharField(max_length=100, label='Ваше новое имя')
