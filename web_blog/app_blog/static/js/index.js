@@ -1,32 +1,10 @@
 window.addEventListener('DOMContentLoaded', function(){
 
+
   let selector = document.querySelectorAll('input[type="tel"]');
+
   let im = new Inputmask('+7 (999) 999-99-99')
-
   im.mask(selector);
-
-  // Или так если пропистаь дата атрибут непосредственно в html
-  // let im = new Inputmask()
-
-
-
-
-  //
-  // let validateForms = function (selector, rules, succesModal, YaGoal) {
-  //   new window.JustValidate(selector, {
-  //     rules: rules,
-  //
-  //   });
-  // }
-  //
-  // validateForms('.register_form',
-  //     {
-  //       email:
-  //           {required: true, email: true},
-  //       tel: {required: true}
-  //     }, '.thanks-popup', 'send goal'
-  //     )
-
 
 
   const swiper = new Swiper('.swiper', {
