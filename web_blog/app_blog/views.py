@@ -92,9 +92,6 @@ class RegisterView(View):
             login(request, user)
             return HttpResponseRedirect('/')
 
-
-        reg_form.add_error('username', 'Выберите другой логин')
-
         return render(request, 'Users/register.html', {'form': reg_form})
 
     def get(self, request):

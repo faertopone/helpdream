@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, User
 from .models import Blog, Profile, BlogPhoto
-from django.core.exceptions import NON_FIELD_ERRORS
+from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 
 
 class AuthForm(forms.Form):
@@ -26,6 +26,26 @@ class MyUserRegister(UserCreationForm):
     gender = forms.ChoiceField(choices=STATUS_CHOISE, required=True, label='Выберите пол', help_text='Не обезательно')
     phone = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'tel'}))
     avatar = forms.ImageField(required=False)
+
+
+    # и тогда ошибка валидации будет form.non_field_errors  - ('Пароли не совпали!')
+    def clean(self):
+        # Тут метод сразу првоерит это условие и если не будет совпадать будет ошибка) в форме erros _)
+        cleaned_data = super(MyUserRegister, self).clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+        if password1 != password2:
+            raise ValidationError('Пароли не совпали!')
+
+
+    # и тогда ошибка валидации будет form.username.errors  - ('Такой пользователь уже есть')
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        user_in_bd = User.objects.filter(username=data)
+        if user_in_bd:
+            raise ValidationError('Такой пользователь уже есть')
+        return data
+
 
     class Meta:
         model = User

@@ -54,6 +54,8 @@
             <label class="label"> Повторите пароль:</label>
             <input type="password" name="password2" required id="id_password2" placeholder="Еще раз пароль" class="input input_password">
         </p>
+           {{ form.non_field_errors }}
+
         <p class="login">
              <label class="label" > Ваше имя:</label>
             <input type="text" name="first_name" maxlength="30" id="id_first_name" placeholder="Имя (необезательно)" class="input ">
