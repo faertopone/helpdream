@@ -1,12 +1,15 @@
 import os
+import time
 from _csv import reader
 from datetime import datetime
+
+from django.core.mail import send_mail
 from django.forms.utils import ErrorList
 from django.contrib import messages
 import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -14,7 +17,7 @@ from django.views import View
 from django.contrib.auth.models import User
 from django.views.generic import DetailView
 
-from .forms import AuthForm, MyUserRegister, EditFormUser, BlogForm, UploadFileCsv, BlogPhotoForm
+from .forms import AuthForm, MyUserRegister, EditFormUser, BlogForm, UploadFileCsv, BlogPhotoForm, RestorePasswordForm
 from .models import Profile, Blog, BlogPhoto
 
 
@@ -242,3 +245,29 @@ class UploadAllBlog(View):
 
         file_csv_form = UploadFileCsv()
         return render(request, 'blog/upload_file_blog.html', {'file_csv_form': file_csv_form})
+
+
+
+class RestorePassword(View):
+
+    def get(self, request):
+        restore_form = RestorePasswordForm()
+        return render(request, 'Users/restore_password.html', {'form': restore_form})
+
+    def post(self, request):
+        restore_form = RestorePasswordForm(request.POST)
+        if restore_form.is_valid():
+            send_mail(
+                subject='Восстановление пароля',
+                message='Тут текст с сообщением',
+                from_email='admin@mail.ru',
+                recipient_list=['any@mail.ru']
+            )
+            return HttpResponseRedirect('/succes')
+
+        return render(request, 'Users/restore_password.html', {'form': restore_form})
+
+
+def succes(request):
+    return render(request, 'complete/succes.html')
+

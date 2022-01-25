@@ -1,3 +1,7 @@
+p {
+    margin: 0;
+}
+
 .login_wrapper{
     margin-top: 150px;
     display: flex;
@@ -82,4 +86,9 @@
 .Btn_login:hover{
     color: white;
     background-color: rgb(153, 54, 130);
+}
+
+
+.login {
+    margin: 0;
 }

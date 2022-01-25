@@ -1,14 +1,55 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, User
-from django.forms import TextInput, Textarea
+from django.forms import TextInput, Textarea, PasswordInput
 
 from .models import Blog, Profile, BlogPhoto
 from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 
 
 class AuthForm(forms.Form):
-    username = forms.CharField(label='Ваш логин')
-    password = forms.CharField(widget=forms.PasswordInput, label='Ваш пароль')
+    username = forms.CharField(required=True, widget=forms.TextInput(attrs={
+                'placeholder': "логин",
+                'class': 'input'
+            }))
+
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={
+                'placeholder': "Пароль",
+                'class': 'input'
+            }))
+
+
+#ФОРМА ВОССТАНОВЛЕНИЯ ПАРОЛЯ
+class RestorePasswordForm(forms.Form):
+    # username = forms.CharField(required=True, widget=forms.TextInput(attrs={
+    #     'placeholder': "логин",
+    #     'class': 'input'
+    # }))
+
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
+        'placeholder': "email",
+        'class': 'input'
+    }))
+
+    #Это будет в form.non_field_errors
+    def clean(self):
+        # Тут метод сразу проверит это условие и если не будет совпадать будет ошибка) в форме erros _)
+        cleaned_data = super(RestorePasswordForm, self).clean()
+        username = cleaned_data.get('username')
+        email = cleaned_data.get('email')
+        email_user_in_bd = User.objects.filter(email=email).first()
+        if not email_user_in_bd:
+            raise ValidationError('Такой почты нет в  БД')
+
+    # #Это будет в form.username.errors
+    # #Проверим что такой пользователь есть
+    # def clean_username(self):
+    #     data = self.cleaned_data['username']
+    #     user_in_bd = User.objects.filter(username=data).first()
+    #     if not user_in_bd:
+    #         raise ValidationError('Такого пользователя нет')
+    #     return data
+
+
 
 
 
@@ -43,7 +84,7 @@ class MyUserRegister(UserCreationForm):
     # и тогда ошибка валидации будет form.username.errors  - ('Такой пользователь уже есть')
     def clean_username(self):
         data = self.cleaned_data['username']
-        user_in_bd = User.objects.filter(username=data)
+        user_in_bd = User.objects.filter(username=data).first()
         if user_in_bd:
             raise ValidationError('Такой пользователь уже есть')
         return data

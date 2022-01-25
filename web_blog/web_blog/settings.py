@@ -126,3 +126,5 @@ SESSION_COOKIE_AGE = 30 * 24 * 60 * 60
 MEDIA_ROOT = os.path.join(BASE_DIR, 'ALL_DATA_FILES')
 MEDIA_URL = '/ALL_DATA_FILES/'
 DATETIME_FORMAT = '%d/%m/%y %H:%M:%S'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

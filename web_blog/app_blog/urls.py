@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import MainIndex, Login_view, logout_view, RegisterView, ProfileInfo, Profile_user_edit, Blog_full_info, CreatedBlog, UploadAllBlog
+from .views import MainIndex, Login_view, logout_view, RegisterView, ProfileInfo, Profile_user_edit, Blog_full_info, \
+    CreatedBlog, UploadAllBlog, RestorePassword, succes
 
 urlpatterns = [
     path('', MainIndex.as_view(), name='index'),
@@ -11,4 +12,6 @@ urlpatterns = [
     path('blog_info/<int:blog_id>/', Blog_full_info.as_view(), name='blog_info'),
     path('created_blog/', CreatedBlog.as_view(), name='created_blog'),
     path('upload_file_blog/', UploadAllBlog.as_view(), name='upload_file_blog'),
+    path('restore_password/', RestorePassword.as_view(), name='restore_password'),
+    path('succes/', succes, name='succes'),
 ]
