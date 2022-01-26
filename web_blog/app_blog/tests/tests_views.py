@@ -69,6 +69,7 @@ class UserRegisterTest(TestCase):
         self.assertEqual(response_register.status_code, 200)
         self.assertTemplateUsed(response_register, 'users/register.html')
         response_register_post = self.client.post(reverse('register'), {'username': USER_2, 'password1': PASSWORD, 'password2': PASSWORD, 'phone': '99999'})
+        #Сюда же должно добавиться данные которые я ввел выше строчкой?
         form_data = MyUserRegister(response_register_post)
         print(form_data)
         self.assertTrue(form_data.is_valid())
