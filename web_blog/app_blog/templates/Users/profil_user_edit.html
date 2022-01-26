@@ -37,19 +37,21 @@
    </header>
 <body>
 
- <section class="content content_profile_edit">
+ <section class="content content_profile_edit" style="height: 600px">
  <h2 class="lk__title">Редактирование данных, <br> {{ user_curent.username }}</h2>
        <div class="profile">
-    <div class="lk_content lk_edit_content">
+    <div class="lk_content lk_edit_content" style="max-height: none">
        <form method="post">
     {% csrf_token %}
     <p class="login">
-        <input type="text" name="name" maxlength="100" required id="id_name" placeholder="{{ request.user.first_name }}, введите новое" class="input input_name">
+         <label class="label" > Ваш имя: {{ request.user.first_name }}</label>
+        <input type="text" name="name" maxlength="100" required id="id_name" placeholder="введите новое" class="input input_name">
     </p>
         <p class="login">
-            <input type="text" name="last_name" maxlength="100" required id="id_last_name" placeholder="{{ request.user.last_name }}, введите новое" class="input input_name">
+             <label class="label" > Ваша фамилия: {{ request.user.last_name }}</label>
+            <input type="text" name="last_name" maxlength="100" required id="id_last_name" placeholder="введите новое" class="input input_name">
         </p>
-     <div class="edit__btn">
+     <div class="edit__btn" style="margin-bottom: 0" >
         <button type="submit"  class="link_edit" >Изменить данные</button>
     </div>
         </form>

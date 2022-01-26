@@ -126,10 +126,10 @@ class Profile_user_edit(View):
         user_curent = User.objects.get(id=user_y.id)
         # Я вот так сделал путь, но мне кажеться он должен как то подругому делаться?)))
         temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
-        if user_curent.username != 'admin':
+        if user_curent.username != 'admin' and (user_curent.profile.avatar != ''):
             avatar_link = temp + str(user_curent.profile.avatar)
         else:
-            avatar_link = ''
+            avatar_link = False
 
         return render(request, 'Users/profil_user_edit.html', {'reg_form': reg_form, 'user_curent': user_curent, 'avatar_link': avatar_link})
 
@@ -139,10 +139,10 @@ class Profile_user_edit(View):
         user_curent = User.objects.get(id=user_y.id)
         # Я вот так сделал путь, но мне кажеться он должен как то подругому делаться?)))
         temp = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
-        if user_curent.username != 'admin':
+        if user_curent.username != 'admin' and (user_curent.profile.avatar != ''):
             avatar_link = temp + str(user_curent.profile.avatar)
         else:
-            avatar_link = ''
+            avatar_link = False
         if reg_form.is_valid():
             name = reg_form.cleaned_data.get('name')
             last_name = reg_form.cleaned_data.get('last_name')
