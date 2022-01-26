@@ -43,7 +43,8 @@
         <p class="login">
              {{ form.username.errors }}
              <label class="label" for="id_username"> Ваш логин:</label>
-            <input type="text" name="username" required id="id_username" placeholder="Логин" class="input input_username">
+            {{ form.username }}
+{#            <input type="text" name="username" required id="id_username" placeholder="Логин" class="input input_username">#}
         </p>
         <p class="password">
 

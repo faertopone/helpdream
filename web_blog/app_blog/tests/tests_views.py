@@ -6,14 +6,15 @@ from django.test import TestCase
 from django.urls import reverse
 
 from app_blog.models import Blog, Profile
-
+from app_blog.forms import MyUserRegister
 
 NUMBER_OF_ITEMS = 10
 
 USER = 'TEST'
+USER_2 = 'TEST2'
 PASSWORD = 'test21312414'
 USER_REGISTER = 'TEST_REGISTER'
-
+TEST_PHONE = '2341421424'
 
 class UserRegisterTest(TestCase):
 
@@ -33,7 +34,8 @@ class UserRegisterTest(TestCase):
         test_user = User.objects.create_user(username=USER, password=PASSWORD)
         test_user.save()
         user_profile = Profile.objects.create(
-            user=test_user
+            user=test_user,
+            phone=TEST_PHONE
         )
         user_profile.save()
 
@@ -51,7 +53,6 @@ class UserRegisterTest(TestCase):
 
     def test_login(self):
 
-
         response_login = self.client.get(reverse('login'))
         self.assertEqual(response_login.status_code, 200)
         self.assertTemplateUsed(response_login, 'users/login.html')
@@ -62,12 +63,24 @@ class UserRegisterTest(TestCase):
         temp = User.objects.get(username=USER)
         self.assertEqual(temp.username, USER)
 
-    #
-    # def test_register(self):
-    #     response_register = self.client.get(reverse('register'))
-    #     self.assertEqual(response_register.status_code, 200)
-    #     self.assertTemplateUsed(response_register, 'users/register.html')
-    #     #тут еще проверку что пользователь зарегался
+
+    def test_register(self):
+        response_register = self.client.get(reverse('register'))
+        self.assertEqual(response_register.status_code, 200)
+        self.assertTemplateUsed(response_register, 'users/register.html')
+        response_register_post = self.client.post(reverse('register'), {'username': USER_2, 'password1': PASSWORD, 'password2': PASSWORD, 'phone': '99999'})
+        form_data = MyUserRegister(response_register_post)
+        print(form_data)
+        self.assertTrue(form_data.is_valid())
+        self.assertRedirects(response_register_post, reverse('index'))
+        self.assertEqual(response_register_post.status_code, 302)
+
+        current_user = User.objects.get(username=USER_2)
+        self.assertEqual(current_user.profile.phone, '00000')
+
+        #тут еще проверку что пользователь зарегался
+
+
 
     # def test_profile_info(self):
     #     response_profile_info = self.client.get(reverse('profile_info'))

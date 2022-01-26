@@ -94,7 +94,7 @@ class RegisterView(View):
             raw_password = reg_form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse('index'))
 
         return render(request, 'users/register.html', {'form': reg_form})
 

@@ -60,13 +60,13 @@ class MyUserRegister(UserCreationForm):
         ('Женский', 'Женский')
     ]
 
-    username = forms.CharField(max_length=50)
+    username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'input input_username', 'placeholder': 'Логин'}))
     first_name = forms.CharField(max_length=30, required=False, label='Имя', help_text='(Не обезательно)')
     last_name = forms.CharField(max_length=30, required=False, label='Фамилия', help_text='(Не обезательно)')
     email = forms.EmailField(required=False, label='Ваш mail', help_text='(не обезательно)')
     password1 = forms.CharField(widget=forms.PasswordInput, label='Пароль', )
     password2 = forms.CharField(widget=forms.PasswordInput, label='Повторите пароль', )
-    gender = forms.ChoiceField(choices=STATUS_CHOISE, required=True, widget=forms.Select(attrs={'class': 'input_select'}))
+    gender = forms.ChoiceField(choices=STATUS_CHOISE, required=False, widget=forms.Select(attrs={'class': 'input_select'}))
     phone = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'tel'}))
     avatar = forms.ImageField(required=False)
 

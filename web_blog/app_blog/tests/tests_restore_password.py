@@ -45,7 +45,6 @@ class RestorePasswordTest(TestCase):
         user.set_password(OLD_PASSWORD)
         user.save()
         old_password_hash = user.password
-
         response = self.client.post(reverse('restore_password'), {'email': USER_EMAIL})
         self.assertEqual(response.status_code, 302)
         user.refresh_from_db()
