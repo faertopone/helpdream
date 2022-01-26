@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.urls import reverse
 from django.views import View
 from django.contrib.auth.models import User
 from django.views.generic import DetailView
@@ -59,7 +60,7 @@ class Login_view(View):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(reverse('index'))
 
 
 class MainIndex(View):
@@ -248,6 +249,7 @@ class UploadAllBlog(View):
 
 
 
+
 class RestorePassword(View):
 
     def get(self, request):
@@ -270,7 +272,7 @@ class RestorePassword(View):
                 from_email='admin@mail.ru',
                 recipient_list=[restore_form.cleaned_data['email']]
             )
-            return HttpResponseRedirect('/succes')
+            return HttpResponseRedirect(reverse('succes'))
 
         return render(request, 'Users/restore_password.html', {'form': restore_form})
 

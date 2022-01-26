@@ -30,10 +30,14 @@ class RestorePasswordTest(TestCase):
     def test_post_restore_password(self):
         user = User.objects.create(username=USER_NAME, email=USER_EMAIL)
         response = self.client.post(reverse('restore_password'), {'email': USER_EMAIL})
+
+        #200 если перенаравление идет HttpResponse, и редирект работает или если HttpResponseRedirect то 302
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('succes'))
         from django.core.mail import outbox
         self.assertEqual(len(outbox), 1)
         self.assertIn(USER_EMAIL, outbox[0].to)
+
 
 
     def test_if_password_was_changed(self):
@@ -41,6 +45,7 @@ class RestorePasswordTest(TestCase):
         user.set_password(OLD_PASSWORD)
         user.save()
         old_password_hash = user.password
+
         response = self.client.post(reverse('restore_password'), {'email': USER_EMAIL})
         self.assertEqual(response.status_code, 302)
         user.refresh_from_db()
