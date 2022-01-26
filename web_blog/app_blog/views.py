@@ -266,7 +266,7 @@ class RestorePassword(View):
 
             send_mail(
                 subject='Восстановление пароля',
-                message='Тут текст с сообщением',
+                message=f'Тут ваш новый пароль: {new_password}',
                 from_email='admin@mail.ru',
                 recipient_list=[restore_form.cleaned_data['email']]
             )
