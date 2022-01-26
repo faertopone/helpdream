@@ -12,6 +12,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelTable(
             name='my_user',
-            table='Users',
+            table='users',
         ),
     ]

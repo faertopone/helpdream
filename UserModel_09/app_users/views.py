@@ -62,7 +62,7 @@ def register_view(request):
             return redirect('/')
     else:
         form = UserCreationForm()
-    return render(request, 'users/register.html', {'form': form} )
+    return render(request, 'users/register.html', {'form': form})
 
 
 
@@ -87,7 +87,7 @@ def best_register_view(request):
             return redirect('/')
     else:
         form = ExtendedREgisterForm()
-    return render(request, 'users/register.html', {'form': form} )
+    return render(request, 'users/register.html', {'form': form})
 
 
 class profile_data_view(View):

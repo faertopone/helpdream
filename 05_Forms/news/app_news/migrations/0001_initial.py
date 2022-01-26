@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=254)),
             ],
             options={
-                'db_table': 'Users',
+                'db_table': 'users',
                 'ordering': ['username'],
             },
         ),

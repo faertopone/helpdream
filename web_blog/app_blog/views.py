@@ -96,11 +96,11 @@ class RegisterView(View):
             login(request, user)
             return HttpResponseRedirect('/')
 
-        return render(request, 'Users/register.html', {'form': reg_form})
+        return render(request, 'users/register.html', {'form': reg_form})
 
     def get(self, request):
         reg_form = MyUserRegister()
-        return render(request, 'Users/register.html', {'form': reg_form})
+        return render(request, 'users/register.html', {'form': reg_form})
 
 
 class ProfileInfo(View):
@@ -114,7 +114,7 @@ class ProfileInfo(View):
             avatar_link = temp + str(user_curent.profile.avatar)
         else:
             avatar_link = False
-        return render(request, 'Users/profile_user.html', {'user_curent': user_curent, 'avatar_link': avatar_link})
+        return render(request, 'users/profile_user.html', {'user_curent': user_curent, 'avatar_link': avatar_link})
 
     def post(self, requset):
         pass
@@ -132,7 +132,7 @@ class Profile_user_edit(View):
         else:
             avatar_link = False
 
-        return render(request, 'Users/profil_user_edit.html', {'reg_form': reg_form, 'user_curent': user_curent, 'avatar_link': avatar_link})
+        return render(request, 'users/profil_user_edit.html', {'reg_form': reg_form, 'user_curent': user_curent, 'avatar_link': avatar_link})
 
     def post(self, request):
         reg_form = EditFormUser(request.POST, request.FILES)
@@ -154,7 +154,7 @@ class Profile_user_edit(View):
 
         reg_form = MyUserRegister(request.POST)
 
-        return render(request, 'Users/profil_user_edit.html', {'reg_form': reg_form, 'errors': reg_form.errors, 'avatar_link': avatar_link})
+        return render(request, 'users/profil_user_edit.html', {'reg_form': reg_form, 'errors': reg_form.errors, 'avatar_link': avatar_link})
 
 
 class Blog_full_info(View):
@@ -254,7 +254,7 @@ class RestorePassword(View):
 
     def get(self, request):
         restore_form = RestorePasswordForm()
-        return render(request, 'Users/restore_password.html', {'form': restore_form})
+        return render(request, 'users/restore_password.html', {'form': restore_form})
 
     def post(self, request):
         restore_form = RestorePasswordForm(request.POST)
@@ -274,7 +274,7 @@ class RestorePassword(View):
             )
             return HttpResponseRedirect(reverse('succes'))
 
-        return render(request, 'Users/restore_password.html', {'form': restore_form})
+        return render(request, 'users/restore_password.html', {'form': restore_form})
 
 
 def succes(request):

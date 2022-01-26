@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('is_active_user', models.BooleanField(db_index=True, verbose_name='актив')),
             ],
             options={
-                'db_table': 'Users',
+                'db_table': 'users',
                 'ordering': ['created_at'],
             },
         ),

@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('username', models.OneToOneField(max_length=30, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Имя')),
             ],
             options={
-                'db_table': 'Users',
+                'db_table': 'users',
                 'ordering': ['created_at'],
             },
         ),

@@ -22,7 +22,7 @@ class RestorePasswordTest(TestCase):
     def test_restore_password_uses_correct_template(self):
         response = self.client.get(reverse('restore_password'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'Users/restore_password.html')
+        self.assertTemplateUsed(response, 'users/restore_password.html')
 
 
 
