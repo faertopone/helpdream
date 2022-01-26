@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from app_blog.models import Blog, Profile
 from app_blog.forms import MyUserRegister
+from django.test import Client
 
 NUMBER_OF_ITEMS = 10
 
@@ -68,18 +69,24 @@ class UserRegisterTest(TestCase):
         response_register = self.client.get(reverse('register'))
         self.assertEqual(response_register.status_code, 200)
         self.assertTemplateUsed(response_register, 'users/register.html')
+        #нвоый пользователь
         response_register_post = self.client.post(reverse('register'), {'username': USER_2, 'password1': PASSWORD, 'password2': PASSWORD, 'phone': '99999'})
-        #Сюда же должно добавиться данные которые я ввел выше строчкой?
-        form_data = MyUserRegister(response_register_post)
-        print(form_data)
-        self.assertTrue(form_data.is_valid())
         self.assertRedirects(response_register_post, reverse('index'))
         self.assertEqual(response_register_post.status_code, 302)
-
         current_user = User.objects.get(username=USER_2)
-        self.assertEqual(current_user.profile.phone, '00000')
+        self.assertEqual(current_user.profile.phone, '99999')
 
-        #тут еще проверку что пользователь зарегался
+
+        #если такой пользователь есть
+        response_register_post_new = self.client.post(reverse('register'),
+                                                  {'username': USER,
+                                                   'password1': PASSWORD,
+                                                   'password2': PASSWORD,
+                                                   'phone': '99999'})
+
+        self.assertEqual(response_register_post_new.status_code, 200)
+
+
 
 
 
