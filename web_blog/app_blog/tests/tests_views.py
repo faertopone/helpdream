@@ -12,6 +12,8 @@ NUMBER_OF_ITEMS = 10
 
 USER = 'TEST'
 PASSWORD = 'test21312414'
+USER_REGISTER = 'TEST_REGISTER'
+
 
 class UserRegisterTest(TestCase):
 
