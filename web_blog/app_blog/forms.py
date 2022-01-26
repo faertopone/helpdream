@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, User
-from django.forms import TextInput, Textarea, PasswordInput
+from django.forms import TextInput, Textarea, PasswordInput, Select
 
 from .models import Blog, Profile, BlogPhoto
 from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
@@ -66,7 +66,7 @@ class MyUserRegister(UserCreationForm):
     email = forms.EmailField(required=False, label='Ваш mail', help_text='(не обезательно)')
     password1 = forms.CharField(widget=forms.PasswordInput, label='Пароль', )
     password2 = forms.CharField(widget=forms.PasswordInput, label='Повторите пароль', )
-    gender = forms.ChoiceField(choices=STATUS_CHOISE, required=True, label='Выберите пол', help_text='Не обезательно')
+    gender = forms.ChoiceField(choices=STATUS_CHOISE, required=True, widget=forms.Select(attrs={'class': 'input_select'}))
     phone = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'tel'}))
     avatar = forms.ImageField(required=False)
 
@@ -93,6 +93,7 @@ class MyUserRegister(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'gender', 'phone', 'avatar']
+
 
 
 

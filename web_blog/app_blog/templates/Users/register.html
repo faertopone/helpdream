@@ -74,11 +74,9 @@
 
 
            <p class="login">
+
              <label class="label" > Выберите пол:</label>
-            <select name="gender" id="id_gender">
-                <option value="Мужской">Мужской</option>
-                <option value="Женский">Женский</option>
-            </select>
+            {{ form.gender }}
         </p>
 
          <p class="login">
@@ -114,8 +112,9 @@
     </div>
  </footer>
 
-  <script src="{% static 'js/just-validate.min.js' %}"></script>
-  <script src="{% static 'js/inputmask.min.js' %}"></script>
+ <script src="{% static 'js/inputmask.min.js' %}"></script>
+  <script src="{% static 'js/swiper-bundle.js' %}"></script>
+  <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
   <script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>

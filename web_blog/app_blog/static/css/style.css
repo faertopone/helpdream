@@ -382,3 +382,22 @@ section{
     margin-top: 10px;
 
 }
+
+
+.input_select{
+    padding: 5px;
+    border: 1px solid rgb(163, 0, 122);
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: aliceblue;
+    color: black;
+}
+
+.input_select option{
+    background-color: lightgrey;
+    border: 1px solid rgb(163, 0, 122);
+    border-radius: 5px;
+    font-size: 16px;
+    color: black;
+
+}
