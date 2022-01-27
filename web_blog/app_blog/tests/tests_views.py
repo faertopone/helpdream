@@ -157,35 +157,21 @@ class UserRegisterTest(TestCase):
         name_file = 'book2.csv'
         file = link_file + name_file
 
-        with open(file) as fp:
-            c.post(reverse('upload_file_blog'), {'username': USER, 'file_csv_form': fp})
+        # ТУТ ДОДЕЛАТЬ ПОТОМ
+        # with open(file) as fp:
+        #     c.post(reverse('upload_file_blog'), {'username': USER, 'file_csv_form': fp})
 
 
+    def test_succes(self):
+        response = self.client.get(reverse('succes'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'complete/succes.html')
 
-        # response_9 = self.client.get(reverse('succes'))
-        #
-        # #created_blog
-        # self.assertEqual(response_6.status_code, 200)
-        # self.assertTemplateUsed(response_6, reverse('created_blog'))
-        #
-        # #upload_file_blog
-        # self.assertEqual(response_7.status_code, 200)
-        # self.assertTemplateUsed(response_7, reverse('upload_file_blog'))
-        #
-        # #restore_password
-        # self.assertEqual(response_8.status_code, 200)
-        # self.assertTemplateUsed(response_8, reverse('restore_password'))
-        #
-        # #succes
-        # self.assertEqual(response_9.status_code, 200)
-        # self.assertTemplateUsed(response_9, 'complete/succes.html')
-        #
-        #
-        #
-        # response_logout = self.client.get(reverse('logout'))
-        # # logout
-        # self.assertEqual(response_logout.status_code, 302)
-        # self.assertRedirects(response_logout, (reverse('index')))
+    def test_logout(self):
+        response = self.client.get(reverse('logout'))
+        self.assertRedirects(response, reverse('index'))
+
+
 
 
 
