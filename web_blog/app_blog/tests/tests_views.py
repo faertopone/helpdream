@@ -157,9 +157,9 @@ class UserRegisterTest(TestCase):
         name_file = 'book2.csv'
         file = link_file + name_file
 
-        # ТУТ ДОДЕЛАТЬ ПОТОМ
-        # with open(file) as fp:
-        #     c.post(reverse('upload_file_blog'), {'username': USER, 'file_csv_form': fp})
+        #Чето тут не поулчается
+        with open(file) as fp:
+            c.post(reverse('upload_file_blog'), {'username': USER, 'file_csv_form': fp})
 
 
     def test_succes(self):
@@ -170,16 +170,3 @@ class UserRegisterTest(TestCase):
     def test_logout(self):
         response = self.client.get(reverse('logout'))
         self.assertRedirects(response, reverse('index'))
-
-
-
-
-
-
-
-
-
-    # blog_info
-    # self.assertEqual(response_blog.status_code, 200)
-    # self.assertTemplateUsed(response_blog, reverse('blog_info'))
-    # response_blog = self.client.get(reverse('blog_info', kwargs={'blog_id': self.test_blog.id}))
