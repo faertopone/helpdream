@@ -226,7 +226,12 @@ class CreatedBlog(View):
         return render(request, 'blog/created_blog.html', {'blog_form': blog_form})
 
 class UploadAllBlog(View):
+
     def get(self, request):
+
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('index'))
+
         file_csv_form = UploadFileCsv()
         return render(request, 'blog/upload_file_blog.html', {'file_csv_form': file_csv_form})
 
@@ -252,7 +257,7 @@ class UploadAllBlog(View):
             except Exception as error:
                 file_csv_form = UploadFileCsv()
                 return render(request, 'blog/upload_file_blog.html', {'file_csv_form': file_csv_form, 'error': error})
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse('index'))
 
         file_csv_form = UploadFileCsv()
         return render(request, 'blog/upload_file_blog.html', {'file_csv_form': file_csv_form})

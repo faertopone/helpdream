@@ -1,3 +1,4 @@
+import os
 import random
 import string
 
@@ -8,6 +9,8 @@ from django.urls import reverse
 from app_blog.models import Blog, Profile
 from app_blog.forms import MyUserRegister
 from django.test import Client
+
+from web_blog.settings import BASE_DIR
 
 NUMBER_OF_ITEMS = 10
 
@@ -135,12 +138,30 @@ class UserRegisterTest(TestCase):
 
 
     def test_blog_info(self):
-        pass
+        resp = self.client.get(reverse('blog_info', kwargs={'blog_id': 1}))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'blog/blog_full_info.html')
+
+    def test_upload_file(self):
+        #До логирования
+        response = self.client.get(reverse('upload_file_blog'))
+        self.assertRedirects(response, reverse('index'))
+
+        #после авторизации
+        login = self.client.login(username=USER, password=PASSWORD)
+        response_login = self.client.get(reverse('upload_file_blog'))
+        self.assertEqual(response_login.status_code, 200)
+
+        c = Client()
+        link_file = os.path.join(BASE_DIR, 'ALL_DATA_FILES/FILES_TEST/')
+        name_file = 'book2.csv'
+        file = link_file + name_file
+
+        with open(file) as fp:
+            c.post(reverse('upload_file_blog'), {'username': USER, 'file_csv_form': fp})
 
 
 
-        # response_7 = self.client.get(reverse('upload_file_blog'))
-        # response_8 = self.client.get(reverse('restore_password'))
         # response_9 = self.client.get(reverse('succes'))
         #
         # #created_blog
