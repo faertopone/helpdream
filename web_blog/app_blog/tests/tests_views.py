@@ -16,14 +16,27 @@ USER_2 = 'TEST2'
 PASSWORD = 'test21312414'
 USER_REGISTER = 'TEST_REGISTER'
 TEST_PHONE = '2341421424'
+USER_NAME = 'TEST_NAME'
+USER_LAST_NAME = 'TEST_LAST_NAME'
 
 class UserRegisterTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
         letters = string.ascii_lowercase
-        author = title = description = ''.join(random.choice(letters) for i in range(NUMBER_OF_ITEMS))
+        # author = title = description = ''.join(random.choice(letters) for i in range(NUMBER_OF_ITEMS))
 
+
+        test_user = User.objects.create_user(username=USER, password=PASSWORD, first_name=USER_NAME, last_name=USER_LAST_NAME)
+
+        test_user.save()
+        user_profile = Profile.objects.create(
+            user=test_user,
+            phone=TEST_PHONE
+        )
+        user_profile.save()
+        author = User.objects.get(username=USER).username
+        title = description = ''.join(random.choice(letters) for i in range(NUMBER_OF_ITEMS))
         for item_index in range(NUMBER_OF_ITEMS):
             Blog.objects.create(
                 id=item_index,
@@ -32,13 +45,6 @@ class UserRegisterTest(TestCase):
                 description=description,
             )
 
-        test_user = User.objects.create_user(username=USER, password=PASSWORD)
-        test_user.save()
-        user_profile = Profile.objects.create(
-            user=test_user,
-            phone=TEST_PHONE
-        )
-        user_profile.save()
 
 
     def test_items_exsists_at_desired_location(self):
@@ -90,27 +96,49 @@ class UserRegisterTest(TestCase):
 
 
 
-    # def test_profile_info(self):
-    #     response_profile_info = self.client.get(reverse('profile_info'))
-    #     self.assertEqual(response_profile_info.status_code, 200)
-    #     self.assertTemplateUsed(response_profile_info, 'users/profile_user.html')
-    #     #проверка что данные пользователя вывелись
-
-
-    # def test_profile_user_edit(self):
-    #     response_profile_user_edit = self.client.get(reverse('profile_user_edit'))
-    #     self.assertEqual(response_profile_user_edit.status_code, 200)
-    #     self.assertTemplateUsed(response_profile_user_edit, 'users/profil_user_edit.html')
-    #     #Проверка что данные вывелись
-    #
+    def test_profile_info(self):
+        login = self.client.login(username=USER, password=PASSWORD)
+        response_profile_info = self.client.get(reverse('profile_info'))
+        self.assertEqual(response_profile_info.status_code, 200)
+        self.assertTemplateUsed(response_profile_info, 'users/profile_user.html')
 
 
 
+    def test_profile_user_edit(self):
+        login = self.client.login(username=USER, password=PASSWORD)
+        response_profile_user_edit = self.client.get(reverse('profile_user_edit'))
+        self.assertEqual(response_profile_user_edit.status_code, 200)
+        self.assertTemplateUsed(response_profile_user_edit, 'users/profil_user_edit.html')
+        old_first_name = User.objects.get(username=USER).first_name
+        old_last_name = User.objects.get(username=USER).last_name
+        response_post = self.client.post(reverse('profile_user_edit'), {'name': 'NEW_NAME', 'last_name': 'NEW_LAST_NAME'})
+        new_first_name = User.objects.get(username=USER).first_name
+        new_last_name = User.objects.get(username=USER).last_name
+        self.assertEqual(response_post.status_code, 302)
+        self.assertRedirects(response_post, reverse('profile_info'))
+        #Тут проверим что изменились введеные даные
+        self.assertNotEqual(old_first_name, new_first_name)
+        self.assertNotEqual(old_last_name, new_last_name)
+
+
+    def test_created_blog(self):
+        response = self.client.get(reverse('created_blog'))
+        self.assertRedirects(response, reverse('index'))
+
+        login = self.client.login(username=USER, password=PASSWORD)
+        response_login = self.client.get(reverse('created_blog'))
+        self.assertEqual(response_login.status_code, 200)
+        author = User.objects.get(username=USER).username
+        response_post = self.client.post(reverse('created_blog'), {'title': 'TEST_TITLE', 'description': 'TEST_DESCRIPTION', 'multi_link_file_img': 'LINK_TEST', 'author': author})
+        self.assertRedirects(response_post, reverse('index'))
 
 
 
+    def test_blog_info(self):
+        pass
 
-        # response_6 = self.client.get(reverse('created_blog'))
+
+
         # response_7 = self.client.get(reverse('upload_file_blog'))
         # response_8 = self.client.get(reverse('restore_password'))
         # response_9 = self.client.get(reverse('succes'))
@@ -139,7 +167,7 @@ class UserRegisterTest(TestCase):
         # self.assertRedirects(response_logout, (reverse('index')))
 
 
-        # ===============================================
+
 
 
 

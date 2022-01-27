@@ -104,6 +104,7 @@ class RegisterView(View):
 
 
 class ProfileInfo(View):
+
     def get(self, request):
         user_y = request.user
         user_curent = User.objects.get(id=user_y.id)
@@ -118,6 +119,7 @@ class ProfileInfo(View):
 
     def post(self, requset):
         pass
+
 
 class Profile_user_edit(View):
 
@@ -150,7 +152,7 @@ class Profile_user_edit(View):
             user_curent.first_name = name
             user_curent.last_name = last_name
             user_curent.save()
-            return HttpResponseRedirect('/profile_info/')
+            return HttpResponseRedirect(reverse('profile_info'))
 
         reg_form = MyUserRegister(request.POST)
 
@@ -181,6 +183,14 @@ class CreatedBlog(View):
     def get(self, request):
         blog_form = BlogForm()
         blog_photo_form = BlogPhotoForm()
+        #если пользователь не авторизован, что б не попал сюда)
+        if not request.user.is_authenticated:
+            # context = {
+            #     'У Вас нет прав создавать БЛОГ'
+            # }
+            # return HttpResponse(content=context)
+            return HttpResponseRedirect(reverse('index'))
+
         return render(request, 'blog/created_blog.html', {'blog_form': blog_form, 'blog_photo_form': blog_photo_form})
 
     def post(self, request):
@@ -209,7 +219,7 @@ class CreatedBlog(View):
             for f_img in files_multi_img:
                 BlogPhoto(file_img=f_img, blog=temp).save()
 
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse('index'))
 
 
 
