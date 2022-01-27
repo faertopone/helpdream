@@ -159,7 +159,7 @@ class UserRegisterTest(TestCase):
 
         #Чето тут не поулчается
         with open(file) as fp:
-            c.post(reverse('upload_file_blog'), {'username': USER, 'file_csv_form': fp})
+            self.client.post(reverse('upload_file_blog'), {'file_csv_form': fp})
 
 
     def test_succes(self):
