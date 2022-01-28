@@ -1,7 +1,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+{% block head %}
 <meta charset="UTF-8">
             {%  load i18n %}
             {% load static %}
@@ -19,8 +21,9 @@
 
 
     <title>{% block title %} Наш блог {% endblock %} </title>
-
+{% endblock %}
 </head>
+
 <body>
 
 {% block header %}
