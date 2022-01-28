@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-28 02:18+0300\n"
+"POT-Creation-Date: 2022-01-28 19:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,16 +24,24 @@ msgstr ""
 msgid "app_blog"
 msgstr "Blog(german)"
 
+#: .\app_blog\models.py:13 .\app_blog\models.py:19
+msgid "Man"
+msgstr ""
+
+#: .\app_blog\models.py:14
+msgid "Girl"
+msgstr ""
+
+#: .\app_blog\models.py:17
+msgid "User"
+msgstr ""
+
 #: .\app_blog\models.py:18
 msgid "Phone"
 msgstr ""
 
 #: .\app_blog\models.py:19
 msgid "Select gender"
-msgstr ""
-
-#: .\app_blog\models.py:19
-msgid "Man"
 msgstr ""
 
 #: .\app_blog\models.py:20
@@ -48,6 +56,28 @@ msgstr ""
 msgid "profiles"
 msgstr ""
 
+#: .\app_blog\models.py:34
+msgid "Author blog"
+msgstr ""
+
+#: .\app_blog\models.py:35
+#, fuzzy
+#| msgid "blog"
+msgid "Title blog"
+msgstr "Blog(german)"
+
+#: .\app_blog\models.py:36
+msgid "Description blog"
+msgstr ""
+
+#: .\app_blog\models.py:37
+msgid "creadet at"
+msgstr ""
+
+#: .\app_blog\models.py:38
+msgid "Link photo"
+msgstr ""
+
 #: .\app_blog\models.py:56
 msgid "blog"
 msgstr "Blog(german)"
@@ -58,19 +88,29 @@ msgstr "Blog(german)"
 msgid "blogs"
 msgstr "Blog(german)"
 
-#: .\app_blog\templates\blog\locale.html:6
-msgid "Our translation page title"
-msgstr "Der Title unserer Ubersetzungesseit"
-
-#: .\app_blog\templates\blog\locale.html:9
-msgid "Translate text"
-msgstr "GERMAN TEXT"
-
-#: .\app_blog\templates\blog\locale.html:20
-msgid "Welcome to our page"
+#: .\app_blog\models.py:62
+msgid "Photo"
 msgstr ""
 
-#: .\app_blog\views.py:309
+#: .\app_blog\models.py:66
+#, fuzzy
+#| msgid "blog"
+msgid "blogPhoto"
+msgstr "Blog(german)"
+
+#: .\app_blog\models.py:67
+#, fuzzy
+#| msgid "blog"
+msgid "blogPhotos"
+msgstr "Blog(german)"
+
+#: .\app_blog\views.py:312
 #, python-format
 msgid "Hello there! today  is %(date)s %(time)s"
 msgstr ""
+
+#~ msgid "Our translation page title"
+#~ msgstr "Der Title unserer Ubersetzungesseit"
+
+#~ msgid "Translate text"
+#~ msgstr "GERMAN TEXT"

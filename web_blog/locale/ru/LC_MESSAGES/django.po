@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-28 02:18+0300\n"
+"POT-Creation-Date: 2022-01-28 19:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,19 @@ msgstr ""
 
 #: .\app_blog\apps.py:7
 msgid "app_blog"
-msgstr "проект блог"
+msgstr "апп_блог"
+
+#: .\app_blog\models.py:13 .\app_blog\models.py:19
+msgid "Man"
+msgstr "Мужской"
+
+#: .\app_blog\models.py:14
+msgid "Girl"
+msgstr "Женский"
+
+#: .\app_blog\models.py:17
+msgid "User"
+msgstr "Пользователь"
 
 #: .\app_blog\models.py:18
 msgid "Phone"
@@ -30,15 +42,11 @@ msgstr "Телефон"
 
 #: .\app_blog\models.py:19
 msgid "Select gender"
-msgstr "Выберите пол"
-
-#: .\app_blog\models.py:19
-msgid "Man"
-msgstr "Мужской"
+msgstr "Выбрать пол"
 
 #: .\app_blog\models.py:20
 msgid "Select file"
-msgstr "Выберите фаил"
+msgstr "Выбрать фаил"
 
 #: .\app_blog\models.py:26
 msgid "profile"
@@ -48,6 +56,26 @@ msgstr "профиль"
 msgid "profiles"
 msgstr "профили"
 
+#: .\app_blog\models.py:34
+msgid "Author blog"
+msgstr "Автор блога"
+
+#: .\app_blog\models.py:35
+msgid "Title blog"
+msgstr "Название блога"
+
+#: .\app_blog\models.py:36
+msgid "Description blog"
+msgstr "Описание блога"
+
+#: .\app_blog\models.py:37
+msgid "creadet at"
+msgstr "Дата создания"
+
+#: .\app_blog\models.py:38
+msgid "Link photo"
+msgstr "Ссылка фото"
+
 #: .\app_blog\models.py:56
 msgid "blog"
 msgstr "блог"
@@ -56,19 +84,19 @@ msgstr "блог"
 msgid "blogs"
 msgstr "блоги"
 
-#: .\app_blog\templates\blog\locale.html:6
-msgid "Our translation page title"
-msgstr "Наша переведенная страница"
+#: .\app_blog\models.py:62
+msgid "Photo"
+msgstr "Фото"
 
-#: .\app_blog\templates\blog\locale.html:9
-msgid "Translate text"
-msgstr "Переведенный текст"
+#: .\app_blog\models.py:66
+msgid "blogPhoto"
+msgstr "Блого фото"
 
-#: .\app_blog\templates\blog\locale.html:20
-msgid "Welcome to our page"
-msgstr "Добро пожаловать на нашу страницу"
+#: .\app_blog\models.py:67
+msgid "blogPhotos"
+msgstr "Блог фотки"
 
-#: .\app_blog\views.py:309
+#: .\app_blog\views.py:312
 #, python-format
 msgid "Hello there! today  is %(date)s %(time)s"
 msgstr "Привет! Сегодня %(date)s %(time)s"

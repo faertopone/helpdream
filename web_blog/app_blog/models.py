@@ -10,11 +10,11 @@ from django.utils.translation import gettext_lazy as _
 class Profile(models.Model):
 
     STATUS_CHOISE = [
-        ('Мужской', 'Мужской'),
-        ('Женский', 'Женский')
+        ('Мужской', _('Man')),
+        ('Женский', _('Girl'))
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
     phone = models.CharField(max_length=20, verbose_name=_('Phone'), db_index=True)
     gender = models.CharField(max_length=100, choices=STATUS_CHOISE, verbose_name=_('Select gender'), db_index=True, default=_('Man'))
     avatar = models.ImageField(upload_to='avatars/', verbose_name=_('Select file'), db_index=True, default='')
@@ -31,11 +31,11 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
-    author = models.CharField(max_length=60, verbose_name='Автор блога', db_index=True )
-    title = models.CharField(max_length=60, verbose_name='Название новости', db_index=True)
-    description = models.TextField(blank=True, verbose_name='Описание новости', db_index=True)
-    creadet_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', db_index=True)
-    multi_link_file_img = models.TextField(verbose_name='Ссылка на фото', db_index=True, default='')
+    author = models.CharField(max_length=60, verbose_name=_('Author blog'), db_index=True )
+    title = models.CharField(max_length=60, verbose_name=_('Title blog'), db_index=True)
+    description = models.TextField(blank=True, verbose_name=_('Description blog'), db_index=True)
+    creadet_at = models.DateTimeField(auto_now_add=True, verbose_name=_('creadet at'), db_index=True)
+    multi_link_file_img = models.TextField(verbose_name=_('Link photo'), db_index=True, default='')
 
 
 
@@ -59,7 +59,9 @@ class Blog(models.Model):
 
 class BlogPhoto(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, default='')
-    file_img = models.ImageField(upload_to='img_blog/', verbose_name='Фото', db_index=True, default='')
+    file_img = models.ImageField(upload_to='img_blog/', verbose_name=_('Photo'), db_index=True, default='')
 
     class Meta:
         db_table = 'BlogPhoto'
+        verbose_name = _('blogPhoto')
+        verbose_name_plural = _('blogPhotos')
