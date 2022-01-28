@@ -24,6 +24,13 @@ window.addEventListener('DOMContentLoaded', function(){
     },
   });
 
+  let forms = document.querySelector('.launge-form')
+
+    forms.addEventListener('change', function (){
+                  forms.submit()
+  })
+
+
 
 });
 

@@ -31,7 +31,7 @@
                     <li class="header__list">
                         <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
                     </li>
-                    <li class="header__list"> <form action="{% url 'set_language' %}" method="post">
+                    <li class="header__list_"> <form class="launge-form" action="{% url 'set_language' %}" method="post">
     {% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}">
     <select name="language">
@@ -44,7 +44,7 @@
         </option>
                 {% endfor %}
     </select>
-<input type="submit" value="Go">
+
 </form></li>
                     <li class="header__list">
                         <div class="header__login">

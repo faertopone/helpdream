@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block title %}
+    #Это берет что в базовом шаблоне тут и терпеь можно доавбить содержимое,а не заменить )
+    {{ block.super }}
+    САЙТ БЛОГОВ
+{%  endblock %}
+
 {% block main %}
 <section class="blog">
     <div class="blog__created">
