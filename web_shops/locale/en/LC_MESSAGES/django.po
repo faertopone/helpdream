@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-29 01:09+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\app_shops\forms.py:14
+msgid "Логин"
+msgstr "Login"
+
+#: .\app_shops\forms.py:19
+msgid "Пароль"
+msgstr "Password"
+
+#: .\app_shops\templates\Index.html:12
+msgid "Войти"
+msgstr "Enter"
+
+#: .\app_shops\templates\Index.html:14
+msgid "Регистраиця"
+msgstr "Register"
+
+#: .\app_shops\templates\Index.html:21
+msgid "Проверка текста"
+msgstr "Checek text"
+
+#: .\app_shops\templates\base.html:17 .\app_shops\templates\base.html:21
+msgid "Веб магазин"
+msgstr "Web shops"

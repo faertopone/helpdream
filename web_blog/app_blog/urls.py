@@ -2,8 +2,11 @@ from django.urls import path
 from .views import MainIndex, Login_view, logout_view, RegisterView, ProfileInfo, Profile_user_edit, Blog_full_info, \
     CreatedBlog, UploadAllBlog, RestorePassword, succes, translation_example, greetings_page
 
+from django.views.decorators.cache import cache_page
+
 urlpatterns = [
-    path('', MainIndex.as_view(), name='index'),
+            #Кеширование на этом уровне этого представления
+    path('', cache_page(30)(MainIndex.as_view()), name='index'),
     path('login/', Login_view.as_view(), name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', RegisterView.as_view(), name='register'),

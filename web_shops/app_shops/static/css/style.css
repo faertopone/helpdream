@@ -1,0 +1,86 @@
+/*================================================ ШРИФТЫ ==========================================*/
+
+@font-face {
+    font-family: 'Open-Sans';
+    src: local('Open-Sans'),
+    url('../font/OpenSansSemibold.woff2') format('woff2'),
+    url('../font/OpenSansSemibold.woff') format('woff');
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+	font-family: 'Open-Sans';
+	src: local('Open-Sans'),
+    url('../font/OpenSansBold.woff2') format('woff2'),
+    url('../font/OpenSansBold.woff') format('woff');
+    font-display: swap;
+    font-style: normal;
+    font-weight: bold;
+}
+
+
+
+@font-face {
+	font-family: 'Open-Sans';
+	src: local('Open-Sans'),
+    url('../font/OpenSansRegular.woff2') format('woff2'),
+    url('../font/OpenSansRegular.woff') format('woff');
+    font-display: swap;
+    font-style: normal;
+
+}
+
+@font-face {
+	font-family: 'Open-Sans';
+	src: local('Open-Sans'),
+    url('../font/OpenSansItalic.woff2') format('woff2'),
+    url('../font/OpenSansItalic.woff') format('woff');
+    font-display: swap;
+    font-style: italic;
+    font-weight: normal;
+}
+
+/*================================================ END - ШРИФТЫ ==========================================*/
+
+
+/*================================================ ОБЩИЕ НАСТРОЙКИ ==========================================*/
+
+/* Плавная прокрутка всего документа */
+html {
+    scroll-behavior: smooth;
+    position: relative;
+  }
+
+/**
+* Reinstate scrolling for non-JS clients
+*/
+.simplebar-content-wrapper {
+    overflow: auto;
+}
+
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-family: 'Open-Sans';
+}
+/* скрыть заголовок h1 */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+}
+
+ul {
+    list-style: none;
+}

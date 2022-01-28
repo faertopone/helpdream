@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+
+{% block main %}
+    {% if not request.user.is_authenticated %}
+<section class="section-loggin">
+        <div class="wrapper__login-form">
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">{% trans 'Войти' %}</button>
+        <span>
+            <a class="link link__register" href="#">{% trans 'Регистраиця' %}</a>
+        </span>
+
+    </form>
+        </div>
+    {% endif %}
+
+    {% trans 'Проверка текста' %}
+</section>
+{% endblock %}

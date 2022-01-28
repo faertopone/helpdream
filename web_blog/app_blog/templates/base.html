@@ -2,7 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% load cache %}
+{% cache 500 head %}
+
 <head>
+
 {% block head %}
 <meta charset="UTF-8">
             {%  load i18n %}
@@ -23,7 +27,7 @@
     <title>{% block title %} Наш блог {% endblock %} </title>
 {% endblock %}
 </head>
-
+{% endcache %}
 <body>
 
 {% block header %}

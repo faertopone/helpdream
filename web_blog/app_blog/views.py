@@ -1,25 +1,17 @@
-import os
-import time
 from _csv import reader
 from datetime import datetime
 import datetime
 from django.utils.translation import gettext as _
 from django.utils.formats import date_format
-
 from django.core.mail import send_mail
-from django.forms.utils import ErrorList
-from django.contrib import messages
-import requests
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-
-# Create your views here.
 from django.urls import reverse
 from django.views import View
 from django.contrib.auth.models import User
-from django.views.generic import DetailView
+from django.views.decorators.cache import cache_page
+
 
 from .forms import AuthForm, MyUserRegister, EditFormUser, BlogForm, UploadFileCsv, BlogPhotoForm, RestorePasswordForm
 from .models import Profile, Blog, BlogPhoto
@@ -67,6 +59,8 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('index'))
 
 
+#Кеширований этой страницы 30 сек
+# @cache_page(30)
 class MainIndex(View):
     def get(self, request):
         blog = Blog.objects.all().order_by('-creadet_at')

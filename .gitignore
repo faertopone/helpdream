@@ -134,3 +134,4 @@ dmypy.json
 .idea/
 /03_RequestsHandlingInDjango/board/history_log/
 
+/web_shops/history_log/
