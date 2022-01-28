@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
@@ -14,16 +15,16 @@ class Profile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=20, verbose_name='Телефон', db_index=True)
-    gender = models.CharField(max_length=100, choices=STATUS_CHOISE, verbose_name='Ваш пол', db_index=True, default='Мужской')
-    avatar = models.ImageField(upload_to='avatars/', verbose_name='Выберите фаил', db_index=True, default='')
+    phone = models.CharField(max_length=20, verbose_name=_('Phone'), db_index=True)
+    gender = models.CharField(max_length=100, choices=STATUS_CHOISE, verbose_name=_('Select gender'), db_index=True, default=_('Man'))
+    avatar = models.ImageField(upload_to='avatars/', verbose_name=_('Select file'), db_index=True, default='')
     def __str__(self):
         return self.user.username
 
     class Meta:
         db_table = 'Profile'
-        verbose_name = 'Профиль'
-        verbose_name_plural = 'Профили'
+        verbose_name = _('profile')
+        verbose_name_plural = _('profiles')
 
 class Blog(models.Model):
 
@@ -52,8 +53,8 @@ class Blog(models.Model):
 
     class Meta:
         db_table = 'Blog'
-        verbose_name = 'Блог'
-        verbose_name_plural = 'Блоги'
+        verbose_name = _('blog')
+        verbose_name_plural = _('blogs')
 
 
 class BlogPhoto(models.Model):

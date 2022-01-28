@@ -103,10 +103,11 @@ body {
     background-image: url('../img/bg-new.png');
     background-size: cover;
     background-repeat: repeat;
+}
 
-
-
-
+.main{
+    display: block;
+    min-height: 800px;
 }
 
 .header{

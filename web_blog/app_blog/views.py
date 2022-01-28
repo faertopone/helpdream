@@ -2,6 +2,9 @@ import os
 import time
 from _csv import reader
 from datetime import datetime
+import datetime
+from django.utils.translation import gettext as _
+from django.utils.formats import date_format
 
 from django.core.mail import send_mail
 from django.forms.utils import ErrorList
@@ -20,6 +23,7 @@ from django.views.generic import DetailView
 
 from .forms import AuthForm, MyUserRegister, EditFormUser, BlogForm, UploadFileCsv, BlogPhotoForm, RestorePasswordForm
 from .models import Profile, Blog, BlogPhoto
+from web_blog.settings import BASE_DIR
 
 
 class Login_view(View):
@@ -294,4 +298,24 @@ class RestorePassword(View):
 
 def succes(request):
     return render(request, 'complete/succes.html')
+
+
+
+
+class translation_example(View):
+    def get(self, request):
+
+        return render(request, 'blog/locale.html', {})
+
+
+def greetings_page(request, *args, **kwargs):
+    greetings_message = _('Hello there! today  is %(date)s %(time)s') % {
+        'date': date_format(datetime.datetime.now().date(), format='SHORT_DATE_FORMAT', use_l10n=True),
+        'time': datetime.datetime.now().time()
+    }
+    return render(request, 'blog/greetings.html', context={
+        'greetings_message': greetings_message
+    })
+
+
 

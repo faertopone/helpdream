@@ -60,6 +60,7 @@ class MyUserRegister(UserCreationForm):
         ('Женский', 'Женский')
     ]
 
+
     username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'input input_username', 'placeholder': 'Логин'}))
     first_name = forms.CharField(max_length=30, required=False, label='Имя', help_text='(Не обезательно)')
     last_name = forms.CharField(max_length=30, required=False, label='Фамилия', help_text='(Не обезательно)')

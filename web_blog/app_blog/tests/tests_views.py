@@ -152,14 +152,15 @@ class UserRegisterTest(TestCase):
         response_login = self.client.get(reverse('upload_file_blog'))
         self.assertEqual(response_login.status_code, 200)
 
-        c = Client()
+
         link_file = os.path.join(BASE_DIR, 'ALL_DATA_FILES/FILES_TEST/')
         name_file = 'book2.csv'
         file = link_file + name_file
 
         #Чето тут не поулчается
         with open(file) as fp:
-            self.client.post(reverse('upload_file_blog'), {'file_csv_form': fp})
+            resp = self.client.post(reverse('upload_file_blog'), {'file_csv_form': fp})
+        print(resp.status_code)
 
 
     def test_succes(self):

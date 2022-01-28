@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import MainIndex, Login_view, logout_view, RegisterView, ProfileInfo, Profile_user_edit, Blog_full_info, \
-    CreatedBlog, UploadAllBlog, RestorePassword, succes
+    CreatedBlog, UploadAllBlog, RestorePassword, succes, translation_example, greetings_page
 
 urlpatterns = [
     path('', MainIndex.as_view(), name='index'),
@@ -14,4 +14,7 @@ urlpatterns = [
     path('upload_file_blog/', UploadAllBlog.as_view(), name='upload_file_blog'),
     path('restore_password/', RestorePassword.as_view(), name='restore_password'),
     path('succes/', succes, name='succes'),
+    path('locale/', translation_example.as_view(), name='locale'),
+    path('locale_view/', greetings_page, name='locale_view'),
+
 ]

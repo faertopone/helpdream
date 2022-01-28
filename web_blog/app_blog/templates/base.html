@@ -1,33 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+            {%  load i18n %}
+            {% load static %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
      <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+  <link rel="stylesheet" href="{% static "css/style_created_blog.css" %}">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 
-    <title>Блог</title>
+    {% block title %}
+    <title> Наш блог </title>
+   {% endblock %}
 </head>
 <body>
 
-<main>
-
- <header> <h1 class="visually-hidden"> Блог </h1>
+{% block header %}
+    <header> <h1 class="visually-hidden"> Блог </h1>
         <div class="header">
             <div class="header__nav">
                 <ul class="header__menu">
                     <li class="header__list">
                         <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
                     </li>
-
+                    <li class="header__list"> <form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %} >
+            {{ language.name_local }} ({{ language.code }})
+        </option>
+                {% endfor %}
+    </select>
+<input type="submit" value="Go">
+</form></li>
                     <li class="header__list">
                         <div class="header__login">
                             <ul class="header__login-menu">
                                 <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
-                                <li class="header__login-list"><a href="{% url 'locale' %}" class="links header__links">Transition</a></li>
-                                <li class="header__login-list"><a href="{% url 'locale_view' %}" class="links header__links">Transition_view</a></li>
                                 {% if request.user.is_authenticated %}
                                     {% if flag_admin %}
                                         <li class="header__login-list"><a href="admin/" class="links header__links">Профиль, ADMIN</a></li>
@@ -52,48 +68,29 @@
         </div>
    </header>
 
-<section class="blog">
-    <div class="blog__created">
-        <h3 class="title__blog">Список всех блогов:</h3>
-         {% if not request.user.is_authenticated %}
-             <p class="title__blog_info">Что бы создать блог, Вам нужно авторизироваться!</p>
-        {% endif %}
-    </div>
+{% endblock %}
+<main>
+    {% block main %} {% endblock %}
+</main>
 
-    {% if blog_list %}
-
-
-    <ul class="blog__menu">
-     {% for item_blog in blog_list %}
-        <li class="blog__list">
-            <div class="blog__list-item">
-                <h3 class="blog__list-title">Блог номер № {{ item_blog.id }}</h3>
-                <span class="blog__author"> автор: {{ item_blog.author }}</span>
-                <h4 class="blog__name">Название: {{ item_blog.title }} </h4>
-                <p class="blog__description">Описание: {{ item_blog.min_description }}</p>
-                <p class="blog__datatime"> {{ item_blog.data_blog }}</p>
-                <a class="links blog__list-links" href="blog_info/{{ item_blog.id }}/"> Подробнее </a>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <div class="blog__created">
-    <h3 class="title__blog">Еще нету ни 1 созданного блока!</h3>
-    </div>
-{% endif %}
-
-</section>
-
-
- <footer class="footer">
+    {% block footer %}
+    <footer class="footer">
     <div class="footer-conteiner">
       <div class="footer__content">
         <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
 
       </div>
     </div>
+
+
  </footer>
-</main>
+    {% endblock %}
+
+ <script src="{% static 'js/inputmask.min.js' %}"></script>
+  <script src="{% static 'js/swiper-bundle.js' %}"></script>
+  <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+
+
 </body>
 </html>
