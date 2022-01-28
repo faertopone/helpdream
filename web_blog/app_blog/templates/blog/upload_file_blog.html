@@ -1,48 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     {% load static %}
-     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
-     <link rel="stylesheet" href="{% static "css/style_login.css" %}">
-        <link rel="stylesheet" href="{% static "css/style.css" %}">
+{% extends "base.html" %}
 
-    <title>Загрузка файла</title>
-</head>
-<body>
- <header> <h1 class="visually-hidden"> Загрузка файла csv </h1>
-        <div class="header">
-            <div class="header__nav">
-                <ul class="header__menu">
-                    <li class="header__list">
-                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
-                    </li>
+{% block title %} Загрузка файла {% endblock %}
 
-                    <li class="header__list">
-                        <div class="header__login">
-                            <ul class="header__login-menu">
-                                <li class="header__login-list"><a href="/admin/" class="links header__links">Админка (для удобства)</a></li>
-                                {% if request.user.is_authenticated %}
-                                <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
 
-                                <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
-                                {% else %}
-                                <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">Войти</a> </li>
-                                <li class="header__login-list"><a href="{% url 'register' %}" class="links header__links">Регистрация</a></li>
-                                {% endif %}
-                            </ul>
-                         </div>
-                    </li>
-
-                </ul>
-            </div>
-
-        </div>
-   </header>
-
- <section>
+{% block main %}
+ <section class="content">
 <div class="login_wrapper login_wrapper_upload">
     <h2 class="header-title title_uplaod_file">Загрузить блог через файл</h2>
     <form method="post" enctype="multipart/form-data" class="login_form">
@@ -62,18 +24,5 @@
 </div>
 </section>
 
+{% endblock %}
 
-
- <footer class="footer">
-    <div class="footer-conteiner">
-      <div class="footer__content">
-        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
-
-      </div>
-    </div>
- </footer>
-
-
-
-</body>
-</html>

@@ -105,7 +105,7 @@ body {
     background-repeat: repeat;
 }
 
-.main{
+main{
     display: block;
     min-height: 800px;
 }
@@ -401,4 +401,11 @@ section{
     font-size: 16px;
     color: black;
 
+}
+
+.blog-created {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
 }

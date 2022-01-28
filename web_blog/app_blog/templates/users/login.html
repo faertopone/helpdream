@@ -1,43 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     {% load static %}
-     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
-      <link rel="stylesheet" href="{% static "css/style_login.css" %}">
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
+{% extends "base.html" %}
 
+{% block title %} LOGIN {% endblock %}
 
-    <title>ЛОГИН</title>
-</head>
-<body>
-
- <header> <h1 class="visually-hidden"> Логин </h1>
-        <div class="header">
-            <div class="header__nav">
-                <ul class="header__menu">
-                    <li class="header__list">
-                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
-                    </li>
-
-                    <li class="header__list">
-                        <div class="header__login">
-                            <ul class="header__login-menu">
-                                <li class="header__login-list"><a href="/admin/" class="links header__links">Админка (для удобства)</a></li>
-
-                            </ul>
-                         </div>
-                    </li>
-
-                </ul>
-            </div>
-
-        </div>
-   </header>
-
-
+{% block main %}
 <section>
 <div class="login_wrapper">
     <form method="post" class="login_form">
@@ -65,15 +30,4 @@
 </section>
 
 
-
-
- <footer class="footer">
-    <div class="footer-conteiner">
-      <div class="footer__content">
-        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
-
-      </div>
-    </div>
- </footer>
-</body>
-</html>
+{% endblock %}

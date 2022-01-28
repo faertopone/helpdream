@@ -1,57 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
+{% extends "base.html" %}
 
-    <title>Блог</title>
-</head>
-<body>
-
-<main>
-
- <header> <h1 class="visually-hidden"> Блог </h1>
-        <div class="header">
-            <div class="header__nav">
-                <ul class="header__menu">
-                    <li class="header__list">
-                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
-                    </li>
-
-                    <li class="header__list">
-                        <div class="header__login">
-                            <ul class="header__login-menu">
-                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
-                                <li class="header__login-list"><a href="{% url 'locale' %}" class="links header__links">Transition</a></li>
-                                <li class="header__login-list"><a href="{% url 'locale_view' %}" class="links header__links">Transition_view</a></li>
-                                {% if request.user.is_authenticated %}
-                                    {% if flag_admin %}
-                                        <li class="header__login-list"><a href="admin/" class="links header__links">Профиль, ADMIN</a></li>
-                                        {% else %}
-                                <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
-                                        {% endif %}
-                                    <li class="header__login-list"><a href="{% url 'created_blog' %}" class="links header__links"> Создать блог </a></li>
-                                <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
-                                {% else %}
-                                <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">Войти</a> </li>
-                                <li class="header__login-list"><a href="{% url 'register' %}" class="links header__links">Регистрация</a></li>
-                                {% endif %}
-                            </ul>
-                         </div>
-                    </li>
-
-                </ul>
-            </div>
-            <div class="header__content">
-                <h2 class="header-title">Сайт для создания блогов</h2>
-            </div>
-        </div>
-   </header>
-
+{% block main %}
 <section class="blog">
     <div class="blog__created">
         <h3 class="title__blog">Список всех блогов:</h3>
@@ -85,15 +34,5 @@
 
 </section>
 
+{% endblock %}
 
- <footer class="footer">
-    <div class="footer-conteiner">
-      <div class="footer__content">
-        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
-
-      </div>
-    </div>
- </footer>
-</main>
-</body>
-</html>

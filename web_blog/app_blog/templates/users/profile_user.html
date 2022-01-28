@@ -1,38 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-     {% load static %}
-     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
-     <link rel="stylesheet" href="{% static "css/lk.css" %}">
-    <title>Профиль</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<header> <h1 class="visually-hidden"> Личный кабинет </h1>
-        <div class="header">
-            <div class="header__nav">
-                <ul class="header__menu">
-                    <li class="header__list">
-                        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
-                    </li>
+{% block title %} Профиль {% endblock %}
 
-                    <li class="header__list">
-                        <div class="header__login">
-                            <ul class="header__login-menu">
-                                <li class="header__login-list"><a href="/admin/" class="links header__links">Админка (для удобства)</a></li>
 
-                            </ul>
-                         </div>
-                    </li>
-
-                </ul>
-            </div>
-
-        </div>
-   </header>
-
+{% block main %}
  <section class="content">
  <h2 class="lk__title">Это Ваш личный кабинет, {{ user_curent.first_name }}</h2>
        <div class="profile">
@@ -56,14 +27,4 @@
 
    </section>
 
-  <footer class="footer">
-    <div class="footer-conteiner">
-      <div class="footer__content">
-        <a href="/" class="links header__links"><img class="logo" src="{% static 'img/LOGO1.png' %}" alt="logo"></a>
-
-      </div>
-    </div>
-</footer>
-
-</body>
-</html>
+{% endblock %}
