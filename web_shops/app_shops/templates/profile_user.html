@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+ {% load static %}
+{% load cache %}
+{% block main %}
+
+    <h2 class="title title__user"> {% trans 'Данные пользователя' %} </h2>
+    <div class="wrapper__profile-info">
+    <ul class="menu__profile">
+        <li class="list__items-profile">  {% trans 'Аватарка' %}
+        <img src=" {% if not avatar %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ avatar }} {% endif %}" alt="user avatar" style="width: 60px; height: 60px" class="user-avatar">
+        </li>
+   <li class="list__items-profile">  {% trans 'Ваше логин: ' %}{{ user.username }}</li>
+     <li class="list__items-profile">  {% trans 'Ваше имя: ' %}{{ user.first_name }}</li>
+     <li class="list__items-profile">  {% trans 'Ваше email: ' %}{{ user.email }}</li>
+    <li class="list__items-profile">   {% trans 'Ваше телефон: ' %}{{ user.profile.phone }}</li>
+    <li class="list__items-profile">   {% trans 'Ваше пол: ' %}{{ user.profile.gender }}</li>
+        <li class="list__items-profile">   {% trans 'Ваш БАЛАНС: ' %}{{ user.profile.balance }}</li>
+</ul>
+    {% cache 86400 history %}
+     <h2 class="title title__user"> {% trans 'история покупок' %} </h2>
+        <ul class="menu__history">
+        {% for item in history %}
+             <li class="list__items-history">  {% trans 'Название товара: ' %}{{ item.name_product }} <br>
+              {% trans 'Цена товара: ' %}{{ item.price }} <br>
+              {% trans 'Дата покупки: ' %}{{ item.creadet_at }}
+            </li>
+            {% endfor %}
+        </ul>
+    {% endcache %}
+
+     <h2 class="title title__user"> {% trans 'Акции' %} </h2>
+        <ul class="menu__stock">
+        {% for item in stock %}
+            {% if item.active %}
+             <li class="list__items-stock">  {% trans 'Название акции: ' %}{{ item.name }} <br>
+              {% trans 'Описание акции: ' %}{{ item.description }} <br>
+              {% trans 'Дата начала акции: ' %}{{ item.created_at }}
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+        <h2 class="title title__user"> {% trans 'Предложения' %} </h2>
+        <ul class="menu__promotions">
+        {% for item in promotions %}
+              {% if item.active %}
+             <li class="list__items-promotions">  {% trans 'Название предложения: ' %}{{ item.name }} <br>
+              {% trans 'Описание предложения: ' %}{{ item.description }} <br>
+              {% trans 'Дата начала предложения: ' %}{{ item.created_at }}
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+
+
+
+
+
+
+    </div>
+{% endblock %}

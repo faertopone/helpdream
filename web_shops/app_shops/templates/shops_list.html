@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+
+{% block main %}
+ <div class="main">
+    <h2 class="title_shops">{% trans 'Список магазинов' %}</h2>
+    <ul class="menu_shops">
+        {% if shops %}
+        {% for shop in shops %}
+            <li class="items__shops"><a class="link link_shops" href="#">{{ shop.name }} </a>
+            <ul class="menu_items_shop">
+                <li class="items__shoop"> {{ shop.adress }}</li>
+                 <li class="items__shoop"> {{ shop.tel }}</li>
+            </ul>
+            </li>
+        {% endfor %}
+        {% else %}
+    <p> Список пуст</p>
+    {% endif %}
+    </ul>
+</div>
+{% endblock %}

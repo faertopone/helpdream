@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 from .forms import MyUserRegister
 from .forms import LoginForm
-from .models import Profile, ProfilePhotos
+from .models import Profile, ProfilePhotos, Shops, PurchaseHistory, Promotions, Stock
 
 
 def logout_view(request):
@@ -23,12 +23,12 @@ class Index(View):
         form = LoginForm()
         base_link = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
         user_y = request.user
+        #Елси пользователь авторизирова и это не админ, то
         if user_y.is_authenticated and user_y.username != 'admin':
             prof_user = Profile.objects.get(user_id=user_y.id)
             avatar = ProfilePhotos.objects.get(id=prof_user.id)
             link = avatar.photo_img
             avatar_x = base_link + str(link)
-
         else:
             avatar_x = False
 
@@ -72,15 +72,17 @@ class RegisterUser(View):
             #СОхраним данные юзера
             user = form.save()
             gender = form.cleaned_data.get('gender')
+            phone = form.cleaned_data.get('phone')
             #тут сохраним дополнительные параметры юзера
-            provile_user = Profile.objects.create(
+            profile_user = Profile.objects.create(
                 user=user,
-                gender=gender
+                gender=gender,
+                phone=phone
             )
-            provile_user.save()
+            profile_user.save()
             avatar = form.cleaned_data.get('avatar')
             #тут сохраним аватар профиля
-            ProfilePhotos.objects.create(photo=provile_user, photo_img=avatar)
+            ProfilePhotos.objects.create(photo=profile_user, photo_img=avatar)
             #далее сразу залогинимся
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -93,3 +95,52 @@ class RegisterUser(View):
             'form': form
         }
         return render(request, 'register.html', context=context)
+
+
+class ProfileInfo(View):
+
+    def get(self, request):
+        #Если пользователь не авторизован - нехер делать в личном кабинете ему
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('index'))
+
+        user_y = request.user
+        # Если админ, пусть идет в свой профиль)
+        if user_y.is_superuser:
+            return HttpResponseRedirect('/admin')
+
+        #Загружаем информацию этого пользователя
+        user_info = User.objects.get(id=request.user.id)
+
+        base_link = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
+        avatar_x = False
+        history = None
+
+        #ищем обьекты Профиля этого пользователя
+        prof_user = Profile.objects.get(user_id=user_y.id)
+        #Теперь ищем аватарки этого пользователя
+        avatar = ProfilePhotos.objects.get(id=prof_user.id)
+        link = avatar.photo_img
+        avatar_x = base_link + str(link)
+        #Тут ищем обьекты истории этого Профиля
+        history = PurchaseHistory.objects.filter(user_history=prof_user)
+
+        promotions = Promotions.objects.all()
+        stock = Stock.objects.all()
+
+
+        context = {
+            'user': user_info,
+            'avatar': avatar_x,
+            'history': history,
+            'promotions': promotions,
+            'stock': stock,
+        }
+
+        return render(request, 'profile_user.html', context=context)
+
+class ShopsView(View):
+
+    def get(self, request):
+        shops = Shops.objects.all()
+        return render(request, 'shops_list.html', {'shops': shops})

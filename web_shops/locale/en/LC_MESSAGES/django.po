@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-29 05:04+0300\n"
+"POT-Creation-Date: 2022-01-29 17:18+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,6 +37,12 @@ msgstr ""
 #: .\app_shops\forms.py:29 .\app_shops\models.py:13
 msgid "Женский"
 msgstr ""
+
+#: .\app_shops\forms.py:32
+#, fuzzy
+#| msgid "Логин"
+msgid "Логин:"
+msgstr "Login"
 
 #: .\app_shops\forms.py:33
 msgid "Имя"
@@ -70,35 +76,47 @@ msgstr ""
 msgid "Дата создания"
 msgstr ""
 
-#: .\app_shops\models.py:24
+#: .\app_shops\models.py:20
+msgid "Телефон"
+msgstr ""
+
+#: .\app_shops\models.py:21
+msgid "Баланс"
+msgstr ""
+
+#: .\app_shops\models.py:26
 msgid "профиль"
 msgstr ""
 
-#: .\app_shops\models.py:25
+#: .\app_shops\models.py:27
 msgid "профили"
 msgstr ""
 
-#: .\app_shops\models.py:34
+#: .\app_shops\models.py:36
 msgid "Пользователь фотки"
 msgstr ""
 
-#: .\app_shops\models.py:35
+#: .\app_shops\models.py:37
 msgid "Фото"
 msgstr ""
 
-#: .\app_shops\models.py:39
+#: .\app_shops\models.py:41
 msgid "Фото профиля"
 msgstr ""
 
-#: .\app_shops\models.py:40
+#: .\app_shops\models.py:42
 msgid "Фото профилей"
 msgstr ""
 
-#: .\app_shops\templates\Index.html:12
+#: .\app_shops\templates\Index.html:7
+msgid "ВОЙТИ В СВОЙ ПРОФИЛЬ"
+msgstr ""
+
+#: .\app_shops\templates\Index.html:13
 msgid "Войти"
 msgstr "Enter"
 
-#: .\app_shops\templates\Index.html:14
+#: .\app_shops\templates\Index.html:15
 msgid "Регистраиця"
 msgstr "Register"
 
@@ -106,7 +124,49 @@ msgstr "Register"
 msgid "Веб магазин"
 msgstr "WEB Shops"
 
-#: .\app_shops\templates\register.html:11
+#: .\app_shops\templates\base.html:24
+msgid "ДОМОЙ"
+msgstr ""
+
+#: .\app_shops\templates\base.html:50
+msgid "Ваш прорфиль"
+msgstr ""
+
+#: .\app_shops\templates\profile_user.html:6
+msgid "Данные пользователя"
+msgstr ""
+
+#: .\app_shops\templates\profile_user.html:9
+#, fuzzy
+#| msgid "Логин"
+msgid "Ваше логин:"
+msgstr "Login"
+
+#: .\app_shops\templates\profile_user.html:10
+msgid "Ваше имя:"
+msgstr ""
+
+#: .\app_shops\templates\profile_user.html:11
+msgid "Ваше фамилия:"
+msgstr ""
+
+#: .\app_shops\templates\profile_user.html:12
+msgid "Ваше email:"
+msgstr ""
+
+#: .\app_shops\templates\profile_user.html:13
+msgid "Ваше телефон:"
+msgstr ""
+
+#: .\app_shops\templates\profile_user.html:14
+msgid "Ваше пол:"
+msgstr ""
+
+#: .\app_shops\templates\register.html:6
+msgid "РЕГИСТРАЦИЯ ПРОФИЛЯ"
+msgstr ""
+
+#: .\app_shops\templates\register.html:12
 #, fuzzy
 #| msgid "Регистраиця"
 msgid "Зарегистрироваться"

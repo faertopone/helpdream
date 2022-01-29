@@ -2,6 +2,7 @@
  {%  load i18n %}
 
 {% block main %}
+    <a class="link_shops" href="{% url 'shops_list' %}">{% trans 'Список магазинов' %}</a>
     {% if not request.user.is_authenticated %}
 <div class="main">
         <h2 class="title_main">{% trans 'ВОЙТИ В СВОЙ ПРОФИЛЬ' %}</h2>

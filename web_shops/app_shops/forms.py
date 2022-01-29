@@ -29,7 +29,7 @@ class MyUserRegister(UserCreationForm):
         ('Женский', _('Женский'))
     ]
 
-    username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder': _('Логин')}))
+    username = forms.CharField(max_length=50, label=_('Логин:'), widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder':_('Логин')}))
     first_name = forms.CharField(max_length=30, required=False, label=_('Имя'), widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder': _('Имя')}))
     email = forms.EmailField(required=False, label=_('Ваш mail'), )
     password1 = forms.CharField(label=_('Пароль'), widget=forms.PasswordInput(attrs={'class': 'login__input-form', 'placeholder': _('Пароль')}))
@@ -62,3 +62,5 @@ class MyUserRegister(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2', 'first_name', 'email', 'gender', 'phone', 'avatar']
+
+
