@@ -16,7 +16,7 @@ class LoginForm(forms.Form):
         })
     )
 
-    password = forms.CharField(required=True, label=False, widget=forms.PasswordInput(attrs={
+    password = forms.CharField(max_length=50, required=True, label=False, widget=forms.PasswordInput(attrs={
         'placeholder': _("Пароль"),
         'class': 'login__input-form'
     }))
@@ -31,7 +31,7 @@ class MyUserRegister(UserCreationForm):
 
     username = forms.CharField(max_length=50, label=_('Логин:'), widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder':_('Логин')}))
     first_name = forms.CharField(max_length=30, required=False, label=_('Имя'), widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder': _('Имя')}))
-    email = forms.EmailField(required=False, label=_('Ваш mail'), )
+    email = forms.EmailField(required=False, label=_('Ваш mail'), widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder': _('Email')}) )
     password1 = forms.CharField(label=_('Пароль'), widget=forms.PasswordInput(attrs={'class': 'login__input-form', 'placeholder': _('Пароль')}))
     password2 = forms.CharField(label=_('Повторите пароль'), widget=forms.PasswordInput(attrs={'class': 'login__input-form', 'placeholder': _('Еще раз пароль')}))
     gender = forms.ChoiceField(choices=GENDER_CHOISE, widget=forms.Select(attrs={'class': 'input_select'}))

@@ -18,7 +18,7 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to='avatars/', verbose_name=_('Выберите файл'), db_index=True, null=True)
     creadet_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата создания'), db_index=True, null=True)
     phone = models.CharField(max_length=15, verbose_name=_('Телефон'), db_index=True, default='', blank=True)
-    balance = models.IntegerField( verbose_name=_('Баланс'), db_index=True, blank=True, default=0)
+    balance = models.IntegerField(verbose_name=_('Баланс'), db_index=True, blank=True, default=0)
 
 
     class Meta:
@@ -67,7 +67,7 @@ class PurchaseHistory(models.Model):
 
     class Meta:
         db_table = 'PurchaseHistory'
-        verbose_name = _('История с товарами')
+        verbose_name = _('История с товара')
         verbose_name_plural = _('истории с товарами')
 
 

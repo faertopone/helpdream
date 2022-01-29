@@ -50,7 +50,7 @@
                         <a href="{% url 'profile' %}" class="login-btn"> {{ request.user.username }},{% trans 'Ваш прорфиль' %}</a>
 
 {#                    <a href="#"><img src=" {% if not avatar %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ avatar }} {% endif %}" alt="user avatar" class="user-avatar"></a>#}
-                     <a href="{% url 'logout' %}" class="logout_lk" >Выйти?</a>
+                     <a href="{% url 'logout' %}" class="logout_lk" >{% trans 'Выйти' %} </a>
                      {% endif %}
                 </div>
 

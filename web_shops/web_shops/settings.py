@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'web_shops.middleware.hystory_users.LogginsMiddleware',
+    # 'web_shops.middleware.hystory_users.LogginsMiddleware',
 ]
 
 ROOT_URLCONF = 'web_shops.urls'

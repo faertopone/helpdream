@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-29 17:18+0300\n"
+"POT-Creation-Date: 2022-01-30 00:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\app_shops\admin.py:60 .\app_shops\admin.py:85
+msgid "Сделать активно"
+msgstr "Make active"
+
+#: .\app_shops\admin.py:61 .\app_shops\admin.py:86
+msgid "Сделать не активно"
+msgstr "Make inactive"
 
 #: .\app_shops\apps.py:7
 msgid "магазины"
@@ -32,91 +40,173 @@ msgstr "Password"
 
 #: .\app_shops\forms.py:28 .\app_shops\models.py:12 .\app_shops\models.py:17
 msgid "Мужской"
-msgstr ""
+msgstr "Man"
 
 #: .\app_shops\forms.py:29 .\app_shops\models.py:13
 msgid "Женский"
-msgstr ""
+msgstr "Girl"
 
 #: .\app_shops\forms.py:32
-#, fuzzy
-#| msgid "Логин"
 msgid "Логин:"
-msgstr "Login"
+msgstr "Login: "
 
 #: .\app_shops\forms.py:33
 msgid "Имя"
-msgstr ""
+msgstr "Name"
 
 #: .\app_shops\forms.py:34
 msgid "Ваш mail"
-msgstr ""
+msgstr "You email"
+
+#: .\app_shops\forms.py:34
+msgid "Email"
+msgstr "Email"
 
 #: .\app_shops\forms.py:36
 msgid "Повторите пароль"
-msgstr ""
+msgstr "Repeat password"
 
 #: .\app_shops\forms.py:36
 msgid "Еще раз пароль"
-msgstr ""
+msgstr "Password Again"
 
 #: .\app_shops\models.py:16
 msgid "Пользователь"
-msgstr ""
+msgstr "User"
 
 #: .\app_shops\models.py:17
 msgid "Выберите пол"
-msgstr ""
+msgstr "Select a gender"
 
 #: .\app_shops\models.py:18
 msgid "Выберите файл"
-msgstr ""
+msgstr "Select a file"
 
 #: .\app_shops\models.py:19
 msgid "Дата создания"
-msgstr ""
+msgstr "Date of creation"
 
-#: .\app_shops\models.py:20
+#: .\app_shops\models.py:20 .\app_shops\models.py:51
 msgid "Телефон"
-msgstr ""
+msgstr "Tel"
 
 #: .\app_shops\models.py:21
 msgid "Баланс"
-msgstr ""
+msgstr "Balanced"
 
 #: .\app_shops\models.py:26
 msgid "профиль"
-msgstr ""
+msgstr "profile"
 
 #: .\app_shops\models.py:27
 msgid "профили"
-msgstr ""
+msgstr "profiles"
 
 #: .\app_shops\models.py:36
 msgid "Пользователь фотки"
-msgstr ""
+msgstr "Picture User"
 
 #: .\app_shops\models.py:37
 msgid "Фото"
-msgstr ""
+msgstr "Photo"
 
 #: .\app_shops\models.py:41
 msgid "Фото профиля"
-msgstr ""
+msgstr "Profile photo"
 
 #: .\app_shops\models.py:42
 msgid "Фото профилей"
-msgstr ""
+msgstr "Profiles photo"
 
-#: .\app_shops\templates\Index.html:7
+#: .\app_shops\models.py:49
+msgid "Название"
+msgstr "Name"
+
+#: .\app_shops\models.py:50
+msgid "Адрес"
+msgstr "The address"
+
+#: .\app_shops\models.py:55
+msgid "Магазин"
+msgstr "Shops"
+
+#: .\app_shops\models.py:56
+msgid "Магазины"
+msgstr "Shops"
+
+#: .\app_shops\models.py:63
+msgid "История покупок пользователя"
+msgstr "User Purchase History"
+
+#: .\app_shops\models.py:64
+msgid "Название товара"
+msgstr "Name product"
+
+#: .\app_shops\models.py:65
+msgid "Цена"
+msgstr "Price"
+
+#: .\app_shops\models.py:66
+msgid "Дата покупки"
+msgstr "Date of purchase"
+
+#: .\app_shops\models.py:70
+msgid "История с товара"
+msgstr "Product history"
+
+#: .\app_shops\models.py:71
+msgid "истории с товарами"
+msgstr "Products history"
+
+#: .\app_shops\models.py:79 .\app_shops\models.py:94
+msgid "наименование"
+msgstr "named"
+
+#: .\app_shops\models.py:80 .\app_shops\models.py:95
+msgid "Описание"
+msgstr "Desription"
+
+#: .\app_shops\models.py:81
+msgid "Дата начало предложения"
+msgstr "Offer start date"
+
+#: .\app_shops\models.py:82 .\app_shops\models.py:97
+msgid "Статус акции"
+msgstr "Stock status"
+
+#: .\app_shops\models.py:86
+msgid "Предложение"
+msgstr "Offer"
+
+#: .\app_shops\models.py:87 .\app_shops\templates\profile_user.html:44
+msgid "Предложения"
+msgstr "Offers"
+
+#: .\app_shops\models.py:96
+msgid "Дата начало акции"
+msgstr "Stock start date"
+
+#: .\app_shops\models.py:101
+msgid "Акция"
+msgstr "Stock"
+
+#: .\app_shops\models.py:102 .\app_shops\templates\profile_user.html:32
+msgid "Акции"
+msgstr "Stocks"
+
+#: .\app_shops\templates\Index.html:5 .\app_shops\templates\shops_list.html:6
+msgid "Список магазинов"
+msgstr "WEB Shops"
+
+#: .\app_shops\templates\Index.html:8
 msgid "ВОЙТИ В СВОЙ ПРОФИЛЬ"
-msgstr ""
+msgstr "ENTER IN PROFILE"
 
-#: .\app_shops\templates\Index.html:13
+#: .\app_shops\templates\Index.html:14
 msgid "Войти"
 msgstr "Enter"
 
-#: .\app_shops\templates\Index.html:15
+#: .\app_shops\templates\Index.html:16
 msgid "Регистраиця"
 msgstr "Register"
 
@@ -126,49 +216,93 @@ msgstr "WEB Shops"
 
 #: .\app_shops\templates\base.html:24
 msgid "ДОМОЙ"
-msgstr ""
+msgstr "HOME"
 
 #: .\app_shops\templates\base.html:50
 msgid "Ваш прорфиль"
-msgstr ""
+msgstr "You profile"
 
-#: .\app_shops\templates\profile_user.html:6
+#: .\app_shops\templates\base.html:53
+msgid "Выйти"
+msgstr "Logout"
+
+#: .\app_shops\templates\profile_user.html:7
 msgid "Данные пользователя"
-msgstr ""
-
-#: .\app_shops\templates\profile_user.html:9
-#, fuzzy
-#| msgid "Логин"
-msgid "Ваше логин:"
-msgstr "Login"
+msgstr "Data user"
 
 #: .\app_shops\templates\profile_user.html:10
-msgid "Ваше имя:"
-msgstr ""
-
-#: .\app_shops\templates\profile_user.html:11
-msgid "Ваше фамилия:"
-msgstr ""
-
-#: .\app_shops\templates\profile_user.html:12
-msgid "Ваше email:"
-msgstr ""
+msgid "Аватарка"
+msgstr "Avatar"
 
 #: .\app_shops\templates\profile_user.html:13
-msgid "Ваше телефон:"
-msgstr ""
+msgid "Ваше логин: "
+msgstr "Login: "
 
 #: .\app_shops\templates\profile_user.html:14
-msgid "Ваше пол:"
-msgstr ""
+msgid "Ваше имя: "
+msgstr "You name: "
+
+#: .\app_shops\templates\profile_user.html:15
+msgid "Ваше email: "
+msgstr "You email: "
+
+#: .\app_shops\templates\profile_user.html:16
+msgid "Ваше телефон: "
+msgstr "You tel: "
+
+#: .\app_shops\templates\profile_user.html:17
+msgid "Ваше пол: "
+msgstr "You gender: "
+
+#: .\app_shops\templates\profile_user.html:18
+msgid "Ваш БАЛАНС: "
+msgstr "You BALANCE: "
+
+#: .\app_shops\templates\profile_user.html:21
+msgid "История ваших покупок"
+msgstr "User Purchase History"
+
+#: .\app_shops\templates\profile_user.html:24
+msgid "Название товара: "
+msgstr "Name product: "
+
+#: .\app_shops\templates\profile_user.html:25
+msgid "Цена товара: "
+msgstr "Price product: "
+
+#: .\app_shops\templates\profile_user.html:26
+msgid "Дата покупки: "
+msgstr "Purchase date: "
+
+#: .\app_shops\templates\profile_user.html:36
+msgid "Название акции: "
+msgstr "Stock name: "
+
+#: .\app_shops\templates\profile_user.html:37
+msgid "Описание акции: "
+msgstr "Description stock: "
+
+#: .\app_shops\templates\profile_user.html:38
+msgid "Дата начала акции: "
+msgstr "Stock start date: "
+
+#: .\app_shops\templates\profile_user.html:48
+msgid "Название предложения: "
+msgstr "Offer name: "
+
+#: .\app_shops\templates\profile_user.html:49
+msgid "Описание предложения: "
+msgstr "Offer description: "
+
+#: .\app_shops\templates\profile_user.html:50
+msgid "Дата начала предложения: "
+msgstr "Offer start date: "
 
 #: .\app_shops\templates\register.html:6
 msgid "РЕГИСТРАЦИЯ ПРОФИЛЯ"
-msgstr ""
+msgstr "REGISTER PROFILE"
 
 #: .\app_shops\templates\register.html:12
-#, fuzzy
-#| msgid "Регистраиця"
 msgid "Зарегистрироваться"
 msgstr "Register"
 

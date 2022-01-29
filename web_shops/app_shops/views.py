@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.contrib.auth.models import User
-
+from django.core.cache import cache
 from .forms import MyUserRegister
 from .forms import LoginForm
 from .models import Profile, ProfilePhotos, Shops, PurchaseHistory, Promotions, Stock
@@ -23,14 +23,15 @@ class Index(View):
         form = LoginForm()
         base_link = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
         user_y = request.user
+        avatar_x = False
         #Елси пользователь авторизирова и это не админ, то
         if user_y.is_authenticated and user_y.username != 'admin':
             prof_user = Profile.objects.get(user_id=user_y.id)
             avatar = ProfilePhotos.objects.get(id=prof_user.id)
             link = avatar.photo_img
-            avatar_x = base_link + str(link)
-        else:
-            avatar_x = False
+            if link:
+                avatar_x = base_link + str(link)
+
 
         context = {
             'form': form,
@@ -113,7 +114,7 @@ class ProfileInfo(View):
         user_info = User.objects.get(id=request.user.id)
 
         base_link = 'http://127.0.0.1:8000/ALL_DATA_FILES/'
-        avatar_x = False
+
         history = None
 
         #ищем обьекты Профиля этого пользователя
@@ -121,13 +122,30 @@ class ProfileInfo(View):
         #Теперь ищем аватарки этого пользователя
         avatar = ProfilePhotos.objects.get(id=prof_user.id)
         link = avatar.photo_img
-        avatar_x = base_link + str(link)
+        if link:
+            avatar_x = base_link + str(link)
+        else:
+            avatar_x = False
         #Тут ищем обьекты истории этого Профиля
         history = PurchaseHistory.objects.filter(user_history=prof_user)
 
+        #Кеширование только этого
+        # promotions = Promotions.objects.all()
+        # promotions_cache_key = 'promotions: {}'.format(user_y.username)
+        # cache.get_or_set(promotions_cache_key, promotions, 60*60*24)
+
+        #Массово кеширование
+        promotions_cache_key = 'promotions: {}'.format(user_y.id)
+        offers_cahe_key = 'offers:{}'.format(user_y.id)
         promotions = Promotions.objects.all()
         stock = Stock.objects.all()
 
+        user_account_cache_data = {
+            promotions_cache_key: promotions,
+            offers_cahe_key: stock
+        }
+
+        cache.set_many(user_account_cache_data)
 
         context = {
             'user': user_info,

@@ -18,7 +18,7 @@
         <li class="list__items-profile">   {% trans 'Ваш БАЛАНС: ' %}{{ user.profile.balance }}</li>
 </ul>
     {% cache 86400 history %}
-     <h2 class="title title__user"> {% trans 'история покупок' %} </h2>
+<h2 class="title title__user"> {% trans 'История ваших покупок' %} </h2>
         <ul class="menu__history">
         {% for item in history %}
              <li class="list__items-history">  {% trans 'Название товара: ' %}{{ item.name_product }} <br>
