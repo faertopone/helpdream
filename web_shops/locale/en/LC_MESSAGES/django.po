@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-29 01:33+0300\n"
+"POT-Creation-Date: 2022-01-29 05:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,81 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\app_shops\forms.py:14
+#: .\app_shops\apps.py:7
+msgid "магазины"
+msgstr "Shops"
+
+#: .\app_shops\forms.py:15 .\app_shops\forms.py:32
 msgid "Логин"
 msgstr "Login"
 
-#: .\app_shops\forms.py:19
+#: .\app_shops\forms.py:20 .\app_shops\forms.py:35
 msgid "Пароль"
 msgstr "Password"
+
+#: .\app_shops\forms.py:28 .\app_shops\models.py:12 .\app_shops\models.py:17
+msgid "Мужской"
+msgstr ""
+
+#: .\app_shops\forms.py:29 .\app_shops\models.py:13
+msgid "Женский"
+msgstr ""
+
+#: .\app_shops\forms.py:33
+msgid "Имя"
+msgstr ""
+
+#: .\app_shops\forms.py:34
+msgid "Ваш mail"
+msgstr ""
+
+#: .\app_shops\forms.py:36
+msgid "Повторите пароль"
+msgstr ""
+
+#: .\app_shops\forms.py:36
+msgid "Еще раз пароль"
+msgstr ""
+
+#: .\app_shops\models.py:16
+msgid "Пользователь"
+msgstr ""
+
+#: .\app_shops\models.py:17
+msgid "Выберите пол"
+msgstr ""
+
+#: .\app_shops\models.py:18
+msgid "Выберите файл"
+msgstr ""
+
+#: .\app_shops\models.py:19
+msgid "Дата создания"
+msgstr ""
+
+#: .\app_shops\models.py:24
+msgid "профиль"
+msgstr ""
+
+#: .\app_shops\models.py:25
+msgid "профили"
+msgstr ""
+
+#: .\app_shops\models.py:34
+msgid "Пользователь фотки"
+msgstr ""
+
+#: .\app_shops\models.py:35
+msgid "Фото"
+msgstr ""
+
+#: .\app_shops\models.py:39
+msgid "Фото профиля"
+msgstr ""
+
+#: .\app_shops\models.py:40
+msgid "Фото профилей"
+msgstr ""
 
 #: .\app_shops\templates\Index.html:12
 msgid "Войти"
@@ -34,10 +102,15 @@ msgstr "Enter"
 msgid "Регистраиця"
 msgstr "Register"
 
-#: .\app_shops\templates\Index.html:21
-msgid "Проверка текста"
-msgstr "ENGL TEXT"
-
 #: .\app_shops\templates\base.html:17 .\app_shops\templates\base.html:21
 msgid "Веб магазин"
 msgstr "WEB Shops"
+
+#: .\app_shops\templates\register.html:11
+#, fuzzy
+#| msgid "Регистраиця"
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#~ msgid "Проверка текста"
+#~ msgstr "ENGL TEXT"

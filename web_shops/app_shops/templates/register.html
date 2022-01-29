@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+
+{% block main %}
+<div class="main">
+<h2 class="title_main">{% trans 'РЕГИСТРАЦИЯ ПРОФИЛЯ' %}</h2>
+    <section class="section__register">
+    <div class="wrapper__form-register">
+    <form method="post" enctype="multipart/form-data" class="form__register">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn__register" type="submit">{% trans 'Зарегистрироваться' %}</button>
+    </form>
+    </div>
+    </section>
+</div>
+{% endblock %}

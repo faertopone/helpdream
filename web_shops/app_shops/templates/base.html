@@ -17,10 +17,15 @@
   <title>{% block title %} {% trans 'Веб магазин' %} {% endblock %} </title>
 </head>
 
-<body>
- <header> <h1 class="visually-hidden"> {% trans 'Веб магазин' %} </h1>
-{% block header %}
-                    <form class="launge-form" action="{% url 'set_language' %}" method="post">
+
+ <body> <h1 class="visually-hidden"> {% trans 'Веб магазин' %} </h1>
+
+<main>
+    <a class="HOME" href="{% url 'index' %}"><h2 class="title_main">{% trans 'ДОМОЙ' %}</h2> </a>
+{% block header %}  {% endblock %}
+<div class="container main-page">
+ <header class="header">
+  <form class="launge-form" action="{% url 'set_language' %}" method="post">
         {% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}">
     <select name="language">
@@ -34,13 +39,37 @@
                 {% endfor %}
 
     </select>
-
+    <a href="#" class="basket ">Корзина</a>
 </form>
-    </header>
-{% endblock %}
 
 
-<main>
+    {% if request.user.is_authenticated %}
+            <div class="header-top">
+
+
+                <input id="menu-toggle" type="checkbox">
+                <label class="menu-btn" for="menu-toggle">
+                    <span></span>
+                </label>
+                <nav class="nav nav-header">
+
+                    <a href="#" class="nav-link">Акции</a>
+                    <a href="#" class="nav-link">Предложения</a>
+
+                </nav>
+
+                <div class="login-wrp">
+                    <a href="{% url 'logout' %}" class="login-btn">{{ request.user.username }}</a>
+                    <a href="#"><img src=" {% if not avatar %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ avatar }} {% endif %}" alt="user avatar" class="user-avatar"></a>
+                     <a href="{% url 'logout' %}" class="logout_lk" >Выйти?</a>
+                </div>
+                {% endif %}
+            </div>
+ </header>
+
+</div>
+
+<main class="main-page">
     {% block main %} {% endblock %}
 </main>
 
@@ -48,10 +77,9 @@
     {% block footer %} {% endblock %}
  </footer>
 
-
      <script src="{% static 'js/inputmask.min.js' %}"></script>
   <script src="{% static 'js/index.js' %}"></script>
 
-
+</main>
 </body>
 </html>

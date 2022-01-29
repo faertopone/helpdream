@@ -3,7 +3,8 @@
 
 {% block main %}
     {% if not request.user.is_authenticated %}
-<section class="section-loggin">
+<div class="main">
+        <h2 class="title_main">{% trans 'ВОЙТИ В СВОЙ ПРОФИЛЬ' %}</h2>
         <div class="wrapper__login-form">
         <form method="post">
         {% csrf_token %}
@@ -11,13 +12,14 @@
 
         <button type="submit">{% trans 'Войти' %}</button>
         <span>
-            <a class="link link__register" href="#">{% trans 'Регистраиця' %}</a>
+            <a class="link link__register" href="{% url 'register' %}">{% trans 'Регистраиця' %}</a>
         </span>
-
+        <span class="Errors">
+            {{ form.errors }}
+        </span>
     </form>
         </div>
     {% endif %}
 
-    {% trans 'Проверка текста' %}
-</section>
+</div>
 {% endblock %}
