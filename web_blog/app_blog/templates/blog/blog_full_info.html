@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %} Блог инфо {% endblock %}
 
 {% block main %}
@@ -7,11 +7,11 @@
     <ul class="blog__menu">
 <li class="blog__list">
             <div class="blog__list-item">
-                <h3 class="blog__list-title">Блог номер № {{ blog_items.id }}</h3>
-                <span class="blog__author"> автор: {{ blog_items.author }}</span>
-                <h4 class="blog__name">Название: {{ blog_items.title }} </h4>
-                <p class="blog__description">Описание: {{ blog_items.description }}</p>
-                <p class="blog__datatime"> {{ blog_items.data_blog }}</p>
+                <h3 class="blog__list-title">{% trans 'Blog №:' %} {{ item_blog.id }}</h3>
+                <span class="blog__author"> {% trans 'Author' %}  {{ item_blog.author }}</span>
+                <h4 class="blog__name">{% trans 'Title:' %}  {{ item_blog.title }} </h4>
+                <p class="blog__description">{% trans 'Description:' %}  {{ item_blog.min_description }}</p>
+                <p class="blog__datatime"> {{ item_blog.data_blog }}</p>
 
             </div>
         </li>
@@ -21,7 +21,7 @@
 {# #}
 <section>
 {% if links_img %}
-<h2 class="blog__list-title"> Галерея этого блога:</h2>
+<h2 class="blog__list-title"> {% trans 'Gallery:' %}</h2>
 <div class="section_swiper">
 
 
@@ -39,7 +39,7 @@
 
     </div>
     {% else %}
-    <h2 class="blog__list-title" style="margin-bottom: 300px"> Фоток нет!</h2>
+    <h2 class="blog__list-title" style="margin-bottom: 300px"> {% trans 'No photo' %}</h2>
      {% endif %}
 </div>
 </section>

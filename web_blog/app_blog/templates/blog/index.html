@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %}
     #Это берет что в базовом шаблоне тут и терпеь можно доавбить содержимое,а не заменить )
     {{ block.super }}
@@ -9,9 +9,9 @@
 {% block main %}
 <section class="blog">
     <div class="blog__created">
-        <h3 class="title__blog">Список всех блогов:</h3>
+        <h3 class="title__blog">{% trans 'List all blogs:' %}</h3>
          {% if not request.user.is_authenticated %}
-             <p class="title__blog_info">Что бы создать блог, Вам нужно авторизироваться!</p>
+             <p class="title__blog_info">{% trans 'To create a blog, you need to log in!' %}</p>
         {% endif %}
     </div>
 
@@ -22,19 +22,19 @@
      {% for item_blog in blog_list %}
         <li class="blog__list">
             <div class="blog__list-item">
-                <h3 class="blog__list-title">Блог номер № {{ item_blog.id }}</h3>
-                <span class="blog__author"> автор: {{ item_blog.author }}</span>
-                <h4 class="blog__name">Название: {{ item_blog.title }} </h4>
-                <p class="blog__description">Описание: {{ item_blog.min_description }}</p>
+                <h3 class="blog__list-title">{% trans 'Blog №:' %} {{ item_blog.id }}</h3>
+                <span class="blog__author"> {% trans 'Author' %}  {{ item_blog.author }}</span>
+                <h4 class="blog__name">{% trans 'Title:' %}  {{ item_blog.title }} </h4>
+                <p class="blog__description">{% trans 'Description:' %}  {{ item_blog.min_description }}</p>
                 <p class="blog__datatime"> {{ item_blog.data_blog }}</p>
-                <a class="links blog__list-links" href="blog_info/{{ item_blog.id }}/"> Подробнее </a>
+                <a class="links blog__list-links" href="blog_info/{{ item_blog.id }}/">{% trans 'More' %}  </a>
             </div>
         </li>
         {% endfor %}
     </ul>
 {% else %}
     <div class="blog__created">
-    <h3 class="title__blog">Еще нету ни 1 созданного блока!</h3>
+    <h3 class="title__blog">{% trans 'No blogs' %} </h3>
     </div>
 {% endif %}
 

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block head %}
     {{ block.super }}
 
@@ -15,12 +15,12 @@ setTimeout('location.replace("/")', 6000);
 {% endblock %}
 
 
-{% block title %} Успешно {% endblock %}
+{% block title %} {% trans 'Done' %} {% endblock %}
 
 {% block main %}
 <section style="height: 800px">
-     <h2 class="lk__title">Операция выполнена успешно! <br> Сейчас Вы будете перенаправлены на главную страницу</h2>
-        <a href="/">нажмите сюда, если не хотите ждать</a>
+     <h2 class="lk__title"> {% trans 'Operation completed successfully!' %} <br> {% trans 'You will now be redirected to the main page' %} </h2>
+        <a href="/">{% trans 'click here if you don't want to wait' %}</a>
 </section >
 
 {% endblock %}

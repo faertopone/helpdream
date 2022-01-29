@@ -1,5 +1,6 @@
 {% extends "base.html" %}
  {% load static %}
+{% load i18n %}
 {% block title %} Создать блог {% endblock %}
 
 
@@ -7,8 +8,8 @@
 <section class="content">
     <div class="blog-created">
         <div class="blog__created">
-            <h2 class="blogcreated__title">Создать блог</h2>
-            <h3 class="title_author">Автор блога: {{ request.user.username }}</h3>
+            <h2 class="blogcreated__title">{% trans 'Created Blog' %}</h2>
+            <h3 class="title_author">{% trans 'Author blog:' %} {{ request.user.username }}</h3>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p>{{ blog_form.title }}</p>
@@ -16,7 +17,7 @@
 {#                <p><input class="input_title" type="text" name="title" maxlength="50" required id="id_title" placeholder="Заголовок"></p>#}
 {#                <textarea class="input_description" name="description" required id="id_description" placeholder="Описание"></textarea>#}
 
-                <div class="blog__uplaod_file" > Загрузить фото: </div>
+                <div class="blog__uplaod_file" >{% trans 'Load photo:' %}</div>
                 <p>{{ blog_photo_form.multi_img }} </p>
                 <button type="submit" class="button_load_file"><img src="{% static 'img/slice-mobile.png' %}" class="button_upload"> </button>
             </form>
@@ -26,7 +27,7 @@
             <img src="{% static 'img/pic1.png' %}" alt="" class="img_blog">
         </div>
     </div>
-    <span class="link_csv"> <a  href="{% url 'upload_file_blog' %}">Если хотите загрузить блог через файл cvs. НАЖМИТЕ СЮДА!</a> </span>
+    <span class="link_csv"> <a  href="{% url 'upload_file_blog' %}"> {% trans 'If you want to download the blog via cvs. CLICK HERE!' %} </a> </span>
 
 </section>
 

@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-
+{% load i18n %}
+{% load static %}
 {% block title %} Загрузка файла {% endblock %}
 
 
 {% block main %}
  <section class="content">
 <div class="login_wrapper login_wrapper_upload">
-    <h2 class="header-title title_uplaod_file">Загрузить блог через файл</h2>
+    <h2 class="header-title title_uplaod_file">{% trans 'Load file' %}</h2>
     <form method="post" enctype="multipart/form-data" class="login_form">
         {% csrf_token %}
 

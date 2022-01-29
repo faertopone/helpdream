@@ -24,14 +24,14 @@
      <link rel="stylesheet" href="{% static "css/style.css" %}">
 
 
-    <title>{% block title %} Наш блог {% endblock %} </title>
+    <title>{% block title %} {% trans 'My blog' %} {% endblock %} </title>
 {% endblock %}
 </head>
 {% endcache %}
 <body>
 
 {% block header %}
-    <header> <h1 class="visually-hidden"> Блог </h1>
+    <header> <h1 class="visually-hidden"> {% trans 'Blog' %} </h1>
         <div class="header">
             <div class="header__nav">
                 <ul class="header__menu">
@@ -56,18 +56,18 @@
                     <li class="header__list">
                         <div class="header__login">
                             <ul class="header__login-menu">
-                                <li class="header__login-list"><a href="admin/" class="links header__links">Админка (для удобства)</a></li>
+                                <li class="header__login-list"><a href="admin/" class="links header__links">{% trans 'Admin panel' %}</a></li>
                                 {% if request.user.is_authenticated %}
                                     {% if flag_admin %}
-                                        <li class="header__login-list"><a href="admin/" class="links header__links">Профиль, ADMIN</a></li>
+                                        <li class="header__login-list"><a href="admin/" class="links header__links"> {% trans 'Profiel admin' %}</a></li>
                                         {% else %}
-                                <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">Профиль, {{ request.user.username }}</a></li>
+                                <li class="header__login-list"><a href="{% url 'profile_info' %}" class="links header__links">{% trans 'Profile' %} {{ request.user.username }}</a></li>
                                         {% endif %}
-                                    <li class="header__login-list"><a href="{% url 'created_blog' %}" class="links header__links"> Создать блог </a></li>
-                                <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">Выйти</a></li>
+                                    <li class="header__login-list"><a href="{% url 'created_blog' %}" class="links header__links"> {% trans 'Created blog' %} </a></li>
+                                <li class="header__login-list"><a href="{% url 'logout' %}" class="links header__links">{% trans 'LOGOUT' %}</a></li>
                                 {% else %}
-                                <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">Войти</a> </li>
-                                <li class="header__login-list"><a href="{% url 'register' %}" class="links header__links">Регистрация</a></li>
+                                <li class="header__login-list"><a href="{% url 'login' %}" class="links header__links">{% trans 'LOGIN' %}</a> </li>
+                                <li class="header__login-list"><a href="{% url 'register' %}" class="links header__links">{% trans 'REGISTER' %}</a></li>
                                 {% endif %}
                             </ul>
                          </div>
@@ -76,7 +76,7 @@
                 </ul>
             </div>
             <div class="header__content">
-                <h2 class="header-title">Сайт для создания блогов</h2>
+                <h2 class="header-title">{% trans 'WEBSITE CREATED BLOG' %}в</h2>
             </div>
         </div>
    </header>

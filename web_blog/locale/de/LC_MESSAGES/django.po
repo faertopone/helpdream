@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-28 21:00+0300\n"
+"POT-Creation-Date: 2022-01-29 16:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: .\app_blog\models.py:19
+#: .\app_blog\models.py:19 .\app_blog\templates\users\register.html:46
 msgid "Select gender"
 msgstr ""
 
@@ -108,7 +108,271 @@ msgstr "Blog(german)"
 msgid "blogPhotos"
 msgstr "Blog(german)"
 
-#: .\app_blog\views.py:312
+#: .\app_blog\templates\base.html:27
+#, fuzzy
+#| msgid "blog"
+msgid "My blog"
+msgstr "Blog(german)"
+
+#: .\app_blog\templates\base.html:34
+msgid "Blog"
+msgstr ""
+
+#: .\app_blog\templates\base.html:59
+msgid "Admin panel"
+msgstr ""
+
+#: .\app_blog\templates\base.html:62
+msgid "Profiel admin"
+msgstr ""
+
+#: .\app_blog\templates\base.html:64
+#: .\app_blog\templates\users\profile_user.html:4
+msgid "Profile"
+msgstr ""
+
+#: .\app_blog\templates\base.html:66
+#, fuzzy
+#| msgid "blog"
+msgid "Created blog"
+msgstr "Blog(german)"
+
+#: .\app_blog\templates\base.html:67
+msgid "LOGOUT"
+msgstr ""
+
+#: .\app_blog\templates\base.html:69
+msgid "LOGIN"
+msgstr ""
+
+#: .\app_blog\templates\base.html:70
+msgid "REGISTER"
+msgstr ""
+
+#: .\app_blog\templates\base.html:79
+msgid "WEBSITE CREATED BLOG"
+msgstr ""
+
+#: .\app_blog\templates\blog\blog_full_info.html:10
+#: .\app_blog\templates\blog\index.html:25
+msgid "Blog №:"
+msgstr ""
+
+#: .\app_blog\templates\blog\blog_full_info.html:11
+#: .\app_blog\templates\blog\index.html:26
+msgid "Author"
+msgstr ""
+
+#: .\app_blog\templates\blog\blog_full_info.html:12
+#: .\app_blog\templates\blog\index.html:27
+#, fuzzy
+#| msgid "blog"
+msgid "Title:"
+msgstr "Blog(german)"
+
+#: .\app_blog\templates\blog\blog_full_info.html:13
+#: .\app_blog\templates\blog\index.html:28
+msgid "Description:"
+msgstr ""
+
+#: .\app_blog\templates\blog\blog_full_info.html:24
+msgid "Gallery:"
+msgstr ""
+
+#: .\app_blog\templates\blog\blog_full_info.html:42
+msgid "No photo"
+msgstr ""
+
+#: .\app_blog\templates\blog\created_blog.html:11
+msgid "Created Blog"
+msgstr ""
+
+#: .\app_blog\templates\blog\created_blog.html:12
+msgid "Author blog:"
+msgstr ""
+
+#: .\app_blog\templates\blog\created_blog.html:20
+msgid "Load photo:"
+msgstr ""
+
+#: .\app_blog\templates\blog\created_blog.html:30
+msgid "If you want to download the blog via cvs. CLICK HERE!"
+msgstr ""
+
+#: .\app_blog\templates\blog\index.html:12
+#, fuzzy
+#| msgid "blog"
+msgid "List all blogs:"
+msgstr "Blog(german)"
+
+#: .\app_blog\templates\blog\index.html:14
+msgid "To create a blog, you need to log in!"
+msgstr ""
+
+#: .\app_blog\templates\blog\index.html:30
+msgid "More"
+msgstr ""
+
+#: .\app_blog\templates\blog\index.html:37
+#, fuzzy
+#| msgid "blog"
+msgid "No blogs"
+msgstr "Blog(german)"
+
+#: .\app_blog\templates\blog\upload_file_blog.html:10
+msgid "Load file"
+msgstr ""
+
+#: .\app_blog\templates\complete\succes.html:18
+msgid "Done"
+msgstr ""
+
+#: .\app_blog\templates\complete\succes.html:22
+msgid "Operation completed successfully!"
+msgstr ""
+
+#: .\app_blog\templates\complete\succes.html:22
+msgid "You will now be redirected to the main page"
+msgstr ""
+
+#: .\app_blog\templates\complete\succes.html:23
+msgid "click here if you don"
+msgstr ""
+
+#: .\app_blog\templates\users\login.html:11
+msgid "Login:"
+msgstr ""
+
+#: .\app_blog\templates\users\login.html:17
+msgid "Password"
+msgstr ""
+
+#: .\app_blog\templates\users\login.html:24
+msgid "enter"
+msgstr ""
+
+#: .\app_blog\templates\users\login.html:26
+msgid "restore password"
+msgstr ""
+
+#: .\app_blog\templates\users\profil_user_edit.html:4
+#: .\app_blog\templates\users\profile_user.html:26
+msgid "Edit profile"
+msgstr ""
+
+#: .\app_blog\templates\users\profil_user_edit.html:9
+msgid "Edit data"
+msgstr ""
+
+#: .\app_blog\templates\users\profil_user_edit.html:15
+msgid "You name"
+msgstr ""
+
+#: .\app_blog\templates\users\profil_user_edit.html:19
+msgid "You last name"
+msgstr ""
+
+#: .\app_blog\templates\users\profil_user_edit.html:23
+msgid "edit data"
+msgstr ""
+
+#: .\app_blog\templates\users\profile_user.html:9
+msgid "You secret data"
+msgstr ""
+
+#: .\app_blog\templates\users\profile_user.html:12
+msgid "You login:"
+msgstr ""
+
+#: .\app_blog\templates\users\profile_user.html:13
+#: .\app_blog\templates\users\register.html:31
+msgid "You name:"
+msgstr ""
+
+#: .\app_blog\templates\users\profile_user.html:14
+msgid "You lastname"
+msgstr ""
+
+#: .\app_blog\templates\users\profile_user.html:15
+#: .\app_blog\templates\users\register.html:41
+msgid "You email:"
+msgstr ""
+
+#: .\app_blog\templates\users\profile_user.html:16
+msgid "You tel"
+msgstr ""
+
+#: .\app_blog\templates\users\profile_user.html:17
+msgid "You gender"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:4
+#: .\app_blog\templates\users\register.html:64
+msgid "Register"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:9
+msgid "Register new user"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:14
+msgid "You login"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:20
+msgid "You password:"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:21
+#: .\app_blog\templates\users\register.html:25
+msgid "password"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:24
+msgid "You password2:"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:32
+msgid "name"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:36
+msgid "You last name:"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:37
+msgid "last name"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:42
+msgid "email"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:52
+msgid "You tel:"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:55
+msgid "tel"
+msgstr ""
+
+#: .\app_blog\templates\users\register.html:60
+msgid "Load avatar img"
+msgstr ""
+
+#: .\app_blog\templates\users\restore_password.html:3
+msgid "Restore password"
+msgstr ""
+
+#: .\app_blog\templates\users\restore_password.html:18
+msgid "You email user restore"
+msgstr ""
+
+#: .\app_blog\templates\users\restore_password.html:22
+msgid "Restore"
+msgstr ""
+
+#: .\app_blog\views.py:306
 #, python-format
 msgid "Hello there! today  is %(date)s %(time)s"
 msgstr ""
