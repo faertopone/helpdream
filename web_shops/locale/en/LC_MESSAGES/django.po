@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-30 00:33+0300\n"
+"POT-Creation-Date: 2022-01-30 05:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,6 +69,21 @@ msgstr "Repeat password"
 #: .\app_shops\forms.py:36
 msgid "Еще раз пароль"
 msgstr "Password Again"
+
+#: .\app_shops\forms.py:37
+#| msgid "Выберите пол"
+msgid "Выберите пол:"
+msgstr "Select a gender"
+
+#: .\app_shops\forms.py:38
+#| msgid "Ваше телефон: "
+msgid "Ваш телефон:"
+msgstr "You tel:"
+
+#: .\app_shops\forms.py:39
+#| msgid "Аватарка"
+msgid "Аватарка:"
+msgstr "Avatar"
 
 #: .\app_shops\models.py:16
 msgid "Пользователь"
@@ -194,35 +209,39 @@ msgstr "Stock"
 msgid "Акции"
 msgstr "Stocks"
 
-#: .\app_shops\templates\Index.html:5 .\app_shops\templates\shops_list.html:6
+#: .\app_shops\templates\Index.html:8 .\app_shops\templates\shops_list.html:6
 msgid "Список магазинов"
 msgstr "WEB Shops"
 
-#: .\app_shops\templates\Index.html:8
+#: .\app_shops\templates\Index.html:10
 msgid "ВОЙТИ В СВОЙ ПРОФИЛЬ"
 msgstr "ENTER IN PROFILE"
 
-#: .\app_shops\templates\Index.html:14
+#: .\app_shops\templates\Index.html:15
 msgid "Войти"
 msgstr "Enter"
 
-#: .\app_shops\templates\Index.html:16
+#: .\app_shops\templates\Index.html:17
 msgid "Регистраиця"
 msgstr "Register"
+
+#: .\app_shops\templates\Index.html:26
+msgid "Добро пожаловать!"
+msgstr "Hello"
 
 #: .\app_shops\templates\base.html:17 .\app_shops\templates\base.html:21
 msgid "Веб магазин"
 msgstr "WEB Shops"
 
-#: .\app_shops\templates\base.html:24
+#: .\app_shops\templates\base.html:46
 msgid "ДОМОЙ"
 msgstr "HOME"
 
 #: .\app_shops\templates\base.html:50
-msgid "Ваш прорфиль"
+msgid "Ваш профиль"
 msgstr "You profile"
 
-#: .\app_shops\templates\base.html:53
+#: .\app_shops\templates\base.html:54
 msgid "Выйти"
 msgstr "Logout"
 
@@ -298,13 +317,10 @@ msgstr "Offer description: "
 msgid "Дата начала предложения: "
 msgstr "Offer start date: "
 
-#: .\app_shops\templates\register.html:6
+#: .\app_shops\templates\register.html:8
 msgid "РЕГИСТРАЦИЯ ПРОФИЛЯ"
 msgstr "REGISTER PROFILE"
 
-#: .\app_shops\templates\register.html:12
+#: .\app_shops\templates\register.html:14
 msgid "Зарегистрироваться"
 msgstr "Register"
-
-#~ msgid "Проверка текста"
-#~ msgstr "ENGL TEXT"

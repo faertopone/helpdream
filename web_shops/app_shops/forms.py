@@ -34,9 +34,9 @@ class MyUserRegister(UserCreationForm):
     email = forms.EmailField(required=False, label=_('Ваш mail'), widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder': _('Email')}) )
     password1 = forms.CharField(label=_('Пароль'), widget=forms.PasswordInput(attrs={'class': 'login__input-form', 'placeholder': _('Пароль')}))
     password2 = forms.CharField(label=_('Повторите пароль'), widget=forms.PasswordInput(attrs={'class': 'login__input-form', 'placeholder': _('Еще раз пароль')}))
-    gender = forms.ChoiceField(choices=GENDER_CHOISE, widget=forms.Select(attrs={'class': 'input_select'}))
-    phone = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'tel', 'class': 'login__input-form'}))
-    avatar = forms.ImageField(required=False)
+    gender = forms.ChoiceField(choices=GENDER_CHOISE, label=_('Выберите пол:'), widget=forms.Select(attrs={'class': 'input_select'}))
+    phone = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'tel', 'class': 'login__input-form'}), label=_('Ваш телефон:'))
+    avatar = forms.ImageField(required=False, label=_('Аватарка:'))
 
 
 

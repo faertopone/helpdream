@@ -20,15 +20,17 @@
 
  <body> <h1 class="visually-hidden"> {% trans 'Веб магазин' %} </h1>
 
-<main>
-    <a class="HOME" href="{% url 'index' %}"><h2 class="title_main">{% trans 'ДОМОЙ' %}</h2> </a>
-{% block header %}  {% endblock %}
+<main class="main">
+
+
 <div class="container main-page">
  <header class="header">
+ {% block header %}  {% endblock %}
+<div class="local">
   <form class="launge-form" action="{% url 'set_language' %}" method="post">
         {% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}">
-    <select name="language">
+    <select name="language" class="launge">
         {% get_current_language as LANGUAGE_CODE %}
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
@@ -37,29 +39,31 @@
             {{ language.name_local }} ({{ language.code }})
         </option>
                 {% endfor %}
-
     </select>
-{#    <a href="#" class="basket ">Корзина</a>#}
 </form>
+</div>
+<ul class="header__menu">
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'index' %}">{% trans 'ДОМОЙ' %} </a></li>
+                   <li class="header__menu-item">{% if request.user.is_authenticated %}
+                       <div class="header__profile-user">
+                            <div class="active_user">
+                            <a href="{% url 'profile' %}" class="link-header link-header-user"> {% trans 'Ваш профиль' %} {{ request.user.username }}</a>
+                            <a href="{% url 'profile' %}"><img src=" {% if not avatar %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ avatar }} {% endif %}" alt="user avatar" class="user-avatar"></a>
+                            </div>
+                          <div class="logout_user">
+                            <a href="{% url 'logout' %}" class="link-header link-header-user" >{% trans 'Выйти' %} </a>
+                          </div>
+                       </div>
+                   </li>
 
+                   {% endif %}
+</ul>
 
-
-            <div class="header-top">
-                <div class="login-wrp">
-                    {% if request.user.is_authenticated %}
-                        <a href="{% url 'profile' %}" class="login-btn"> {{ request.user.username }},{% trans 'Ваш прорфиль' %}</a>
-
-{#                    <a href="#"><img src=" {% if not avatar %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ avatar }} {% endif %}" alt="user avatar" class="user-avatar"></a>#}
-                     <a href="{% url 'logout' %}" class="logout_lk" >{% trans 'Выйти' %} </a>
-                     {% endif %}
-                </div>
-
-            </div>
  </header>
 
 </div>
 
-<main class="main-page">
+
     {% block main %} {% endblock %}
 </main>
 

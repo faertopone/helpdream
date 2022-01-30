@@ -2,21 +2,24 @@
  {%  load i18n %}
 
 {% block main %}
- <div class="main">
-    <h2 class="title_shops">{% trans 'Список магазинов' %}</h2>
-    <ul class="menu_shops">
-        {% if shops %}
-        {% for shop in shops %}
-            <li class="items__shops"><a class="link link_shops" href="#">{{ shop.name }} </a>
-            <ul class="menu_items_shop">
-                <li class="items__shoop"> {{ shop.adress }}</li>
-                 <li class="items__shoop"> {{ shop.tel }}</li>
-            </ul>
-            </li>
-        {% endfor %}
-        {% else %}
-    <p> Список пуст</p>
-    {% endif %}
-    </ul>
-</div>
+
+    <h2 class="title_main title__list-shops">{% trans 'Список магазинов' %}</h2>
+
+    <section class="shops-list">
+
+                             {% if shops %}
+                            {% for shop in shops %}
+              <div class="wrap-shops">
+
+                <h2 class="title-shops"> {{ shop.name }} </h2>
+                <p class="adres-shop">{{ shop.adress }}</p>
+                <p class="tel-shops"> {{ shop.tel }}</p>
+                <a href="#" class="links link-shops">Перейти в магазин</a>
+              </div>
+                        {% endfor %}
+                        {% else %}
+        <h2 class="title_main title__enter-login">{% trans 'Список пуст' %}</h2>
+                        {% endif %}
+    </section>
+
 {% endblock %}
