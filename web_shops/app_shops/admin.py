@@ -15,7 +15,7 @@ class PhotoProfileInLine(admin.StackedInline):
 
 class HistoryProfileInLine(admin.StackedInline):
     model = PurchaseHistory
-    fields = ('name_product', 'price')
+    fields = ('name_product', 'price', 'count_product')
 
 
 class ProfileAdmin(admin.ModelAdmin):

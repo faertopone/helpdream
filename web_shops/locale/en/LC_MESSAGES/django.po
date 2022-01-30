@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-30 05:41+0300\n"
+"POT-Creation-Date: 2022-01-30 06:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,17 +71,14 @@ msgid "Еще раз пароль"
 msgstr "Password Again"
 
 #: .\app_shops\forms.py:37
-#| msgid "Выберите пол"
 msgid "Выберите пол:"
 msgstr "Select a gender"
 
 #: .\app_shops\forms.py:38
-#| msgid "Ваше телефон: "
 msgid "Ваш телефон:"
 msgstr "You tel:"
 
 #: .\app_shops\forms.py:39
-#| msgid "Аватарка"
 msgid "Аватарка:"
 msgstr "Avatar"
 
@@ -165,47 +162,51 @@ msgstr "Price"
 msgid "Дата покупки"
 msgstr "Date of purchase"
 
-#: .\app_shops\models.py:70
+#: .\app_shops\models.py:67
+msgid "Количество"
+msgstr ""
+
+#: .\app_shops\models.py:71
 msgid "История с товара"
 msgstr "Product history"
 
-#: .\app_shops\models.py:71
+#: .\app_shops\models.py:72
 msgid "истории с товарами"
 msgstr "Products history"
 
-#: .\app_shops\models.py:79 .\app_shops\models.py:94
+#: .\app_shops\models.py:80 .\app_shops\models.py:95
 msgid "наименование"
 msgstr "named"
 
-#: .\app_shops\models.py:80 .\app_shops\models.py:95
+#: .\app_shops\models.py:81 .\app_shops\models.py:96
 msgid "Описание"
 msgstr "Desription"
 
-#: .\app_shops\models.py:81
+#: .\app_shops\models.py:82
 msgid "Дата начало предложения"
 msgstr "Offer start date"
 
-#: .\app_shops\models.py:82 .\app_shops\models.py:97
+#: .\app_shops\models.py:83 .\app_shops\models.py:98
 msgid "Статус акции"
 msgstr "Stock status"
 
-#: .\app_shops\models.py:86
+#: .\app_shops\models.py:87
 msgid "Предложение"
 msgstr "Offer"
 
-#: .\app_shops\models.py:87 .\app_shops\templates\profile_user.html:44
+#: .\app_shops\models.py:88 .\app_shops\templates\profile_user.html:44
 msgid "Предложения"
 msgstr "Offers"
 
-#: .\app_shops\models.py:96
+#: .\app_shops\models.py:97
 msgid "Дата начало акции"
 msgstr "Stock start date"
 
-#: .\app_shops\models.py:101
+#: .\app_shops\models.py:102
 msgid "Акция"
 msgstr "Stock"
 
-#: .\app_shops\models.py:102 .\app_shops\templates\profile_user.html:32
+#: .\app_shops\models.py:103 .\app_shops\templates\profile_user.html:32
 msgid "Акции"
 msgstr "Stocks"
 
@@ -324,3 +325,7 @@ msgstr "REGISTER PROFILE"
 #: .\app_shops\templates\register.html:14
 msgid "Зарегистрироваться"
 msgstr "Register"
+
+#: .\app_shops\templates\shops_list.html:21
+msgid "Список пуст"
+msgstr ""
