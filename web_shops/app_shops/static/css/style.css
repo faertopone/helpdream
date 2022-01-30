@@ -371,3 +371,117 @@ a {
 .title__list-shops{
     font-size: 40px;
 }
+
+
+.title__user{
+    text-align: center;
+}
+
+.profile__section{
+    padding: 0 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.wrapper__profile-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.title__user-profile{
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.profile_info{
+    width: 50%;
+}
+.profile_avatar{
+    width: 50%;
+}
+
+.user-avatar-profile{
+    max-width: 250px;
+    border: 2px solid lightgreen;
+    border-radius: 10px;
+}
+
+.menu__profile{
+    padding: 5px 0;
+    list-style: none;
+
+}
+
+.list__items-profile{
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.menu__promotions,
+.menu__stock,
+.menu__history{
+    padding: 10px;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    background-color: lightgrey;
+    border-radius: 10px;
+
+}
+
+.list__items-promotions,
+.list__items-promotion,
+.list__items-stock,
+.list__items-history{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 30%;
+    margin-right: 15px;
+}
+
+.title__user_stock,
+.title__user_promotions,
+.title__user_history{
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.list__items-promotions-description,
+.list__items-stock-description,
+.list__items-history-description{
+    margin: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.list__items-promotions-price,
+.list__items-stock-price,
+.list__items-history-price{
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.list__items-promotions-data,
+.list__items-stock-data,
+.list__items-history-data{
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+}

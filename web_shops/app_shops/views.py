@@ -1,3 +1,5 @@
+import datetime
+
 from django.utils.translation import gettext as _
 from django.utils.formats import date_format
 from django.core.mail import send_mail
@@ -11,6 +13,9 @@ from django.core.cache import cache
 from .forms import MyUserRegister
 from .forms import LoginForm
 from .models import Profile, ProfilePhotos, Shops, PurchaseHistory, Promotions, Stock
+
+
+
 
 
 def logout_view(request):
@@ -101,6 +106,7 @@ class RegisterUser(View):
 class ProfileInfo(View):
 
     def get(self, request):
+
         #Если пользователь не авторизован - нехер делать в личном кабинете ему
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse('index'))
@@ -137,6 +143,7 @@ class ProfileInfo(View):
         #Массово кеширование
         promotions_cache_key = 'promotions: {}'.format(user_y.id)
         offers_cahe_key = 'offers:{}'.format(user_y.id)
+
         promotions = Promotions.objects.all()
         stock = Stock.objects.all()
 
@@ -146,6 +153,8 @@ class ProfileInfo(View):
         }
 
         cache.set_many(user_account_cache_data)
+
+
 
         context = {
             'user': user_info,

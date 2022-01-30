@@ -64,7 +64,7 @@ class PurchaseHistory(models.Model):
     name_product = models.CharField(max_length=50, verbose_name=_('Название товара'), db_index=True, null=True)
     price = models.IntegerField(verbose_name=_('Цена'), db_index=True, null=True)
     creadet_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата покупки'), db_index=True, null=True)
-    count_product = models.IntegerField(verbose_name=_('Количество'), db_index=True, null=True)
+    count_product = models.IntegerField(verbose_name=_('Количество'), db_index=True, null=True,)
 
     class Meta:
         db_table = 'PurchaseHistory'
