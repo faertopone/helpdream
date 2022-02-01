@@ -7,17 +7,30 @@ from .enities import Item
 from .seriallizers import ItemSerializer
 from .models import ItemModel
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
 
-class ItemList(APIView):
+# class ItemList(APIView):
+#     def get(self, request):
+#         items = ItemModel.objects.all()
+#         serializer = ItemSerializer(items, many=True)
+#         return Response(serializer.data)
+#
+#     def post(self, request, format=None):
+#         serializer = ItemSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ItemList(ListModelMixin, CreateModelMixin, GenericAPIView):
+    queryset = ItemModel.objects.all()
+    serializer_class = ItemSerializer
+
     def get(self, request):
-        items = ItemModel.objects.all()
-        serializer = ItemSerializer(items, many=True)
-        return Response(serializer.data)
+        return self.list(request)
 
-    def post(self, request):
-        serializer = ItemSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request, format=None):
+        return self.create(request)
