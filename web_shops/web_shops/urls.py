@@ -21,6 +21,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_shops.urls')),
+    path('api/', include('rest.urls')),
+    path('api/', include('rest.urls_json')),
     #ЧТо бы работала локализация
     path('i18n', include('django.conf.urls.i18n'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
