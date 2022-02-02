@@ -153,3 +153,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'ALL_DATA_FILES')
 MEDIA_URL = '/ALL_DATA_FILES/'
 #формат даты
 DATETIME_FORMAT = '%d/%m/%y %H:%M:%S'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2
+}

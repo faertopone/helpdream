@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import Profile, ProfilePhotos, Shops, PurchaseHistory, Promotions, Stock
 
 
+
 class PhotoProfileAdmin(admin.ModelAdmin):
     list_display = ['photo', 'id', 'photo_img']
 
@@ -28,6 +29,11 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Profile, ProfileAdmin)
+
+
+
+
+
 
 
 
