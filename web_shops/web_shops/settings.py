@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #  для документирования в админ панели
+    'django.contrib.admindocs',
+    #Документирование тоже
+    'drf_yasg',
     'app_shops',
     'rest_framework',
     'rest',
@@ -55,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'web_shops.middleware.hystory_users.LogginsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'web_shops.urls'
@@ -158,4 +164,5 @@ DATETIME_FORMAT = '%d/%m/%y %H:%M:%S'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 2
+
 }

@@ -9,7 +9,7 @@ from .seriallizers import ItemSerializer, BookSerializer, AuthorBookSerializer
 from .models import ItemModel, AuthorBook, Book
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
-from rest_framework.mixins import ListModelMixin, CreateModelMixin
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 
 
 # class ItemList(APIView):
@@ -41,6 +41,9 @@ from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
 
 class ItemList(ListModelMixin, CreateModelMixin, GenericAPIView):
+    """
+    Представление для получния списка товаров и создание нового товара
+    """
     # queryset = ItemModel.objects.all()
     serializer_class = ItemSerializer
 
@@ -59,9 +62,30 @@ class ItemList(ListModelMixin, CreateModelMixin, GenericAPIView):
         return self.create(request)
 
 
+class ItemDetail(UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin, GenericAPIView):
+    """
+    Представление для получения детальной информации о товаре, а также для его редактирования и удаления
+    """
+    queryset = ItemModel.objects.all()
+    serializer_class = ItemSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+
+
 #Тут уже выводим обьекты из БД на страницу HTML
 class BookList(ListModelMixin, CreateModelMixin, GenericAPIView):
-
+    """
+    Представление для получения списка книг и создание новых книг
+    """
     serializer_class = BookSerializer
     # pagination_class = StandardResultsSetPagination
 
@@ -119,7 +143,10 @@ class BookList(ListModelMixin, CreateModelMixin, GenericAPIView):
 
 
 class AuthorBookList(ListModelMixin, CreateModelMixin, GenericAPIView):
-    queryset = AuthorBook.objects.all()
+    """
+    Представление для получения списка авторов и создание нового автора
+    """
+
     serializer_class = AuthorBookSerializer
     # pagination_class = StandardResultsSetPagination
 

@@ -14,7 +14,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemModel
-        fields = ['name', 'description', 'weight']
+        fields = ['id','name', 'description', 'weight']
 
 
 
@@ -24,7 +24,7 @@ class ItemSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['name', 'isbn', 'yearofissue', 'numberofpages', 'author_book']
+        fields = ['id', 'name', 'isbn', 'yearofissue', 'numberofpages', 'author_book']
 
 
 
@@ -32,4 +32,4 @@ class BookSerializer(serializers.ModelSerializer):
 class AuthorBookSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuthorBook
-        fields = ['name', 'lastname', 'yearofbirth']
+        fields = ['id', 'name', 'lastname', 'yearofbirth']

@@ -4,6 +4,9 @@ from django.db import models
 
 
 class ItemModel(models.Model):
+    """
+    Модель Товаров.
+    """
     name = models.CharField(max_length=200, verbose_name='название', null=True)
     description = models.TextField(blank=True, verbose_name='описание')
     weight = models.FloatField(verbose_name='вес')
@@ -13,6 +16,9 @@ class ItemModel(models.Model):
 
 
 class AuthorBook(models.Model):
+    """
+    Модель Автора книг.
+    """
 
     def __str__(self):
         return self.name
@@ -28,6 +34,9 @@ class AuthorBook(models.Model):
 
 
 class Book(models.Model):
+    """
+    Модель Книг.
+    """
 
     def __str__(self):
         return self.name
