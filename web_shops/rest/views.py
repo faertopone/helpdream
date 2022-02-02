@@ -80,25 +80,39 @@ class BookList(ListModelMixin, CreateModelMixin, GenericAPIView):
             querysetAuthorBook = querysetAuthorBook.filter(name=item_author_book).first()
             querysetBook = Book.objects.filter(author_book=querysetAuthorBook)
 
+        # Выводит результат где введенное число будет типа 10, значит выведет все что больше 10
+        count_page = self.request.query_params.get('amount_of_pag__gt')
+        if count_page:
+            querysetBook = Book.objects.filter(numberofpages__gt=count_page)
 
-        # amount_of_pag__gt >
-        # amount_of_pag__gte >=
-        # amount_of_pag__lt <
-        # amount_of_pag__lte <=
-
-
-        # если число >
-        # amount_of_pag__gt = self.request.query_params('amount_of_pag__gt')
-        # if amount_of_pag__gt:
-
+        # Выводит результат где введенное число будет типа 10, значит выведет все что больше или равно 10
+        count_page = self.request.query_params.get('amount_of_pag__gte')
+        if count_page:
+            querysetBook = Book.objects.filter(numberofpages__gte=count_page)
 
 
+        # Выводит результат где введенное число будет типа 10, значит выведет все что меньше 10
+        count_page = self.request.query_params.get('amount_of_pag__lt')
+        if count_page:
+            querysetBook = Book.objects.filter(numberofpages__lt=count_page)
+
+
+        # Выводит результат где введенное число будет типа 10, значит выведет все что меньше 10 или равно 10
+        count_page = self.request.query_params.get('amount_of_pag__lte')
+        if count_page:
+            querysetBook = Book.objects.filter(numberofpages__lte=count_page)
+
+        # Выводит результат, где введенное число будет = введеному
+        count_page = self.request.query_params.get('amount_of_pag')
+        if count_page:
+            querysetBook = Book.objects.filter(numberofpages=count_page).order_by('name')
 
         return querysetBook
 
 
     def get(self, request):
         return self.list(request)
+
 
     def post(self, request, format=None):
         return self.create(request)
