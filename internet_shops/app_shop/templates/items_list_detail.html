@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+{% block main %}
+    <div class="items">
+        <div class="items__card">
+            <h2 class="items__title"> {% trans 'Название: ' %}
+                {{ detail_items.name }}
+            </h2>
+            <p class="items__description"> {% trans 'Описание: ' %} {{ detail_items.description }} </p>
+            <p class="items__price"> {% trans 'Цена: ' %}{{ detail_items.price }}</p>
+            <p class="items__amount"> {% trans 'Количество на складе: ' %} {{ detail_items.amount_item }}</p>
+            <p class="items__category"> {% trans 'Категория товара: ' %} {{ detail_items.category_item }}</p>
+        </div>
+
+            <ul class="shop_list">
+                <h3 class="shop__title">{% trans 'Магазины: ' %} </h3>
+                 {% for i_shop in detail_items.shops.all %}
+                <li class="shop_item"> {{ i_shop.name }} </li>
+                     {% endfor %}
+            </ul>
+
+
+    </div>
+
+{% endblock %}

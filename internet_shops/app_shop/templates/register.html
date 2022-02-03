@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+
+
+{% block main %}
+    <div class="login__form">
+    <form method="post">
+    {{ form.as_p }}
+    <button type="submit"> {% trans 'Регистрация' %}</button>
+    </form>
+</div>
+{% endblock %}

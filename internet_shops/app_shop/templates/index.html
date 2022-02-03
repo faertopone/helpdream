@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+{% block main %}
+
+    <a href="{% url 'items_list' %}">список товаров </a>
+     <a href="{% url 'register' %}"> регистрация </a>
+     <a href="{% url 'login' %}"> войти в профиль </a>
+     <a href="{% url 'logout' %}">выйти из профиля </a>
+{% endblock %}

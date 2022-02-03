@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+{% block main %}
+    <div class="items">
+        {% for item in item_list %}
+        <div class="items__card">
+            <h2 class="items__title"> {% trans 'Название: ' %}
+                {{ item.name }}
+            </h2>
+            <p class="items__price"> {% trans 'Цена: ' %}{{ item.price }}</p>
+        </div>
+
+            <ul class="shop_list">
+                <h3 class="shop__title">{% trans 'Магазины: ' %} </h3>
+                 {% for i_shop in item.shops.all %}
+                <li class="shop_item"> {{ i_shop.name }} </li>
+                     {% endfor %}
+            </ul>
+            <a href="{% url 'items_list-detail' pk=item.pk %}" class="link link__items"> {% trans 'Подробнее' %}</a>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
