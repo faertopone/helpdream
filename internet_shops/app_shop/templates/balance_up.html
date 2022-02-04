@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+
+{% block main %}
+    <form method="post">
+    {% csrf_token %}
+    <p>Пополнить баланс: {{ form.money }}</p>
+    <button type="submit"> {% trans 'Пополнить' %}</button>
+    </form>
+{% endblock %}

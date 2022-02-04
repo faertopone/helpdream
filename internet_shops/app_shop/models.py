@@ -33,6 +33,8 @@ class Profile(models.Model):
     phone = models.CharField(max_length=15, verbose_name=_('Телефон'), db_index=True, default='', blank=True)
     balance = models.IntegerField(verbose_name=_('Баланс'), db_index=True, blank=True, default=0)
     status_profile = models.CharField(max_length=100, choices=STATUS_PROFILE_CHOISE, verbose_name=_('Ваш статус профиля'), db_index=True, default=_('новичек'))
+    score = models.FloatField(db_index=True, default=0, blank=True, verbose_name=_('Очки профиля'))
+
 
 
     class Meta:
@@ -82,7 +84,7 @@ class Item(models.Model):
     description = models.TextField(verbose_name=_('описание товара'), db_index=True, null=True, blank=True)
     price = models.FloatField(verbose_name=_('Цена'), db_index=True, default=0)
     amount_item = models.IntegerField(verbose_name=_('количество товара на складе'), db_index=True, default=0)
-    count_pay = models.IntegerField(verbose_name=_('количество товара купить'), db_index=True, default=0)
+    count_pay = models.IntegerField(verbose_name=_('количество товара купили'), db_index=True, default=0)
     category_item = models.CharField(max_length=50,  choices=CATEGORY_ITEM_CHOISE, verbose_name=_('Выберите категорию товара'), db_index=True, default=_('другое'))
     shops = models.ManyToManyField(Shops, verbose_name=_('Магазины в которых эти товары'), db_index=True)
 
@@ -97,13 +99,29 @@ class ShoppingCart(models.Model):
     Модель корзины.
     """
 
-    def __str__(self):
-        return self.cart_user.user
 
     items = models.ManyToManyField(Item, verbose_name=_('Товары которые добавим в корзину'), db_index=True, blank=True)
-    cart_user = models.OneToOneField(Profile, on_delete=models.CASCADE, verbose_name=_('Пользователь для этой корзины'), db_index=True, blank=True)
+    cart_user = models.OneToOneField(Profile, on_delete=models.CASCADE, verbose_name=_('Пользователь для этой корзины'), db_index=True, blank=True, null=True)
 
     class Meta:
         db_table = 'ShoppingCart'
         verbose_name = _('корзина')
         verbose_name_plural = _('корзины')
+
+class ProductReport(models.Model):
+    """
+    Модель, где храняться данные о проданных товарах.
+    """
+
+    user_report = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('Проданные товары этого пользователя'), null=True)
+    id_product = models.IntegerField(verbose_name=_('ИД товара'), db_index=True, default=0, blank=True)
+    name = models.CharField(max_length=30, verbose_name=_('название товара'), db_index=True, null=True, blank=True)
+    description = models.TextField(verbose_name=_('описание товара'), db_index=True, null=True, blank=True)
+    price = models.FloatField(verbose_name=_('Цена'), db_index=True, default=0, blank=True)
+    count_pay = models.IntegerField(verbose_name=_('количество товара купили'), db_index=True, default=0, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        db_table = 'ProductReport'
+        verbose_name = _('отчет о проданных товарах')
+        verbose_name_plural = _('отчеты о проданных товарах')

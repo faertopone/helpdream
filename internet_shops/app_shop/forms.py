@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, User
 from django.core.exceptions import ValidationError
-from django.forms import Textarea, PasswordInput
 from django.utils.translation import gettext_lazy as _
 
-from .models import Shops
+
+
 
 
 class LoginForm(forms.Form):
@@ -27,13 +27,13 @@ class MyUserRegister(UserCreationForm):
         ('Женский', _('Женский'))
     ]
 
-    username = forms.CharField()
-    password1 = forms.CharField()
-    password2 = forms.CharField()
-
-    gender = forms.ChoiceField(choices=GENDER_CHOISE, label=_('Выберите пол:'))
-    phone = forms.CharField(required=False)
-    avatar = forms.ImageField(required=False)
+    username = forms.CharField(max_length=50, label=_('Логин:'), widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder': _('Логин')}))
+    first_name = forms.CharField(max_length=30, required=False, label=_('Имя'), widget=forms.TextInput(attrs={'class': 'login__input-form', 'placeholder': _('Имя')}))
+    password1 = forms.CharField(label=_('Пароль'), widget=forms.PasswordInput(attrs={'class': 'login__input-form', 'placeholder': _('Пароль')}))
+    password2 = forms.CharField(label=_('Повторите пароль'), widget=forms.PasswordInput(attrs={'class': 'login__input-form', 'placeholder': _('Еще раз пароль')}))
+    gender = forms.ChoiceField(choices=GENDER_CHOISE, label=_('Выберите пол:'), widget=forms.Select(attrs={'class': 'input_select'}))
+    phone = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'tel', 'class': 'login__input-form'}), label=_('Ваш телефон:'))
+    avatar = forms.ImageField(required=False, label=_('Аватарка:'))
 
     # и тогда ошибка валидации будет form.non_field_errors  - ('Пароли не совпали!')
     def clean(self):
@@ -54,34 +54,13 @@ class MyUserRegister(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'gender', 'phone', 'avatar']
-        widgets = {
-            'username': Textarea(attrs={
-                'placeholder': "Логин",
-                'class': 'input'
-            }),
-            'password1': PasswordInput(attrs={
-                'placeholder': _('Пароль '),
-                'class': 'input'
-            }),
-            'password2': PasswordInput(attrs={
-                'placeholder': _('Повторите пароль '),
-                'class': 'input'
-            }),
-
-            'phone': Textarea(attrs={
-                'placeholder': "Телефон",
-                'class': 'input',
-                'type': 'tel'
-            }),
-
-        }
+        fields = ['username', 'first_name', 'password1', 'password2', 'gender', 'phone', 'avatar']
 
 
 
 class BuyItems(forms.Form):
-    id_item = forms.IntegerField()
-    count_item = forms.IntegerField()
+    id_item = forms.IntegerField(required=True)
+    count_item = forms.IntegerField(min_value=1, widget=forms.TextInput(attrs={'value': '1'}))
 
 
 class EditItemCart(forms.Form):
@@ -91,3 +70,7 @@ class EditItemCart(forms.Form):
 
 class BalanceUpdate(forms.Form):
     money = forms.FloatField(widget=forms.TextInput(attrs={'class': 'input-money'}))
+
+
+class BuyItemForm(forms.Form):
+    buy = forms.BooleanField(required=False)

@@ -20,7 +20,19 @@
                 <li class="shop_item"> {{ i_shop.name }} </li>
                      {% endfor %}
             </ul>
+            {% if request.user.is_authenticated %}
+            <form method="post">
+            {% csrf_token %}
+                <input type="number" name="id_item" required id="id_id_item" style="display: none" value={{ detail_items.id }}>
+                <p class="count"> {% trans 'Сколько купить: ' %} {{ add_cart.count_item }} </p>
 
+                <button type="submit" {% if not is_active %} disabled {% endif %}> {% trans 'Добавить в корзину' %}</button>
+
+            </form>
+
+            {% else %}
+                <a href="{% url 'login' %}"> {% trans 'Чтобы купить сначало авторизируйтесь' %}</a>
+            {% endif %}
 
     </div>
 

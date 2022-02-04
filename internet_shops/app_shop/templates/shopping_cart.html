@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+
+
+{% block main %}
+    <div class="profile__info">
+    <p> Добро пожаловатьв корзину {{ profile_user.user.firstname }}</p>
+
+    <h2>Корзина ({{ cart.items.count }})</h2>
+    {% for item in cart.items.all %}
+        <ul> Товар :
+        <li>  Имя : {{ item.name }}</li>
+        <li>  Описание : {{ item.description }}</li>
+        <li>  Цена : {{ item.price }}</li>
+        <li>  Сколько : {{ item.count_pay }}</li>
+
+
+         </ul>
+    {% endfor %}
+    <h2> Сумма всех товаров: {{ price_all_itmes }}</h2>
+    {% if cart.items.all %}
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Купить</button>
+    </form>
+    {% endif %}
+
+
+
+
+</div>
+{% endblock %}

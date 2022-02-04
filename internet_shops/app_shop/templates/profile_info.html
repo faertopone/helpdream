@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+
+
+{% block main %}
+    <div class="profile__info">
+    <p> Ваше имя {{ profile_user.user.first_name }}</p>
+    <p> баланс {{ profile_user.balance }}</p>
+    <li> Score: {{ profile_user.score }}</li>
+    <a href="{% url 'balance_up' %}"> пополнить баланс</a>
+    <p> Статус {{ profile_user.status_profile }}</p>
+
+    <ul>МОИ ПОКУПКИ
+        {% for item in product_report %}
+        <li> Имя продукта: {{ item.name }} </li>
+            <li> Сколько купили {{ item.count_pay }} </li>
+            <li> Цена {{ item.price }} </li>
+             <li> Дата покупки {{ item.created_at }} </li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

@@ -162,3 +162,5 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 2
 
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

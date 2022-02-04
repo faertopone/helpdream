@@ -5,6 +5,7 @@
 {% block main %}
     <div class="login__form">
     <form method="post">
+        {% csrf_token %}
     {{ form.as_p }}
     <button type="submit"> {% trans 'Войти' %}</button>
     </form>

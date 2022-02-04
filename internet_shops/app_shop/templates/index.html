@@ -3,9 +3,26 @@
 {% load static %}
 
 {% block main %}
+    <ul>
+    <li><a href="{% url 'items_list' %}">список товаров </a></li>
+    <li> <a href="{% url 'register' %}"> регистрация </a></li>
+    <li> <a href="{% url 'login' %}"> войти в профиль </a></li>
+    <li> <a href="{% url 'logout' %}">выйти из профиля </a></li>
+        {% if request.user.is_authenticated and not request.user.is_superuser%}
+   <li> <a href="{% url 'profile_info' %}">Профиль </a></li>
+             <li> <a href="{% url 'cart' %}">Корзина </a></li>
 
-    <a href="{% url 'items_list' %}">список товаров </a>
-     <a href="{% url 'register' %}"> регистрация </a>
-     <a href="{% url 'login' %}"> войти в профиль </a>
-     <a href="{% url 'logout' %}">выйти из профиля </a>
+    {% endif %}
+    </ul>
+    <ul> <h2>Топ 10 продоваемых товаров</h2>
+        {% for product in sort_total_x %}
+             <li>  ID : {{ product.id_product }} </li>
+            <li> Имя продукта: {{ product.name }} </li>
+            <li> Сколько купили {{ product.count_pay }} </li>
+            <li> Цена {{ product.price }} </li>
+             <li> Дата покупки {{ product.created_at }} </li>
+        {% endfor %}
+    </ul>
+
+
 {% endblock %}
