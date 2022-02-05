@@ -134,7 +134,7 @@ class MainIndex(View):
         sort_total_x = sorted(total,  key=lambda x: x[0], reverse=True) [:5]
         for i in sort_total_x:
             super_sort.append(Mysort(i[0], i[1], i[2]))
-        print(super_sort)
+
 
         return render(request, 'index.html', {'product_report': product_report, 'super_sort': super_sort})
 
