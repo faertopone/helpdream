@@ -3,18 +3,36 @@
 {% load static %}
 
 {% block main %}
+<section class="section__index">
+ <h2 class="title__top-items"> {% trans 'Топ 5 лучших товара: ' %}</h2>
+    <div class="top-items-buy">
+
+       {% for item in super_sort %}
+              <div class="wrap__item">
+                 <h3 class="title__item">{% trans 'Товар: ' %}{{ item.name }} </h3>
+              <p class="text__item">{% trans 'ID: ' %}{{ item.id }} </p>
+              <p class="text__item">{% trans 'Сколько купили: ' %} {{ item.count }}</p>
 
 
+              </div>
+                 {% endfor %}
+    </div>
+ <h2 class="title__top-items"> {% trans 'Всего проданных товаров: ' %}</h2>
+      <div class="all-items-buy">
 
-    <ul> <h2>Топ 10 продоваемых товаров</h2>
-        {% for product in sort_total_x %}
-             <li>  ID : {{ product.id_product }} </li>
-            <li> Имя продукта: {{ product.name }} </li>
-            <li> Сколько купили {{ product.count_pay }} </li>
-            <li> Цена {{ product.price }} </li>
-             <li> Дата покупки {{ product.created_at }} </li>
-        {% endfor %}
-    </ul>
+            {% for product in product_report %}
+              <div class="wrap__item">
+                 <h3 class="title__item">{% trans 'Товар: ' %}{{ product.name }} </h3>
+              <p class="text__item">{% trans 'ID: ' %}{{ product.id_product }} </p>
+              <p class="text__item">{% trans 'Сколько купили: ' %} {{ product.count_pay }}</p>
+              <p class="text__item"> {% trans 'Цена: ' %}{{ product.price }}</p>
+              <p class="text__data">{% trans 'Дата покупки: ' %}{{ product.created_at }} </p>
 
+              </div>
+                 {% endfor %}
+
+    </div>
+
+</section>
 
 {% endblock %}

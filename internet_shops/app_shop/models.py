@@ -125,3 +125,4 @@ class ProductReport(models.Model):
         db_table = 'ProductReport'
         verbose_name = _('отчет о проданных товарах')
         verbose_name_plural = _('отчеты о проданных товарах')
+

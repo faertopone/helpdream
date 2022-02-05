@@ -45,7 +45,7 @@ def buy_item(user_info):
 
 
         for item in all_items:
-            # Добавим купленый товар внаш отчет БД
+            # Добавим купленный товар в наш отчет личный отчет пользователя БД
                 ProductReport.objects.create(
                     user_report=user_info,
                     id_product=item.id,
@@ -107,6 +107,12 @@ class LoginView(View):
         return render(request, 'login.html', {'from': form})
 
 
+class Mysort:
+    def __init__(self, count, name, id):
+        self.count = count
+        self.name = name
+        self.id = id
+
 class MainIndex(View):
     """
     Представление главной страницы.
@@ -116,23 +122,21 @@ class MainIndex(View):
         no_id = []
         total = []
         sort_total_x = []
+        super_sort = []
         product_report = ProductReport.objects.select_related('user_report').all()
         for i in product_report:
             if i.id_product not in no_id:
                 no_id.append(i.id_product)
-                temp = ProductReport.objects.filter(id_product=i.id_product)
-                max_count = 0
-                for x in temp:
-                    max_count += x.count_pay
-                total.append((temp.first(), max_count))
-
-        sort_total = sorted(total, key=lambda count: count[1], reverse=True)[:10]
-        for i in sort_total:
-            sort_total_x.append(i[0])
-            print(i[0])
+                temp = ProductReport.objects.filter(id_product=i.id_product).aggregate(Total_count=Sum('count_pay'))
+                total.append((temp.get('Total_count'), i.name, i.id_product))
 
 
-        return render(request, 'index.html', {'product_report': product_report, 'sort_total_x': sort_total_x})
+        sort_total_x = sorted(total,  key=lambda x: x[0], reverse=True) [:5]
+        for i in sort_total_x:
+            super_sort.append(Mysort(i[0], i[1], i[2]))
+        print(super_sort)
+
+        return render(request, 'index.html', {'product_report': product_report, 'super_sort': super_sort})
 
 
 class Register(View):
