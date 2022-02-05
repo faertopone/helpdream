@@ -2,9 +2,12 @@
  {%  load i18n %}
 
 {% block main %}
-    <form method="post">
+    <section class="section__balance-up">
+    <form method="post" class="form__balance">
     {% csrf_token %}
-    <p>Пополнить баланс: {{ form.money }}</p>
-    <button type="submit"> {% trans 'Пополнить' %}</button>
+    <span class="text__balance-up">{% trans 'Пополнить баланс: ' %} {{ form.money }}</span>
+     <button class="btn btn__register" type="submit"> {% trans 'Пополнить' %}</button>
     </form>
+
+    </section>
 {% endblock %}

@@ -3,11 +3,19 @@
 
 
 {% block main %}
-    <div class="login__form">
-    <form method="post">
-        {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit"> {% trans 'Войти' %}</button>
-    </form>
-</div>
+    <section class="login-section">
+        <div class="wrapper__login">
+          <div class="wrapper__login-form">
+                        <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn_enter" type="submit">{% trans 'Войти' %}</button>
+                        </form>
+                            <a class="link link__register" href="{% url 'register' %}">{% trans 'Регистраиця' %}</a>
+                        <span class="Errors">
+                         {{ form.errors }}
+                        </span>
+          </div>
+        </div>
+    </section>
 {% endblock %}

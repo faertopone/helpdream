@@ -1,23 +1,48 @@
 {% extends 'base.html' %}
  {%  load i18n %}
+{% load static %}
 
 
 {% block main %}
-    <div class="profile__info">
-    <p> Ваше имя {{ profile_user.user.first_name }}</p>
-    <p> баланс {{ profile_user.balance }}</p>
-    <li> Score: {{ profile_user.score }}</li>
-    <a href="{% url 'balance_up' %}"> пополнить баланс</a>
-    <p> Статус {{ profile_user.status_profile }}</p>
 
-    <ul>МОИ ПОКУПКИ
-        {% for item in product_report %}
-        <li> Имя продукта: {{ item.name }} </li>
-            <li> Сколько купили {{ item.count_pay }} </li>
-            <li> Цена {{ item.price }} </li>
-             <li> Дата покупки {{ item.created_at }} </li>
-        {% endfor %}
-    </ul>
+      <section class="profile__section">
+        <div class="wrapper__profile-info">
+             <div class="profile_avatar">
+                        <img src=" {% if not profile_user.avatar.url %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ profile_user.avatar.url }} {% endif %}" alt="user avatar" class="user-avatar-profile">
+                    </div>
 
-</div>
+            <div class="profile_info">
+                <ul class="menu__profile">
+
+                     <h2 class="title title__user-profile"> {% trans 'Данные пользователя' %} </h2>
+
+                        <li class="list__items-profile">  {% trans 'Ваше логин: ' %}{{ user.username }}</li>
+                <li class="list__items-profile">  {% trans 'Ваше имя: ' %}{{ profile_user.user.first_name }} </li>
+                <li class="list__items-profile">  {% trans 'Ваше баланс: ' %}{{ profile_user.balance }} {% trans 'руб. ' %} <a class="link-header link-header-user" href="{% url 'balance_up' %}"> {% trans 'Пополнить баланс' %}</a></li>
+                <li class="list__items-profile">  {% trans 'Ваши очки: ' %}{{ profile_user.score }}</li>
+                    <li class="list__items-profile ">  {% trans 'Ваше статус: ' %} <p class="status_profile"> {{ profile_user.status_profile }} </p></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+
+                <h2 class="title title__user_history"> {% trans 'История ваших покупок' %} </h2>
+        <ul class="menu__history">
+                            {% for item in product_report %}
+                <li class="list__items-history">
+                  <p class="list__items-history-description"> {% trans 'Название: ' %}{{ item.name }} </p>
+                    <p class="list__items-history-price"> {% trans 'Цена товара: ' %}{{ item.price }} {% trans 'руб.' %}</p>
+                    <p class="list__items-history-price"> {% trans 'Количество: ' %}{{ item.count_pay }} </p>
+                    <p class="list__items-history-data">  {% trans 'Дата: ' %}{{ item.created_at }} </p>
+                 </li>
+                                     {% endfor %}
+
+        </ul>
+
+
+
+
+</section>
 {% endblock %}

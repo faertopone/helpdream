@@ -69,7 +69,7 @@ class EditItemCart(forms.Form):
 
 
 class BalanceUpdate(forms.Form):
-    money = forms.FloatField(widget=forms.TextInput(attrs={'class': 'input-money'}))
+    money = forms.FloatField(widget=forms.TextInput(attrs={'class': 'input-money', 'placeholder': 'Введите сумму'}))
 
 
 class BuyItemForm(forms.Form):

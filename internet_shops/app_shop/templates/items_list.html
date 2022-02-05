@@ -3,24 +3,33 @@
 {% load static %}
 
 {% block main %}
-    <div class="items">
-        {% for item in item_list %}
-        <div class="items__card">
-            <h2 class="items__title"> {% trans 'Название: ' %}
-                {{ item.name }}
-            </h2>
-            <p class="items__price"> {% trans 'Цена: ' %}{{ item.price }}</p>
-        </div>
 
-            <ul class="shop_list">
-                <h3 class="shop__title">{% trans 'Магазины: ' %} </h3>
-                 {% for i_shop in item.shops.all %}
-                <li class="shop_item"> {{ i_shop.name }} </li>
-                     {% endfor %}
+    <h2 class="title_main title__list-shops">{% trans 'Список товаров' %}</h2>
+
+    <section class="shops-list">
+
+                             {% if item_list %}
+                            {% for item in item_list %}
+              <div class="wrap-shops">
+
+                <h2 class="title-shops"> {{ item.name }} </h2>
+                <p class="price-shop">{% trans 'Цена: ' %}{{ item.price }} {% trans 'руб.' %}</p>
+                <p class="tel-shops"> {{ item.tel }}</p>
+                <a href="{% url 'items_list-detail' pk=item.pk %}" class="links link-shops">{% trans 'Подробнее' %}</a>
+                    <ul class="shop_list">
+                    <h3 class="shop__title">{% trans 'В магазинах: ' %} </h3>
+                     {% for i_shop in item.shops.all %}
+                    <li class="shop_item"> {{ i_shop.name }} </li>
+                         {% endfor %}
             </ul>
-            <a href="{% url 'items_list-detail' pk=item.pk %}" class="link link__items"> {% trans 'Подробнее' %}</a>
-        {% endfor %}
 
-    </div>
+              </div>
+                        {% endfor %}
+                        {% else %}
+        <h2 class="title_main title__enter-login">{% trans 'Список пуст' %}</h2>
+                        {% endif %}
+    </section>
+
+
 
 {% endblock %}

@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -39,8 +40,22 @@
     </select>
 </form>
 </div>
-
-
+<ul class="header__menu">
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'index' %}">{% trans 'ДОМОЙ' %} </a></li>
+    {% if  not request.user.is_superuser %}
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'items_list' %}">{% trans 'Список товаров' %} </a></li>
+    {% if request.user.is_authenticated %}
+      <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'profile_info' %}">{% trans 'Ваш профиль' %} </a></li>
+              <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'cart' %}">{% trans 'Корзина' %} </a></li>
+      <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'logout' %}">{% trans 'Выйти' %} </a></li>
+    {% else %}
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'login' %}">{% trans 'ВОЙТИ' %} </a></li>
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'register' %}">{% trans 'Регистрация' %} </a></li>
+    {% endif %}
+{% else %}
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'admin/' %}">{% trans 'АДМИН ПРОФИЛЬ' %} </a></li>
+{% endif %}
+</ul>
  </header>
 
 </div>
