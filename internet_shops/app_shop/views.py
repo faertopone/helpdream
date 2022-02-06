@@ -8,10 +8,14 @@ from django.views import View
 from django.utils.translation import gettext as _
 from django.views.generic import ListView, DetailView
 from django.db.models import Avg,Max,Min,Count,Sum
+import logging
 
 from .forms import LoginForm, MyUserRegister, BuyItems, BalanceUpdate, BuyItemForm
 from .models import Profile, Item, ShoppingCart, ProductReport
 from django.db import transaction
+
+logger = logging.getLogger(__name__)
+
 
 @transaction.atomic
 def buy_item(user_info):
@@ -64,9 +68,12 @@ def buy_item(user_info):
 
         #Вычтим с баланса
         profile_user.balance -= price_all_itmes
+        logger.debug('У Пользователь {user}, уменьшился баланс на {balance}'.format(user=profile_user.user, balance=price_all_itmes))
         #добавим очки пользователю
         profile_user.score += price_all_itmes
         profile_user.save()
+
+    logger.debug('Пользователь {user} успешно совершил покупку'.format(user=profile_user.user))
 
     return True
 
@@ -101,6 +108,7 @@ class LoginView(View):
             if user:
                 if user.is_active:
                     login(request, user)
+                    logger.info('Залогинился пользователь {}'.format(username))
                     return HttpResponseRedirect(reverse('index'))
 
         form = LoginForm()
@@ -118,6 +126,15 @@ class MainIndex(View):
     Представление главной страницы.
     """
     def get(self, request):
+
+        # logger.info('Запрошена главная страница через GET - ВЫВЕСТИ В КОСНОЛЬ')
+        # logger.debug('Запрошена главная страница через GET - ВЫВЕСТИ В ФАИЛ')
+
+        #Запрос если там есть ключ ForeignKey ( select_related) или если ManyToManyField(prefetch_related)
+        # Так же если нужно например что бы запросить 1 поля из БД а не все подряд используется .only('name'),
+        # если нужно что бы еще при этом было еще какое то значение из связаной бд то через __ например blog__name (в ключе blog будет запрашиватсья только имя)
+        # Пример
+        # post= Post.objects.select_related('blog').only('title', 'blog__name')
 
         no_id = []
         total = []
@@ -170,6 +187,7 @@ class Register(View):
             #Залогинимся сразу после регистрации
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            logger.debug('Появился новый пользователь {}'.format(username))
             return HttpResponseRedirect(reverse('index'))
 
         form = MyUserRegister(instance=request.user)
@@ -190,7 +208,7 @@ class ItemListDetail(View):
 
     def get(self, request, pk):
         add_cart = BuyItems()
-        detail_items = Item.objects.get(pk=pk)
+        detail_items = Item.objects.prefetch_related('shops').get(pk=pk)
         if detail_items.amount_item > 0:
             is_active = True
         else:
@@ -238,15 +256,24 @@ class ProfileInfo(View):
         #Проверка статуса пользователя
         if 100 <= profile_user.score < 1000:
             profile_user.status_profile = 'продвинутый'
+            logger.debug('Пользователь {user} успешно изменил статус на "продвинутый"'.format(user=profile_user.user))
             profile_user.save()
         elif 1000 <= profile_user.score < 10000:
             profile_user.status_profile = 'эксперт'
+            logger.debug('Пользователь {user} успешно изменил статус на "эксперт"'.format(user=profile_user.user))
             profile_user.save()
         elif profile_user.score >= 10000:
             profile_user.status_profile = 'БОГ покупок'
+            logger.debug('Пользователь {user} успешно изменил статус на "БОГ покупок"'.format(user=profile_user.user))
             profile_user.save()
 
-        return render(request, 'profile_info.html', {'profile_user': profile_user,  'form_buy': form_buy, 'product_report': product_report})
+        if profile_user.avatar == '':
+            avatar_checked = False
+        else:
+            avatar_checked = True
+
+
+        return render(request, 'profile_info.html', {'profile_user': profile_user,  'form_buy': form_buy, 'product_report': product_report, 'avatar_checked': avatar_checked})
 
 
 class BalanceUp(View):
@@ -262,6 +289,7 @@ class BalanceUp(View):
             #баланс
             prof.balance += money
             prof.save()
+            logger.debug('Пользователь {user}, пополнил баланс на {balance}'.format(user=prof.user, balance=prof.balance))
             return HttpResponseRedirect(reverse('profile_info'))
 
         form = BalanceUpdate()
@@ -285,10 +313,13 @@ class ShopingCartView(View):
             cart = False
             price_all_itmes = 0
 
+        error_messages = ''
+
         return render(request, 'shopping_cart.html', {'profile_user': profile_user, 'cart': cart, 'form_buy': form_buy,
-                                                     'price_all_itmes': price_all_itmes})
+                                                     'price_all_itmes': price_all_itmes, 'error_messages': error_messages})
 
     def post(self, request):
+        error_messages = ''
         form_buy = BuyItemForm(request.POST)
         user_info = request.user
         profile_user = Profile.objects.get(user_id=user_info.id)
@@ -301,9 +332,10 @@ class ShopingCartView(View):
         if form_buy.is_valid():
 
             if (buy_item(user_info)):
-                return HttpResponseRedirect(reverse('profile_info'))
+                error_messages = 'Спасибо за покупку!'
+                price_all_itmes = 0
             else:
-                pass
+                error_messages = 'Ошибка покупки'
 
         return render(request, 'shopping_cart.html', {'profile_user': profile_user, 'cart': cart, 'form_buy': form_buy,
-                                                     'price_all_itmes': price_all_itmes})
+                                                     'price_all_itmes': price_all_itmes, 'error_messages': error_messages})

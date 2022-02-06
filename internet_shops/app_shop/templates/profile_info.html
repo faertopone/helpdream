@@ -8,7 +8,7 @@
       <section class="profile__section">
         <div class="wrapper__profile-info">
              <div class="profile_avatar">
-                        <img src=" {% if not profile_user.avatar.url %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ profile_user.avatar.url }} {% endif %}" alt="user avatar" class="user-avatar-profile">
+                        <img src=" {% if not avatar_checked %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ profile_user.avatar.url }} {% endif %}" alt="user avatar" class="user-avatar-profile">
                     </div>
 
             <div class="profile_info">

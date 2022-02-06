@@ -53,7 +53,8 @@
     <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'register' %}">{% trans 'Регистрация' %} </a></li>
     {% endif %}
 {% else %}
-    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'admin/' %}">{% trans 'АДМИН ПРОФИЛЬ' %} </a></li>
+    <li class="header__menu-item"><a class="link-header link-header-user" href="admin/">{% trans 'АДМИН ПРОФИЛЬ' %} </a></li>
+        <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'logout' %}">{% trans 'Выйти' %} </a></li>
 {% endif %}
 </ul>
  </header>

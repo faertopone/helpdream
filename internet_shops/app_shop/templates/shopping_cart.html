@@ -5,6 +5,7 @@
 {% block main %}
        <section class="profile__section">
        <h2 class="title_main title__cart">{% trans 'Ваша корзина' %} {{ profile_user.user.firstname }} ({{ cart.items.count }})</h2>
+       <h2 class="title_main title__cart">  {{ error_messages }}</h2>
             <div class="wrapper__item-info">
                     {% for item in cart.items.all %}
                         <div class="item_info">

@@ -166,7 +166,13 @@ class AppNewsConfig(AppConfig):
 
 
 
+ЗАПРОСЫ В БД для улучшения(убыстрения)
 
+   #Запрос если там есть ключ ForeignKey ( select_related) или если ManyToManyField(prefetch_related)
+        # Так же если нужно например что бы запросить 1 поля из БД а не все подряд используется .only('name'),
+        # если нужно что бы еще при этом было еще какое то значение из связаной бд то через __ например blog__name (в ключе blog будет запрашиватсья только имя)
+        # Пример
+        # post= Post.objects.select_related('blog').only('title', 'blog__name')
 
 
 
