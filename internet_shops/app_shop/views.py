@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LogoutView
 from django.core.exceptions import ValidationError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from django.views.generic import ListView, DetailView
 from django.db.models import Avg,Max,Min,Count,Sum
 import logging
-
+from django.core import serializers
 from .forms import LoginForm, MyUserRegister, BuyItems, BalanceUpdate, BuyItemForm
 from .models import Profile, Item, ShoppingCart, ProductReport
 from django.db import transaction
@@ -135,6 +135,13 @@ class MainIndex(View):
         # если нужно что бы еще при этом было еще какое то значение из связаной бд то через __ например blog__name (в ключе blog будет запрашиватсья только имя)
         # Пример
         # post= Post.objects.select_related('blog').only('title', 'blog__name')
+
+        # format = request.GET['format']
+        # if format not in ['xml', 'json']:
+        #     return HttpResponseBadRequest()
+        # else:
+        #     data = serializers.serialize(format, ProductReport.objects.select_related('user_report').all())
+        #     return HttpResponse(data)
 
         no_id = []
         total = []
