@@ -176,9 +176,186 @@ class AppNewsConfig(AppConfig):
 
 
 
+========================================ЛОКАЛИЗАЦИЯ ====================================================================
+Что бы работала ЛОКАЛИЗАЦИЯ - НАСТРЙОКА:
+
+добавить в
+MIDDLEWARE = [
+    #Чтобы работал перевод языка
+    'django.middleware.locale.LocaleMiddleware',
+
+# стандартно RU
+LANGUAGE_CODE = 'ru'
+
+TIME_ZONE = 'W-SU'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
 
 
+LANGUAGES = [
+    ('ru', 'Русский'),
+    ('en', 'English'),
+]
+
+#где храниться папка с переводом
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
+
+# сюда добавить эту строчку)
+urlpatterns = [
+    #ЧТо бы работала локализация
+    path('i18n', include('django.conf.urls.i18n')),
+
+потом сделать команду python manage.py makemessages -l en
+- появится фаил и там сделать перевод и потом напистаь команду
+python manage.py compilemessages
 
 
+=======================================================================================================================
+
+======================================КЭШИРОВАНИЕ=============================================================
+Добавить сюда
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    # Кеширование всех страниц - если надо
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    #Кэширование
+    'django.middleware.cache.FetchFromCacheMiddleware',
 
 
+Если кешировать полночстью шаблон
+from django.views.decorators.cache import cache_page
+в секнуднах
+ path('shops', cache_page(60*60*24*5)(ShopsView.as_view()), name='shops_list'),
+
+
+from django.core.cache import cache
+
+ПРИМЕР:
+
+#Кеширование только этого
+        # promotions = Promotions.objects.all()
+        # promotions_cache_key = 'promotions: {}'.format(user_y.username)
+        # cache.get_or_set(promotions_cache_key, promotions, 60*60*24)
+
+        #Массово кеширование
+        #Созадидм ключ для хеширования
+        promotions_cache_key = 'promotions: {}'.format(user_y.id)
+        offers_cahe_key = 'offers:{}'.format(user_y.id)
+
+        #Елси кеш пустой на промоакции, то азпишем туда из БД иначе заберем из хеша
+        if not cache.get(promotions_cache_key):
+            promotions = Promotions.objects.all()
+            cache.set(promotions_cache_key, promotions, 60)
+        else:
+            promotions = cache.get(promotions_cache_key)
+
+        # Елси кеш пустой на акции, то запишем туда из БД иначе заберем из хеша
+        if not cache.get(offers_cahe_key):
+            stock = Stock.objects.all()
+            cache.set(offers_cahe_key, stock, 60)
+        else:
+            stock = cache.get(offers_cahe_key)
+
+        #теперь првоерим ключи если ключа нет, то запросим из БД и запишем туда
+        #тут способо если все в 1 большой словарь
+        # if not cache.get_many([promotions_cache_key, offers_cahe_key]):
+        #     promotions = Promotions.objects.all()
+        #     stock = Stock.objects.all()
+        #     user_account_cache_data = {
+        #         promotions_cache_key: promotions,
+        #         offers_cahe_key: stock,
+        #     }
+        #     cache.set_many(user_account_cache_data)
+        # else:
+        #     promotions = cache.get(promotions_cache_key)
+        #     stock = cache.get(offers_cahe_key)
+
+
+======================================================документирование=-===============================================
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+
+Добавить в сюда ( обезательно что бы был      'django.contrib.staticfiles',)
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    #для документирования в админ панели
+    'django.contrib.admindocs',
+    #Документирование тоже
+    'drf_yasg',
+
+в главный
+urlpatterns = [
+    #Важно что бы это было первое
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
+
+ ================================================== КАРТА САЙТА==================================================
+
+ добавить в
+
+ INSTALLED_APPS = [
+
+    #Для добавления карты сайта
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
+
+в setting обезателньо еще написать
+SITE_ID = 1
+
+далее сделать миграцию python manage.py migrate
+
+
+добавим файл в проект sitemap.py
+и там
+===========================
+from django.contrib.sitemaps import Sitemap
+from .models import News
+
+
+class NewsSiteMap(Sitemap):
+    changefreq = 'weekly'
+    priority = 0.9
+
+    def items(self):
+        return News.objects.filter(is_published=True).all()
+
+    def lastmod(self, obj: News):
+        return obj.created_at
+
+======================================
+
+models.py в
+
+в нужной модели сделать
+
+ #Для карты сайта нужно
+    def get_absolute_url(self):
+        return reverse('news-detail', args=[str(self.pk)])
+==================
+
+В главный url добавить
+
+from django.contrib.sitemaps.views import sitemap
+from app_sale_home.sitemap import NewsSiteMap
+
+# сюда добавить все что хотим в карту
+sitemaps = {
+    'news': NewsSiteMap
+}
+
+urlpatterns = [
+    #Для карты сайта
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),

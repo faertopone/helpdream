@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.urls import reverse
+from django.views import generic
 
 class Housing(models.Model):
     name = models.CharField(max_length=40, verbose_name='имя жилья')
@@ -49,9 +50,16 @@ class News(models.Model):
     is_published = models.BooleanField(default=False, verbose_name='опубликовать')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
+
+    #Для карытй сайта нужно
+    def get_absolute_url(self):
+        return reverse('news-detail', args=[str(self.pk)])
+
     def __str__(self):
         return self.title
 
     class Meta:
         verbose_name = 'новость'
         verbose_name_plural = 'новости'
+
+

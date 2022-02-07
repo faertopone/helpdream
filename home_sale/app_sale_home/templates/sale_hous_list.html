@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+{% block main %}
+
+    <h2 class="title_main title__list-shops">{% trans 'Список продоваемоего жилья' %}</h2>
+
+    <section class="shops-list">
+
+                             {% if hous_list %}
+                            {% for hous in hous_list %}
+
+              <div class="wrap-shops">
+
+                <h2 class="title-shops"> {% trans 'Жилье: ' %}{{ hous.name }} </h2>
+                <p class="news__text">{% trans 'Описание: ' %}{{ hous.description }}</p>
+                   <p class="news__text"> {% trans 'тип помещения: ' %}{{ hous.typehousing.name }}</p>
+                  <p class="news__text"> {% trans 'количество комнат: ' %}{{ hous.numberrooms.rooms_count }}</p>
+                <p class="data__news">{% trans 'дата создания обяьвления: ' %} {{ hous.created_at }}</p>
+              </div>
+
+                        {% endfor %}
+                        {% else %}
+        <h2 class="title_main title__enter-login">{% trans 'Новостей нет' %}</h2>
+                        {% endif %}
+    </section>
+
+
+
+
+
+{% endblock %}
