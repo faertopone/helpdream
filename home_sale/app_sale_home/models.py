@@ -53,7 +53,7 @@ class News(models.Model):
 
     #Для карытй сайта нужно
     def get_absolute_url(self):
-        return reverse('news-detail', args=[str(self.pk)])
+        return reverse('news-detail', args=[str(self.id)])
 
     def __str__(self):
         return self.title
