@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+{% load humanize %}
+
+{% block bodystart %}
+    <div class="container main-page">
+{% endblock %}
+{% block main %}
+
+<main class="main-page-content">
+            <div class="about-us">
+                    <div class="main-desc rashid">
+                        <h1 class="main-heading">{% trans 'BOXDREAM' %} <br>
+                                </h1>
+                       <p class="heading-txt rashid">
+                           {% trans 'Как только сумма в нашем BOXDREAM достигнет нужной суммы и будет достаточно активых желаний, с помощью простой функции "RANDOM" из активынх желаний произойдет распределение средств, но не более 50 000 ₽ на 1 желание! Результаты розыгрышей' %}
+                          <a href="{% url 'historywin' %}">{% trans 'вы можете посмотреть тут.' %}</a>  </p>
+
+                    </div>
+
+                    <div class="main-replenish main-replenish__boxdream">
+                        <img src="{% static 'img/coins.png' %}" alt="bag of coins" class="pic-coins" width="296" height="296">
+
+                        <span class="lottery-txt">{% trans 'До розыгрыша осталось:' %} </span>
+                        <span class="sum">{{ boxdream.balance|intcomma }} {% trans '₽' %} </span>
+                        {% if flag_dream %}
+
+                        <span class="lottery-counter__draw-text ">
+                       {{ need_count_active_dream }} {% trans 'активных желаний' %}
+                        </span>
+                    {% else %}
+                    <span class="lottery-counter">
+                       {{ Leftbeforethedraw|intcomma }} {% trans '₽' %}
+                    </span>
+                    {% endif %}
+                         <div class="result_win_box">
+                        <a href="{% url 'historywin' %}"><img src="{% static 'img/coins.png' %}" alt="bag of coins" class="result_win_box__img js-tooltip-right" data-tippy-content="Результаты розыгрыша"></a>
+                    </div>
+                    </div>
+
+
+
+           </div>
+
+               <div class="boxdream_content">
+
+                    <div class="boxdream__content">
+                     <h3 class="about__title">{% trans 'Пополнение BOXDREAM' %}</h3>
+                        <div class="boxdream_wrapp__form ">
+
+                            <div class="boxdream__wrapp_img">
+                                <img src="{% static 'img/coins.png' %}" alt="bag of coins" class="pic-coins boxdream__img">
+                                <div class="boxdream_total_balance">
+                                    <p class="boxdream_total_balance_text"> {% trans '?' %} </p>
+                                </div>
+                            </div>
+                           {% if request.user.is_authenticated %}
+                             <form method="post" class="boxdream__form">
+                                 {% csrf_token %}
+                                 {{ form.as_p }}
+                                 <button type="submit" class="btn btn_boxdream"> {% trans 'Пополнить' %}</button>
+                             </form>
+
+                            {% else %}
+                        <p class="write_dream_link help_dream_link" >{% if not request.user.is_authenticated %} <a href="{% url 'login' %}" >{% trans 'Чтобы помочь, нужно авторизоваться' %} {% endif %} </a></p>
+                        {% endif %}
+                        </div>
+                    </div>
+
+{#                   <div class="boxdream__feedback">#}
+{#                       <h3 class="about__title">{% trans 'Результаты розыгрешей BOXDREAM' %}</h3>#}
+{#                   </div>#}
+
+                   <div class="boxdream_wrapp__history">
+                       <h3 class="about__title">{% trans 'История пополнения BOXDREAM' %}</h3>
+                       <div class="all_items_box_profile">
+                           {% for i_profile in boxdream_profiles %}
+                           <div class="item_prof_box">
+                               <div class="item_prof">
+                                   <p class="item_prof__title"> {{ i_profile.help_profile.user.username }}</p>
+                                   <img class="item_prof__ava" src="{{ i_profile.help_profile.avatar.url }}">
+                                   <img class="item_prof__rank" src="{{ i_profile.help_profile.img.url }}">
+                                   <p class="item_prof__date"> {{ i_profile.data_popolnenia }}</p>
+                               </div>
+                               <div class="item_prof__arrow">
+                                   <img src="{% static 'img/arrow_box_rigth.svg' %}" class="item_prof__arrow_img">
+                               </div>
+                               <div class="item_prof__box">
+                                   <img src="{% static 'img/coins.png' %}" alt="boxdream" class="item_prof__boxdream__img">
+                                   <div class="item_prof__price">
+                                       <p class="item_prof__price--text">+{{ i_profile.who_price }} {% trans '₽' %}</p>
+                                   </div>
+                               </div>
+
+                           </div>
+                           {% endfor %}
+                       </div>
+
+                    <div class="pagination">
+                                <span class="step-links">
+                                    {% if boxdream_profiles.has_previous %}
+                                        <a  class="page_number" href="?page=1">1</a>
+                                        <a class="page_number_link" href="?page={{ boxdream_profiles.previous_page_number }}"> &laquo;{% trans 'предыдущая' %}</a>
+                                    {% endif %}
+
+                                    {% if boxdream_profiles.has_previous or boxdream_profiles.has_next %}
+                                            <span class="current">
+                                                 {{ boxdream_profiles.number }}
+                                            </span>
+                                    {% endif %}
+
+                                    {% if boxdream_profiles.has_next %}
+                                        <a class="page_number_link"  href="?page={{ boxdream_profiles.next_page_number }}">{% trans 'следующая' %} &raquo;</a>
+                                        <a class="page_number" href="?page={{ boxdream_profiles.paginator.num_pages }}">{{ boxdream_profiles.paginator.num_pages }}</a>
+
+                                    {% endif %}
+                                </span>
+
+
+                            </div>
+
+
+                  </div>
+
+               </div>
+
+
+
+
+
+        </main>
+    </div>
+
+{% endblock %}

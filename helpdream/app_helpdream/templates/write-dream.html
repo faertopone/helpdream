@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+{% block bodystart %}
+    <div class="container main-page">
+{% endblock %}
+{% block main %}
+
+<main class="write-dream-block">
+
+        <div class="about-us">
+                <div class="main-desc rashid">
+                    <h1 class="main-heading">{% trans 'Написать мечту' %}</h1>
+                    <form method="post" enctype="multipart/form-data" class="write-dream-form">
+                        {% csrf_token %}
+                        {{ form.title.errors }}
+                        <p>{{ form.title }}</p>
+                        <p>{{ form.description }}</p>
+                        <p><input type="number" name="price" class="upload-sum" required data-price="{{ profile_user.max_dream_price }}"  placeholder= "{% if request.user.is_authenticated %} Максимум {{ profile_user.max_dream_price }} {% else %} Авторизируйтесь {% endif %}" id="id_price"></p>
+                        <p>{{ form.imgs }}</p>
+
+                        <p><button {% if not request.user.is_authenticated %} disabled {% endif %} class="upload-form-btn button" type="submit"> {% trans 'Создать мечту' %} </button></p>
+                        <p class="write_dream_link" >{% if not request.user.is_authenticated %} <a href="{% url 'login' %}" >{% trans 'Чтобы создать мечту авторизуйтесь' %} {% endif %} </a></p>
+
+            </form>
+                </div>
+                 <div class="main-replenish rashid">
+                <img src="{% static 'img/Register  _Log in _Illustration.svg' %}" alt="lady writes a dream" class="pic-coins-dream">
+            </div>
+            </div>
+            <div class="slogan">
+                <span class="slogan-txt">{% trans 'Мечты сбываются нужно только захотеть...' %}</span>
+            </div>
+        </main>
+    </div>
+{% endblock %}
+
+

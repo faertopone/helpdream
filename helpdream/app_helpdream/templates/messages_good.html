@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+
+{% block bodystart %}
+    <div class="container avtorization">
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block main %}
+
+        <main class="auth-block auth-block__messages">
+            <div class="login-block__messages">
+                     <span class="messages__compelte">{% trans 'Ваше сообщение успешно отправлено!' %}</span>
+                    <span class="messages__compelte__text">{% trans 'Сейчас вы автоматически будете перенаправлены, где были!' %}</span>
+                    <span class="messages__compelte__link"> <a href="{% url 'about' %}"> {% trans 'Если этого не произошло, нажмите сюда' %} </a> </span>
+
+            </div>
+
+
+        </main>
+</div>
+
+  <script src="{% static 'js/delay.js' %}"></script>
+{% block footer %} {% endblock %}
+{% endblock %}
