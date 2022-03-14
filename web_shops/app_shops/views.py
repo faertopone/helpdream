@@ -89,6 +89,7 @@ class RegisterUser(View):
             avatar = form.cleaned_data.get('avatar')
             #тут сохраним аватар профиля
             ProfilePhotos.objects.create(photo=profile_user, photo_img=avatar)
+
             #далее сразу залогинимся
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')

@@ -42,8 +42,15 @@ pip install -r requirements.txt
 	python manage.py runserver
 
 
+ВАЖНО!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=================
+
+Если нужно переждать value  в форму HTML
+надои сопльзовать initial= {'key' : 'value'} , Где key -это name='title' -название поля где созадшеь форму
+ form = WriteDreamForm(initial={'title': 'TEST'})
+  ..... value='TEST'
 
 
+ВАЖНО!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!=================
 
 
 Сама структура выглядит так Название папки ГДЕ ДЖАНГО там фаил manage.py и db.sqlite3 (БД)
@@ -160,6 +167,24 @@ class AppNewsConfig(AppConfig):
 
 -----------------------------------------------------------------------------------------------------------
 
+-==========================================СТАНДАРТНО================================================
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect, HttpResponse
+Для вьюшек использование
+
+стандартный логаут)
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+
+   для моделей что бы расширить данные юзера
+from django.contrib.auth.models import User
+         в модели
+   user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('Пользователь'))
+
+   в форме
+   class MyUserRegister(UserCreationForm):
+
 
 -----------------------------------------------------------------------------------------------------------
 Папка tempaltes  - туда создавать наши html странички (html)
@@ -213,6 +238,37 @@ urlpatterns = [
 - появится фаил и там сделать перевод и потом напистаь команду
 python manage.py compilemessages
 
+В HTML коде
+  <form class="launge-form" action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language" class="launge">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %} >
+            {{ language.name_local }} ({{ language.code }})
+        </option>
+                {% endfor %}
+    </select>
+</form>
+
+
+JS - это чтобы небыло кнпоки, а сразу отправлялалсь форма
+
+let forms = document.querySelector('.launge-form')
+
+    forms.addEventListener('change', function (){
+                  forms.submit()
+  })
+
+
+В файлах нуэжно добавить библиотеку
+from django.utils.translation import gettext as _
+
+А в моделях и админке
+from django.utils.translation import gettext_lazy as _
 
 =======================================================================================================================
 
@@ -280,8 +336,6 @@ from django.core.cache import cache
 
 
 ======================================================документирование=-===============================================
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
 
 
 Добавить в сюда ( обезательно что бы был      'django.contrib.staticfiles',)
@@ -294,13 +348,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #для документирования в админ панели
     'django.contrib.admindocs',
-    #Документирование тоже
-    'drf_yasg',
+
 
 в главный
+
+
 urlpatterns = [
     #Важно что бы это было первое
     path('admin/doc/', include('django.contrib.admindocs.urls')),
+
+
+    далее в вфайлах
+
+    from django.utils.translation import gettext_lazy as _
 
  ================================================== КАРТА САЙТА==================================================
 
@@ -406,6 +466,41 @@ urlpatterns = [
  ИНСТРУКЦИЯ по установке и настройке на сайте
  https://www.django-rest-framework.org/#installation
 
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+
  Пример работы  у меня в web_shops -> rest
 
  ===========================================================================================================
+
+
+ Критически важные настройки файла settings.py:
+
+DEBUG. При развёртывании сайта должен быть установлен в False (DEBUG = False). Тем самым, прекратится вывод  важной отладочной информации.
+SECRET_KEY. Это большое случайное число, применяемое для защиты от CRSF. Важно, чтобы ключ, используемый в продакшене, не указывался в исходном коде, и/или не запрашивался с другого сервера. Django рекомендует размещать значение ключа либо в переменной окружения, или в файле с доступом только на чтение.
+# Чтение SECRET_KEY из переменной окружения
+import os
+SECRET_KEY = os.environ['SECRET_KEY']
+
+#ИЛИ
+
+#Чтение ключа из файла
+with open('/etc/secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
+Давайте изменим приложение LocalLibrary таким образом, чтобы читать SECRET_KEY и DEBUG из переменных окружения, если те определены, иначе использовать значения по умолчанию.
+
+Откройте /locallibrary/settings.py, закомментируйте исходное значение SECRET_KEY и добавьте новые строки, как указано ниже жирным. В течении разработки, никаких переменных окружения определено не было, таким образом будут использоваться значения по умолчанию (не имеет значения какой ключ вы используете в процессе разработки, поскольку при развёртывании проекта вы будете использовать другой).
+
+# SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag'
+import os
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
+Copy to Clipboard
+Затем закомментируйте строку с настройкой DEBUG, а затем, добавьте новую, указанную ниже.
+
+# SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+Copy to Clipboard
+Значение DEBUG будет True по умолчанию и станет False, в том случае, если переменная окружения DJANGO_DEBUG будет проинициализирована пустой строкой, то есть, DJANGO_DEBUG=''

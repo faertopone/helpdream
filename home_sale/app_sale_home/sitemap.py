@@ -15,6 +15,7 @@ class NewsSiteMap(Sitemap):
         return obj.created_at
 
 
+# Статические страницы
 class StaticViewSitemap(Sitemap):
     priority = 0.9
     changefreq = 'information'
