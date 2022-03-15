@@ -20,12 +20,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b@kx+i@pgjso)ue%mh_5hofkechxcwecc0l*nxcg^6!3m(%2t*'
+with open('helpdream/secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
+
+# SECRET_KEY = 'django-insecure-b@kx+i@pgjso)ue%mh_5hofkechxcwecc0l*nxcg^6!3m(%2t*'
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -151,6 +156,9 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 STATIC_URL = 'static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR]
+
+# Перед collectstatic это раскоментировать а STATIC DIR закоментировать
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CREDITOR_JQUERY_URL = ''
@@ -167,8 +175,8 @@ CKEDITOR_CONFIGS = {
         ]
     }
 }
-# Перед collectstatic это раскоментировать а STATIC DIR закоментировать
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
 
 
 # Default primary key field type
