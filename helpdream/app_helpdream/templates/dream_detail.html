@@ -136,7 +136,7 @@
                <p class="logotyps__nohelp_text--detail ">{% trans 'Никто не помог :(' %}</p>
               {% endif %}
             {% if dream_items.where_dream_box.all %}
-            <h3>{% trans 'Помощь BOXDREAM: ' %}</h3>
+            <h3>{% trans 'Помощь Boxdream: ' %}</h3>
                 <div class="huma_reviews huma_reviews-detail">
                        {#                        "ЭТО ПОМОЩЬ ОТ БОКС ДРИМ#}
                          {% for i_user in dream_items.where_dream_box.all %}
@@ -145,7 +145,7 @@
                                 <img class="ava_mini_profile_help ava_border ava_mini_profile_help_boxdream" src="{{ i_user.avatar.url }}">
 
                                 <div class="price">
-                                    <p class="who_help_name"> {% trans 'BOXDREAM' %}</p>
+                                    <p class="who_help_name"> {% trans 'Boxdream' %}</p>
                                     <p>{{ i_user.box_win_price|intcomma  }} {% trans '₽' %}</p>
 
                                 </div>

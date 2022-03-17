@@ -18,6 +18,7 @@
                         <p>{{ form.title }}</p>
                         <p>{{ form.description }}</p>
                         <p><input type="number" name="price" class="upload-sum" required data-price="{{ profile_user.max_dream_price }}"  placeholder= "{% if request.user.is_authenticated %} Максимум {{ profile_user.max_dream_price }} {% else %} Авторизируйтесь {% endif %}" id="id_price"></p>
+                        <p class="rang_descrip__info">{% trans 'Почему доступно только' %} {{ profile_user.max_dream_price }} ₽&nbsp;&nbsp;<img class="js-tooltip-right"  data-tippy-content="Вам нужно повысить свой ранг, помогая другим! Подробнее Вы можете узнать в личном кабинете!" src="{% static 'img/Rectangle 55.png' %}"></p>
                         <p>{{ form.imgs }}</p>
 
                         <p><button {% if not request.user.is_authenticated %} disabled {% endif %} class="upload-form-btn button" type="submit"> {% trans 'Создать мечту' %} </button></p>

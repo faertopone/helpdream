@@ -311,7 +311,7 @@ class HelpAmount(forms.Form):
             user_in_bd = Profile.objects.get(user_id=my_user_id)
             if user_in_bd:
                 if user_in_bd.my_balance < amount:
-                    raise ValidationError('Сумма не должна быть больше {my_balance} рублей!'.format(my_balance=user_in_bd.my_balance))
+                    raise ValidationError('У Вас на кошельке всего {my_balance} ₽'.format(my_balance=user_in_bd.my_balance))
         else:
             raise ValidationError('Вы не авторизованы!')
 
@@ -365,7 +365,7 @@ class PopolnenieBoxDream(forms.Form):
     def clean_amount_box(self):
         amount_box = self.cleaned_data.get('amount_box')
         if amount_box <= 0:
-            raise ValidationError('Не корректное число')
+            raise ValidationError('только не 0')
 
         return amount_box
 

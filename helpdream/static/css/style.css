@@ -561,7 +561,7 @@ label,
     display: block;
     font-family: 'Circe', sans-serif;
     font-weight: bold;
-    font-size: 1.8rem;
+    font-size: 3rem;
     line-height: 27px;
     color: #821E84;
     margin: 36px 0 12px 0;
@@ -573,7 +573,7 @@ label,
     font-family: 'Circe', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     line-height: 24px;
     color: #565656;
 }
@@ -1058,7 +1058,7 @@ textarea {
     outline: none;
     padding-left: 10px;
     border-radius: 25px;
-    margin: 30px 0;
+    margin: 0;
 }
 
 .upload-sum--help {
@@ -1941,7 +1941,7 @@ left
     }
 
     .reviews-block {
-        padding: 0 30px 0 30px;
+        padding: 10px 30px 0 30px;
     }
 
     .review-txt {
@@ -3941,15 +3941,23 @@ left
     box-shadow: 0 0 0 1px #BC14A5, 0 0 10px #BC14A5;
 }
 
+.rang_descrip__info{
+    margin: 0;
+    color: gray;
+    font-style: italic;
+    display: flex;
+    align-items: flex-start;
+}
 
 
 
-
-
-
-
-/* ADAPTIVE*/
-
+/* ========================================ADAPTIVE ==============================================================*/
+/* ========================================ADAPTIVE ==============================================================*/
+/* ========================================ADAPTIVE ==============================================================*/
+/* ========================================ADAPTIVE ==============================================================*/
+/* ========================================ADAPTIVE ==============================================================*/
+/* ========================================ADAPTIVE ==============================================================*/
+/* ========================================ADAPTIVE ==============================================================*/
 /* adaptive rashid*/
 @media (max-width: 1600px) {
     html {
@@ -3994,6 +4002,11 @@ left
     html {
         font-size: 6px;
     }
+
+    .how-to-do{
+        padding: 0 7rem;
+    }
+
 
     .dop_info_up_wrapp{
        top: -130px;
