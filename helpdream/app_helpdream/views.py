@@ -26,6 +26,10 @@ from .models import Profile, WriteDeam, ImgWriteDream, Comments, WhoHelpMe, Tota
 from django.db import transaction
 import logging
 
+from django.conf import settings
+
+
+
 logger = logging.getLogger(__name__)
 
 # Сумма при которой будет розыгрыщ боксдрим
@@ -35,6 +39,7 @@ BOX_DRAW_DREAM = 20
 # ограничем максимальную сумму на мечту при распределения выйгрыша
 MAX_BOX_WIN_ONE_DREAM = 50000
 
+MY_EMAIL = 'Sergey-kolyhalov@rambler.ru'
 
 #=============================== ВСПОМОГАТЕЛЬНЫЕ ФУНЦИИ===============================================
 
@@ -700,19 +705,16 @@ class DetailDreamView(View):
             form_help_amount = HelpAmount(initial={'my_user_id': request.user.id})
 
 
+
         if form_help_amount.is_valid():
             profile_user = Profile.objects.select_related('user').get(user=request.user)
-            max_price_author = profile_user.my_balance
             messages_text = form_help_amount.cleaned_data.get('messages_text')
             amount = form_help_amount.cleaned_data.get('amount')
-
             #Вызовем функцию где будем записсыватьв БД эти данные
             balance_transfer(messages_text, amount, profile_user, dream_items)
 
-
             dream_items = WriteDeam.objects.select_related('who_dream').prefetch_related('comments').prefetch_related(
                 'where_dream').get(pk=pk)
-
             form_help_amount = HelpAmount(initial={'my_user_id': request.user.id})
 
 
@@ -895,22 +897,24 @@ class AboutView(View):
     def post(self, request):
         form = FeedbackForm(request.POST)
 
-
         if form.is_valid():
             name = form.cleaned_data.get('name')
             email = form.cleaned_data.get('email')
             text = form.cleaned_data.get('text')
             messeges_text = 'Сообщение написал ' + name + '\n' + 'Текст сообщения: ' + text
 
-            logger.info(messeges_text)
-            try:
-                send_mail(subject='Feedback от {name}'.format(name=name),
-                          message=messeges_text,
-                          from_email='from@example.com',
-                          recipient_list=[email],
-                          fail_silently=False)
-            except BadHeaderError:
-                return HttpResponse('Ошибка в теме письма.')
+            send_mail(subject='Отзыв от {name}, его почта {mail}'.format(name=name, mail=email),
+                      message=messeges_text,
+                      from_email=settings.EMAIL_HOST_USER,
+                      recipient_list=[MY_EMAIL, settings.EMAIL_HOST_USER],
+                      fail_silently=True)
+
+            send_mail(subject='Ваш отзыв принят',
+                      message='Спасибо за отзыв, мы обезательно его прочитаем и ответим Вам!',
+                      from_email=settings.EMAIL_HOST_USER,
+                      recipient_list=[email],
+                      fail_silently=True)
+
             return redirect('messagesgood')
 
 

@@ -18,7 +18,7 @@ class TimedeltaDays:
         self.count = 0
 
         #Созаддим нашу базу
-        if not TotalBoxDream.objects.get(id=1):
+        if not TotalBoxDream.objects.filter(id=1).exists():
             TotalBoxDream.objects.create(balance=0)
 
 

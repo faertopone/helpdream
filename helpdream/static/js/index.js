@@ -287,7 +287,7 @@ window.addEventListener('DOMContentLoaded', function(){
         maxWidth: 265,
         theme: 'style_tooltip',
         delay: [100, 300],
-        placement: 'right',
+        placement: 'top',
       });
 
       tippy('.js-tooltip', {
@@ -301,7 +301,7 @@ window.addEventListener('DOMContentLoaded', function(){
         maxWidth: 265,
         theme: 'style_tooltip--logout',
         delay: [100, 300],
-        placement: 'right',
+        placement: 'top',
       });
 
 
@@ -405,7 +405,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
                     colorWrong: 'red',
                     messages: {
-                        price: `Нельзя вводить 0 и больше чем ${max_price_value}₽`
+                        price: `У Вас на кошельке всего ${max_price_value} ₽`
                     },
 
 
@@ -434,7 +434,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
                     colorWrong: 'red',
                     messages: {
-                        price_box: `Нельзя вводить 0 и больше чем ${max_balance}₽`
+                        price_box: `У Вас на кошельке всего ${max_balance}₽`
                     },
 
 

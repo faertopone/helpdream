@@ -262,10 +262,10 @@ class CommentForm(forms.ModelForm):
     """
     # Проверял ckeditor
     # content = forms.CharField(widget=CKEditorUploadingWidget())
-
+    
     class Meta:
         model = Comments
-        fields = '__all__'
+        fields = ['messages']
 
         # Вот так можно добавлять в нашу форму все что нужно и классы и все такое
         widgets = {
@@ -307,11 +307,13 @@ class HelpAmount(forms.Form):
         cleaned_data = super(HelpAmount, self).clean()
         amount = cleaned_data.get('amount')
         my_user_id = cleaned_data.get('my_user_id')
-        user_in_bd = Profile.objects.get(user_id=my_user_id)
-        if user_in_bd:
-            if user_in_bd.my_balance < amount:
-                raise ValidationError('Сумма не должна быть больше {my_balance} рублей!'.format(my_balance=user_in_bd.my_balance))
-
+        if Profile.objects.filter(user_id=my_user_id).exists():
+            user_in_bd = Profile.objects.get(user_id=my_user_id)
+            if user_in_bd:
+                if user_in_bd.my_balance < amount:
+                    raise ValidationError('Сумма не должна быть больше {my_balance} рублей!'.format(my_balance=user_in_bd.my_balance))
+        else:
+            raise ValidationError('Вы не авторизованы!')
 
 class FeedbackForm(forms.Form):
     """
@@ -331,6 +333,7 @@ class FeedbackForm(forms.Form):
                                  'class': 'auth-input email_feedback',
                                  'placeholder': _('Ваш email...'),
                                  'data-validate-field ': 'email',
+                                 'type': 'email'
                              })
     )
 

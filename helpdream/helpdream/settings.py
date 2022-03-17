@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('helpdream/secret_key.txt') as f:
+with open('helpdream/secret_key_my.txt') as f:
     SECRET_KEY = f.read().strip()
 
 # SECRET_KEY = 'django-insecure-b@kx+i@pgjso)ue%mh_5hofkechxcwecc0l*nxcg^6!3m(%2t*'
@@ -28,7 +28,7 @@ with open('helpdream/secret_key.txt') as f:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -154,14 +154,27 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [STATIC_DIR]
+
+#Тут хранить загруженные файлы
+MEDIA_ROOT = os.path.join(BASE_DIR, 'ALL_DATA_FILES')
+#ссылка на фаилы
+MEDIA_URL = '/ALL_DATA_FILES/'
+
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+       ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+
+# STATIC_DIR = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [STATIC_DIR]
 
 # Перед collectstatic это раскоментировать а STATIC DIR закоментировать
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 CKEDITOR_UPLOAD_PATH = "uploads/"
-
-CREDITOR_JQUERY_URL = ''
 
 
 CKEDITOR_CONFIGS = {
@@ -188,10 +201,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Сколько вермени хранить пользователя в секундах - тут 30 дней
 SESSION_COOKIE_AGE = 30 * 24 * 60 * 60
 
-#Тут хранить загруженные файлы
-MEDIA_ROOT = os.path.join(BASE_DIR, 'ALL_DATA_FILES')
-#ссылка на фаилы
-MEDIA_URL = '/ALL_DATA_FILES/'
+
 #формат даты разобраться
 DATETIME_INPUT_FORMATS = ['%d/%m/%y %H:%M:%S']
 
@@ -229,19 +239,24 @@ LOGGING = {
 }
 
 # Проверка отправка почты во вермя теста
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # mail.ru
-# EMAIL_HOST = 'smtp.mail.ru'
-# EMAIL_PORT = 2525
-# EMAIL_HOST_USER = "your@mail.ru"
-# EMAIL_HOST_PASSWORD = "password"
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
-#
-#
-# SERVER_EMAIL = EMAIL_HOST_USER
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "helpdream2022@mail.ru"
+EMAIL_HOST_PASSWORD = "TtxWPf8GRAFM9UtvWj1t"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 

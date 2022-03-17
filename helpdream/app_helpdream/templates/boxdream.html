@@ -21,9 +21,9 @@
 
                     <div class="main-replenish main-replenish__boxdream">
                         <img src="{% static 'img/coins.png' %}" alt="bag of coins" class="pic-coins" width="296" height="296">
-
-                        <span class="lottery-txt">{% trans 'До розыгрыша осталось:' %} </span>
                         <span class="sum">{{ boxdream.balance|intcomma }} {% trans '₽' %} </span>
+                        <span class="lottery-txt">{% trans 'До розыгрыша осталось:' %} </span>
+
                         {% if flag_dream %}
 
                         <span class="lottery-counter__draw-text ">
