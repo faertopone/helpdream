@@ -89,6 +89,7 @@ class RegisterUser(View):
             avatar = form.cleaned_data.get('avatar')
             #тут сохраним аватар профиля
             ProfilePhotos.objects.create(photo=profile_user, photo_img=avatar)
+
             #далее сразу залогинимся
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -127,6 +128,8 @@ class ProfileInfo(View):
         prof_user = Profile.objects.get(user_id=user_y.id)
         #Теперь ищем аватарки этого пользователя
         avatar = ProfilePhotos.objects.get(id=prof_user.id)
+
+        avatar_link = avatar.photo_img.url
         link = avatar.photo_img
         if link:
             avatar_x = base_link + str(link)
@@ -141,18 +144,39 @@ class ProfileInfo(View):
         # cache.get_or_set(promotions_cache_key, promotions, 60*60*24)
 
         #Массово кеширование
+
+
+        #Созадидм ключ для хеширования
         promotions_cache_key = 'promotions: {}'.format(user_y.id)
         offers_cahe_key = 'offers:{}'.format(user_y.id)
 
-        promotions = Promotions.objects.all()
-        stock = Stock.objects.all()
+        #Елси кеш пустой на промоакции, то азпишем туда из БД иначе заберем из хеша
+        if not cache.get(promotions_cache_key):
+            promotions = Promotions.objects.all()
+            cache.set(promotions_cache_key, promotions, 60)
+        else:
+            promotions = cache.get(promotions_cache_key)
 
-        user_account_cache_data = {
-            promotions_cache_key: promotions,
-            offers_cahe_key: stock
-        }
+        # Елси кеш пустой на акции, то запишем туда из БД иначе заберем из хеша
+        if not cache.get(offers_cahe_key):
+            stock = Stock.objects.all()
+            cache.set(offers_cahe_key, stock, 60)
+        else:
+            stock = cache.get(offers_cahe_key)
 
-        cache.set_many(user_account_cache_data)
+        #теперь првоерим ключи если ключа нет, то запросим из БД и запишем туда
+        #тут способо если все в 1 большой словарь
+        # if not cache.get_many([promotions_cache_key, offers_cahe_key]):
+        #     promotions = Promotions.objects.all()
+        #     stock = Stock.objects.all()
+        #     user_account_cache_data = {
+        #         promotions_cache_key: promotions,
+        #         offers_cahe_key: stock,
+        #     }
+        #     cache.set_many(user_account_cache_data)
+        # else:
+        #     promotions = cache.get(promotions_cache_key)
+        #     stock = cache.get(offers_cahe_key)
 
 
 
@@ -162,6 +186,7 @@ class ProfileInfo(View):
             'history': history,
             'promotions': promotions,
             'stock': stock,
+            'avatar_link': avatar_link,
         }
 
         return render(request, 'profile_user.html', context=context)

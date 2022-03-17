@@ -37,7 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #для документирования в админ панели
+    'django.contrib.admindocs',
+    #Документирование тоже
+    'drf_yasg',
     'app_shops',
+    'rest_framework',
+    'rest',
+    'app_blogs',
 ]
 
 MIDDLEWARE = [
@@ -45,14 +52,18 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     # Кеширование всех страниц
     # 'django.middleware.cache.UpdateCacheMiddleware',
+    #для локализации
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
+    #Кэширование
     'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'web_shops.middleware.hystory_users.LogginsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'web_shops.urls'
@@ -147,7 +158,16 @@ SESSION_COOKIE_AGE = 30 * 24 * 60 * 60
 
 #Тут хранить загруженные файлы
 MEDIA_ROOT = os.path.join(BASE_DIR, 'ALL_DATA_FILES')
+
 #ссылка на фаилы
 MEDIA_URL = '/ALL_DATA_FILES/'
+
 #формат даты
 DATETIME_FORMAT = '%d/%m/%y %H:%M:%S'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2
+
+}

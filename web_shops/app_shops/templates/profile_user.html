@@ -19,11 +19,11 @@
             </div>
 
             <div class="profile_avatar">
-                <img src=" {% if not avatar %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ avatar }} {% endif %}" alt="user avatar" class="user-avatar-profile">
+                <img src=" {% if not avatar %}  {%  static 'img/no_avatar.jpg' %} {% else %} {{ avatar_link }} {% endif %}" alt="user avatar" class="user-avatar-profile">
             </div>
         </div>
 
-    {% cache 60 history %}
+    {% cache 60 history request.user.username %}
     <h2 class="title title__user_history"> {% trans 'История ваших покупок' %} </h2>
         <ul class="menu__history">
                             {% for item in history %}

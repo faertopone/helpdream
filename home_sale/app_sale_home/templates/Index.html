@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+{% block main %}
+
+    <h2 class="title_main title__list-shops">{% trans 'Список новостей' %}</h2>
+
+    <section class="shops-list">
+
+                             {% if news_list %}
+                            {% for news in news_list %}
+                                {% if news.is_published %}
+              <div class="wrap-shops">
+
+                <h2 class="title-shops"> {{ news.title }} </h2>
+                <p class="news__text">{{ news.text }}</p>
+                <p class="data__news"> {{ news.created_at }}</p>
+              <a href="{% url 'news-detail' pk=news.pk %}" class="links link-shops">{% trans 'Подробнее' %}</a>
+              </div>
+                                {% endif %}
+                        {% endfor %}
+                        {% else %}
+        <h2 class="title_main title__enter-login">{% trans 'Новостей нет' %}</h2>
+                        {% endif %}
+    </section>
+
+
+
+
+
+{% endblock %}

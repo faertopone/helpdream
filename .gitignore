@@ -135,3 +135,5 @@ dmypy.json
 /03_RequestsHandlingInDjango/board/history_log/
 
 /web_shops/history_log/
+
+/helpdream/helpdream/secret_key_my.txt

@@ -1,0 +1,1151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-17 23:48+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\app_helpdream\admin.py:30
+msgid "мечта-активна"
+msgstr "dream-active"
+
+#: .\app_helpdream\admin.py:31
+msgid "мечта-не активна"
+msgstr "dream-no active"
+
+#: .\app_helpdream\admin.py:32
+msgid "завершить мечту"
+msgstr "complete the dream"
+
+#: .\app_helpdream\admin.py:33
+msgid "отменить завершение мечту"
+msgstr "cancel complete the dream"
+
+#: .\app_helpdream\forms.py:25
+msgid "Логин *"
+msgstr "Login *"
+
+#: .\app_helpdream\forms.py:30
+msgid "Пароль *"
+msgstr "Password *"
+
+#: .\app_helpdream\forms.py:41 .\app_helpdream\forms.py:114
+msgid "Логин"
+msgstr "Login"
+
+#: .\app_helpdream\forms.py:44 .\app_helpdream\forms.py:118
+#: .\app_helpdream\forms.py:248 .\app_helpdream\forms.py:379
+msgid "Email"
+msgstr "Email"
+
+#: .\app_helpdream\forms.py:45 .\app_helpdream\forms.py:78
+#: .\app_helpdream\forms.py:395
+msgid "Пароль"
+msgstr "Password"
+
+#: .\app_helpdream\forms.py:46 .\app_helpdream\forms.py:80
+#: .\app_helpdream\forms.py:398
+msgid "Еще раз пароль"
+msgstr "Password again"
+
+#: .\app_helpdream\forms.py:77
+msgid "Текущий пароль"
+msgstr "Current password"
+
+#: .\app_helpdream\forms.py:109 .\app_helpdream\forms.py:136
+#: .\app_helpdream\models.py:44
+msgid "Мужской"
+msgstr "Male"
+
+#: .\app_helpdream\forms.py:110 .\app_helpdream\forms.py:137
+#: .\app_helpdream\models.py:45
+msgid "Женский"
+msgstr "Female"
+
+#: .\app_helpdream\forms.py:116 .\app_helpdream\forms.py:141
+msgid "Имя"
+msgstr "Name"
+
+#: .\app_helpdream\forms.py:120 .\app_helpdream\forms.py:142
+msgid "Выберите пол:"
+msgstr "Choose gender:"
+
+#: .\app_helpdream\forms.py:124 .\app_helpdream\forms.py:146
+msgid "Телефон:"
+msgstr "Phone:"
+
+#: .\app_helpdream\forms.py:125
+msgid "Новая аватарка:"
+msgstr "New avatar:"
+
+#: .\app_helpdream\forms.py:147
+msgid "Выберите аватарку:"
+msgstr "Choose an avatar"
+
+#: .\app_helpdream\forms.py:153 .\app_helpdream\models.py:58
+msgid "Дата рождения"
+msgstr "Date of Birth"
+
+#: .\app_helpdream\forms.py:163
+msgid "Введите сумму пополнения *"
+msgstr "Enter replenishment amount *"
+
+#: .\app_helpdream\forms.py:184
+msgid "Название мечты *"
+msgstr "Dream name *"
+
+#: .\app_helpdream\forms.py:190
+msgid "Напишите свою мечту ..."
+msgstr "Write your dream..."
+
+#: .\app_helpdream\forms.py:196
+msgid "Сумма которая необходима"
+msgstr "Amount required"
+
+#: .\app_helpdream\forms.py:287 .\app_helpdream\forms.py:356
+msgid "Введите сумму помощи *"
+msgstr "Enter the amount of assistance *"
+
+#: .\app_helpdream\forms.py:298
+msgid "Напишите текст к своему донату..."
+msgstr "Write a text to your donation..."
+
+#: .\app_helpdream\forms.py:326
+msgid "Ваше имя..."
+msgstr "Your name..."
+
+#: .\app_helpdream\forms.py:334
+msgid "Ваш email..."
+msgstr "Your email..."
+
+#: .\app_helpdream\forms.py:342
+msgid "Текст вашего отзыва..."
+msgstr "The text of your review..."
+
+#: .\app_helpdream\forms.py:404
+msgid "По дате сначала новые"
+msgstr "By date newest first"
+
+#: .\app_helpdream\forms.py:405
+msgid "По дате сначала старые"
+msgstr "By date old first"
+
+#: .\app_helpdream\forms.py:406
+msgid "По собранной сумме по возрастанию"
+msgstr "Ascending amount collected"
+
+#: .\app_helpdream\forms.py:407
+msgid "По собранной сумме по убыванию"
+msgstr "By amount collected descending"
+
+#: .\app_helpdream\forms.py:408
+msgid "По желаемой сумме по возрастанию"
+msgstr "By desired amount ascending"
+
+#: .\app_helpdream\forms.py:409
+msgid "По желаемой сумме по убыванию"
+msgstr "Desired amount descending"
+
+#: .\app_helpdream\models.py:19
+msgid "Какой банк"
+msgstr "Which bank"
+
+#: .\app_helpdream\models.py:21
+msgid "Пользователя кому перечислил денег"
+msgstr "User to whom money was transferred"
+
+#: .\app_helpdream\models.py:22
+msgid "Сумма денег"
+msgstr "Amount of money"
+
+#: .\app_helpdream\models.py:23
+msgid "Дата совершении оплаты"
+msgstr "Date of payment"
+
+#: .\app_helpdream\models.py:24
+msgid "Еще какая то информация"
+msgstr "Some more information"
+
+#: .\app_helpdream\models.py:28
+msgid "История операции"
+msgstr "Operation history"
+
+#: .\app_helpdream\models.py:29
+msgid "История операций"
+msgstr "Operations history"
+
+#: .\app_helpdream\models.py:50
+msgid "Пользователь"
+msgstr "User"
+
+#: .\app_helpdream\models.py:51
+msgid "Выберите пол"
+msgstr "Choose gender"
+
+#: .\app_helpdream\models.py:51
+msgid "не указан"
+msgstr "not specified"
+
+#: .\app_helpdream\models.py:52
+msgid "Аватарка"
+msgstr "Avatar"
+
+#: .\app_helpdream\models.py:53 .\app_helpdream\models.py:158
+#: .\app_helpdream\models.py:184 .\app_helpdream\models.py:241
+msgid "Дата создания"
+msgstr "date of creation"
+
+#: .\app_helpdream\models.py:55
+msgid "Телефон"
+msgstr "Phone"
+
+#: .\app_helpdream\models.py:56
+msgid "Баланс"
+msgstr "Balance"
+
+#: .\app_helpdream\models.py:57
+msgid "возраст"
+msgstr "age"
+
+#: .\app_helpdream\models.py:59
+msgid "на сколько помогли"
+msgstr "how much did they help"
+
+#: .\app_helpdream\models.py:60
+msgid "ранк"
+msgstr "rank"
+
+#: .\app_helpdream\models.py:62
+msgid "Сколько создать мечт можно"
+msgstr "How many dreams can you create"
+
+#: .\app_helpdream\models.py:63
+msgid "Максимальная сумма мечты"
+msgstr "Maximum dream amount"
+
+#: .\app_helpdream\models.py:64
+msgid "супер статус"
+msgstr "super status"
+
+#: .\app_helpdream\models.py:65
+msgid "ранг"
+msgstr "rank"
+
+#: .\app_helpdream\models.py:67
+msgid "слот для расчета места в топе"
+msgstr "slot for calculating a place in the top"
+
+#: .\app_helpdream\models.py:71
+msgid "Модель историй оплаты"
+msgstr "Payment history model"
+
+#: .\app_helpdream\models.py:73
+msgid "Значек что вся инфа юзера заполнена"
+msgstr "Icon that all user info is filled"
+
+#: .\app_helpdream\models.py:106
+msgid "профиль"
+msgstr "profile"
+
+#: .\app_helpdream\models.py:107
+msgid "профили"
+msgstr "profiles"
+
+#: .\app_helpdream\models.py:119
+msgid "Сообщение при донате"
+msgstr "Donation message"
+
+#: .\app_helpdream\models.py:120
+msgid "на сколько помогли "
+msgstr "how much did they help"
+
+#: .\app_helpdream\models.py:121
+msgid "Профиль кто помог"
+msgstr "Profile who helped"
+
+#: .\app_helpdream\models.py:124
+msgid "порядковый номер для ограниченого вывода в завершенных"
+msgstr "sequence number for limited output in completed"
+
+#: .\app_helpdream\models.py:132
+msgid "мечта которой помогли"
+msgstr "dream helped"
+
+#: .\app_helpdream\models.py:133
+msgid "мечты которым помогли"
+msgstr "dreams that helped"
+
+#: .\app_helpdream\models.py:143
+msgid "сколько выйграл "
+msgstr "how much did you win"
+
+#: .\app_helpdream\models.py:144
+msgid "Аватарка_boxdream"
+msgstr "Avatar_boxdream"
+
+#: .\app_helpdream\models.py:157
+msgid "Текст сообщения"
+msgstr "Message text"
+
+#: .\app_helpdream\models.py:159
+msgid "Кто написал комментарий"
+msgstr "Who wrote the comment"
+
+#: .\app_helpdream\models.py:166
+msgid "Инфо о комменте"
+msgstr "Comment info"
+
+#: .\app_helpdream\models.py:167
+msgid "Информация о коментариях"
+msgstr "Information about comments"
+
+#: .\app_helpdream\models.py:180
+msgid "Чья эта мечта"
+msgstr "Whose dream is this"
+
+#: .\app_helpdream\models.py:181
+msgid "название мечты"
+msgstr "dream name"
+
+#: .\app_helpdream\models.py:182
+msgid "описание мечты"
+msgstr "dream description"
+
+#: .\app_helpdream\models.py:183
+msgid "сумма на мечту"
+msgstr "amount for a dream"
+
+#: .\app_helpdream\models.py:186
+msgid "Дата создания для расчета времени заявки"
+msgstr "Creation date for ticket time calculation"
+
+#: .\app_helpdream\models.py:189
+msgid "мечта активна"
+msgstr "the dream is active"
+
+#: .\app_helpdream\models.py:190
+msgid "мечта завершена"
+msgstr "the dream is complete"
+
+#: .\app_helpdream\models.py:191
+msgid "Сколько собрали уже на мечту"
+msgstr "How much has already been collected for a dream"
+
+#: .\app_helpdream\models.py:192
+msgid "слот для расчета позиции "
+msgstr "position calculation slot"
+
+#: .\app_helpdream\models.py:195
+msgid "Профиль кто помог этой мечте"
+msgstr "Profile who helped this dream"
+
+#: .\app_helpdream\models.py:196
+msgid "Профиль BOXDREAM кто помог этой мечте"
+msgstr "BOXDREAM profile who helped this dream"
+
+#: .\app_helpdream\models.py:199
+msgid "Модели комментария"
+msgstr "Comment Models"
+
+#: .\app_helpdream\models.py:201
+msgid "Сколько дней до завершения мечты"
+msgstr "How many days until the end of the dream"
+
+#: .\app_helpdream\models.py:215
+msgid "Мечта"
+msgstr "Dream"
+
+#: .\app_helpdream\models.py:216
+msgid "Мечты пользователей"
+msgstr "User Dreams"
+
+#: .\app_helpdream\models.py:229
+msgid "фотки"
+msgstr "pictures"
+
+#: .\app_helpdream\models.py:230
+msgid "фото"
+msgstr "picture"
+
+#: .\app_helpdream\models.py:238
+msgid "Баланс BOXDREAM"
+msgstr "BOXDREAM balance"
+
+#: .\app_helpdream\models.py:239
+msgid "Профиль кто помог BOXDREAM"
+msgstr "Profile who helped BOXDREAM"
+
+#: .\app_helpdream\models.py:242
+msgid "Какой по счету розыгрыш"
+msgstr "What is the draw"
+
+#: .\app_helpdream\models.py:254
+msgid "Сколько денег мечта получила через BOXDREAM"
+msgstr "How much money did the dream get through BOXDREAM"
+
+#: .\app_helpdream\models.py:257
+msgid "Какой мечте помогли"
+msgstr "What dream did you help"
+
+#: .\app_helpdream\models.py:266
+msgid "номер розыгрыша"
+msgstr "draw number"
+
+#: .\app_helpdream\models.py:267
+msgid "Мечта с параметрами кто выграл"
+msgstr "Dream with parameters who won"
+
+#: .\app_helpdream\models.py:268
+msgid "Дата розыгрыша"
+msgstr "Draw date"
+
+#: .\app_helpdream\templates\about.html:13
+msgid "О проекте Help Dream"
+msgstr "About the Help Dream project"
+
+#: .\app_helpdream\templates\about.html:15
+#, fuzzy
+#| msgid ""
+#| "Этот проект создан, для того что бы, можно было помогать всем людям.<br> "
+#| "Многие люди готовы сливать большие деньги на голые фотографии и тд... "
+#| "<br><br>Цель проекта -  это помощь обычным людям! На сайте есть система "
+#| "присутствует рангов! "
+msgid ""
+"Этот проект создан, для того что бы, можно было помогать всем людям.<br> "
+"<br>Цель проекта -  это помощь обычным людям! На сайте присутствует система  "
+"рангов! "
+msgstr ""
+"This project was created in order to be able to help all people.<br> Many "
+"people are ready to spend big money on naked photos and so on...<br><br>The "
+"goal of the project is to help ordinary people! The site has a system ranks "
+"present!"
+
+#: .\app_helpdream\templates\about.html:29
+msgid "Всякая информация"
+msgstr "Any information"
+
+#: .\app_helpdream\templates\about.html:35
+msgid "В разработке"
+msgstr "In developing"
+
+#: .\app_helpdream\templates\about.html:41
+msgid "Напишите свое мнение"
+msgstr "Write your opinion"
+
+#: .\app_helpdream\templates\about.html:46
+msgid "Отправить"
+msgstr "Send"
+
+#: .\app_helpdream\templates\about.html:55
+msgid "Помочь проекту"
+msgstr "Help the project"
+
+#: .\app_helpdream\templates\authorization.html:16
+#: .\app_helpdream\templates\base.html:53
+#: .\app_helpdream\templates\register.html:17
+msgid "Войти"
+msgstr "Log in"
+
+#: .\app_helpdream\templates\authorization.html:17
+#: .\app_helpdream\templates\register.html:18
+msgid "Регистрация"
+msgstr "Register"
+
+#: .\app_helpdream\templates\authorization.html:19
+msgid "Если у вас уже есть учетная запись, "
+msgstr "If you already have an account,"
+
+#: .\app_helpdream\templates\authorization.html:20
+msgid "войдите в систему ниже. "
+msgstr "log in below."
+
+#: .\app_helpdream\templates\authorization.html:22
+msgid "Ошибка входа. Не вернные данные!"
+msgstr "Login failed. Invalid data!"
+
+#: .\app_helpdream\templates\authorization.html:31
+msgid "ВОЙТИ"
+msgstr "LOGIN"
+
+#: .\app_helpdream\templates\authorization.html:37
+msgid "Забыли Ваш пароль?"
+msgstr "Forgot your password?"
+
+#: .\app_helpdream\templates\authorization.html:38
+msgid "Нет учетной записи?"
+msgstr "Don't have an account?"
+
+#: .\app_helpdream\templates\authorization.html:38
+msgid "Зарегестрироваться"
+msgstr "Register"
+
+#: .\app_helpdream\templates\base.html:35
+#: .\app_helpdream\templates\base.html:82
+msgid "Создать"
+msgstr "Create"
+
+#: .\app_helpdream\templates\base.html:36
+#: .\app_helpdream\templates\base.html:83
+msgid "Активные"
+msgstr "Active"
+
+#: .\app_helpdream\templates\base.html:37
+#: .\app_helpdream\templates\base.html:84
+msgid "Завершенные"
+msgstr "Completed"
+
+#: .\app_helpdream\templates\base.html:38
+#: .\app_helpdream\templates\base.html:85
+#, fuzzy
+#| msgid "ТОП"
+msgid "Топ"
+msgstr "TOP"
+
+#: .\app_helpdream\templates\base.html:39
+#: .\app_helpdream\templates\base.html:86
+#: .\app_helpdream\templates\boxdream.html:14
+#: .\app_helpdream\templates\dream_detail.html:148
+msgid "Boxdream"
+msgstr "Boxdream"
+
+#: .\app_helpdream\templates\base.html:40
+#: .\app_helpdream\templates\base.html:87
+msgid "О проекте"
+msgstr "about the project"
+
+#: .\app_helpdream\templates\base.html:57
+msgid "АДМИН ПАНЕЛЬ"
+msgstr "Admin panel"
+
+#: .\app_helpdream\templates\base.html:148
+msgid "Политика конфиденциальности"
+msgstr "Privacy policy"
+
+#: .\app_helpdream\templates\base.html:149
+msgid "Сайт разработан"
+msgstr "Website developed"
+
+#: .\app_helpdream\templates\boxdream.html:17
+
+msgid ""
+"Как только сумма в нашем Boxdream достигнет нужной суммы и будет достаточно "
+"активных желаний, с помощью простой функции \"RANDOM\" из активынх желаний "
+"произойдет распределение средств, но не более 50 000 ₽ на 1 желание! "
+"Результаты розыгрышей"
+msgstr ""
+"As soon as the amount in our Boxdream reaches the required amount and there "
+"is enough active wishes, with a simple \"RANDOM\" function from active "
+"wishesthere will be a distribution of funds, but not more than 50,000 ₽ for "
+"1 wish!Raffle Results"
+
+#: .\app_helpdream\templates\boxdream.html:18
+msgid "вы можете посмотреть тут."
+msgstr "you can look here."
+
+#: .\app_helpdream\templates\boxdream.html:24
+#: .\app_helpdream\templates\boxdream.html:34
+#: .\app_helpdream\templates\boxdream.html:92
+#: .\app_helpdream\templates\complete_dreams.html:57
+#: .\app_helpdream\templates\complete_dreams.html:61
+#: .\app_helpdream\templates\dream_detail.html:61
+#: .\app_helpdream\templates\dream_detail.html:86
+#: .\app_helpdream\templates\dream_detail.html:87
+#: .\app_helpdream\templates\dream_detail.html:116
+#: .\app_helpdream\templates\dream_detail.html:149
+#: .\app_helpdream\templates\history_win_dreams.html:42
+#: .\app_helpdream\templates\index.html:23
+#: .\app_helpdream\templates\index.html:32
+#: .\app_helpdream\templates\other_dreams.html:57
+#: .\app_helpdream\templates\other_dreams.html:58
+#: .\app_helpdream\templates\top.html:40
+#: .\app_helpdream\templates\user_lk.html:66
+#: .\app_helpdream\templates\user_lk.html:98
+#: .\app_helpdream\templates\user_lk.html:128
+#: .\app_helpdream\templates\user_lk.html:129
+#: .\app_helpdream\templates\user_lk.html:179
+#: .\app_helpdream\templates\user_lk.html:180
+#: .\app_helpdream\templates\user_lk.html:228
+msgid "₽"
+msgstr "₽"
+
+#: .\app_helpdream\templates\boxdream.html:25
+#: .\app_helpdream\templates\index.html:24
+msgid "До розыгрыша осталось:"
+msgstr "Until the draw left:"
+
+#: .\app_helpdream\templates\boxdream.html:30
+#: .\app_helpdream\templates\index.html:28
+msgid "активных желаний"
+msgstr "active desires"
+
+#: .\app_helpdream\templates\boxdream.html:49
+msgid "Пополнение BOXDREAM"
+msgstr "Replenishment BOXDREAM"
+
+#: .\app_helpdream\templates\boxdream.html:55
+msgid "?"
+msgstr "?"
+
+#: .\app_helpdream\templates\boxdream.html:62
+#: .\app_helpdream\templates\index.html:35
+#: .\app_helpdream\templates\user_lk.html:69
+#: .\app_helpdream\templates\user_lk.html:76
+msgid "Пополнить"
+msgstr "Top up"
+
+#: .\app_helpdream\templates\boxdream.html:66
+msgid "Чтобы помочь, нужно авторизоваться"
+msgstr "To help, you need to log in"
+
+#: .\app_helpdream\templates\boxdream.html:76
+msgid "История пополнения BOXDREAM"
+msgstr "BOXDREAM replenishment history"
+
+#: .\app_helpdream\templates\boxdream.html:104
+#: .\app_helpdream\templates\complete_dreams.html:96
+#: .\app_helpdream\templates\other_dreams.html:84
+#: .\app_helpdream\templates\top.html:52
+msgid "предыдущая"
+msgstr "previous"
+
+#: .\app_helpdream\templates\boxdream.html:114
+msgid "следующая"
+msgstr "next"
+
+#: .\app_helpdream\templates\complete_dreams.html:14
+msgid "Сбор средств на мечту окончен!"
+msgstr "Fundraising for the dream is over!"
+
+#: .\app_helpdream\templates\complete_dreams.html:15
+msgid ""
+"Мечта – это положительная энергия и возможность стать счастливее! Зарядитесь "
+"вместе с нами и посмотрите, сколько людей смогли обрести то, чего они так "
+"долго хотели, благодаря пользователям HELP DREAM."
+msgstr ""
+"A dream is a positive energy and an opportunity to become happier! "
+"Rechargetogether with us and see how many people were able to find what they "
+"are so wanted for a long time, thanks to HELP DREAM users."
+
+#: .\app_helpdream\templates\complete_dreams.html:22
+#: .\app_helpdream\templates\other_dreams.html:29
+msgid "Сортировать по: "
+msgstr "Sort by:"
+
+#: .\app_helpdream\templates\complete_dreams.html:57
+msgid "Цель была: "
+msgstr "The goal was:"
+
+#: .\app_helpdream\templates\complete_dreams.html:61
+#: .\app_helpdream\templates\dream_detail.html:61
+msgid "Было собрано: "
+msgstr "Was collected:"
+
+#: .\app_helpdream\templates\complete_dreams.html:75
+#: .\app_helpdream\templates\dream_detail.html:136
+msgid "Никто не помог :("
+msgstr "Nobody helped :("
+
+#: .\app_helpdream\templates\complete_dreams.html:105
+#: .\app_helpdream\templates\other_dreams.html:93
+#: .\app_helpdream\templates\top.html:62
+#, fuzzy
+#| msgid "следующая"
+msgid "следущая"
+msgstr "next"
+
+#: .\app_helpdream\templates\complete_dreams.html:115
+#: .\app_helpdream\templates\dream_detail.html:211
+#: .\app_helpdream\templates\history_win_dreams.html:56
+#: .\app_helpdream\templates\index.html:74
+#: .\app_helpdream\templates\other_dreams.html:101
+#: .\app_helpdream\templates\top.html:72
+#: .\app_helpdream\templates\user_lk.html:247
+#: .\app_helpdream\templates\write-dream.html:34
+msgid "Мечты сбываются нужно только захотеть..."
+msgstr "Dreams do come true, all you have to do is..."
+
+#: .\app_helpdream\templates\dream_detail.html:37
+msgid "Фоток нет :("
+msgstr "No pics :("
+
+#: .\app_helpdream\templates\dream_detail.html:40
+msgid "Информация о пользователе:"
+msgstr "User information:"
+
+#: .\app_helpdream\templates\dream_detail.html:41
+msgid "Имя: "
+msgstr "Name:"
+
+#: .\app_helpdream\templates\dream_detail.html:42
+msgid "Пол: "
+msgstr "Gender:"
+
+#: .\app_helpdream\templates\dream_detail.html:43
+msgid "Возраст: "
+msgstr "Age:"
+
+#: .\app_helpdream\templates\dream_detail.html:45
+msgid "Ранг"
+msgstr "Rank"
+
+#: .\app_helpdream\templates\dream_detail.html:60
+msgid "Сбор средств завершен!"
+msgstr "Fundraising completed!"
+
+#: .\app_helpdream\templates\dream_detail.html:69
+msgid "Вы можете помочь!"
+msgstr "You can help!"
+
+#: .\app_helpdream\templates\dream_detail.html:76
+msgid "Помочь мечте"
+msgstr "help the dream"
+
+#: .\app_helpdream\templates\dream_detail.html:80
+#, fuzzy
+#| msgid "Чтобы помочь, нужно авторизоваться"
+msgid "Чтобы помоч, нужно авторизироваться"
+msgstr "To help, you need to log in"
+
+#: .\app_helpdream\templates\dream_detail.html:86
+#: .\app_helpdream\templates\other_dreams.html:57
+#: .\app_helpdream\templates\user_lk.html:128
+#: .\app_helpdream\templates\user_lk.html:179
+msgid "Сейчас: "
+msgstr "Now: "
+
+#: .\app_helpdream\templates\dream_detail.html:87
+#: .\app_helpdream\templates\other_dreams.html:58
+#: .\app_helpdream\templates\user_lk.html:129
+#: .\app_helpdream\templates\user_lk.html:180
+msgid "Цель: "
+msgstr "Target: "
+
+#: .\app_helpdream\templates\dream_detail.html:93
+#: .\app_helpdream\templates\other_dreams.html:64
+#: .\app_helpdream\templates\user_lk.html:135
+#: .\app_helpdream\templates\user_lk.html:185
+msgid "Осталось (дней): "
+msgstr "Days (left): "
+
+#: .\app_helpdream\templates\dream_detail.html:104
+msgid "Кто помог: "
+msgstr "Who helped: "
+
+#: .\app_helpdream\templates\dream_detail.html:120
+msgid "Сообщение: "
+msgstr "Message: "
+
+#: .\app_helpdream\templates\dream_detail.html:139
+#, fuzzy
+#| msgid "Помощь BOXDREAM: "
+msgid "Помощь Boxdream: "
+msgstr "Help BOXDREAM: "
+
+#: .\app_helpdream\templates\dream_detail.html:162
+msgid "Комментарии:"
+msgstr "Comments:"
+
+#: .\app_helpdream\templates\dream_detail.html:175
+msgid "Написать"
+msgstr "Write"
+
+#: .\app_helpdream\templates\dream_detail.html:195
+msgid "Комментариев нет..."
+msgstr "No comments..."
+
+#: .\app_helpdream\templates\edit_profile.html:16
+msgid "Редактирование инфы:"
+msgstr "Editing information:"
+
+#: .\app_helpdream\templates\edit_profile.html:23
+#: .\app_helpdream\templates\edit_profile.html:42
+msgid "изменить"
+msgstr "change"
+
+#: .\app_helpdream\templates\edit_profile.html:24
+#: .\app_helpdream\templates\edit_profile.html:43
+msgid "назад"
+msgstr "back"
+
+#: .\app_helpdream\templates\edit_profile.html:31
+msgid "Редактирование пароля:"
+msgstr "Password editing:"
+
+#: .\app_helpdream\templates\history_win_dreams.html:14
+msgid "Результат розыгрыша"
+msgstr "Draw result"
+
+#: .\app_helpdream\templates\history_win_dreams.html:15
+#, fuzzy
+#| msgid "Boxdream"
+msgid "Boxdream "
+msgstr "Boxdream"
+
+#: .\app_helpdream\templates\history_win_dreams.html:16
+#, fuzzy
+#| msgid ""
+#| "В этом списке можете быть вы!<br> Здесь показана история розыгрыша нашего "
+#| "Boxdream. "
+msgid ""
+"В этом списке можете быть вы!<br> Здесь показана история розыгрышей нашего "
+"Boxdream. "
+msgstr ""
+"You could be on this list!<br> Here is the history of our draw Boxdream"
+
+#: .\app_helpdream\templates\history_win_dreams.html:28
+msgid "Розыгрыш №"
+msgstr "Draw №"
+
+#: .\app_helpdream\templates\history_win_dreams.html:29
+msgid "Дата: "
+msgstr "Date: "
+
+#: .\app_helpdream\templates\index.html:15
+msgid ""
+"Любая мечта – теперь реальность.<br> Исполнить мечту можно, помогая не "
+"только себе, но и другим людям. Тысячи из нас хотят, чтобы их желание скорее "
+"исполнилось и уже выставляют свою цель на наш сайт. Вы сами выбираете, какую "
+"мечту хотите исполнить, а ведь можно осчастливить сразу нескольких людей!"
+"<br><br> HELP DREAM – это сервис, где каждый может помочь друг-другу, "
+"достаточно пополнить чье-то желание. После того, как нужная сумма будет "
+"собрана, средства автоматически переводятся на счёт. Если собранная сумма "
+"будет больше указанной, деньги перечислятся в общий фонд сервиса"
+msgstr ""
+"Any dream is now a reality.<br> You can fulfill a dream by helping not only "
+"to ourselves, but also to other people. Thousands of us want their wish to "
+"come soonfulfilled and are already setting their goal on our website. You "
+"choose which You want to fulfill your dream, but you can make several people "
+"happy at once!<br><br> HELP DREAM is a service where everyone can help each "
+"other, it is enough to replenish someone's desire. After the required amount "
+"is collected, the funds are automatically transferred to the account. If the "
+"collected amount will be more than specified, the money will be transferred "
+"to the general fund of the service"
+
+#: .\app_helpdream\templates\index.html:43
+msgid "Как исполнить мечту?"
+msgstr "How to fulfill a dream?"
+
+#: .\app_helpdream\templates\index.html:49
+msgid "Написать свою мечту"
+msgstr "write your dream"
+
+#: .\app_helpdream\templates\index.html:50
+msgid "Загрузите фотографии и опишите на какую мечту Вы собираете"
+msgstr "Upload photos and describe what dream you are going for"
+
+#: .\app_helpdream\templates\index.html:55
+msgid "Собрать средства"
+msgstr "Raise funds"
+
+#: .\app_helpdream\templates\index.html:56
+msgid "С помощью не равнодушных людей собираете на свою мечту"
+msgstr ""
+"With the help of people who are not indifferent, you collect for your dream"
+
+#: .\app_helpdream\templates\index.html:60
+msgid "Исполнить свою мечту"
+msgstr "Fulfill your dream"
+
+#: .\app_helpdream\templates\index.html:61
+msgid "И не забудьте сами кому то помочь!"
+msgstr "And don't forget to help someone!"
+
+#: .\app_helpdream\templates\index.html:72
+msgid "Хочу написать свою мечту"
+msgstr "I want to write my dream"
+
+#: .\app_helpdream\templates\messages_good.html:16
+msgid "Ваше сообщение успешно отправлено!"
+msgstr "Your message has been sent successfully!"
+
+#: .\app_helpdream\templates\messages_good.html:17
+msgid "Сейчас вы автоматически будете перенаправлены, где были!"
+msgstr "Now you will automatically be redirected to where you were!"
+
+#: .\app_helpdream\templates\messages_good.html:18
+#: .\app_helpdream\templates\operation_ok.html:18
+#: .\app_helpdream\templates\operations_errors.html:18
+msgid "Если этого не произошло, нажмите сюда"
+msgstr "If it doesn't, click here"
+
+#: .\app_helpdream\templates\operation_ok.html:16
+msgid "Операция выполнена успешно!"
+msgstr "Operation completed successfully!"
+
+#: .\app_helpdream\templates\operation_ok.html:17
+#: .\app_helpdream\templates\operations_errors.html:17
+msgid "Сейчас вы автоматически будете перенаправлены в личный кабинет!"
+msgstr "Now you will be automatically redirected to your personal account!"
+
+#: .\app_helpdream\templates\operations_errors.html:16
+msgid "ОШИБКА, что то пошло не так!"
+msgstr "ERROR, something went wrong!"
+
+#: .\app_helpdream\templates\other_dreams.html:20
+msgid "Другие мечты"
+msgstr "Other dreams"
+
+#: .\app_helpdream\templates\other_dreams.html:21
+msgid ""
+"Каждый час HELP DREAM исполняет мечты наших пользователей. Мы стремимся к "
+"регулярному исполнению мечт, поэтому прямо сейчас вы можете ознакомится с "
+"самыми заветными желаниями других людей. Каждая мечта достойна исполнения, "
+"независимо от стоимости и величины «хотения»."
+msgstr ""
+"Every hour HELP DREAM fulfills the dreams of our users. We strive to regular "
+"fulfillment of dreams, so right now you can get acquainted with the most "
+"cherished desires of other people. Every dream is worthy of fulfillment, "
+"regardless of the cost and magnitude of the 'want'."
+
+#: .\app_helpdream\templates\other_dreams.html:22
+msgid ""
+"Мы настроены на то, чтобы люди были счастливы и поддерживали друг-друга, "
+"поэтому HELP DREAM – это проект, который направлен на создание позитивных "
+"эмоций и доброй энергетики."
+msgstr ""
+"We are determined to ensure that people are happy and support each other,"
+"that's why HELP DREAM is a project that aims to create positive emotions and "
+"good energy."
+
+#: .\app_helpdream\templates\other_dreams.html:70
+msgid "комментарии"
+msgstr "comments"
+
+#: .\app_helpdream\templates\register.html:32
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#: .\app_helpdream\templates\registration\password_reset_complete_new.html:17
+msgid "Восстановление пароля завершено"
+msgstr "Password recovery completed"
+
+#: .\app_helpdream\templates\registration\password_reset_complete_new.html:18
+msgid "Ваш пароль был сохранен. Теперь вы можете "
+msgstr "Your password has been saved. Now you can"
+
+#: .\app_helpdream\templates\registration\password_reset_complete_new.html:18
+msgid "войти"
+msgstr "log in"
+
+#: .\app_helpdream\templates\registration\password_reset_confirm_new.html:17
+msgid "Введите новый пароль"
+msgstr ""
+
+#: .\app_helpdream\templates\registration\password_reset_confirm_new.html:30
+msgid "Изменить мой пароль"
+msgstr "Change my password"
+
+#: .\app_helpdream\templates\registration\password_reset_confirm_new.html:33
+msgid ""
+"Пожалуйста, введите новый пароль дважды, чтобы мы могли убедиться в "
+"правильности написания."
+msgstr ""
+"Please enter your new password twice so we can verify correct spelling."
+
+#: .\app_helpdream\templates\registration\password_reset_done_new.html:17
+#: .\app_helpdream\templates\registration\password_reset_form_new.html:17
+msgid "Сброс пароля"
+msgstr "Password reset"
+
+#: .\app_helpdream\templates\registration\password_reset_done_new.html:18
+msgid ""
+"Мы отправили вам инструкцию по установке нового пароля на указанный адрес "
+"электронной почты. Вы должны получить ее в ближайшее время"
+msgstr ""
+"We have sent you instructions on how to set a new password to the address "
+"you providedemail. You should receive it soon"
+
+#: .\app_helpdream\templates\registration\password_reset_done_new.html:19
+msgid ""
+"Если вы не получили письмо, пожалуйста, убедитесь, что вы ввели адрес с "
+"которым Вы зарегистрировались, и проверьте папку со спамом."
+msgstr ""
+"If you didn't receive an email, please make sure you entered the address "
+"with which you signed up with and check your spam folder."
+
+#: .\app_helpdream\templates\registration\password_reset_form_new.html:25
+#: .\app_helpdream\templates\restore_password.html:26
+msgid "Отправить новый пароль"
+msgstr "Send new password"
+
+#: .\app_helpdream\templates\restore_password.html:17
+msgid "Восстановление пароля"
+msgstr "Password recovery"
+
+#: .\app_helpdream\templates\top.html:14
+msgid "Топ людей"
+msgstr "Top people"
+
+#: .\app_helpdream\templates\top.html:15
+msgid "которые помогли "
+msgstr "who helped "
+
+#: .\app_helpdream\templates\top.html:16
+msgid "осуществить мечту"
+msgstr "fulfill the dream"
+
+#: .\app_helpdream\templates\top.html:17
+msgid ""
+"В этом списке можете быть вы! Помогайте исполнять мечту чаще других и "
+"получайте приятные поощрения в виде высокого рейтинга. И это еще не все! Чем "
+"больше ваш рейтинг, тем больше призов и акций ждёт вас на нашем сайте. "
+"Помогайте с удовольствием. "
+msgstr ""
+"You can be on this list! Help fulfill a dream more often than others andget "
+"nice rewards in the form of a high rating. And that's not all! Than The "
+"higher your rating, the more prizes and promotions await you on our website."
+"Help with pleasure."
+
+#: .\app_helpdream\templates\top.html:31
+msgid "место"
+msgstr "place"
+
+#: .\app_helpdream\templates\user_lk.html:16
+#, fuzzy
+#| msgid "Личный  кабинет "
+msgid "Личный кабинет "
+msgstr "Personal Area "
+
+#: .\app_helpdream\templates\user_lk.html:17
+msgid "Редактировать"
+msgstr "Edit"
+
+#: .\app_helpdream\templates\user_lk.html:20
+msgid "Ваш логин: "
+msgstr "Your login: "
+
+#: .\app_helpdream\templates\user_lk.html:22
+msgid "Ваш email: "
+msgstr "Your email: "
+
+#: .\app_helpdream\templates\user_lk.html:25
+msgid "Ваш имя: "
+msgstr "Your name: "
+
+#: .\app_helpdream\templates\user_lk.html:27
+msgid "Ваш возраст: "
+msgstr "Your age: "
+
+#: .\app_helpdream\templates\user_lk.html:29
+msgid "Дата рождения: "
+msgstr "Date of Birth: "
+
+#: .\app_helpdream\templates\user_lk.html:31
+msgid "Ваш телефон: "
+msgstr "Your phone: "
+
+#: .\app_helpdream\templates\user_lk.html:33
+msgid "Ваш пол: "
+msgstr "Your gender: "
+
+#: .\app_helpdream\templates\user_lk.html:38
+msgid "Дополнить информацию о себе"
+msgstr "Add information about yourself"
+
+#: .\app_helpdream\templates\user_lk.html:45
+msgid "сохранить"
+msgstr "save"
+
+#: .\app_helpdream\templates\user_lk.html:64
+msgid "Баланс:"
+msgstr "Balance:"
+
+#: .\app_helpdream\templates\user_lk.html:86
+msgid "Вы помогли на:"
+msgstr "You have helped on:"
+
+#: .\app_helpdream\templates\user_lk.html:86
+msgid " ₽"
+msgstr " ₽"
+
+#: .\app_helpdream\templates\user_lk.html:88
+msgid "Ваш ранг"
+msgstr "Your rank"
+
+#: .\app_helpdream\templates\user_lk.html:91
+msgid "УЗАТЬ О СИСТЕМЕ РАНГОВ"
+msgstr "LEARN ABOUT THE RANKING SYSTEM"
+
+#: .\app_helpdream\templates\user_lk.html:95
+msgid "Вам доступно:"
+msgstr "You have access to:"
+
+#: .\app_helpdream\templates\user_lk.html:97
+msgid "Написать до "
+msgstr "Write to "
+
+#: .\app_helpdream\templates\user_lk.html:97
+msgid "активных желаний "
+msgstr "active desires "
+
+#: .\app_helpdream\templates\user_lk.html:98
+msgid "Создать мечту до"
+msgstr "Create a dream before"
+
+#: .\app_helpdream\templates\user_lk.html:99
+msgid "В разработке..."
+msgstr "In developing..."
+
+#: .\app_helpdream\templates\user_lk.html:106
+msgid "Активные: "
+msgstr "Active: "
+
+#: .\app_helpdream\templates\user_lk.html:146
+msgid "Отменить"
+msgstr "Cancel"
+
+#: .\app_helpdream\templates\user_lk.html:157
+msgid "В ожидании: "
+msgstr "Pending: "
+
+#: .\app_helpdream\templates\user_lk.html:196
+msgid "Активировать"
+msgstr "Activate"
+
+#: .\app_helpdream\templates\user_lk.html:197
+msgid "Удалить"
+msgstr "Delete"
+
+#: .\app_helpdream\templates\user_lk.html:208
+msgid "Завершенные: "
+msgstr "Completed: "
+
+#: .\app_helpdream\templates\user_lk.html:228
+msgid "Собрано: "
+msgstr "Collected: "
+
+#: .\app_helpdream\templates\write-dream.html:14
+msgid "Написать мечту"
+msgstr "Write a dream"
+
+#: .\app_helpdream\templates\write-dream.html:21
+#, fuzzy
+#| msgid "Вам доступно:"
+msgid "Почему доступно только"
+msgstr "You have access to:"
+
+#: .\app_helpdream\templates\write-dream.html:24
+msgid "Создать мечту"
+msgstr "Create a dream"
+
+#: .\app_helpdream\templates\write-dream.html:25
+msgid "Чтобы создать мечту авторизуйтесь"
+msgstr "To create a dream, log in"
+
+#, fuzzy
+#~| msgid "BOXDREAM"
+#~ msgid "BOXDREAM "
+#~ msgstr "BOXDREAM"

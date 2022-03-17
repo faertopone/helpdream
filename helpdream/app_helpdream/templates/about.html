@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+{% block bodystart %}
+    <div class="container main-page">
+{% endblock %}
+{% block main %}
+
+<main class="main-page-content">
+            <div class="about-us">
+                    <div class="main-desc rashid">
+                        <h1 class="main-heading">{% trans 'О проекте Help Dream' %} <br>
+                                </h1>
+                       <p class="heading-txt rashid">{% trans 'Этот проект создан, для того что бы, можно было помогать всем людям.<br> <br>Цель проекта -  это помощь обычным людям! На сайте присутствует система  рангов! ' %}
+                            </p>
+                    </div>
+
+                    <div class="main-replenish rashid">
+                        <img src="{% static 'img/Maintenance  Product  Illustration.svg' %}" alt="bag of coins" class="pic-coins top_icons" width="70%" height="auto">
+
+                    </div>
+
+           </div>
+
+               <div class="about_content">
+
+                    <div class="about_my_info">
+                    <h3 class="about__title">{% trans 'Всякая информация' %}</h3>
+                        <div class="about__content">
+                            <div class="about__content__left">
+                                <img src="{% static 'img/about_.svg' %}" alt="мое фото" class="my_photo">
+                            </div>
+                            <div class="about__content__right">
+                                {% trans 'В разработке' %}
+                            </div>
+                        </div>
+                    </div>
+
+                   <div class="about__feedback">
+                       <h3 class="about__title">{% trans 'Напишите свое мнение' %}</h3>
+                       <div class="wrapp_form__feedback">
+                           <form method="post" class="form__feedback">
+                               {% csrf_token %}
+                               {{ form.as_p }}
+                                <button class="btn feedback_btn">{% trans 'Отправить' %}</button>
+                           </form>
+
+
+
+                       </div>
+                   </div>
+
+                   <div class="about__help-donat">
+                      <h3 class="about__title">{% trans 'Помочь проекту' %}</h3>
+                       <div class="about__content__donate_text">
+
+                           <a class="btn_alerts" href="https://www.donationalerts.com/r/faertop_1"> donationalerts </a> <br>
+                           <a class="btn_sberbank" href="https://pay.mysbertips.ru/10429186"> Sberbank </a> <br>
+                       </div>
+                  </div>
+
+               </div>
+
+
+
+        </main>
+    </div>
+
+{% endblock %}

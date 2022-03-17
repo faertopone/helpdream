@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+            {%  load i18n %}
+            {% load static %}
+            {% load humanize %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+        {# swiper #}
+     <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    {#  tooltipe  #}
+    <link rel="stylesheet" href="{% static 'css/simplebar.css' %}">
+     <link rel="stylesheet" href="{% static "css/style.css" %}">
+{% block head %} {% endblock %}
+
+</head>
+
+<body>
+
+{% block bodystart %}
+{% endblock %}
+
+{% block header %}
+<header class="header">
+            <div class="header-top">
+
+                <a href="{% url 'index' %}" style="text-decoration: none;"><span class="logo-name"><img  style="vertical-align: bottom" src="{% static 'img/LOGO1.png' %}"></span></a>
+                <input id="menu-toggle" type="checkbox">
+                <label class="menu-btn" for="menu-toggle">
+                    <span></span>
+                </label>
+                <nav class="nav nav-header">
+                    <a href="{% url 'writedream' %}" class="nav-link">{% trans 'Создать' %}</a>
+                    <a href="{% url 'otherdream' %}" class="nav-link">{% trans 'Активные' %}</a>
+                    <a href="{% url 'complete_dreams' %}" class="nav-link">{% trans 'Завершенные' %}</a>
+                    <a href="{% url 'top' %}" class="nav-link">{% trans 'Топ' %}</a>
+                    <a href="{% url 'boxdream' %}" class="nav-link">{% trans 'Boxdream' %}</a>
+                    <a href="{% url 'about' %}" class="nav-link">{% trans 'О проекте' %}</a>
+                </nav>
+                <div class="login-wrp">
+
+
+
+                    {% if request.user.is_authenticated and not request.user.is_superuser%}
+                        <a href="{% url 'user_lk' %}" class="login-btn">{{ request.user.username }}</a>
+                         <a href="{% url 'logout' %}" class="logout__wrapp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="js-tooltip--logout" data-tippy-content="Выйти">
+                        <path fill="#682A72"  d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                </a>
+                    {% else %}
+                      <a href="{% url 'login' %}" class="login-btn">{% trans 'Войти' %}</a>
+
+                {% endif %}
+                    {% if request.user.is_superuser %}
+                        <a href="/admin/" class="login-btn">{% trans 'АДМИН ПАНЕЛЬ' %}</a>
+                        {% endif %}
+
+                    <a {% if request.user.is_authenticated %} href="{% url 'user_lk' %}"{% endif %}><img class="avatar_mini_img user-avatar" src=" {% static 'img/user-avatar.svg' %}" alt="user avatar"></a>
+
+
+                </div>
+            </div>
+
+
+        </header>
+
+{% endblock %}
+
+{% block main %}
+
+{% endblock %}
+
+
+<footer>
+        {% block footer %}
+      <footer class="footer">
+            <div class="footer-top">
+                <nav class="nav nav-footer">
+                    <span class="logo-name ft_img">Help dream</span>
+                    <a href="{% url 'writedream' %}" class="nav-link ft">{% trans 'Создать' %}</a>
+                    <a href="{% url 'otherdream' %}" class="nav-link ft">{% trans 'Активные' %}</a>
+                    <a href="{% url 'complete_dreams' %}" class="nav-link ft">{% trans 'Завершенные' %}</a>
+                    <a href="{% url 'top' %}" class="nav-link ft">{% trans 'Топ' %}</a>
+                    <a href="{% url 'boxdream' %}" class="nav-link ft">{% trans 'Boxdream' %}</a>
+                    <a href="{% url 'about' %}" class="nav-link ft">{% trans 'О проекте' %}</a>
+                    <div class="wrapper__locale">
+                    <form class="launge-form" action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <select name="language" class="launge">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %} >
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                                    {% endfor %}
+                        </select>
+                    </form>
+                 </div>
+                </nav>
+                <button id="topNubex" class="top-arrow-btn"></button>
+            </div>
+            <div class="socials-block">
+                <a href="#" class="social-item">
+                    <svg width="19" height="10" viewBox="0 0 19 10" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M15.7666 5.73429C15.4594 5.38429 15.5473 5.22857 15.7666 4.91571C15.7705 4.91214 18.3063 1.75071 18.5676 0.678571L18.5692 0.677857C18.699 0.287143 18.5692 0 17.9414 0H15.864C15.3351 0 15.0913 0.246429 14.9606 0.522143C14.9606 0.522143 13.9029 2.80643 12.4066 4.28714C11.9237 4.715 11.7004 4.85214 11.4368 4.85214C11.307 4.85214 11.1051 4.715 11.1051 4.32429V0.677857C11.1051 0.209286 10.957 0 10.5192 0H7.25271C6.92099 0 6.72386 0.218571 6.72386 0.422143C6.72386 0.866429 7.47201 0.968571 7.5496 2.21857V4.93071C7.5496 5.525 7.43005 5.63429 7.16483 5.63429C6.45864 5.63429 4.74462 3.34071 3.72888 0.715714C3.52383 0.206428 3.32353 0.000714234 2.79072 0.000714234H0.712525C0.119546 0.000714234 0 0.247143 0 0.522857C0 1.01 0.706191 3.43214 3.28395 6.63214C5.00192 8.81643 7.42134 10 9.62225 10C10.9452 10 11.1067 9.73714 11.1067 9.285C11.1067 7.19786 10.9871 7.00071 11.6498 7.00071C11.957 7.00071 12.4858 7.13786 13.7208 8.19143C15.1324 9.44071 15.3644 10 16.1545 10H18.2319C18.8241 10 19.1242 9.73714 18.9516 9.21857C18.5565 8.12786 15.8869 5.88429 15.7666 5.73429Z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-item">
+                    <svg width="19" height="14" viewBox="0 0 19 14" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.45544 9.22694L7.14115 13.1357C7.59082 13.1357 7.78558 12.9649 8.01912 12.7598L10.1274 10.9783L14.4959 13.807C15.2971 14.2018 15.8616 13.9939 16.0777 13.1553L18.9452 1.27498L18.946 1.27428C19.2001 0.227083 18.5177 -0.182415 17.7371 0.0744835L0.882079 5.78015C-0.268241 6.17495 -0.250824 6.74195 0.686532 6.99885L4.99568 8.18394L15.005 2.64627C15.476 2.37047 15.9043 2.52307 15.552 2.79887L7.45544 9.22694Z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-item">
+                    <svg width="17" height="18" viewBox="0 0 17 18" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0)">
+                            <path
+                                d="M8.56813 4.59985C6.21965 4.59985 4.31836 6.50321 4.31836 8.84962C4.31836 11.1981 6.22172 13.0994 8.56813 13.0994C10.9166 13.0994 12.8179 11.196 12.8179 8.84962C12.8179 6.50114 10.9145 4.59985 8.56813 4.59985ZM8.56813 11.608C7.04365 11.608 5.80971 10.3734 5.80971 8.84962C5.80971 7.32583 7.04434 6.09121 8.56813 6.09121C10.0919 6.09121 11.3265 7.32583 11.3265 8.84962C11.3272 10.3734 10.0926 11.608 8.56813 11.608Z" />
+                            <path
+                                d="M11.9803 0.626184C10.4565 0.555101 6.68221 0.558552 5.15704 0.626184C3.81683 0.688985 2.63465 1.01265 1.68159 1.96571C0.0887879 3.55851 0.292374 5.70479 0.292374 8.85244C0.292374 12.0739 0.112942 14.1705 1.68159 15.7392C3.2806 17.3375 5.45793 17.1284 8.56831 17.1284C11.7594 17.1284 12.8609 17.1305 13.9892 16.6936C15.5234 16.098 16.6814 14.7268 16.7946 12.2637C16.8663 10.7392 16.8622 6.96564 16.7946 5.44047C16.6579 2.53299 15.0976 0.769729 11.9803 0.626184ZM14.3923 14.6853C13.3481 15.7295 11.8995 15.6363 8.5483 15.6363C5.09769 15.6363 3.714 15.6874 2.70435 14.675C1.54149 13.5177 1.75198 11.6592 1.75198 8.8414C1.75198 5.02847 1.36068 2.28248 5.18741 2.08648C6.06662 2.05543 6.32542 2.04507 8.53864 2.04507L8.56969 2.06578C12.2474 2.06578 15.1327 1.68069 15.306 5.50673C15.3453 6.37973 15.3543 6.64198 15.3543 8.85175C15.3536 12.2623 15.4185 13.6543 14.3923 14.6853Z" />
+                            <path
+                                d="M12.9865 5.42556C13.535 5.42556 13.9796 4.98094 13.9796 4.43248C13.9796 3.88401 13.535 3.43939 12.9865 3.43939C12.438 3.43939 11.9934 3.88401 11.9934 4.43248C11.9934 4.98094 12.438 5.42556 12.9865 5.42556Z" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0">
+                                <rect width="16.5629" height="16.5629" transform="translate(0.283936 0.571045)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </a>
+                <a href="#" class="social-item"><svg width="17" height="18" viewBox="0 0 17 18"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12.0953 10.4456L12.0891 10.4973C10.5715 9.74096 10.4128 9.6402 10.2168 9.93419C10.0809 10.1378 9.68475 10.5995 9.56536 10.7361C9.44459 10.8707 9.32451 10.881 9.11955 10.7879C8.91252 10.6843 8.24794 10.467 7.46122 9.76304C6.8484 9.21441 6.43709 8.54155 6.31563 8.33452C6.11343 7.98532 6.53647 7.93563 6.92155 7.20688C6.99056 7.06195 6.95536 6.94809 6.9043 6.84526C6.85254 6.74174 6.44054 5.72728 6.26802 5.32288C6.10239 4.91985 5.93193 4.97092 5.80426 4.97092C5.40676 4.93642 5.11622 4.94194 4.86019 5.20832C3.74635 6.43257 4.02723 7.69547 4.98027 9.03843C6.85323 11.4897 7.85113 11.941 9.67578 12.5676C10.1685 12.7243 10.6178 12.7022 10.9732 12.6512C11.3693 12.5884 12.1926 12.1536 12.3644 11.6671C12.5404 11.1805 12.5404 10.7768 12.4887 10.6837C12.4376 10.5905 12.3023 10.5387 12.0953 10.4456Z" />
+                        <path
+                            d="M14.1752 2.95153C8.86896 -2.17805 0.0873118 1.54233 0.0838612 8.77882C0.0838612 10.2253 0.462732 11.6359 1.18459 12.8815L0.0141602 17.134L4.38601 15.9939C9.84132 18.9407 16.574 15.0278 16.5768 8.78296C16.5768 6.59117 15.7211 4.52843 14.1649 2.97845L14.1752 2.95153ZM15.198 8.76019C15.1938 14.0278 9.41138 17.3175 4.83803 14.6289L4.58959 14.4812L2.00168 15.1541L2.69524 12.6386L2.5303 12.3798C-0.315712 7.84924 2.95403 1.9281 8.34517 1.9281C10.1767 1.9281 11.8958 2.64236 13.1904 3.93632C14.4844 5.21923 15.198 6.9383 15.198 8.76019Z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-bottom">
+                <div class="dev-info">
+                    <span class="confiendiality">{% trans 'Политика конфиденциальности' %}</span>
+                    <span class="development">{% trans 'Сайт разработан' %} <a href="https://vk.com/best_papa_man/">FaerTop</a></span>
+                </div>
+                <span class="copyright">Copyright © HELP DREAM 2022</span>
+            </div>
+        </footer>
+
+ {% endblock %}
+ </footer>
+
+
+{# ДЛЯ ТЕСТА САЙТА ОБЯЬВЛЕНИЕ #}
+
+<div class="testing_site">
+    Режим "TEST"
+</div>
+
+
+
+{# Для ckeditors #}
+{#    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
+{#    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
+
+    <script src="{% static 'js/swiper-bundle.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/inputmask.min.js' %}"></script>
+    <script src="{% static 'js/simplebar.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/just-validate.min.js' %}"></script>
+    <script src="{% static 'js/tippy-bundle.umd.min.js' %}"></script>
+
+  <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

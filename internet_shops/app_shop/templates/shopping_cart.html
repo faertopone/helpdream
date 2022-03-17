@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+
+
+{% block main %}
+       <section class="profile__section">
+       <h2 class="title_main title__cart">{% trans 'Ваша корзина' %} {{ profile_user.user.firstname }} ({{ cart.items.count }})</h2>
+       <h2 class="title_main title__cart">  {{ error_messages }}</h2>
+            <div class="wrapper__item-info">
+                    {% for item in cart.items.all %}
+                        <div class="item_info">
+
+                            <ul class="menu__profile">
+
+                                <h2 class="title title__user-profile">  {{ item.name }} </h2>
+                                <li class="list__items-profile"> {% trans 'Описание: ' %} {{ item.description }}</li>
+                                 <li class="list__items-profile"> {% trans 'Цена: ' %}{{ item.price }} {% trans 'руб.' %}</li>
+                                         <li class="list__items-profile"> {% trans 'Количество: ' %} {{ item.count_pay }} {% trans 'штук' %}</li>
+                                         <li class="list__items-profile"> {% trans 'Категория товара: ' %} {{ item.category_item }}</li>
+
+                                    <ul class="shop_list">
+                                        <h3 class="shop__title">{% trans 'В магазинах: ' %} </h3>
+                                         {% for i_shop in item.shops.all %}
+                                        <li class="shop_item"> {{ i_shop.name }} </li>
+                                             {% endfor %}
+                                    </ul>
+
+                            </ul>
+
+                    </div>
+                        {% endfor %}
+            </div>
+        <h2 class="title_main title__cart">{% trans 'Товаров на сумму: ' %}{{ price_all_itmes }} {% trans 'руб.' %}</h2>
+                                                                {% if cart.items.all %}
+                                                            <form method="post" class="form__cart">
+                                                                {% csrf_token %}
+                                                                <button class="btn btn__cart" type="submit">{% trans 'Купить' %}</button>
+                                                            </form>
+                                                            {% endif %}
+       </section>
+
+
+{% endblock %}

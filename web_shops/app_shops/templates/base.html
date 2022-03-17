@@ -44,6 +44,10 @@
 </div>
 <ul class="header__menu">
     <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'index' %}">{% trans 'ДОМОЙ' %} </a></li>
+    <li class="header__menu-item"><a class="link-header link-header-user" href="/api/users/">{% trans 'АПИ МОДУЛЬ' %} </a></li>
+  <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'book_List' %}">{% trans 'АПИ МОДУЛЬ BOOK' %} </a></li>
+  <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'author_books' %}">{% trans 'АПИ МОДУЛЬ AUTHOR BOOK' %} </a></li>
+ <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'json_items' %}">{% trans 'АПИ МОДУЛЬ_ITEMS' %} </a></li>
                    <li class="header__menu-item">{% if request.user.is_authenticated %}
                        <div class="header__profile-user">
                             <div class="active_user">

@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+            {%  load i18n %}
+            {% load static %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+     <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+{% block head %} {% endblock %}
+  <title>{% block title %} {% trans 'Веб магазин' %} {% endblock %} </title>
+</head>
+
+
+ <body> <h1 class="visually-hidden"> {% trans 'Веб магазин' %} </h1>
+
+<main class="main">
+
+<div class="container main-page">
+ <header class="header">
+ {% block header %}  {% endblock %}
+<div class="local">
+  <form class="launge-form" action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language" class="launge">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %} >
+            {{ language.name_local }} ({{ language.code }})
+        </option>
+                {% endfor %}
+    </select>
+</form>
+</div>
+<ul class="header__menu">
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'index' %}">{% trans 'ДОМОЙ' %} </a></li>
+    {% if  not request.user.is_superuser %}
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'items_list' %}">{% trans 'Список товаров' %} </a></li>
+    {% if request.user.is_authenticated %}
+      <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'profile_info' %}">{% trans 'Ваш профиль' %} </a></li>
+              <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'cart' %}">{% trans 'Корзина' %} </a></li>
+      <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'logout' %}">{% trans 'Выйти' %} </a></li>
+    {% else %}
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'login' %}">{% trans 'ВОЙТИ' %} </a></li>
+    <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'register' %}">{% trans 'Регистрация' %} </a></li>
+    {% endif %}
+{% else %}
+    <li class="header__menu-item"><a class="link-header link-header-user" href="admin/">{% trans 'АДМИН ПРОФИЛЬ' %} </a></li>
+        <li class="header__menu-item"><a class="link-header link-header-user" href="{% url 'logout' %}">{% trans 'Выйти' %} </a></li>
+{% endif %}
+</ul>
+ </header>
+
+</div>
+    {% block main %} {% endblock %}
+</main>
+
+<footer>
+    {% block footer %} {% endblock %}
+ </footer>
+
+     <script src="{% static 'js/inputmask.min.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+
+</main>
+</body>
+</html>

@@ -4,6 +4,7 @@ import os
 from datetime import datetime, date, time
 
 
+
 class LogginsMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response

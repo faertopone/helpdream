@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+{% block main %}
+
+    <section class="profile__section">
+        <div class="wrapper__item-info">
+         <div class="item_info">
+                <ul class="menu__profile">
+
+                    <h2 class="title title__user-profile">  {{ detail_items.name }} </h2>
+                    <li class="list__items-profile"> {% trans 'Описание: ' %} {{ detail_items.description }}</li>
+                     <li class="list__items-profile"> {% trans 'Цена: ' %}{{ detail_items.price }} {% trans 'руб.' %}</li>
+                             <li class="list__items-profile"> {% trans 'Количество на складе: ' %} {{ detail_items.amount_item }} {% trans 'штук' %}</li>
+                             <li class="list__items-profile"> {% trans 'Категория товара: ' %} {{ detail_items.category_item }}</li>
+
+                        <ul class="shop_list">
+                            <h3 class="shop__title">{% trans 'В магазинах: ' %} </h3>
+                             {% for i_shop in detail_items.shops.all %}
+                            <li class="shop_item"> {{ i_shop.name }} </li>
+                                 {% endfor %}
+                        </ul>
+
+                </ul>
+
+            {% if request.user.is_authenticated %}
+            <form method="post">
+            {% csrf_token %}
+                <input type="number" name="id_item" required id="id_id_item" style="display: none" value={{ detail_items.id }}>
+                <p class="count__item"> {% trans 'Сколько купить: ' %} {{ add_cart.count_item }} </p>
+                <button class="btn btn__register" type="submit" {% if not is_active %} disabled {% endif %}> {% trans 'Добавить в корзину' %}</button>
+
+            </form>
+
+            {% else %}
+                <a href="{% url 'login' %}"> {% trans 'Чтобы купить сначало авторизируйтесь' %}</a>
+            {% endif %}
+
+    </div>
+
+{% endblock %}

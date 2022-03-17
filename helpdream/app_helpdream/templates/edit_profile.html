@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+
+{% block bodystart %}
+    <div class="container avtorization">
+{% endblock %}
+
+
+{% block main %}
+
+        <main class="auth-block">
+            <div class="login-block">
+
+                <span class="login-txt edit_profile_txt">{% trans 'Редактирование инфы:'%} </span>
+
+                <form class="auth-form edit_profile__form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+
+                    <div class="edit_profile__form--all_btn_wrapp">
+                        <button class="button edit_porfile__btn " type="submit">{% trans 'изменить' %}</button>
+                        <a href="{% url 'user_lk' %}" class="button edit_profile__link " >{% trans 'назад' %}</a>
+                    </div>
+
+                </form>
+
+
+
+                 <span class="login-txt edit_profile_txt_password">{% trans 'Редактирование пароля:'%} </span>
+
+                <form class="auth-form edit_profile__form" method="post">
+                    {% csrf_token %}
+                    {{ form_password.non_field_errors }}
+                    <p>{{form_password.old_password}}</p>
+                     <p>{{form_password.password1}}</p>
+                     <p>{{form_password.password2}}</p>
+                     <p>{{form_password.profile_id}}</p>
+
+                    <div class="edit_profile__form--all_btn_wrapp">
+                        <button class="button edit_porfile__btn " type="submit">{% trans 'изменить' %}</button>
+                        <a href="{% url 'user_lk' %}" class="button edit_profile__link " >{% trans 'назад' %}</a>
+                    </div>
+
+                </form>
+
+
+
+            </div>
+
+
+        </main>
+</div>
+{% block footer %} {% endblock %}
+{% endblock %}

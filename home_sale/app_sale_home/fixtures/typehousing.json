@@ -1,0 +1,1 @@
+[{"model": "app_sale_home.typehousing", "pk": 1, "fields": {"name": "жилое", "description": "нужен ремонт", "hous": 1}}, {"model": "app_sale_home.typehousing", "pk": 2, "fields": {"name": "Аренда", "description": "Под магазины", "hous": 2}}, {"model": "app_sale_home.typehousing", "pk": 3, "fields": {"name": "Комуналка", "description": "там нет бомжей", "hous": 3}}]
