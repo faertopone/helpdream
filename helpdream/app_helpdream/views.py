@@ -136,8 +136,6 @@ def boxdreamdraw(total_balanc_box, active_dreams):
         if len(win_list) == max_number_win or total_balanc_box.balance == 0:
             flag_draw = False
 
-    logger.info('Закончили цикл розыгрыша')
-
 
 def dream_checked(user_dream):
     """
@@ -218,12 +216,12 @@ def popolneni_boxdream(author, amount_box):
     box_dream.who_help_boxdream.add(who_help)
     box_dream.save()
 
-    logger.info('Попалли в йункцию popolneni_boxdream')
+
     activ_dreams = WriteDeam.objects.select_related('who_dream').filter(dream_is_active=True)
-    print(activ_dreams)
+
     if box_dream.balance >= BOX_DRAW_PRICE and activ_dreams.count() >= BOX_DRAW_DREAM:
         #тут если условия верны вызовем функцию где разыграем эту сумму
-        logger.info('вызываем функцию boxdreamdraw')
+
         boxdreamdraw(box_dream, activ_dreams)
         #Знаичт был роызгырш
         float_draw = True
@@ -313,6 +311,7 @@ class IndexView(View):
 
         boxdream = TotalBoxDream.objects.get(id=1)
         flag_dream = False
+        flag_next_popolnenie = False
         need_count_active_dream = 0
         activ_dreams_count = WriteDeam.objects.select_related('who_dream').filter(dream_is_active=True).count()
         Leftbeforethedraw = 100000 - boxdream.balance
@@ -321,12 +320,15 @@ class IndexView(View):
             if activ_dreams_count < BOX_DRAW_DREAM:
                 need_count_active_dream = BOX_DRAW_DREAM - activ_dreams_count
                 flag_dream = True
+            else:
+                flag_next_popolnenie = True
 
 
         return render(request, 'index.html', {'boxdream': boxdream,
                                               'Leftbeforethedraw': Leftbeforethedraw,
                                               'flag_dream': flag_dream,
-                                              'need_count_active_dream': need_count_active_dream})
+                                              'need_count_active_dream': need_count_active_dream,
+                                              'flag_next_popolnenie': flag_next_popolnenie})
 
 
 class LoginView(View):
@@ -939,7 +941,7 @@ class BoxDreamView(View):
         paginator = Paginator(boxdream_profiles, 10)  # Show 10 contacts per page.
         page_number = request.GET.get('page')
         boxdream_profiles = paginator.get_page(page_number)
-
+        flag_next_popolnenie = False
         flag_dream = False
         need_count_active_dream = 0
         activ_dreams_count = WriteDeam.objects.select_related('who_dream').filter(dream_is_active=True).count()
@@ -949,6 +951,9 @@ class BoxDreamView(View):
             if activ_dreams_count < BOX_DRAW_DREAM:
                 need_count_active_dream = BOX_DRAW_DREAM - activ_dreams_count
                 flag_dream = True
+            else:
+                flag_next_popolnenie = True
+
         form = PopolnenieBoxDream(initial={'max_balance_user': author_my_balance})
 
         return render(request, 'boxdream.html', {'form': form,
@@ -956,7 +961,8 @@ class BoxDreamView(View):
                                                  'boxdream_profiles': boxdream_profiles,
                                                  'Leftbeforethedraw': Leftbeforethedraw,
                                                  'need_count_active_dream': need_count_active_dream,
-                                                 'flag_dream': flag_dream})
+                                                 'flag_dream': flag_dream,
+                                                 'flag_next_popolnenie': flag_next_popolnenie})
 
 
     def post(self, request):
@@ -968,7 +974,7 @@ class BoxDreamView(View):
         paginator = Paginator(boxdream_profiles, 10)  # Show 10 contacts per page.
         page_number = request.GET.get('page')
         boxdream_profiles = paginator.get_page(page_number)
-
+        flag_next_popolnenie = False
         flag_dream = False
         need_count_active_dream = 0
         activ_dreams_count = WriteDeam.objects.select_related('who_dream').filter(dream_is_active=True).count()
@@ -978,6 +984,8 @@ class BoxDreamView(View):
             if activ_dreams_count < BOX_DRAW_DREAM:
                 need_count_active_dream = BOX_DRAW_DREAM - activ_dreams_count
                 flag_dream = True
+            else:
+                flag_next_popolnenie = True
 
         if form.is_valid():
             amount_box = form.cleaned_data.get('amount_box')
@@ -990,7 +998,8 @@ class BoxDreamView(View):
                                                  'boxdream_profiles': boxdream_profiles,
                                                  'Leftbeforethedraw': Leftbeforethedraw,
                                                  'need_count_active_dream': need_count_active_dream,
-                                                 'flag_dream': flag_dream})
+                                                 'flag_dream': flag_dream,
+                                                 'flag_next_popolnenie': flag_next_popolnenie})
 
 
 class HistoryDrawBoxVIew(View):

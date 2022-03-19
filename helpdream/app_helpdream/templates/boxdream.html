@@ -23,16 +23,22 @@
                         <img src="{% static 'img/coins.png' %}" alt="bag of coins" class="pic-coins" width="296" height="296">
                         <span class="sum">{{ boxdream.balance|intcomma }} {% trans '₽' %} </span>
                         <span class="lottery-txt">{% trans 'До розыгрыша осталось:' %} </span>
+                     {% if flag_next_popolnenie %}
+                             <span class="lottery-counter__draw-text ">
+                                    {% trans 'Пополни на любую сумму и будет розыгрыш!' %}
+                              </span>
 
-                        {% if flag_dream %}
+                            {% else %}
+                                {% if flag_dream %}
+                                    <span class="lottery-counter__draw-text ">
+                                        {{ need_count_active_dream }} {% trans 'активных желаний' %}
+                                    </span>
 
-                        <span class="lottery-counter__draw-text ">
-                       {{ need_count_active_dream }} {% trans 'активных желаний' %}
-                        </span>
-                    {% else %}
-                    <span class="lottery-counter">
-                       {{ Leftbeforethedraw|intcomma }} {% trans '₽' %}
-                    </span>
+                                {% else %}
+                                    <span class="lottery-counter">
+                                       {{ Leftbeforethedraw|intcomma }} {% trans '₽' %}
+                                    </span>
+                                {% endif %}
                     {% endif %}
                          <div class="result_win_box">
                         <a href="{% url 'historywin' %}"><img src="{% static 'img/coins.png' %}" alt="bag of coins" class="result_win_box__img js-tooltip-right" data-tippy-content="Результаты розыгрыша"></a>
