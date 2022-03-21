@@ -606,6 +606,10 @@ label,
     color: #565656;
 }
 
+.register__form .errorlist{
+    color: white;
+}
+
 .dream_detail_img{
     width: 378px;
     height: 378px;

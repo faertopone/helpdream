@@ -22,7 +22,8 @@
                 <form class="auth-form register__form" method="post">
                     {% csrf_token %}
                     {{ form.username.errors }}
-                    {{form.username}}
+                    {{ form.username}}
+                    {{ form.password2.errors }}
                     {{ form.password1 }}
                     {{ form.password2 }}
                     {{ form.non_field_errors }}

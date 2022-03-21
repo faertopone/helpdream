@@ -14,7 +14,9 @@
                 <div class="main-desc rashid">
                     <div class="kakoy">
                         <h1 class="main-heading title__lk">{% trans 'Личный кабинет ' %}</h1>
+                    {% if user_lk.all_info_user %}
                         <a class="edit_profile_link" href="{% url 'edit_profile' pk=user_lk.pk %}"> {% trans 'Редактировать' %}</a>
+                    {% endif %}
 
 
                         <p>{% trans 'Ваш логин: ' %}{{ user_lk.user.username }}</p>

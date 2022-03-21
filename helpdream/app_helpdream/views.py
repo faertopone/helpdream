@@ -375,7 +375,6 @@ class RegisterView(View):
             profile_user.save()
             #===================================
 
-
             # далее сразу залогинимся
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
