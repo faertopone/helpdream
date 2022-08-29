@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+
+
+{% block bodystart %}
+    <div class="container avtorization">
+{% endblock %}
+
+
+{% block main %}
+
+        <main class="auth-block">
+            <div class="login-block">
+                <div class="log-in-txt">
+                    <span class="log-in">{% trans 'Войти' %}</span>
+                    <a href="{% url 'register' %}" class="sign-in">{% trans 'Регистрация' %}</a>
+                </div>
+                <span class="login-txt">{% trans 'Если у вас уже есть учетная запись, '%}<br>
+                    {% trans 'войдите в систему ниже. ' %}</span>
+                   {% if error_login_flag %}
+                    <p class="Errors_flag">{% trans 'Ошибка входа. Не вернные данные!' %}</p>
+                {% endif %}
+                <form class="auth-form login__form" method="post" >
+                    {% csrf_token %}
+                    {{form.username}}
+                    {{form.password}}
+                    <p class="remember_me">
+
+                    </p>
+                    <p class="submit"><button class="auth-submit button" type="submit">{% trans 'ВОЙТИ' %}</button></p>
+                </form>
+
+            </div>
+
+            <div class="login-help">
+                <a class="forget-pass" href="{% url 'password_reset' %}">{% trans 'Забыли Ваш пароль?' %}</a>
+                <span >{% trans 'Нет учетной записи?' %} <a class="reg-page" href="{% url 'register' %}">{% trans 'Зарегестрироваться' %}</a></span>
+            </div>
+        </main>
+</div>
+{% block footer %} {% endblock %}
+{% endblock %}

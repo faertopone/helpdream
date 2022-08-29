@@ -8,10 +8,6 @@ from django.utils.translation import gettext_lazy as _
 from ckeditor.widgets import CKEditorWidget
 
 from django.contrib.auth.forms import PasswordResetForm
-
-
-
-
 from .models import Comments, Profile
 
 

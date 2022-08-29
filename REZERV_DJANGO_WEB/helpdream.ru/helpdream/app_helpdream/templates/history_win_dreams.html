@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+{% load humanize %}
+
+{% block bodystart %}
+    <div class="container main-page">
+{% endblock %}
+{% block main %}
+
+<main class="main-page-content">
+            <div class="about-us">
+                <div class="main-desc rashid">
+                    <h1 class="main-heading">{% trans 'Результат розыгрыша' %} <br>
+                            {% trans 'BOXDREAM ' %} </h1>
+                   <p class="heading-txt rashid">{% trans 'В этом списке можете быть вы!<br> Здесь показана история розыгрыша нашего BOXDREAM. ' %}
+                        </p>
+                </div>
+                <div class="main-replenish rashid">
+                    <img src="{% static 'img/coins.png' %}" alt="bag of coins" class="pic-coins box_win_history_main" width="296" height="296">
+
+                </div>
+            </div>
+            <div class="how-to-do rashid">
+
+            {% for obj_dream in dreams %}
+            <div class="win_box__content">
+                <h2 class="title_win_box"> {% trans 'Розыгрыш №' %} {{ obj_dream.count_win }} </h2>
+                <p class="data_win_box">  {% trans 'Дата: ' %} {{ obj_dream.data_win_box }}</p>
+                <div class="items_win_box__wrapp">
+                     {% for items_dream in obj_dream.win_dream.all %}
+                               <div class="chelovek chelovek--otherdream ">
+                                        <a href="{% url 'detail_dream' pk=items_dream.who_dream_box.pk %}">
+                                            <div class="chelovek_body chelovek_body--otherdream chelovek_body--otherdream__boxwins">
+                                                   <img class="logo rashid ava_border" src="{{ items_dream.who_dream_box.who_dream.avatar.url }}">
+                                                   <div class="peredvig"><div class="stars">
+                                                       <img src="{{ items_dream.who_dream_box.who_dream.img.url}}">
+                                                   </div>
+                                                   <h3>{{ items_dream.who_dream_box.title}}</h3></div>
+                                                   <p>{{ items_dream.who_dream_box.mini_description }}</p>
+                                                <div class="win_price_box">
+                                                    + {{ items_dream.amount_help_box }} {% trans '₽' %}
+                                                </div>
+
+
+                                            </div>
+                                        </a>
+                               </div>
+                           {% endfor %}
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+               <div class="motivation"><h1>{% trans 'Мечты сбываются нужно только захотеть...' %}</h1></div>
+
+        </div>
+
+        </main>
+    </div>
+
+{% endblock %}

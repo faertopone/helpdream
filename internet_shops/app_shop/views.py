@@ -127,8 +127,8 @@ class MainIndex(View):
     """
     def get(self, request):
 
-        # logger.info('Запрошена главная страница через GET - ВЫВЕСТИ В КОСНОЛЬ')
-        # logger.debug('Запрошена главная страница через GET - ВЫВЕСТИ В ФАИЛ')
+        logger.info('Запрошена главная страница через GET - ВЫВЕСТИ В КОСНОЛЬ')
+        logger.debug('Запрошена главная страница через GET - ВЫВЕСТИ В ФАИЛ')
 
         #Запрос если там есть ключ ForeignKey ( select_related) или если ManyToManyField(prefetch_related)
         # Так же если нужно например что бы запросить 1 поля из БД а не все подряд используется .only('name'),

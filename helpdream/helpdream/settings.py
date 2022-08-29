@@ -238,7 +238,7 @@ LOGGING = {
     }
 }
 
-# Проверка отправка почты во вермя теста
+# Проверка отправка почты во врмя теста
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 if DEBUG:

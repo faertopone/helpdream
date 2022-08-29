@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+{% load humanize %}
+
+
+{% block bodystart %}
+    <div class="container main-page">
+{% endblock %}
+{% block main %}
+
+<main class="main-page-content">
+            <div class="about-us">
+                <div class="main-desc rashid">
+                    <h1 class="main-heading">{{ dream_items.title }}</h1>
+                    <p class="heading-txt rashid">{{ dream_items.description }}<</p>
+
+                       {% if photo_dream %}
+                              <div class="photki">
+                                    <button class="swiper-button-prev" aria-label="К предыдущему слайду"></button>
+                                    <button class="swiper-button-next" aria-label="К следующему слайду"></button>
+                                    <div class="section_swiper">
+                                      <div class="swiper">
+                                            <!-- Additional required wrapper -->
+                                              <div class="swiper-wrapper">
+                                                <!-- Slides -->
+                                                    {% for item_img in photo_dream %}
+                                                <div class="swiper-slide slide-section"> <img class="img_swiper" src="{{ item_img.img.url }}"></div>
+                                                    {% endfor %}
+                                              </div>
+
+                                      </div>
+                                    </div>
+
+                              </div>
+                      {% else %}
+                        <h3 class="title_detail photo_no"> {% trans 'Фоток нет :(' %}</h3>
+                      {% endif %}
+
+                    <h3 class="title_detail">{% trans 'Информация о пользователе:' %}</h3>
+                    <p class="text_detail">{% trans 'Имя: ' %} {{ dream_items.who_dream.user.first_name }}</p>
+                   <p class="text_detail">{% trans 'Пол: ' %} {{ dream_items.who_dream.gender }}</p>
+                    <p class="text_detail">{% trans 'Возраст: ' %}{{ dream_items.who_dream.age }}</p>
+                    <div class="vash_rang">
+                            <p class="text_detail text_detail__rang">{% trans 'Ранг' %} ({{ dream_items.who_dream.user.profile.rank }})</p>
+                            <img src="{{ dream_items.who_dream.user.profile.img.url }}">
+                        </div>
+
+                </div>
+                <div class="main-replenish rashid">
+                    <img src="{{ dream_items.who_dream.avatar.url }}" alt="bag of coins" class="pic-coins ava_border dream_detail_img" >
+                </div>
+            </div>
+
+            <div class="how-to-do rashid">
+
+
+
+            {% if dream_items.dream_is_complete %}
+                <h3 class="title_detail"> {% trans 'Сбор средств завершен!' %}</h3>
+                <p class="text_detail">{% trans 'Было собрано: ' %} {{ dream_items.help_price|intcomma  }} {% trans '₽' %} </p>
+               
+            {% else %}
+            <div class="chelovek_body chelovek_body-detail">
+
+                <div class="popolnenie">
+                    {% if request.user.is_authenticated %}
+                    <div class="popolnenie__wrapp">
+                        <h2 class="title__popolnenie"> {% trans 'Вы можете помочь!' %}</h2>
+                        <form method="post" class="popolnenie__form">
+                            {% csrf_token %}
+                           <p> <input type="number" name="amount" data-maxprice="{{ request.user.profile.my_balance }}" class="upload-sum--help" placeholder="Максимум доступно ({{ request.user.profile.my_balance }} ₽) " data-validate-field="price" required="" id="id_amount"></p>
+                            <p> {{ form_help_amount.messages_text }}</p>
+                            <p>{{ form_help_amount.my_user_id }}</p>
+
+                            <button type="submit" class="btn btn-dream_detail"> {% trans 'Помочь мечте' %} </button>
+                        </form>
+                    </div>
+                        {% else %}
+                        <p class="write_dream_link help_dream_link" >{% if not request.user.is_authenticated %} <a href="{% url 'login' %}" >{% trans 'Чтобы помоч, нужно авторизироваться' %} {% endif %} </a></p>
+                        {% endif %}
+                </div>
+                                 <div class="progress_bar progress_bar-detail">
+
+                                                    <div class="progress_bar_price progress_bar_price-detail">
+                                                        <p>{% trans 'Сейчас: ' %}{{ dream_items.help_price|intcomma }} {% trans '₽' %}</p>
+                                                        <p>{% trans 'Цель: ' %}{{ dream_items.price|intcomma  }}  {% trans '₽' %}</p>
+                                                    </div>
+
+                                                    <progress class="polosa  polosa-detail" max="{{ dream_items.price }}" value="{{ dream_items.help_price }}"></progress>
+
+                                                        <div class="ostat">
+                                                            <p>{% trans 'Осталось (дней): ' %}{{ dream_items.days_end }}</p>
+                                                        </div>
+                                                </div>
+
+
+                           </div>
+            {% endif %}
+
+
+            <div class="reviews_block reviews_block--detail">
+
+                <h3>{% trans 'Кто помог: ' %}({{ dream_items.where_dream.count }})</h3>
+                    {% if dream_items.where_dream.all %}
+                  <div class="huma_reviews huma_reviews-detail">
+                      {% for i_user in dream_items.where_dream.all %}
+                            <div class="human_review" >
+                                <button class="model-closed" id="model-closed_profile"></button>
+                                <img class="ava_mini_profile_help ava_border" src="{{ i_user.help_profile.avatar.url }}">
+                                    <div class="stars_review">
+                                        <img src="{{ i_user.help_profile.img.url }}">
+                                    </div>
+                                <div class="price">
+                                    <p class="who_help_name"> {{ i_user.help_profile.user.username }}</p>
+                                    <p>{{ i_user.who_price|intcomma  }} {% trans '₽' %}</p>
+
+                                </div>
+                                {% if i_user.messages %}
+                                    <p class="message_help-title"> {% trans 'Сообщение: ' %}</p>
+                                    <div class="modal_messages" data-simplebar>
+                                             <p class="message_help">{{ i_user.messages }} </p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                      {% endfor %}
+
+
+
+
+
+
+
+                  </div>
+                {% else %}
+               <p class="logotyps__nohelp_text--detail ">{% trans 'Никто не помог :(' %}</p>
+              {% endif %}
+            {% if dream_items.where_dream_box.all %}
+            <h3>{% trans 'Помощь BOXDREAM: ' %}</h3>
+                <div class="huma_reviews huma_reviews-detail">
+                       {#                        "ЭТО ПОМОЩЬ ОТ БОКС ДРИМ#}
+                         {% for i_user in dream_items.where_dream_box.all %}
+                            <div class="human_review" >
+                                <button class="model-closed" id="model-closed_profile"></button>
+                                <img class="ava_mini_profile_help ava_border ava_mini_profile_help_boxdream" src="{{ i_user.avatar.url }}">
+
+                                <div class="price">
+                                    <p class="who_help_name"> {% trans 'BOXDREAM' %}</p>
+                                    <p>{{ i_user.box_win_price|intcomma  }} {% trans '₽' %}</p>
+
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                </div>
+
+            {% endif %}
+              </div>
+
+            <div class="reviews_block reviews_block--detail">
+
+                    <h3 class="title_comment">{% trans 'Комментарии:' %} <img class="js-tooltip-right"  data-tippy-content="Комментарии могут писать, только авторизованные пользователи" src="{% static 'img/Rectangle 55.png' %}"></h3>
+
+                     <div class="wrapp_modal" >
+
+                            <div class="comments_wrapp" >
+                                <div class="modal__content">
+
+                                            {% if request.user.is_authenticated  %}
+                                                    {% if not dream_items.dream_is_complete %}
+                                                        <form method="post" class="comment_form" >
+                                                            {% csrf_token %}
+                                                            <p>{{ form_comment.messages }}</p>
+
+                                                            <button type="submit" class="btn btn_comment_derail_created" > {% trans 'Написать' %} </button>
+                                                        </form>
+                                                    {% endif %}
+                                            {% endif %}
+
+                                                {% if  dream_items.comments.all %}
+                                                                {% for i_comment in dream_items.comments.all %}
+                                                                    <div class="i_comment__wrap">
+                                                                        <div class="icons_comments">
+                                                                            <p class="comment_username"> {{  i_comment.author.user.username }} </p>
+                                                                            <img class="mini_ava_comment ava_border" src="{{ i_comment.author.avatar.url }}">
+                                                                            <img class="mini_rang_comment" src="{{ i_comment.author.img.url }}">
+                                                                            <p class="data_coment">{{ i_comment.data_created }}</p>
+                                                                        </div>
+                                                                    <p class="item__comment"> {{ i_comment.messages }} </p>
+                                                                    </div>
+
+                                                                {% endfor %}
+
+                                                {% else %}
+                                                    <h2 class="no-comments">{% trans 'Комментариев нет...' %}</h2>
+                                                {% endif %}
+
+
+
+
+
+                                </div>
+                            </div>
+
+
+
+            </div>
+
+                </div>
+
+              <div class="motivation"><h1>{% trans 'Мечты сбываются нужно только захотеть...' %}</h1></div>
+            </div>
+
+
+        </main>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+

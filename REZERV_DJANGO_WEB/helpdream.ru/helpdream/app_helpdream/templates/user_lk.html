@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+ {%  load i18n %}
+{% load static %}
+{%  load humanize %}
+
+{% block bodystart %}
+    <div class="container main-page">
+{% endblock %}
+
+{% block main %}
+
+ <main class="main-page-content">
+            <div class="about-us">
+                <div class="main-desc rashid">
+                    <div class="kakoy">
+                        <h1 class="main-heading title__lk">{% trans 'Личный кабинет ' %}</h1>
+                        <a class="edit_profile_link" href="{% url 'edit_profile' pk=user_lk.pk %}"> {% trans 'Редактировать' %}</a>
+
+
+                        <p>{% trans 'Ваш логин: ' %}{{ user_lk.user.username }}</p>
+
+                        <p>{% trans 'Ваш email: ' %}{{ user_lk.user.email }}</p>
+
+                        {% if user_lk.all_info_user %}
+                        <p>{% trans 'Ваш имя: ' %}{{ user_lk.user.first_name }}</p>
+
+                        <p>{% trans 'Ваш возраст: ' %}{{ user_lk.age }}</p>
+
+                        <p>{% trans 'Дата рождения: ' %} {{ user_lk.birthday.date }}</p>
+
+                        <p>{% trans 'Ваш телефон: ' %}{{ user_lk.phone }}</p>
+
+                        <p>{% trans 'Ваш пол: ' %}{{ user_lk.gender }}</p>
+
+
+                            {% else %}
+                            <div class="wrapp_modal">
+                                <div class="dop_info_user_link" id="button_dop_info_user_link">{% trans 'Дополнить информацию о себе' %}
+                                    <img class="js-tooltip-right img_tooltip"  data-tippy-content="Как только вы заполните все данные, Вам откроется редактирование профиля и Вы получите Ранг 1." src="{% static 'img/Rectangle 55.png' %}">
+                                </div>
+                            <div class="dop_info_up_wrapp">
+                                             <form method="post" class="form__dopinfo" enctype="multipart/form-data">
+                                                 {% csrf_token %}
+                                                 {{ form_dop_info.as_p }}
+                                                 <button type="submit" class="btn btn_balance_up"> {% trans 'сохранить' %} </button>
+
+                                             </form>
+                                          <button class="model-closed" id="model-closed_dop_info"></button>
+                                      </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="main-replenish rashid">
+                    <img src="{{ request.user.profile.avatar.url }}" alt="bag of coins" class="pic-coins user_lk--ava">
+                </div>
+            </div>
+
+            <div class="how-to-do rashid">
+             
+                 <div class="lk_contain">
+                     <div class="li_balance">
+                         <div class="tab_3">
+                             <p>{% trans 'Баланс:' %} </p>
+                             <div class="lk_price">
+                                 {{ user_lk.my_balance|intcomma  }}  <p>{% trans '₽' %} </p>
+                             </div>
+                                 <div class="wrapp_modal wrapp_modal_popolnenie">
+                                     <div class="balance_up_link" id="modal_balance_up">{% trans 'Пополнить' %}
+
+                                     </div>
+                                      <div class="balance_up_wrapp">
+                                             <form method="post" class="form__balance_up">
+                                                 {% csrf_token %}
+                                                 {{ form_balance_up }}
+                                                 <button type="submit" class="btn btn_balance_up"> {% trans 'Пополнить' %} </button>
+
+                                             </form>
+                                          <button class="model-closed" id="model-closed_balance_up_lk"></button>
+                                      </div>
+                                </div>
+                         </div>
+                     </div>
+
+                    <div class="contaim2">
+                        <p>{% trans 'Вы помогли на:' %} {{ user_lk.help_balanced|intcomma  }}{% trans ' ₽' %}</p>
+                        <div class="vash_rang">
+                            <p>{% trans 'Ваш ранг' %} ({{ request.user.profile.rank }})</p>
+                            <img src="{{ request.user.profile.img.url }}">
+                        </div>
+                        <a href="#">{% trans 'УЗАТЬ О СИСТЕМЕ РАНГОВ' %}</a>
+                    </div>
+
+                    <div class="contaim3">
+                        <p class="zagalov">{% trans 'Вам доступно:' %}</p>
+                        <ul>
+                            <li><div class="but"></div>{% trans 'Написать до ' %}{{ request.user.profile.max_dream_created }} {% trans 'активных желаний ' %}</li>
+                            <li><div class="but"></div>{% trans 'Создать мечту до' %} {{ request.user.profile.max_dream_price }} {% trans '₽' %}</li>
+                            <li><div class="but"></div>{% trans 'В разработке...' %}</li>
+                            <li><div class="but"></div>{% trans 'В разработке...' %}</li>
+                            <li><div class="but"></div>{% trans 'В разработке...' %}</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="contaim4 active_dream">
+                        <h3>{% trans 'Активные: ' %}({{ active_dream.count }}/{{ request.user.profile.max_dream_created }})
+                           <img class="js-tooltip-right"  data-tippy-content="Эти желания видят все пользователи, и могут помогать им осуществиться!" src="{% static 'img/Rectangle 55.png' %}">
+                        </h3>
+
+                        <div class="refraktor">
+
+                                    {% for item_active in active_dream %}
+                                        <div class="flexas">
+                                            <div class="divko active_divko">
+                                                <div class="repol">
+                                                    <div class="nubmer">
+                                                        {{ item_active.place }}
+                                                    </div>
+                                                    <div class="zagolovoko">
+                                                        <a class="podrobnee_lk" href="{% url 'detail_dream' pk=item_active.pk %}">
+                                                        {{ item_active.title }}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="progress_bar">
+
+                                                    <div class="progress_bar_price">
+                                                        <p>{% trans 'Сейчас: ' %}{{ item_active.help_price|intcomma  }} {% trans '₽' %}</p>
+                                                        <p>{% trans 'Цель: ' %}{{ item_active.price|intcomma  }}  {% trans '₽' %}</p>
+                                                    </div>
+
+                                                    <progress class="polosa" max="{{ item_active.price }}" value="{{ item_active.help_price }}"></progress>
+
+                                                        <div class="ostat">
+                                                            <p>{% trans 'Осталось (дней): ' %}{{ item_active.days_end }}</p>
+                                                        </div>
+                                                </div>
+                                                    <div class="bittonso">
+                                                        <form method="post"  class="form_lk_dream">
+                                                            {% csrf_token %}
+                                                                 <input type="number" name="id_dream" required="False" id="id_id_dream"  value="{{ item_active.id }}" style="display: none">
+                                                                {{ form_dream_edit.cancel }}
+                                                                {{ form_dream_edit.push_up }}
+
+{#                                                            <button type="submit" class="btn btn_dream_edit btn_push_up"> {% trans 'Поднять на верх списка' %} </button>#}
+                                                            <button type="submit" class="btn btn_dream_edit btn_cancel"> {% trans 'Отменить' %} </button>
+                                                        </form>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                            </div>
+
+                    </div>
+
+                    <div class="contaim4 wait_dream">
+                        <h3>{% trans 'В ожидании: ' %} ({{ wait_dream.count }})
+                           <img class="js-tooltip-right"  data-tippy-content="Эти желания не видят другие пользователи!" src="{% static 'img/Rectangle 55.png' %}">
+                        </h3>
+
+                        <div class="refraktor">
+
+                                    {% for item_wait in wait_dream %}
+                                        <div class="flexas">
+                                            <div class="divko wait_divko">
+                                                <div class="repol">
+                                                    <div class="nubmer">
+                                                        {{ item_wait.place }}
+                                                    </div>
+                                                    <div class="zagolovoko">
+                                                        <a class="podrobnee_lk" href="{% url 'detail_dream' pk=item_wait.pk %}">
+                                                        {{ item_wait.title }}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="progress_bar">
+
+                                                    <div class="progress_bar_price">
+                                                        <p>{% trans 'Сейчас: ' %}{{ item_wait.help_price|intcomma  }} {% trans '₽' %}</p>
+                                                        <p>{% trans 'Цель: ' %}{{ item_wait.price|intcomma  }}  {% trans '₽' %}</p>
+                                                    </div>
+                                                        <progress class="polosa" max="{{ item_wait.price }}" value="{{ item_wait.help_price }}"></progress>
+
+                                                        <div class="ostat">
+                                                            <p>{% trans 'Осталось (дней): ' %}{{ item_wait.days_end }}</p>
+                                                        </div>
+                                                </div>
+                                                    <div class="bittonso">
+                                                        <form method="post"  class="form_lk_dream">
+                                                            {% csrf_token %}
+
+                                                            <input type="number" name="id_dream" required="False" id="id_id_dream"  value="{{ item_wait.id }}" style="display: none">
+                                                            {{ form_dream_edit.active }}
+                                                            {{ form_dream_edit.delete }}
+
+                                                            <button type="submit" {% if not permission_dream %} disabled {% endif %} class="btn btn_dream_edit btn_active"> {% trans 'Активировать' %} </button>
+                                                         <button type="submit" class="btn btn_dream_edit btn_delete"> {% trans 'Удалить' %} </button>
+                                                        </form>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                            </div>
+
+                    </div>
+
+                    <div class="contaim5 complete_dream">
+                        <h3>{% trans 'Завершенные: ' %} ({{ complete_dream.count }})
+                    <img class="js-tooltip-right"  data-tippy-content="Когда сумма собрана или истек срок размещения, то ваше желание переходит в статус 'завершенные'. Собранные деньги, с этих желаний уже на Вашем балансе!" src="{% static 'img/Rectangle 55.png' %}">
+                        </h3>
+                        <div class="refraktor">
+
+                             {% for item_complete in complete_dream %}
+                                    <div class="flexas">
+                                        <div class="divko complete_divko">
+                                            <div class="repol">
+                                                <div class="nubmer">
+                                                    {{ item_complete.place }}
+                                                </div>
+                                                <div class="zagolovoko">
+                                                     <a class="podrobnee_lk" href="{% url 'detail_dream' pk=item_complete.pk %}">
+                                                    {{ item_complete.title }} </a>
+                                                </div>
+                                            </div>
+                                            <div class="progress_bar">
+                                                <div class="progress_bar_price">
+                                                    <p></p>
+                                                    <p>{% trans 'Собрано: ' %} {{ item_complete.help_price|intcomma  }} {% trans '₽' %}</p>
+                                                </div>
+
+                                                <progress class="polosa polosa-complete" max="{{ item_complete.price }}" value="{{ item_complete.help_price }}"></progress>
+                                                <div class="ostat" style="    height: 13px;">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                 </div>
+
+
+                <div class="motivation"><h1>{% trans 'Мечты сбываются нужно только захотеть...' %}</h1></div>
+            </div>
+
+
+
+ </main>
+    </div>
+ {% endblock %}
